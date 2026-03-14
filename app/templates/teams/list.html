@@ -1,0 +1,12 @@
+
+{% extends "base.html" %}
+{% block content %}
+<h2>Teams</h2>
+<a href="/teams/add" class="btn btn-primary mb-3">Add team</a>
+<table class="table table-striped">
+<tr><th>ID</th><th>Name</th></tr>
+{% for t in items %}
+<tr><td>{{ t.id }}</td><td><a href="/teams/{{ t.id }}">{{ t.name }}</a></td></tr>
+{% endfor %}
+</table>
+{% endblock %}

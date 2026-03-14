@@ -1,0 +1,12 @@
+
+{% extends "base.html" %}
+{% block content %}
+<h2>Quests</h2>
+<a href="/quests/add" class="btn btn-primary mb-3">Add quest</a>
+<table class="table table-striped">
+<tr><th>ID</th><th>Title</th></tr>
+{% for q in items %}
+<tr><td>{{ q.id }}</td><td><a href="/quests/{{ q.id }}">{{ q.title }}</a></td></tr>
+{% endfor %}
+</table>
+{% endblock %}

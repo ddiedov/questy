@@ -1,0 +1,12 @@
+
+{% extends "base.html" %}
+{% block content %}
+<h2>Add Quest</h2>
+<form method="post" action="{{ url }}">
+<div class="mb-3">
+<label class="form-label">Title</label>
+<input class="form-control" name="title">
+</div>
+<button class="btn btn-success">Create</button>
+</form>
+{% endblock %}
