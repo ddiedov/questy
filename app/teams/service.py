@@ -1,7 +1,7 @@
 from fastapi import HTTPException
 from app.core.base_service import BaseService
 from app.teams.repository import TeamsRepository
-from .model import Team, TeamCreate, TeamUpdate
+from .model import Team, TeamCreate, TeamUpdate, TeamPatch
 
 class TeamsService(BaseService):
 
@@ -10,7 +10,8 @@ class TeamsService(BaseService):
             repository=TeamsRepository(),
             model=Team,
             create_model=TeamCreate,
-            update_model=TeamUpdate
+            update_model=TeamUpdate,
+            patch_model=TeamPatch
         )
 
 

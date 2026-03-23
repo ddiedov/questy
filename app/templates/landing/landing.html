@@ -1,0 +1,55 @@
+{% extends "core/base.html" %}
+{% block content %}
+<div class="container-xl mt-5">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body text-center">
+          <h2>Create a Quest</h2>
+          <p>
+            Build your own adventure for other teams
+          </p>
+          <a href="/quests/add" class="btn btn-primary">
+            Create quest
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body text-center">
+          <h2>Play a Quest</h2>
+          <p>
+            Browse quests created by the community
+          </p>
+          <a href="/quests" class="btn btn-primary">
+            Browse quests
+          </a>
+        </div>
+      </div>
+    </div>    
+  </div>
+</div>
+
+<h2 class="mt-5 mb-3">Featured Quests</h2>
+
+<div id="carousel-featured" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+
+    {% for quest in featured_quests %}
+    <div class="carousel-item {% if loop.first %}active{% endif %}">
+      {% include "quests/_card.html" %}
+    </div>
+    {% endfor %}
+
+  </div>
+
+  <button class="carousel-control-prev" type="button" data-bs-target="#carousel-featured" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+
+  <button class="carousel-control-next" type="button" data-bs-target="#carousel-featured" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
+</div>
+{% endblock %}

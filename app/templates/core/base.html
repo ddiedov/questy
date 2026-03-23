@@ -1,0 +1,27 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<link href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta21/dist/css/tabler.min.css" rel="stylesheet"/>
+</head>
+<body>
+{% include "core/_navbar.html" %}
+<div class="page">
+  <div class="page-wrapper">
+    <div class="text-center mb-5">
+      <h1>Questy</h1>
+      <p class="text-muted">
+        Create and play interactive quests with your team
+      </p>
+    </div>
+
+    <div class="page-body">
+      <div class="container-xl">
+        {% block content %}{% endblock %}
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta21/dist/js/tabler.min.js"></script>
+</body>
+</html>

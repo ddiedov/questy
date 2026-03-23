@@ -1,0 +1,15 @@
+<div class="card">
+    <div class="img-responsive img-responsive-21x9 card-img-top"
+        style="background-image: url({{ quest.image_url }})">
+    </div>
+    <div class="card-body text-center">
+        <h3>{{ quest.title }}</h3>
+        <p class="text-muted">
+            {{ quest.description }}
+        </p>
+        
+        <a href="/quests/{{ quest.id }}" class="btn btn-primary">
+            View quest
+        </a>
+    </div>
+</div>

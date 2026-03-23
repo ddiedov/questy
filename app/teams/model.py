@@ -9,3 +9,6 @@ class TeamCreate(BaseModel):
 
 class TeamUpdate(BaseModel):
     name: str
+
+class TeamPatch(BaseModel):
+    name: str
