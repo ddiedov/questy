@@ -22,8 +22,10 @@ app = FastAPI(title="Questy")
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
 
 from app.core.auth_routers import create_auth_router
-
 app.include_router(create_auth_router(""))
+
+from app.core.auth import AuthMiddleware
+app.add_middleware(AuthMiddleware)
 
 app.include_router(teams_router)
 app.include_router(quests_router)

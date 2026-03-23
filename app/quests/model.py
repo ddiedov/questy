@@ -6,6 +6,7 @@ class Quest(BaseModel):
     description: str | None = None
     featured: bool  | None = None
     image_url: str | None = None
+    created_by: int
 
 class QuestCreate(BaseModel):
     title: str

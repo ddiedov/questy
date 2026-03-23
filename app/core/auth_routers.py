@@ -47,6 +47,14 @@ def create_auth_router(prefix: str):
     @router.get("/callback")
     async def auth_callback(request: Request):
         return templates.TemplateResponse("auth/auth_callback.html", {"request": request})
+    
+    
+    # -------------------------
+    # FORGOT PASSWORD
+    # -------------------------
+    @router.get("/forgot-password")
+    def forgot_password(request: Request):
+        return templates.TemplateResponse("auth/forgot_password.html", {"request": request})
 
 
     # -------------------------
@@ -92,14 +100,5 @@ def create_auth_router(prefix: str):
         response.delete_cookie("access_token")
         return response
     
-
-    # -------------------------
-    # FORGOT PASSWORD
-    # -------------------------
-    @router.get("/forgot-password")
-    def logout():
-        response = RedirectResponse("/auth/forgot_password.html")
-        response.delete_cookie("access_token")
-        return response
 
     return router

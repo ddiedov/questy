@@ -1,0 +1,102 @@
+{% extends "core/base.html" %}
+{% block content %}
+
+<h1 class="mb-4">Edit Quest: {{ item.title }}</h1>
+
+<div class="row">
+    <div class="col-md-8">
+        <form method="post" action="/quests/{{ item.id }}">
+            <!-- Title -->
+            <div class="mb-3">
+                <label class="form-label">Title</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    name="title"
+                    value="{{ item.title }}"
+                    required
+                >
+            </div>
+
+            <!-- Description -->
+            <div class="mb-3">
+                <label class="form-label">Description</label>
+                <textarea
+                    name="description"
+                    id="description"
+                    rows="6"
+                    class="form-control"
+                >{{ item.description }}</textarea>
+            </div>
+
+            <!-- Hidden image URL (обновляется через JS после загрузки) -->
+            <input type="hidden" name="image_url" id="image-hidden" value="{{ item.image_url }}">
+
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a href="/quests/" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+
+    <!-- Колонка для картинки -->
+    <div class="col-md-4">
+        <label class="form-label">Quest Image</label>
+        <img id="preview" src="{{ item.image_url or '/static/images/placeholder.png' }}" class="img-fluid mb-2" style="max-height: 300px; object-fit: cover; border: 1px solid #ccc; border-radius: 5px;">
+
+        <input type="file" id="image-input" class="form-control">
+        <small class="text-muted">Upload a new image for this quest</small>
+    </div>
+</div>
+
+<!-- JS для загрузки картинки -->
+<script>
+document.getElementById("image-input").addEventListener("change", async function() {
+    const file = this.files[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    const response = await fetch(`/quests/{{ item.id }}/image`, {
+        method: "POST",
+        body: formData
+    });
+
+    if (!response.ok) {
+        alert("Failed to upload image");
+        return;
+    }
+
+    const data = await response.json();
+
+    // обновляем hidden input и превью
+    document.getElementById("image-hidden").value = data.image_url;
+    document.getElementById("preview").src = data.image_url;
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    let options = {
+      selector: '#description',
+      height: 300,
+      menubar: true,
+      statusbar: true,
+      plugins: [
+        'advlist', 'autolink', 'lists', 'link', 'image', 'charmap',
+        'preview', 'anchor',
+        'searchreplace', 'visualblocks', 'code', 'fullscreen',
+        'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount'
+      ],
+      toolbar: 'undo redo | formatselect | ' +
+        'bold italic backcolor | alignleft aligncenter ' +
+        'alignright alignjustify | bullist numlist outdent indent | ' +
+        'removeformat',
+      content_style: 'body { font-family: -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif; font-size: 14px; -webkit-font-smoothing: antialiased; }'
+    }
+    if (localStorage.getItem("tablerTheme") === 'dark') {
+      options.skin = 'oxide-dark';
+      options.content_css = 'dark';
+    }
+    hugeRTE.init(options);
+  })
+</script>
+
+{% endblock %}

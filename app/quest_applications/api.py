@@ -6,6 +6,6 @@ from .filter import QuestApplicationsFilter
 
 router = create_api_router(
     service=QuestApplicationsService(),
-    prefix="/api/quest_applications",
+    prefix="/api/quest-applications",
     filter_model=QuestApplicationsFilter,
 )

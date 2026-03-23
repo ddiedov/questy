@@ -4,7 +4,7 @@ from app.core.repository import BaseRepository
 class QuestApplicationsRepository(BaseRepository):
 
     def __init__(self):
-        super().__init__("quest_applications")
+        super().__init__("quest-applications")
 
     filter_map = {
         "id": "id",

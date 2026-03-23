@@ -31,8 +31,8 @@ def create_crud_router(
         return None
 
     @router.get("/")
-    async def list_items(request: Request):
-        items = service.list()
+    async def list_items(request: Request, user_id = Depends(get_current_user)):
+        items = service.list(user_id)
  
         return templates.TemplateResponse(
             f"{entity}/list.html",
@@ -61,18 +61,33 @@ def create_crud_router(
 
         new_item = service.create(data)
         return RedirectResponse(
-            url=f"/{entity}/{new_item.id}",
+            url=f"/{entity}/{new_item.id}/edit",
             status_code=303
         )
 
     @router.get("/{id}")
-    async def details_form(request: Request, id: int, user_id = Depends(auth_dependency)):
+    async def details_form(request: Request, id: int):
         item = service.get(id)
         if not item:
             raise HTTPException(status_code=404)
 
         return templates.TemplateResponse(
             f"{entity}/details.html",
+            {
+                "request": request,
+                "item": item,
+                "entity": entity
+            }
+        )
+
+    @router.get("/{id}/edit")
+    async def edit_form(request: Request, id: int, user_id = Depends(auth_dependency)):
+        item = service.get(id)
+        if not item:
+            raise HTTPException(status_code=404)
+
+        return templates.TemplateResponse(
+            f"{entity}/update.html",
             {
                 "request": request,
                 "item": item,
