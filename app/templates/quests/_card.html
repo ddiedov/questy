@@ -8,8 +8,20 @@
             {{ quest.description }}
         </p>
         
-        <a href="/quests/{{ quest.id }}" class="btn btn-primary">
-            View quest
-        </a>
+        
+        {% if quest.is_author %}
+            <a href="/quests/{{ quest.id }}/edit" class="btn btn-warning">Edit</a>
+        {% else %}
+            {% if request.state.user %}
+                {% if quest.application_status == None %}
+                    <form method="post" action="/quest-applications">
+                        {% include "quests/_apply.html" %}
+                    </form>
+                {% endif %}
+            {% endif %}
+            <a href="/quests/{{ quest.id }}" class="btn btn-primary">View</a>
+        {% endif %}
+        
+        
     </div>
 </div>

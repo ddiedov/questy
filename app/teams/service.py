@@ -4,16 +4,12 @@ from app.teams.repository import TeamsRepository
 from .model import Team, TeamCreate, TeamUpdate, TeamPatch
 
 class TeamsService(BaseService):
-
-    def __init__(self):
-        super().__init__(
-            repository=TeamsRepository(),
-            model=Team,
-            create_model=TeamCreate,
-            update_model=TeamUpdate,
-            patch_model=TeamPatch
-        )
-
+    repository=TeamsRepository()
+    model=Team
+    create_model=TeamCreate
+    update_model=TeamUpdate
+    patch_model=TeamPatch
+        
 
     def create(self, data: TeamCreate):
         if len(data.name) < 3:

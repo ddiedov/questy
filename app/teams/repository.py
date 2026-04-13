@@ -2,9 +2,7 @@ from app.core.repository import BaseRepository
 
 
 class TeamsRepository(BaseRepository):
-
-    def __init__(self):
-        super().__init__("teams")
+    table_name = "teams"
 
     filter_map = {
         "owner_id": "owner_id",

@@ -1,0 +1,5 @@
+<input type="hidden" name="quest_id" id="quest_id" value="{{ quest.id }}">
+<input type="hidden" name="participant_id" id="participant_id" value="{{ request.state.user.id }}">
+<input type="hidden" name="participant_type" id="participant_type" value="individual">
+<input type="hidden" name="next" value="/quests/{{ quest.id }}">
+<button type="submit" class="btn btn-success">Apply</button>

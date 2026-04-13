@@ -3,12 +3,23 @@
 <html>
 <head>
 <link href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta21/dist/css/tabler.min.css" rel="stylesheet"/>
+<link rel="stylesheet" href="/static/css/main.css">
 </head>
 <body>
 {% include "core/_navbar.html" %}
+
+{% if request.session.get("flash") %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{ request.session.get("flash") }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+</div>
+
+{% set _ = request.session.pop("flash") %}
+{% endif %}
+
 <div class="page">
   <div class="page-wrapper">
-    <div class="text-center mb-5">
+    <div class="text-center py-4 border-bottom mb-4">
       <h1>Questy</h1>
       <p class="text-muted">
         Create and play interactive quests with your team
@@ -16,12 +27,23 @@
     </div>
 
     <div class="page-body">
-      <div class="container-xl">
+      <div class="container-xl app-container">
         {% block content %}{% endblock %}
       </div>
     </div>
   </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta21/dist/js/tabler.min.js"></script>
+
+<script>
+    setTimeout(() => {
+        let alert = document.querySelector('.alert');
+        if (alert) {
+            alert.classList.remove('show');
+            alert.classList.add('fade');
+        }
+    }, 3000);
+</script>
+
 </body>
 </html>

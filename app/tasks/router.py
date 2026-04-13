@@ -1,9 +1,9 @@
 from app.core.router_factory import create_crud_router
-from app.core.services_factory import get_teams_service
+from app.core.services_factory import get_tasks_service
 
 router = create_crud_router(
-    get_teams_service(),
-    "/teams",
+    get_tasks_service(),
+    "/tasks",
     True,
     True
 )
