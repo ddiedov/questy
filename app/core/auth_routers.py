@@ -78,6 +78,7 @@ def create_auth_router(prefix: str):
             return {"error": str(e)}
 
         access_token = session.session.access_token
+        refresh_token = session.session.refresh_token
         if not access_token:
             raise HTTPException(401, "Login failed")
 #            return {"error": "Login failed. Possibly email not confirmed."}
@@ -85,6 +86,12 @@ def create_auth_router(prefix: str):
         response.set_cookie(
             key="access_token",
             value=access_token,
+            httponly=True,
+            samesite="lax"
+        )
+        response.set_cookie(
+            key="refresh_token",
+            value=refresh_token,
             httponly=True,
             samesite="lax"
         )
@@ -98,6 +105,7 @@ def create_auth_router(prefix: str):
     def logout():
         response = RedirectResponse("/")
         response.delete_cookie("access_token")
+        response.delete_cookie("refresh_token")
         return response
     
 

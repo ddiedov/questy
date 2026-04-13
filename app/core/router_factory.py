@@ -2,7 +2,7 @@ from fastapi import APIRouter, Request, HTTPException, Depends
 from fastapi.responses import RedirectResponse
 from app.core.templates import templates
 from fastapi import UploadFile, File
-from app.core.auth import get_current_user
+from app.core.auth import build_user_dependency
 
 
 def create_crud_router(
@@ -12,11 +12,7 @@ def create_crud_router(
         require_auth_for_read: bool = False
     ):
 
-    dependencies = []
-    if require_auth_for_read or require_auth_for_write:
-        dependencies.append(Depends(get_current_user))
-
-#    router = APIRouter(prefix=prefix, dependencies=dependencies)
+    
     router = APIRouter(prefix=prefix)
 
     entity = prefix.removeprefix("/")
@@ -25,14 +21,13 @@ def create_crud_router(
     update_model = service.update_model
     patch_model = service.patch_model
 
-    def auth_dependency(user_id=Depends(get_current_user)):
-        if require_auth_for_write:
-            return user_id
-        return None
+    get_user_for_read = build_user_dependency(require_auth_for_read)
+    get_user_for_write = build_user_dependency(require_auth_for_write)
 
     @router.get("/")
-    async def list_items(request: Request, user_id = Depends(get_current_user)):
-        items = service.list(user_id)
+    async def list_items(request: Request, user_id = Depends(get_user_for_read)):
+        print("SERVICE:", type(service))
+        items = service.list(current_user_id = user_id)
  
         return templates.TemplateResponse(
             f"{entity}/list.html",
@@ -44,7 +39,7 @@ def create_crud_router(
         )
 
     @router.get("/add")
-    async def add_form(request: Request, user_id = Depends(auth_dependency)):
+    async def add_form(request: Request, user_id = Depends(get_user_for_write)):
         return templates.TemplateResponse(
             f"{entity}/add.html",
             {
@@ -55,22 +50,25 @@ def create_crud_router(
         )
 
     @router.post("/")
-    async def create_item(request: Request, user_id = Depends(auth_dependency)):
+    async def create_item(request: Request, user_id = Depends(get_user_for_write)):
         form = await request.form()
         data = create_model(**dict(form))
 
-        new_item = service.create(data)
+        new_item = service.create(data, user_id)
+        redirect_url = service.get_redirect_url(entity = entity, item = new_item)
+        request.session["flash"] = "New item succesfully created"
+
         return RedirectResponse(
-            url=f"/{entity}/{new_item.id}/edit",
+            url=redirect_url,
             status_code=303
         )
 
     @router.get("/{id}")
-    async def details_form(request: Request, id: int):
+    async def details_form(request: Request, id: int, user_id = Depends(get_user_for_read)):
         item = service.get(id)
         if not item:
             raise HTTPException(status_code=404)
-
+        
         return templates.TemplateResponse(
             f"{entity}/details.html",
             {
@@ -81,8 +79,8 @@ def create_crud_router(
         )
 
     @router.get("/{id}/edit")
-    async def edit_form(request: Request, id: int, user_id = Depends(auth_dependency)):
-        item = service.get(id)
+    async def edit_form(request: Request, id: int, user_id = Depends(get_user_for_write)):
+        item = service.get_for_update(id)
         if not item:
             raise HTTPException(status_code=404)
 
@@ -96,7 +94,7 @@ def create_crud_router(
         )
 
     @router.post("/{id}")
-    async def save_item(request: Request, id: int, user_id = Depends(auth_dependency)):
+    async def save_item(request: Request, id: int, user_id = Depends(get_user_for_write)):
         form = await request.form()
         data = update_model(**dict(form))
 
@@ -109,7 +107,7 @@ def create_crud_router(
         )
     
     @router.post("/{id}/image")
-    async def upload_image(id: int, file: UploadFile = File(...), user_id = Depends(auth_dependency)):
+    async def upload_image(id: int, file: UploadFile = File(...), user_id = Depends(get_user_for_write)):
         if user_id:
             service.ensure_owner(id, user_id)
         contents = await file.read()
