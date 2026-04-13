@@ -1,11 +1,10 @@
 from app.core.api_factory import create_api_router
+from app.core.services_factory import get_quest_applications_service
 
-from .service import QuestApplicationsService
 from .filter import QuestApplicationsFilter
 
-
 router = create_api_router(
-    service=QuestApplicationsService(),
+    service=get_quest_applications_service(),
     prefix="/api/quest-applications",
-    filter_model=QuestApplicationsFilter,
+    filter_model=QuestApplicationsFilter
 )
