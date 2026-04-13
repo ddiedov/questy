@@ -1,11 +1,10 @@
 from app.core.api_factory import create_api_router
+from app.core.services_factory import get_quests_service
 
-from .service import QuestsService
 from .filter import QuestsFilter
 
-
 router = create_api_router(
-    service=QuestsService(),
+    service=get_quests_service(),
     prefix="/api/quests",
-    filter_model=QuestsFilter,
+    filter_model=QuestsFilter
 )
