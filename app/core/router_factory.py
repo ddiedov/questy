@@ -52,10 +52,13 @@ def create_crud_router(
     @router.post("/")
     async def create_item(request: Request, user_id = Depends(get_user_for_write)):
         form = await request.form()
-        data = create_model(**dict(form))
+        data_dict = dict(form)
+        data = create_model(**data_dict)
 
         new_item = service.create(data, user_id)
-        redirect_url = service.get_redirect_url(entity = entity, item = new_item)
+    
+        redirect_url = service.get_redirect_url(entity=entity, item=new_item)
+        
         request.session["flash"] = "New item succesfully created"
 
         return RedirectResponse(
