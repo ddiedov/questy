@@ -9,6 +9,9 @@ from app.quests.router import router as quests_router
 from app.quest_applications.router import router as quest_applications_router
 from app.tasks.router import router as tasks_router
 
+from app.quest_structure.router import router as quest_structure_router
+from app.quest_structure.router import quest_tasks_router as quest_tasks_router
+
 from app.teams.api import router as teams_api_router
 from app.quests.api import router as quests_api_router
 from app.quest_applications.api import router as quest_applications_api_router
@@ -32,6 +35,9 @@ app.include_router(teams_router)
 app.include_router(quests_router)
 app.include_router(quest_applications_router)
 app.include_router(tasks_router)
+
+app.include_router(quest_structure_router)
+app.include_router(quest_tasks_router)
 
 app.include_router(teams_api_router)
 app.include_router(quests_api_router)
