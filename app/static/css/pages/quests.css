@@ -1,0 +1,48 @@
+
+/* =========================
+   TIMELINE
+========================= */
+
+.timeline {
+  position: relative;
+  padding-left: 70px;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 30px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #d8d2c4;
+}
+
+.timeline-step {
+  position: relative;
+  margin-bottom: 28px;
+}
+
+.timeline-icon {
+  position: absolute;
+  left: 14px;
+  top: 6px;
+
+  width: 32px;
+  height: 32px;
+
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 14px;
+  color: white;
+}
+
+.step-card {
+  margin-left: 60px;
+  border-radius: 14px;
+  border: 1px solid #e5e0d5;
+  background: #fff;
+}

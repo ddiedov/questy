@@ -1,19 +1,25 @@
 from pydantic import BaseModel
-from enum import Enum
+from app.tasks.model import Task
 
-class QuestStructure(BaseModel):
+#   ======      DTO structures      ======
+class QuestStructureItemDTO(BaseModel):
     id: int
     quest_id: int
     task_id: int
+    position: int
+    created_by: str | None = None
 
-class QuestStructureCreate(BaseModel):
+class CreateQuestStructureItemDTO(BaseModel):
     quest_id: int
     task_id: int
+    position: int | None = None
     
-class QuestStructureUpdate(BaseModel):
+
+#   ======      Service structures      ======
+class QuestStructureItem(BaseModel):
+    task: Task
+    position: int | None = None
+
+class QuestStructure(BaseModel):
     quest_id: int
-    task_id: int
-    
-class QuestStructurePatch(BaseModel):
-    quest_id: int | None = None
-    task_id: int | None = None
+    tasks: list[QuestStructureItem]

@@ -9,6 +9,8 @@ class Task(BaseModel):
 
 class TaskCreate(BaseModel):
     title: str
+    description: str | None = None
+    image_url: str | None = None
 
 class TaskUpdate(BaseModel):
     title: str

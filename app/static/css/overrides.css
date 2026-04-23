@@ -1,0 +1,15 @@
+
+.btn {
+  border-radius: 8px;
+  padding: 6px 14px;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+  border-color: var(--primary-hover);
+}

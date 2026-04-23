@@ -1,0 +1,26 @@
+
+.custom-navbar {
+  background: var(--navbar-bg);
+  border: 1px solid var(--navbar-border);
+  border-radius: 16px;
+  padding: 10px 16px;
+}
+
+/* Brand */
+.navbar-brand {
+  font-size: 20px;
+}
+
+/* Avatar */
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid var(--navbar-bg);
+}
+
+/* Text */
+.custom-navbar span {
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}

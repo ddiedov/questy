@@ -1,0 +1,60 @@
+
+/* =========================
+   LIGHT THEME (default)
+========================= */
+
+:root {
+  --primary: #4f7cff;
+  --primary-hover: #3b63d6;
+
+  --background: #eef2f7;
+  --surface: #ffffff;
+
+  --text-main: #1f2a37;
+  --text-muted: #8a94a6;
+
+  --border: #e5e7eb;
+  --border-soft: #f1f3f5;
+
+  --shadow-sm: 0 8px 24px rgba(0,0,0,0.06);
+  --shadow-md: 0 8px 24px rgba(0,0,0,0.08);
+
+  --navbar-bg: #f8f4ec;
+  --navbar-border: #e2d8c8;
+
+  --card-bg: #f8f4ec;
+  --card-border: #e2d8c8;
+
+  --dot-start-bg: #f8f4ec;
+  --dot-start-border: #e2d8c8;
+}
+
+/* =========================
+   DARK THEME
+========================= */
+
+[data-theme="dark"] {
+  --primary: #6ea8fe;
+  --primary-hover: #4f7cff;
+
+  --background: #0f172a;
+  --surface: #111827;
+
+  --text-main: #e5e7eb;
+  --text-muted: #9ca3af;
+
+  --border: #1f2937;
+  --border-soft: #111827;
+
+  --shadow-sm: 0 8px 24px rgba(0,0,0,0.4);
+  --shadow-md: 0 8px 24px rgba(0,0,0,0.5);
+
+  --navbar-bg: #111827;
+  --navbar-border: #1f2937;
+
+  --card-bg: #111827;
+  --card-border: #1f2937;
+
+  --dot-start-bg: #111827;
+  --dot-start-border: #1f2937;
+}

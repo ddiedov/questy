@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from app.quest_applications.model import QuestApplication
-from app.tasks.model import Task
+from app.quest_structure.model import QuestStructureItem
 
 
 #------ DTO Models (Database structures)
@@ -31,4 +31,4 @@ class QuestPatch(BaseModel):
 
 class QuestForUpdate(Quest):
     applications: list[QuestApplication]
-    tasks: list[Task]
+    tasks: list[QuestStructureItem]

@@ -12,8 +12,8 @@ class TasksService(BaseService):
     patch_model=TaskPatch
         
 
-    def get_redirect_url(self, entity, item):
-        return f"/quests/{item.quest_id}"
+#    def get_redirect_url(self, entity, item):
+#        return f"/quests/{item.quest_id}"
 
     def create(self, data: TaskCreate, user_id):
         if len(data.title) < 3:

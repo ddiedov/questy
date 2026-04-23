@@ -7,3 +7,4 @@ router = create_crud_router(
     True,
     False
 )
+

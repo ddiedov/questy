@@ -1,0 +1,223 @@
+{% extends "core/base.html" %}
+{% block content %}
+
+<!-- ================= HERO SECTION ================= -->
+<form method="post" action="/quests/{{ item.id }}" id="quest-form">
+
+<div class="card-soft quest-header mb-4 p-4">
+
+    <div class="d-flex align-items-start">
+
+        <!-- IMAGE -->
+        <div class="me-4">
+            <img
+                src="{{ item.image_url or '/static/images/placeholder.png' }}"
+                class="rounded"
+                style="width: 240px; height: 150px; object-fit: cover;"
+                id="preview"
+            >
+
+            <input 
+                type="file" 
+                id="image-input"
+                class="form-control form-control-sm mt-2"
+                data-upload-url="/quests/{{ item.id }}/image" 
+                data-preview-target="#preview" 
+                data-hidden-input="#image-hidden"
+            >
+        </div>
+
+        <!-- CONTENT -->
+        <div class="flex-grow-1">
+
+            <!-- TOP ROW -->
+            <div class="d-flex justify-content-between align-items-start mb-2">
+
+                <div class="flex-grow-1 me-3">
+
+                    <!-- TITLE -->
+                    <input
+                        type="text"
+                        class="form-control border-0 p-0 fs-3 fw-semibold"
+                        name="title"
+                        value="{{ item.title }}"
+                        placeholder="Quest title"
+                    >
+
+                </div>
+
+                <!-- STATUS -->
+                <span class="badge bg-warning text-dark">
+                    Draft
+                </span>
+
+            </div>
+
+            <!-- DESCRIPTION -->
+            <textarea
+                name="description"
+                rows="2"
+                class="form-control border-0 p-0 text-muted"
+                placeholder="Short description"
+            >{{ item.description }}</textarea>
+
+            <!-- ACTIONS -->
+            <div class="d-flex gap-2 mt-3">
+                <button type="submit" class="btn btn-success btn-sm">
+                    Save Changes
+                </button>
+
+                <a href="/quests/" class="btn btn-outline-secondary btn-sm">
+                    Cancel
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<input type="hidden" name="image_url" id="image-hidden" value="{{ item.image_url }}">
+
+</form>
+
+
+
+<div class="row">
+
+    <!-- SCENARIO -->
+    <div class="col-lg-8">
+        <div class="card-soft p-3">
+
+            {% if not item.tasks %}
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <h5 class="mb-0">No tasks yet</h5>
+                        <div class="text-muted small">Start building your quest by adding the first task</div>
+                    </div>
+
+                    <div>
+                        {% include "quests/_add_task_actions.html" %}
+                    </div>
+                </div>
+            {% else %}
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <h5 class="mb-0">Scenario</h5>
+                        <div class="text-muted small">Build your quest step by step</div>
+                    </div>
+
+                    <div>
+                        {% include "quests/_add_task_actions.html" %}
+                    </div>
+                </div>
+
+                <div class="timeline">
+    
+                    <!-- START -->
+                    <div class="timeline-row">
+                        <div class="timeline-col">
+                            <div class="timeline-dot start">
+                                <i class="bi bi-play-fill"></i>
+                            </div>
+                        </div>
+                        <div class="timeline-content"></div>
+                    </div>
+
+                    {% for task in item.tasks %}
+                        {% include "tasks/_card.html" %}
+                    {% endfor %}
+
+                    <!-- FINISH -->
+                    <div class="timeline-row">
+                        <div class="timeline-col">
+                            <div class="timeline-dot finish">
+                                <i class="bi bi-flag"></i>
+                            </div>
+                        </div>
+                        <div class="timeline-content"></div>
+                    </div>
+
+                </div>
+            {% endif %}
+
+            
+        </div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="col-lg-4">
+
+        <!-- FLOW 
+        <div class="card-soft p-3 mb-3">
+            <h6>Quest Flow</h6>
+            <p class="text-muted small">
+                {{ steps|length }} steps • {{ total_time }} min
+            </p>
+
+            <div class="flow-step">
+                <div class="flow-dot bg-success">01</div>
+                <div>Start</div>
+            </div>
+
+            {% for step in steps %}
+            <div class="flow-step">
+                <div class="flow-dot bg-secondary">
+                    {{ loop.index }}
+                </div>
+                <div>{{ step.title }}</div>
+            </div>
+            {% endfor %}
+
+            <div class="flow-step">
+                <div class="flow-dot bg-dark">
+                    <i class="bi bi-flag"></i>
+                </div>
+                <div>Finish</div>
+            </div>
+        </div>  -->
+
+        <!-- TIPS -->
+        <div class="card-soft p-3 mb-3">
+            <h6>Tips</h6>
+            <ul class="small text-muted">
+                <li>Start with a hook</li>
+                <li>Add a challenge</li>
+                <li>End with a reward</li>
+            </ul>
+        </div>
+
+        <!-- APPLICATIONS -->
+        <div class="card-soft p-3">
+            <h6>Applications</h6>
+            <ul class="small text-muted">
+                {% for app in item.applications %}
+                    <li>{{ app.id }} - {{ app.participant_id }} - {{ app.status }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- ACTIONS
+        <div class="card-soft p-3">
+            <h6>Quick Actions</h6>
+
+            <button class="btn btn-outline-primary w-100 mb-2">
+                Add Step
+            </button>
+
+            <button class="btn btn-outline-secondary w-100 mb-2">
+                Duplicate Quest
+            </button>
+
+            <button class="btn btn-outline-dark w-100">
+                Preview for Players
+            </button>
+        </div>  -->
+
+    </div>
+
+</div>
+
+
+{% endblock %}

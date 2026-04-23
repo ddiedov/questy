@@ -12,10 +12,10 @@ class QuestsService(BaseService):
     update_model=QuestUpdate
     patch_model=QuestPatch
 
-    def __init__(self, quest_applications_service, quest_tasks_service):
+    def __init__(self, quest_applications_service, quest_structure_service):
         super().__init__()
         self.quest_applications_service = quest_applications_service
-        self.quest_tasks_service = quest_tasks_service
+        self.quest_structure_service = quest_structure_service
 
 
     def create(self, data: QuestCreate, user_id):
@@ -55,6 +55,7 @@ class QuestsService(BaseService):
             return None
         applications = self.quest_applications_service.get_list_by_quest(quest_id = id)
         tasks = self.get_tasks(quest_id = id, current_user_id=None)
+        print(tasks)
         return QuestForUpdate(
             **quest.model_dump(),
             applications = applications,
@@ -71,8 +72,8 @@ class QuestsService(BaseService):
 
 #   ======      quest tasks      ======
     def get_tasks(self, quest_id: int, current_user_id=None):
-        quest_tasks = self.quest_tasks_service.get_tasks_by_quest(
+        quest_structure = self.quest_structure_service.get_by_quest(
             quest_id=quest_id,
             current_user_id=current_user_id
         )
-        return quest_tasks
+        return quest_structure.tasks

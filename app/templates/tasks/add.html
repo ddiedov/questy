@@ -1,12 +1,78 @@
-
 {% extends "core/base.html" %}
 {% block content %}
-<h2>Add Task</h2>
-<form method="post" action="{{ url }}">
-<div class="mb-3">
-<label class="form-label">Title</label>
-<input class="form-control" name="title">
+
+<div class="mb-4">
+    <a href="/quests/{{ quest_id }}" class="text-muted">← Back to quest</a>
+    <h1 class="mt-2">Create Task</h1>
+    <p class="text-muted">Add a new step to your quest scenario</p>
 </div>
-<button class="btn btn-success">Create</button>
-</form>
+
+<div class="row">
+    <form method="post" action="/quests/{{ quest_id }}/tasks/create">
+
+        <input type="hidden" name="quest_id" value="{{ quest_id }}">
+
+        <!-- IMAGE -->
+        <div class="mb-4">
+            <label class="form-label">Task Image</label>
+
+            <img
+                id="preview"
+                src="/static/images/placeholder.png"
+                class="img-fluid mb-2 w-100"
+                style="max-height: 320px; object-fit: cover; border-radius: 12px;"
+            >
+
+            <input type="file" id="image-input" class="form-control">
+            <input type="hidden" name="image_url" id="image-hidden"">
+        </div>
+
+        <!-- TITLE -->
+        <div class="mb-3">
+            <input
+                type="text"
+                name="title"
+                class="form-control form-control-lg"
+                placeholder="Task title"
+            >
+        </div>
+
+        <!-- DESCRIPTION -->
+        <div class="mb-3">
+            <textarea
+                name="description"
+                id="description"
+                rows="6"
+                class="form-control"
+                placeholder="Describe the scene..."
+            ></textarea>
+        </div>
+
+        <!-- QUESTION -->
+        <div class="mb-3">
+            <input
+                type="text"
+                name="question"
+                class="form-control"
+                placeholder="Question for player"
+            >
+        </div>
+
+        <!-- ANSWER -->
+        <div class="mb-4">
+            <input
+                type="text"
+                name="answer"
+                class="form-control"
+                placeholder="Correct answer"
+            >
+        </div>
+
+        <button class="btn btn-primary">Create Task</button>
+    </form>    
+</div>
+
+
+
+
 {% endblock %}
