@@ -15,8 +15,11 @@ def create_auth_router(prefix: str):
     # -------------------------
     @router.get("/signup", response_class=HTMLResponse)
     async def signup_form(request: Request):
-        return templates.TemplateResponse("auth/signup.html", {"request": request})
-
+        return templates.TemplateResponse(
+            name="auth/signup.html",
+            request=request, 
+            context={}
+        )            
 
     @router.post("/signup")
     async def signup(
@@ -36,8 +39,9 @@ def create_auth_router(prefix: str):
         )
 
         return templates.TemplateResponse(
-            "auth/check_email.html",
-            {"request": request}
+            name="auth/check_email.html",
+            request=request,
+            context={}
         )
 
 
@@ -46,15 +50,23 @@ def create_auth_router(prefix: str):
     # -------------------------
     @router.get("/callback")
     async def auth_callback(request: Request):
-        return templates.TemplateResponse("auth/auth_callback.html", {"request": request})
-    
-    
+        return templates.TemplateResponse(
+            name="auth/auth_callback.html",
+            request=request,
+            context={}
+        )
+
+
     # -------------------------
     # FORGOT PASSWORD
     # -------------------------
     @router.get("/forgot-password")
     def forgot_password(request: Request):
-        return templates.TemplateResponse("auth/forgot_password.html", {"request": request})
+        return templates.TemplateResponse(
+            name="auth/forgot_password.html",
+            request=request,
+            context={}
+        )
 
 
     # -------------------------
@@ -62,7 +74,11 @@ def create_auth_router(prefix: str):
     # -------------------------
     @router.get("/login", response_class=HTMLResponse)
     async def login_form(request: Request):
-        return templates.TemplateResponse("auth/login.html", {"request": request})
+        return templates.TemplateResponse(
+            name="auth/login.html",
+            request=request,
+            context={}
+        )
 
 
     @router.post("/login")

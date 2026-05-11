@@ -51,10 +51,15 @@ quests_service = get_quests_service()
 def index(request: Request):
     user = getattr(request.state, "user", None)
     featured_quests = quests_service.get_featured(user.id if user else None)
+
+    print(type(templates))
+    print(type(featured_quests))
+    print(type("landing/landing.html"))
+
     return templates.TemplateResponse(
-        "landing/landing.html",
-        {
-            "request": request,
+        name = "landing/landing.html",
+        request = request,
+        context = {
             "featured_quests": featured_quests
         }
     )

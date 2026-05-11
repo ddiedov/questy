@@ -30,9 +30,9 @@ def create_crud_router(
         items = service.list(current_user_id = user_id)
  
         return templates.TemplateResponse(
-            f"{entity}/list.html",
-            {
-                "request": request,
+            name = f"{entity}/list.html",
+            request = request,
+            context = {
                 "items": items,
                 "entity": entity
             }
@@ -41,9 +41,9 @@ def create_crud_router(
     @router.get("/add")
     async def add_form(request: Request, user_id = Depends(get_user_for_write)):
         return templates.TemplateResponse(
-            f"{entity}/add.html",
-            {
-                "request": request,
+            name = f"{entity}/add.html",
+            request = request,
+            context = {
                 "entity": entity,
                 "url": f"/{entity}"
             }
@@ -73,9 +73,9 @@ def create_crud_router(
             raise HTTPException(status_code=404)
         
         return templates.TemplateResponse(
-            f"{entity}/details.html",
-            {
-                "request": request,
+            name = f"{entity}/details.html",
+            request = request,
+            context = {
                 "item": item,
                 "entity": entity
             }
@@ -88,9 +88,9 @@ def create_crud_router(
             raise HTTPException(status_code=404)
 
         return templates.TemplateResponse(
-            f"{entity}/update.html",
-            {
-                "request": request,
+            name = f"{entity}/update.html",
+            request = request,
+            context = {
                 "item": item,
                 "entity": entity
             }

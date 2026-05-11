@@ -29,9 +29,9 @@ async def add_task_page(
     user_id = Depends(get_user_for_write)
 ):
     return templates.TemplateResponse(
-        "tasks/add.html",
-        {
-            "request": request,
+        name = "tasks/add.html",
+        request = request,
+        context = {
             "quest_id": quest_id,
             "url": f"/quests/{quest_id}/tasks/create"
         }
@@ -76,9 +76,9 @@ async def select_task_page(
     print(tasks)
 
     return templates.TemplateResponse(
-        "tasks/list.html",
-        {
-            "request": request,
+        name = "tasks/list.html",
+        request = request,
+        context = {
             "items": tasks,
             "quest_id": quest_id
         }
