@@ -1,7 +1,12 @@
+import logging
+from typing import List
+
 from app.core.supabase import supabase
 from .apply_filters import apply_filters
 from postgrest.exceptions import APIError
-from typing import List
+
+
+logger = logging.getLogger(__name__)
 
 class BaseRepository:
     table_name: str
@@ -11,7 +16,7 @@ class BaseRepository:
         self.table = supabase.table(self.table_name)
         self.bucket = "questy-assets"
         self.prefix = self.table_name  
-        print(f"[Repository] Using table: {self.table_name}")      
+        logger.debug("[Repository] Using table: %s", self.table_name)
 
     def list(self, filters=None):
         try:
@@ -19,8 +24,8 @@ class BaseRepository:
             query = apply_filters(query, filters, self.filter_map)
             response = query.execute()
             return response.data or []
-        except APIError as e:
-            print(f"[Repository:{self.prefix}] ERROR:", e)
+        except APIError:
+            logger.exception("[Repository:%s] ERROR", self.prefix)
             return []
         
     def get_list_by_ids(self, ids: List[int]):
@@ -29,16 +34,16 @@ class BaseRepository:
                 return []
             response = self.table.select("*").in_("id", ids).execute()
             return response.data or []
-        except APIError as e:
-            print(f"[Repository:{self.prefix}] ERROR:", e)
+        except APIError:
+            logger.exception("[Repository:%s] ERROR", self.prefix)
             return []
 
     def create(self, data):
         try:
             response = self.table.insert(data).execute()
             return response.data or []
-        except APIError as e:
-            print(f"[Repository:{self.prefix}] ERROR:", e)
+        except APIError:
+            logger.exception("[Repository:%s] ERROR", self.prefix)
             return []
     
     def get(self, id):
@@ -47,16 +52,16 @@ class BaseRepository:
             if response is None:
                 return None
             return response.data
-        except APIError as e:
-            print(f"[Repository:{self.prefix}] ERROR:", e)
+        except APIError:
+            logger.exception("[Repository:%s] ERROR", self.prefix)
             return None
     
     def update(self, id, data):
         try:
             response = self.table.update(data).eq("id", id).execute()
             return response.data or []
-        except APIError as e:
-            print(f"[Repository:{self.prefix}] ERROR:", e)
+        except APIError:
+            logger.exception("[Repository:%s] ERROR", self.prefix)
             return []
         
     def upload_image(self, id, filename: str, data: bytes):
@@ -65,6 +70,6 @@ class BaseRepository:
             supabase.storage.from_(self.bucket).upload(path, data, {"upsert": "true"})
             url = supabase.storage.from_(self.bucket).get_public_url(path)
             return url
-        except APIError as e:
-            print(f"[Repository:{self.prefix}] ERROR:", e)
+        except APIError:
+            logger.exception("[Repository:%s] ERROR", self.prefix)
             return None

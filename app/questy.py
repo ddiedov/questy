@@ -1,4 +1,6 @@
 
+import logging
+
 from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse
@@ -18,6 +20,12 @@ from app.quest_applications.api import router as quest_applications_api_router
 from app.tasks.api import router as tasks_api_router
 
 from config import SESSION_SECRET
+
+logging.basicConfig(
+    level=logging.DEBUG,
+    format="%(levelname)s:%(name)s:%(message)s"
+)
+logger = logging.getLogger(__name__)
 
 app = FastAPI(title="Questy")
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
@@ -52,9 +60,9 @@ def index(request: Request):
     user = getattr(request.state, "user", None)
     featured_quests = quests_service.get_featured(user.id if user else None)
 
-    print(type(templates))
-    print(type(featured_quests))
-    print(type("landing/landing.html"))
+    logger.debug("Templates type: %s", type(templates))
+    logger.debug("Featured quests type: %s", type(featured_quests))
+    logger.debug("Landing template type: %s", type("landing/landing.html"))
 
     return templates.TemplateResponse(
         name = "landing/landing.html",

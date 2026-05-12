@@ -1,9 +1,15 @@
+import logging
+
 from fastapi import HTTPException
 from app.core.base_service import BaseService
 from app.quests.repository import QuestsRepository
 from .model import Quest, QuestCreate, QuestUpdate, QuestPatch
 from .model import QuestForUpdate
 from .filter import QuestsFilter
+
+
+logger = logging.getLogger(__name__)
+
 
 class QuestsService(BaseService):
     repository=QuestsRepository()
@@ -55,7 +61,7 @@ class QuestsService(BaseService):
             return None
         applications = self.quest_applications_service.get_list_by_quest(quest_id = id)
         tasks = self.get_tasks(quest_id = id, current_user_id=None)
-        print(tasks)
+        logger.debug("Quest %s tasks for update: %s", id, tasks)
         return QuestForUpdate(
             **quest.model_dump(),
             applications = applications,

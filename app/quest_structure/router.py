@@ -1,3 +1,5 @@
+import logging
+
 from fastapi import APIRouter, Request, Depends
 from fastapi.responses import RedirectResponse
 
@@ -8,6 +10,8 @@ from app.tasks.filter import TasksFilter
 from app.tasks.model import TaskCreate
 from app.core.auth import build_user_dependency
 
+
+logger = logging.getLogger(__name__)
 
 
 router = create_crud_router(
@@ -46,7 +50,7 @@ async def create_task_for_quest(
 ):
     form = await request.form()
     data_dict = dict(form)
-    print (data_dict)
+    logger.debug("Create task for quest %s form data: %s", quest_id, data_dict)
     data = TaskCreate(**data_dict)
 
     task = get_tasks_service().create(data, user_id=user_id)
@@ -67,14 +71,14 @@ async def select_task_page(
     user_id = Depends(get_user_for_write)
 ):
     filters = TasksFilter()
-#    filters.quest_id = quest_id  # 👈 ок, если ты реально фильтруешь “не добавленные”
-    print(filters)
+#    filters.quest_id = quest_id  # ок, если ты реально фильтруешь _не добавленные_
+    logger.debug("Task selection filters for quest %s: %s", quest_id, filters)
 
     tasks = get_tasks_service().list(
         filters=filters,
         current_user_id=user_id
     )
-    print(tasks)
+    logger.debug("Selectable tasks for quest %s: %s", quest_id, tasks)
 
     return templates.TemplateResponse(
         name = "tasks/list.html",

@@ -1,8 +1,13 @@
+import logging
+
 from fastapi import APIRouter, Request, HTTPException, Depends
 from fastapi.responses import RedirectResponse
 from app.core.templates import templates
 from fastapi import UploadFile, File
 from app.core.auth import build_user_dependency
+
+
+logger = logging.getLogger(__name__)
 
 
 def create_crud_router(
@@ -26,7 +31,7 @@ def create_crud_router(
 
     @router.get("/")
     async def list_items(request: Request, user_id = Depends(get_user_for_read)):
-        print("SERVICE:", type(service))
+        logger.debug("CRUD service for %s: %s", entity, type(service))
         items = service.list(current_user_id = user_id)
  
         return templates.TemplateResponse(

@@ -1,7 +1,12 @@
+import logging
+
 from app.core.repository import BaseRepository
 from app.core.supabase import supabase
 from postgrest.exceptions import APIError
 from typing import List
+
+
+logger = logging.getLogger(__name__)
 
 
 class QuestStructureRepository(BaseRepository):
@@ -16,6 +21,6 @@ class QuestStructureRepository(BaseRepository):
         try:
             response = self.table.select("*").eq("quest_id", quest_id).execute()
             return response.data or []
-        except APIError as e:
-            print(f"[Repository:{self.prefix}] ERROR:", e)
+        except APIError:
+            logger.exception("[Repository:%s] ERROR", self.prefix)
             return []
