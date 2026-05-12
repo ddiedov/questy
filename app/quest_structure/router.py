@@ -22,6 +22,7 @@ get_user_for_write = build_user_dependency(True)
 
 quest_tasks_router = APIRouter()
 
+
 @quest_tasks_router.get("/quests/{quest_id}/tasks/add")
 async def add_task_page(
     request: Request,

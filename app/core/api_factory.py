@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 
 
 def create_api_router(service, prefix: str, filter_model=None):
@@ -30,7 +30,7 @@ def create_api_router(service, prefix: str, filter_model=None):
     if create_model:
         @router.post("/")
         def create_item(data: create_model):
-            return service.create(data)
+            return service.create(data, user_id=None)
 
     if update_model:
         @router.put("/{id}")

@@ -17,6 +17,7 @@ from app.quests.api import router as quests_api_router
 from app.quest_applications.api import router as quest_applications_api_router
 from app.tasks.api import router as tasks_api_router
 
+from config import SESSION_SECRET
 
 app = FastAPI(title="Questy")
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
@@ -24,9 +25,8 @@ app.mount("/static", StaticFiles(directory="app/static"), name="static")
 from app.core.auth_routers import create_auth_router
 app.include_router(create_auth_router(""))
 
-import secrets
 from starlette.middleware.sessions import SessionMiddleware
-app.add_middleware(SessionMiddleware,secret_key=secrets.token_hex(32))
+app.add_middleware(SessionMiddleware, secret_key=SESSION_SECRET)
 
 from app.core.auth import AuthMiddleware
 app.add_middleware(AuthMiddleware)

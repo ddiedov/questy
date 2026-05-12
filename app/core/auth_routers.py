@@ -1,8 +1,16 @@
-from fastapi import APIRouter, Request, Form
+from fastapi import APIRouter, Request, Form, HTTPException
 from fastapi.responses import HTMLResponse, RedirectResponse
 
 from app.core.supabase import supabase
 from app.core.templates import templates
+
+
+def safe_next_url(next_url: str | None) -> str:
+    if not next_url:
+        return "/"
+    if not next_url.startswith("/") or next_url.startswith("//"):
+        return "/"
+    return next_url
 
 
 
@@ -33,7 +41,7 @@ def create_auth_router(prefix: str):
                 "email": email,
                 "password": password,
                 "options": {
-                    "email_redirect_to": f"auth/callback?next={next}"
+                    "email_redirect_to": f"auth/callback?next={safe_next_url(next)}"
                 }
             }
         )
@@ -98,7 +106,7 @@ def create_auth_router(prefix: str):
         if not access_token:
             raise HTTPException(401, "Login failed")
 #            return {"error": "Login failed. Possibly email not confirmed."}
-        response = RedirectResponse(url=next, status_code=303)
+        response = RedirectResponse(url=safe_next_url(next), status_code=303)
         response.set_cookie(
             key="access_token",
             value=access_token,
