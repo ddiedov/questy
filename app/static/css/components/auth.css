@@ -13,7 +13,7 @@
 }
 
 .auth-card {
-  border-radius: 8px;
+  border-radius: var(--radius-md);
 }
 
 .auth-brand {
@@ -29,7 +29,7 @@
 .auth-brand img {
   width: 36px;
   height: 36px;
-  border-radius: 10px;
+  border-radius: var(--radius-lg);
 }
 
 .auth-links {

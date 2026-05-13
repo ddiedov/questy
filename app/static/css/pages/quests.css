@@ -15,7 +15,7 @@
   top: 0;
   bottom: 0;
   width: 2px;
-  background: #d8d2c4;
+  background: var(--timeline-line);
 }
 
 .timeline-step {
@@ -42,7 +42,7 @@
 
 .step-card {
   margin-left: 60px;
-  border-radius: 14px;
-  border: 1px solid #e5e0d5;
-  background: #fff;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--editor-card-border);
+  background: var(--editor-card-bg);
 }

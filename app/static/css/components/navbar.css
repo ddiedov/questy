@@ -2,7 +2,7 @@
 .custom-navbar {
   background: var(--navbar-bg);
   border: 1px solid var(--navbar-border);
-  border-radius: 16px;
+  border-radius: var(--radius-md);
   padding: 10px 16px;
 }
 
@@ -14,7 +14,7 @@
 .navbar-brand-mark {
   width: 28px;
   height: 28px;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
 }
 
 /* Avatar */
