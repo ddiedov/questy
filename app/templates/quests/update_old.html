@@ -11,7 +11,7 @@
         <!-- IMAGE -->
         <div class="me-4">
             <img
-                src="{{ item.image_url or '/static/images/placeholder.png' }}"
+                src="{{ item.image_url or '/static/images/placeholder.svg' }}"
                 class="rounded"
                 style="width: 240px; height: 150px; object-fit: cover;"
                 id="preview"
@@ -153,7 +153,7 @@
         <div class="card-soft p-3 mb-3">
             <h6>Quest Flow</h6>
             <p class="text-muted small">
-                {{ steps|length }} steps • {{ total_time }} min
+                {{ steps|length }} steps - {{ total_time }} min
             </p>
 
             <div class="flow-step">

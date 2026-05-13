@@ -1,6 +1,7 @@
 <div class="card">
+    {% set quest_image = quest.image_url or '/static/images/placeholder.svg' %}
     <div class="img-responsive img-responsive-21x9 card-img-top"
-        style="background-image: url({{ quest.image_url }})">
+        style="background-image: url('{{ quest_image }}')">
     </div>
     <div class="card-body text-center">
         <h3>{{ quest.title }}</h3>

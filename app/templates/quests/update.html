@@ -5,11 +5,27 @@
 
   <!-- HEADER -->
   <div class="qe-header">
-    <img
-      src="{{ item.image_url or '/static/images/placeholder.png' }}"
-      class="qe-cover"
-      id="preview"
-    >
+    <div class="qe-cover-wrap">
+      <img
+        src="{{ item.image_url or '/static/images/placeholder.svg' }}"
+        class="qe-cover"
+        id="preview"
+      >
+
+      <label class="btn btn-light btn-sm qe-cover-upload">
+        <i class="bi bi-image"></i>
+        Change
+        <input
+          type="file"
+          id="image-input"
+          class="d-none"
+          accept="image/*"
+          data-upload-url="/quests/{{ item.id }}/image"
+          data-preview-target="#preview"
+          data-hidden-input="#image-hidden"
+        >
+      </label>
+    </div>
 
     <div class="qe-meta">
       <input name="title" class="qe-title" value="{{ item.title }}">
@@ -61,7 +77,7 @@
       <div class="qe-card">
 
         <img
-          src="{{ task.task.image_url or '/static/images/placeholder.png' }}"
+          src="{{ task.task.image_url or '/static/images/placeholder.svg' }}"
           class="qe-img"
         >
 

@@ -10,6 +10,13 @@ document.addEventListener("DOMContentLoaded", () => {
         const previewSelector = this.dataset.previewTarget;
         const hiddenSelector = this.dataset.hiddenInput;
 
+        if (!uploadUrl) {
+            if (previewSelector) {
+                document.querySelector(previewSelector).src = URL.createObjectURL(file);
+            }
+            return;
+        }
+
         const formData = new FormData();
         formData.append("file", file);
 

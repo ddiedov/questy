@@ -29,7 +29,7 @@
                 >{{ item.description }}</textarea>
             </div>
 
-            <!-- Hidden image URL (обновляется через JS после загрузки) -->
+            <!-- Hidden image URL updated by JS after upload -->
             <input type="hidden" name="image_url" id="image-hidden" value="{{ item.image_url }}">
 
             <button type="submit" class="btn btn-primary">Save</button>
@@ -37,10 +37,10 @@
         </form>
     </div>
 
-    <!-- Колонка для картинки -->
+    <!-- Image column -->
     <div class="col-md-4">
         <label class="form-label">Quest Image</label>
-        <img id="preview" src="{{ item.image_url or '/static/images/placeholder.png' }}" class="img-fluid mb-2" style="max-height: 300px; object-fit: cover; border: 1px solid #ccc; border-radius: 5px;">
+        <img id="preview" src="{{ item.image_url or '/static/images/placeholder.svg' }}" class="img-fluid mb-2" style="max-height: 300px; object-fit: cover; border: 1px solid #ccc; border-radius: 5px;">
         
         <input 
             type="file" 
@@ -51,7 +51,7 @@
             data-preview-target="#preview" 
             data-hidden-input="#image-hidden"
         >
-        <small class="text-muted">Upload a new image for this quest</small>
+        <small class="text-muted">Upload a new image for this task</small>
     </div>
 </div>
 

@@ -9,11 +9,24 @@
   margin-bottom: 20px;
 }
 
+.qe-cover-wrap {
+  position: relative;
+  width: 220px;
+  flex: 0 0 220px;
+}
+
 .qe-cover {
   width: 220px;
   height: 140px;
   object-fit: cover;
   border-radius: 12px;
+}
+
+.qe-cover-upload {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  box-shadow: var(--shadow-sm);
 }
 
 .qe-meta { flex: 1; }
@@ -64,7 +77,7 @@
   padding-left: 70px;
 }
 
-/* ОДНА ЛИНИЯ */
+/* Timeline line */
 .qe-timeline::before {
   content: "";
   position: absolute;
@@ -87,7 +100,7 @@
   transform: translateX(-50%);
 }
 
-/* КРУЖОК */
+/* Timeline dot */
 .qe-dot {
   width: 34px;
   height: 34px;

@@ -2,7 +2,7 @@
 {% block content %}
 
 <div class="mb-4">
-    <a href="/quests/{{ quest_id }}" class="text-muted">← Back to quest</a>
+    <a href="/quests/{{ quest_id }}" class="text-muted">&larr; Back to quest</a>
     <h1 class="mt-2">Create Task</h1>
     <p class="text-muted">Add a new step to your quest scenario</p>
 </div>
@@ -18,13 +18,19 @@
 
             <img
                 id="preview"
-                src="/static/images/placeholder.png"
+                src="/static/images/placeholder.svg"
                 class="img-fluid mb-2 w-100"
                 style="max-height: 320px; object-fit: cover; border-radius: 12px;"
             >
 
-            <input type="file" id="image-input" class="form-control">
-            <input type="hidden" name="image_url" id="image-hidden"">
+            <input
+                type="file"
+                id="image-input"
+                class="form-control"
+                data-preview-target="#preview"
+                data-hidden-input="#image-hidden"
+            >
+            <input type="hidden" name="image_url" id="image-hidden">
         </div>
 
         <!-- TITLE -->
