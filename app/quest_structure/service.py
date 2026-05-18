@@ -1,8 +1,12 @@
+import logging
+
 from app.core.base_service import BaseService
 from app.quest_structure.repository import QuestStructureRepository
 from .model import QuestStructure, QuestStructureItem, QuestStructureItemDTO, CreateQuestStructureItemDTO
 from .filter import QuestStructureFilter
 
+
+logger = logging.getLogger(__name__)
 
 class QuestStructureService(BaseService):
     repository=QuestStructureRepository()
@@ -42,6 +46,7 @@ class QuestStructureService(BaseService):
 
         items = [
             QuestStructureItem(
+                id=link.id,
                 task=task_map[link.task_id],
                 position=link.position
             )
@@ -55,6 +60,10 @@ class QuestStructureService(BaseService):
         )
     
     def add_task(self, quest_id: int, task_id: int):
+        if self.repository.exists(quest_id, task_id):
+            logger.warning("Task %s already exists in quest %s", task_id, quest_id)
+            return
+        
         next_position = self.get_next_position(quest_id)
 
         self.repository.create({
@@ -64,9 +73,40 @@ class QuestStructureService(BaseService):
         })
 
     def remove_task(self, quest_id: int, task_id: int):
-        # пока можно просто delete через repo (если есть)
-        pass
+        quest_task = QuestStructureItemDTO(**self.repository.get_quest_task(quest_id, task_id))
+
+        if not quest_task:
+            return
+
+        deleted_position = quest_task.position
+
+        deleted = self.repository.delete(quest_task.id)
+
+        if not deleted:
+            return
+
+        self.repository.shift_positions_down(
+            quest_id=quest_id,
+            from_position=deleted_position
+        )
         
+    def reorder_tasks(self, quest_id: int, ordered_ids: list[int]):
+        items = self.repository.get_by_quest(quest_id)
+
+        # защита: убедимся, что все id принадлежат этому квесту
+        valid_ids = {item["id"] for item in items}
+
+        for i in ordered_ids:
+            if i not in valid_ids:
+                logger.warning("Invalid quest_task_id in reorder: %s", i)
+                return
+
+        # обновляем позиции
+        for position, quest_task_id in enumerate(ordered_ids):
+            self.repository.update(
+                id=quest_task_id,
+                data={"position": position}
+            )
 
     
         

@@ -71,13 +71,27 @@ async def select_task_page(
     user_id = Depends(get_user_for_write)
 ):
     filters = TasksFilter()
-#    filters.quest_id = quest_id  # ок, если ты реально фильтруешь _не добавленные_
-    logger.debug("Task selection filters for quest %s: %s", quest_id, filters)
 
     tasks = get_tasks_service().list(
         filters=filters,
         current_user_id=user_id
     )
+
+    quest_structure = get_quest_structure_service().get_by_quest(
+        quest_id=quest_id,
+        current_user_id=user_id
+    )
+
+    excluded_ids = [
+        item.task.id
+        for item in quest_structure.tasks
+    ]
+
+    tasks = [
+        task for task in tasks
+        if task.id not in excluded_ids
+    ]
+
     logger.debug("Selectable tasks for quest %s: %s", quest_id, tasks)
 
     return templates.TemplateResponse(
@@ -88,3 +102,37 @@ async def select_task_page(
             "quest_id": quest_id
         }
     )
+
+@quest_tasks_router.post("/quests/{quest_id}/tasks/{task_id}/remove")
+async def remove_task_from_quest(
+    request: Request,
+    quest_id: int,
+    task_id: int,
+    user_id = Depends(get_user_for_write)
+):
+    logger.debug("Task deletion from quest %s: %s", quest_id, task_id)
+
+    get_quest_structure_service().remove_task(
+        quest_id=quest_id,
+        task_id=task_id
+    )
+
+    request.session["flash"] = "Task succesfully removed from quest"
+
+    return RedirectResponse(
+        url=f"/quests/{quest_id}/edit",
+        status_code=303
+    )
+
+@quest_tasks_router.post("/quests/{quest_id}/tasks/reorder")
+async def reorder_tasks(
+    quest_id: int,
+    payload: dict,
+    user_id = Depends(get_user_for_write)
+):
+    get_quest_structure_service().reorder_tasks(
+        quest_id=quest_id,
+        ordered_ids=payload.get("items", [])
+    )
+
+    return {"success": True}

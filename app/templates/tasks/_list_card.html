@@ -10,7 +10,9 @@
 
       <!-- CONTENT -->
       <div class="flex-grow-1">
-        <h5 class="mb-1">{{ task.title }}</h5>
+        <h5 class="mb-1"><a href="/tasks/{{ task.id }}/edit" class="qe-title-sm">
+            {{ task.title }}
+          </a></h5>
         <p class="text-muted mb-0">
           {{ task.description }}
         </p>

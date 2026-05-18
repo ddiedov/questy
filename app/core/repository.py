@@ -73,3 +73,11 @@ class BaseRepository:
         except APIError:
             logger.exception("[Repository:%s] ERROR", self.prefix)
             return None
+        
+    def delete(self, id):
+        try:
+            self.table.delete().eq("id", id).execute()
+            return True
+        except APIError:
+            logger.exception("[Repository:%s] ERROR", self.prefix)
+            return False

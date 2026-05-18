@@ -17,6 +17,7 @@ class CreateQuestStructureItemDTO(BaseModel):
 
 #   ======      Service structures      ======
 class QuestStructureItem(BaseModel):
+    id: int
     task: Task
     position: int | None = None
 
