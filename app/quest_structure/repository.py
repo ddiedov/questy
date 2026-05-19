@@ -41,18 +41,25 @@ class QuestStructureRepository(BaseRepository):
             return None
 
     def exists(self, quest_id: int, task_id: int):
+        logger.error("EXISTS CALLED")
+        logger.error("TABLE TYPE = %s", type(self.table))
+        logger.error("TABLE REPR = %s", self.table)
         try:
-            row = (
+            response = (
                 self.table
                 .select("id")
                 .eq("quest_id", quest_id)
                 .eq("task_id", task_id)
                 .maybe_single()
                 .execute()
-                .data
             )
 
-            return row is not None
+            logger.error("EXISTS RESPONSE = %s", response)
+
+            if not response:
+                return False
+
+            return response.data is not None
 
         except APIError:
             logger.exception("[Repository:%s] EXISTS ERROR", self.prefix)

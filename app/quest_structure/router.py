@@ -38,7 +38,16 @@ async def add_task_page(
         request = request,
         context = {
             "quest_id": quest_id,
-            "url": f"/quests/{quest_id}/tasks/create"
+            "url": f"/quests/{quest_id}/tasks/create",
+            "item": None,
+
+            "page_title": "Create Task",
+            "page_description": "Add a new step to your quest",
+
+            "submit_label": "Create Task",
+
+            "back_url": f"/quests/{quest_id}",
+            "cancel_url": f"/quests/{quest_id}",
         }
     )
 
@@ -54,6 +63,7 @@ async def create_task_for_quest(
     data = TaskCreate(**data_dict)
 
     task = get_tasks_service().create(data, user_id=user_id)
+    logger.debug("Link task %s to quest %s", task.id, quest_id)
     get_quest_structure_service().add_task(
         quest_id=quest_id,
         task_id=task.id

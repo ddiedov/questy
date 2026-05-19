@@ -1,0 +1,169 @@
+<div class="task-editor">
+
+    <div class="task-editor__header">
+        {% if back_url %}
+            <a href="{{ back_url }}" class="task-editor__back">
+                &larr; Back
+            </a>
+        {% endif %}
+
+        <h1>{{ page_title }}</h1>
+
+        {% if page_description %}
+            <p class="muted">{{ page_description }}</p>
+        {% endif %}
+    </div>
+
+    <form method="post" action="{{ url }}" class="task-form">
+
+        {% if quest_id %}
+            <input type="hidden" name="quest_id" value="{{ quest_id }}">
+        {% endif %}
+
+        <!-- ================= MAIN ================= -->
+
+        <section class="card-block">
+
+            <h2>Main Scene</h2>
+
+            <label>Title</label>
+            <input
+                type="text"
+                name="title"
+                class="form-control form-control-lg"
+                value="{{ item.title if item else '' }}"
+            >
+
+            <label>Description</label>
+            <textarea
+                name="description"
+                rows="6"
+                class="form-control"
+            >{{ item.description if item else '' }}</textarea>
+
+            <!-- IMAGE -->
+
+            <label>Main Image</label>
+
+            <img
+                id="preview"
+                src="{{ item.image_url if item and item.image_url else '/static/images/placeholder.svg' }}"
+                class="img-preview"
+            >
+
+            <input
+                type="file"
+                id="image-input"
+                class="form-control"
+                {% if item %}
+                    data-upload-url="/tasks/{{ item.id }}/image"
+                {% endif %}
+                data-preview-target="#preview"
+                data-hidden-input="#image-hidden"
+            >
+
+            <input
+                type="hidden"
+                name="image_url"
+                id="image-hidden"
+                value="{{ item.image_url if item else '' }}"
+            >
+
+        </section>
+
+        <!-- ================= QUESTION ================= -->
+
+        <section class="card-block">
+
+            <h2>Question</h2>
+
+            <label>Question</label>
+
+            <textarea
+                name="question"
+                rows="3"
+                class="form-control"
+            >{{ item.question if item else '' }}</textarea>
+
+            <label>Question Image URL</label>
+
+            <input
+                type="text"
+                name="question_image_url"
+                class="form-control"
+                value="{{ item.question_image_url if item else '' }}"
+            >
+
+        </section>
+
+        <!-- ================= ANSWER ================= -->
+
+        <section class="card-block">
+
+            <h2>Answer</h2>
+
+            <label>Correct Answer</label>
+
+            <input
+                type="text"
+                name="answer"
+                class="form-control"
+                value="{{ item.answer if item else '' }}"
+            >
+
+        </section>
+
+        <!-- ================= OUTRO ================= -->
+
+        <section class="card-block">
+
+            <h2>Result / Epilogue</h2>
+
+            <label>Outer Description</label>
+
+            <textarea
+                name="outer_description"
+                rows="4"
+                class="form-control"
+            >{{ item.outer_description if item else '' }}</textarea>
+
+            <label>Outer Image URL</label>
+
+            <input
+                type="text"
+                name="outer_image_url"
+                class="form-control"
+                value="{{ item.outer_image_url if item else '' }}"
+            >
+
+        </section>
+
+        <!-- ================= FUTURE HINTS ================= -->
+
+        <section class="card-block card-block--muted">
+            <h2>Hints (future feature)</h2>
+
+            <p class="muted">
+                Hint management will appear here later.
+            </p>
+        </section>
+
+        <!-- ================= ACTIONS ================= -->
+
+        <div class="d-flex gap-2">
+
+            <button type="submit" class="btn btn-primary">
+                {{ submit_label }}
+            </button>
+
+            {% if cancel_url %}
+                <a href="{{ cancel_url }}" class="btn btn-secondary">
+                    Cancel
+                </a>
+            {% endif %}
+
+        </div>
+
+    </form>
+
+</div>

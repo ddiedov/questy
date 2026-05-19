@@ -1,59 +1,7 @@
 {% extends "core/base.html" %}
+
 {% block content %}
 
-<h1 class="mb-4">Edit Task: {{ item.title }}</h1>
-
-<div class="row">
-    <div class="col-md-8">
-        <form method="post" action="/tasks/{{ item.id }}">
-            <!-- Title -->
-            <div class="mb-3">
-                <label class="form-label">Title</label>
-                <input
-                    type="text"
-                    class="form-control"
-                    name="title"
-                    value="{{ item.title }}"
-                    required
-                >
-            </div>
-
-            <!-- Description -->
-            <div class="mb-3">
-                <label class="form-label">Description</label>
-                <textarea
-                    name="description"
-                    id="description"
-                    rows="6"
-                    class="form-control"
-                >{{ item.description }}</textarea>
-            </div>
-
-            <!-- Hidden image URL updated by JS after upload -->
-            <input type="hidden" name="image_url" id="image-hidden" value="{{ item.image_url }}">
-
-            <button type="submit" class="btn btn-primary">Save</button>
-            <a href="/tasks/" class="btn btn-secondary">Cancel</a>
-        </form>
-    </div>
-
-    <!-- Image column -->
-    <div class="col-md-4">
-        <label class="form-label">Quest Image</label>
-        <img id="preview" src="{{ item.image_url or '/static/images/placeholder.svg' }}" class="img-fluid mb-2" style="max-height: 300px; object-fit: cover; border: 1px solid #ccc; border-radius: 5px;">
-        
-        <input 
-            type="file" 
-            id="image-input"
-            class="form-control 
-            form-control-sm" 
-            data-upload-url="/tasks/{{ item.id }}/image" 
-            data-preview-target="#preview" 
-            data-hidden-input="#image-hidden"
-        >
-        <small class="text-muted">Upload a new image for this task</small>
-    </div>
-</div>
-
+{% include "tasks/_form.html" %}
 
 {% endblock %}

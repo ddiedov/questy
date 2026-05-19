@@ -45,87 +45,223 @@
 </form>
 
 
-<!-- SCENARIO -->
-<div class="qe-scenario">
+<div class="qe-layout">
 
-  <div class="qe-scenario-head">
-    <h5>Scenario</h5>
-    {% include "quests/_add_task_actions.html" %}
-  </div>
+  <!-- LEFT -->
+  <div class="qe-main">
 
-  <div class="qe-timeline">
+    <!-- SCENARIO -->
+    <div class="qe-scenario">
 
-    <!-- START -->
-    <div class="qe-row">
-      <div class="qe-col">
-        <div class="qe-dot start">
-          <i class="bi bi-play-fill"></i>
-        </div>
+      <div class="qe-scenario-head">
+        <h5>Scenario</h5>
+
+        {% include "quests/_add_task_actions.html" %}
       </div>
-      <div></div>
-    </div>
 
-    <div id="quest-task-list">
-      {% for task in item.tasks %}
-      <div class="qe-row" data-id="{{ task.id }}">
+      <div class="qe-timeline">
 
-        <div class="qe-col">
-          <div class="qe-dot discover">
-            <i class="bi bi-search"></i>
+        <!-- START -->
+        <div class="qe-row">
+          <div class="qe-col">
+            <div class="qe-dot start">
+              <i class="bi bi-play-fill"></i>
+            </div>
           </div>
+          <div></div>
         </div>
 
-        <div class="qe-card">
+        <div id="quest-task-list">
 
-          <div class="qe-drag">
-            <i class="bi bi-grip-vertical"></i>
+          {% for task in item.tasks %}
+
+          <div class="qe-row" data-id="{{ task.id }}">
+
+            <div class="qe-col">
+              <div class="qe-dot discover">
+                <i class="bi bi-search"></i>
+              </div>
+            </div>
+
+            <div class="qe-card">
+
+              <div class="qe-drag">
+                <i class="bi bi-grip-vertical"></i>
+              </div>
+
+              <img
+                src="{{ task.task.image_url or '/static/images/placeholder.svg' }}"
+                class="qe-img"
+              >
+
+              <div class="qe-content">
+
+                <a href="/tasks/{{ task.task.id }}/edit"
+                   class="qe-title-sm">
+                  {{ task.task.title }}
+                </a>
+
+                <div class="qe-desc-sm">
+                  {{ task.task.description }}
+                </div>
+
+              </div>
+
+              <div class="qe-actions">
+
+                <form method="post"
+                      action="/quests/{{item.id}}/tasks/{{ task.task.id }}/remove">
+
+                  <button class="qe-delete">
+                    <i class="bi bi-x-lg"></i>
+                  </button>
+
+                </form>
+
+              </div>
+
+            </div>
+
           </div>
 
-          <img
-            src="{{ task.task.image_url or '/static/images/placeholder.svg' }}"
-            class="qe-img"
-          >
+          {% endfor %}
 
-          <div class="qe-content">
-            <a href="/tasks/{{ task.task.id }}/edit" class="qe-title-sm">
-              {{ task.task.title }}
-            </a>
+        </div>
 
-            <div class="qe-desc-sm">
-              {{ task.task.description }}
+        <!-- FINISH -->
+        <div class="qe-row">
+
+          <div class="qe-col">
+            <div class="qe-dot finish">
+              <i class="bi bi-flag"></i>
             </div>
           </div>
 
-          <div class="qe-actions">
-            <form method="post" action="/quests/{{item.id}}/tasks/{{ task.task.id }}/remove">
-              <button class="qe-delete">
-                <i class="bi bi-x-lg"></i>
-              </button>
-            </form>
+          <div class="qe-card">
+            {% include "quests/_add_task_actions.html" %}
           </div>
 
         </div>
 
       </div>
-      {% endfor %}
-    </div>
 
-    <!-- FINISH -->
-    <div class="qe-row">
-      <div class="qe-col">
-        <div class="qe-dot finish">
-          <i class="bi bi-flag"></i>
-        </div>
-      </div>
-      <div class="qe-card">
-        {% include "quests/_add_task_actions.html" %}
-      </div>
     </div>
 
   </div>
 
-</div>
+  <!-- RIGHT SIDEBAR -->
+  <aside class="qe-sidebar">
 
+    <!-- FLOW -->
+    <div class="qe-side-card">
+
+      <h5>Quest Flow</h5>
+
+      <div class="qe-flow">
+
+        <div class="qe-flow-item">
+          <div class="qe-flow-dot active">01</div>
+          <div>Start</div>
+        </div>
+
+        {% for task in item.tasks %}
+
+        <div class="qe-flow-item">
+          <div class="qe-flow-dot">
+            {{ loop.index + 1 }}
+          </div>
+
+          <div>
+            {{ task.task.title }}
+          </div>
+        </div>
+
+        {% endfor %}
+
+        <div class="qe-flow-item">
+          <div class="qe-flow-dot finish">
+            <i class="bi bi-flag"></i>
+          </div>
+
+          <div>Finish</div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- APPLICATIONS -->
+    <div class="qe-side-card">
+
+      <div class="d-flex justify-content-between align-items-center mb-3">
+
+        <h5 class="mb-0">Applications</h5>
+
+        <span class="badge bg-warning text-dark">
+          {{ item.applications | length }}
+        </span>
+
+      </div>
+
+      {% if item.applications %}
+
+        <div class="qe-app-list">
+
+          {% for app in item.applications %}
+
+          <div class="qe-app-item">
+
+            <div>
+              <div class="fw-semibold">
+                Participant #{{ app.participant_id }}
+              </div>
+
+              <div class="small text-muted">
+                {{ app.status }}
+              </div>
+            </div>
+
+            <div class="qe-app-actions">
+
+              <form method="post"
+                    action="/applications/{{ app.id }}/approve">
+
+                <button class="btn btn-success btn-sm">
+                  Approve
+                </button>
+
+              </form>
+
+              <form method="post"
+                    action="/applications/{{ app.id }}/reject">
+
+                <button class="btn btn-outline-danger btn-sm">
+                  Reject
+                </button>
+
+              </form>
+
+            </div>
+
+          </div>
+
+          {% endfor %}
+
+        </div>
+
+      {% else %}
+
+        <div class="text-muted small">
+          No active applications
+        </div>
+
+      {% endif %}
+
+    </div>
+
+  </aside>
+
+</div>
 
 {% endblock %}
 

@@ -97,7 +97,16 @@ def create_crud_router(
             request = request,
             context = {
                 "item": item,
-                "entity": entity
+                "entity": entity,
+
+                "page_title": f"Edit {entity.title()}: {item.title}",
+
+                "submit_label": "Save",
+
+                "url": f"/{entity}/{id}",
+
+                "back_url": f"/{entity}",
+                "cancel_url": f"/{entity}",
             }
         )
 

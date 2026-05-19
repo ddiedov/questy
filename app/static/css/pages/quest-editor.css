@@ -187,3 +187,106 @@
   background: rgba(0,0,0,0.05);
   color: #e74c3c;
 }
+
+/* ========================================
+   LAYOUT
+======================================== */
+
+.qe-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 20px;
+  align-items: start;
+}
+
+.qe-main {
+  min-width: 0;
+}
+
+
+/* ========================================
+   SIDEBAR
+======================================== */
+
+.qe-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.qe-side-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  padding: 16px;
+}
+
+
+/* ========================================
+   FLOW
+======================================== */
+
+.qe-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.qe-flow-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.qe-flow-dot {
+  width: 30px;
+  height: 30px;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--timeline-discover-bg);
+  color: white;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  flex-shrink: 0;
+}
+
+.qe-flow-dot.active {
+  background: var(--dot-start-bg);
+}
+
+.qe-flow-dot.finish {
+  background: var(--timeline-finish-bg);
+}
+
+
+/* ========================================
+   APPLICATIONS
+======================================== */
+
+.qe-app-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.qe-app-item {
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  padding: 12px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.qe-app-actions {
+  display: flex;
+  gap: 8px;
+}

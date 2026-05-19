@@ -1,0 +1,90 @@
+/* ===== LAYOUT ===== */
+
+.task-editor {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    background: var(--task-bg);
+}
+
+.task-editor__header {
+    margin-bottom: 20px;
+}
+
+.task-editor__back {
+    display: inline-block;
+    color: var(--task-muted);
+    text-decoration: none;
+    margin-bottom: 8px;
+}
+
+/* ===== FORM ===== */
+
+.task-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* ===== CARD BLOCKS ===== */
+
+.card-block {
+    background: var(--task-card);
+    border: 1px solid var(--task-border);
+    border-radius: var(--task-radius);
+    padding: 20px;
+}
+
+.card-block h2 {
+    font-size: 18px;
+    margin-bottom: 14px;
+    color: var(--task-text);
+}
+
+/* muted future section */
+.card-block--muted {
+    opacity: 0.7;
+}
+
+/* ===== INPUTS ===== */
+
+label {
+    display: block;
+    font-size: 13px;
+    color: var(--task-muted);
+    margin-top: 10px;
+    margin-bottom: 6px;
+}
+
+.form-control {
+    border-radius: 10px;
+    border: 1px solid var(--task-border);
+}
+
+.form-control:focus {
+    border-color: var(--task-primary);
+    box-shadow: 0 0 0 3px rgba(79, 124, 255, 0.15);
+}
+
+/* ===== IMAGE PREVIEW ===== */
+
+.img-preview {
+    width: 100%;
+    max-height: 320px;
+    object-fit: cover;
+    border-radius: var(--task-radius);
+    margin-bottom: 10px;
+    border: 1px solid var(--task-border);
+}
+
+/* ===== BUTTON ===== */
+
+.btn-primary {
+    background: var(--task-primary);
+    border: none;
+    border-radius: 12px;
+}
+
+.btn-primary:hover {
+    background: var(--task-primary-hover);
+}

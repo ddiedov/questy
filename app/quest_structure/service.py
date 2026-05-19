@@ -65,7 +65,7 @@ class QuestStructureService(BaseService):
             return
         
         next_position = self.get_next_position(quest_id)
-
+        logger.debug("Link task %s to quest %s with order %s", task_id, quest_id, next_position)
         self.repository.create({
             "quest_id": quest_id,
             "task_id": task_id,
