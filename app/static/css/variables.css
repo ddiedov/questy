@@ -11,7 +11,9 @@
   --surface: #ffffff;
 
   --text-main: #1f2a37;
-  --text-muted: #8a94a6;
+  --text-muted: #5e4b3b;
+
+  --paper-text: #3d2b1f;
 
   --border: #e5e7eb;
   --border-soft: #f1f3f5;
@@ -19,20 +21,57 @@
   --navbar-bg: #f8f4ec;
   --navbar-border: #e2d8c8;
 
-  --card-bg: #f8f4ec;
-  --card-border: #e2d8c8;
+  --card-bg: linear-gradient(
+      180deg,
+      #f3e7cc 0%,
+      #eadbbd 100%
+    );
+  --card-border: rgba(93, 67, 31, 0.35);
 
-  --editor-card-bg: #ffffff;
-  --editor-card-border: #e5e0d5;
+  --card-shadow:
+    0 6px 18px rgba(30, 20, 10, 0.12);
+  --card-inset:
+    inset 0 1px 0 rgba(255,255,255,.35);
 
-  --status-draft-bg: #ffe08a;
+  --editor-card-bg: linear-gradient(
+      180deg,
+      rgba(255,255,255,.55),
+      rgba(255,255,255,.35)
+    );
+  --editor-card-border: rgba(90,70,40,.18);
 
-  --timeline-line: #d8d2c4;
+  --status-draft-bg: linear-gradient(
+      180deg,
+      #f3d68b,
+      #d4a94c
+    );
+
+  --timeline-line: linear-gradient(
+      180deg,
+      #8b7355,
+      #c9b08a,
+      #8b7355
+    );
   --timeline-discover-bg: #28c76f;
   --timeline-finish-bg: #444444;
 
-  --dot-start-bg: #f8f4ec;
+  --dot-start-bg: linear-gradient(
+      180deg,
+      #4f7c65,
+      #345443
+    );
   --dot-start-border: #e2d8c8;
+
+  --dot-discover-bg: linear-gradient(
+      180deg,
+      #4d6c91,
+      #334a64
+    );
+  --dot-finish-bg: linear-gradient(
+      180deg,
+      #b78b3d,
+      #8c6525
+    );
 
   /* Shadows */
   --shadow-sm: 0 8px 24px rgba(0,0,0,0.06);
@@ -42,6 +81,7 @@
   --radius-sm: 6px;
   --radius-md: 8px;
   --radius-lg: 10px;
+  --status-radius: 999px;
 
   /* Task */
   --task-bg: #f4f6fb;
@@ -72,6 +112,8 @@
   --text-main: #e5e7eb;
   --text-muted: #9ca3af;
 
+  --paper-text: #3d2b1f;
+
   --border: #1f2937;
   --border-soft: #111827;
 
@@ -80,6 +122,11 @@
 
   --card-bg: #111827;
   --card-border: #1f2937;
+
+  --card-shadow:
+    0 6px 18px rgba(30, 20, 10, 0.12);
+  --card-inset:
+    inset 0 1px 0 rgba(255,255,255,.35);
 
   --editor-card-bg: #111827;
   --editor-card-border: #1f2937;
@@ -92,6 +139,17 @@
 
   --dot-start-bg: #111827;
   --dot-start-border: #1f2937;
+
+  --dot-discover-bg: linear-gradient(
+      180deg,
+      #4d6c91,
+      #334a64
+    );
+  --dot-finish-bg: linear-gradient(
+      180deg,
+      #b78b3d,
+      #8c6525
+    );
 
   /* Shadows */
   --shadow-sm: 0 8px 24px rgba(0,0,0,0.4);

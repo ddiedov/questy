@@ -1,7 +1,13 @@
-
 body {
-  background: var(--background);
-  color: var(--text-main);
+  background:
+    radial-gradient(
+      circle at top,
+      rgba(255,255,255,.4),
+      transparent 40%
+    ),
+    #dfe3e8;
+
+  color: var(--paper-text);
 }
 
 .app-container {
