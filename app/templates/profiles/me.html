@@ -1,0 +1,27 @@
+{% extends "core/base.html" %}
+{% block content %}
+
+<h2>My Profile</h2>
+
+<form method="post">
+
+  <div>
+    <label>Username</label>
+    <input name="username" value="{{ profile.username or '' }}">
+  </div>
+
+  <div>
+    <label>Display name</label>
+    <input name="display_name" value="{{ profile.display_name or '' }}">
+  </div>
+
+  <div>
+    <label>Avatar URL</label>
+    <input name="avatar_url" value="{{ profile.avatar_url or '' }}">
+  </div>
+
+  <button type="submit">Save</button>
+
+</form>
+
+{% endblock %}

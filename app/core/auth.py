@@ -1,7 +1,17 @@
 from fastapi import Request, HTTPException
+from fastapi.responses import RedirectResponse
 from app.core.supabase import supabase
 from typing import Optional, Callable
 
+from starlette.middleware.base import BaseHTTPMiddleware
+from supabase_auth.errors import AuthApiError
+
+from app.core.services_factory import get_profiles_service
+
+
+# =========================================================
+# Dependency for routes
+# =========================================================
 
 def build_user_dependency(required: bool) -> Callable:
     async def dependency(request: Request) -> Optional[str]:
@@ -23,8 +33,9 @@ def build_user_dependency(required: bool) -> Callable:
     return dependency
 
 
-from starlette.middleware.base import BaseHTTPMiddleware
-from supabase_auth.errors import AuthApiError
+# =========================================================
+# AUTH MIDDLEWARE
+# =========================================================
 
 class AuthMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request, call_next):
@@ -32,27 +43,91 @@ class AuthMiddleware(BaseHTTPMiddleware):
         refresh_token = request.cookies.get("refresh_token")
 
         request.state.user = None
+        request.state.profile = None
         new_session = None
 
+        # -------------------------------------------------
+        # 1. AUTH USER
+        # -------------------------------------------------
         if access_token:
             try:
                 user = supabase.auth.get_user(access_token)
                 request.state.user = user.user
 
-            except AuthApiError as e:
-                if "expired" in str(e) and refresh_token:
+            except AuthApiError:
+                # try refresh
+                if refresh_token:
                     try:
                         new_session = supabase.auth.refresh_session(refresh_token)
+
                         access_token = new_session.session.access_token
                         user = supabase.auth.get_user(access_token)
+
                         request.state.user = user.user
+
                     except Exception:
                         request.state.user = None
                 else:
                     request.state.user = None
 
+        # -------------------------------------------------
+        # 2. PROFILE (SAFE BOOTSTRAP)
+        # -------------------------------------------------
+        request.state.profile = None
+
+        if request.state.user:
+            try:
+                profiles_service = get_profiles_service()
+
+                profile = profiles_service.get(request.state.user.id)
+
+                # если нет профиля → создаём, но БЕЗ падений
+                if not profile:
+                    try:
+                        profile = profiles_service.create(
+                            profiles_service.create_model(
+                                id=request.state.user.id,
+                                username=None,
+                                display_name=None,
+                                avatar_url=None
+                            ),
+                            request.state.user.id
+                        )
+                    except Exception as e:
+                        # НЕ ломаем request
+                        profile = None
+
+                request.state.profile = profile
+
+            except Exception:
+                request.state.profile = None
+
+
+        # =================================================
+        # 2.5 ONBOARDING GUARD  
+        # =================================================
+        if request.state.user and request.state.profile:
+
+            if not getattr(request.state.profile, "username", None):
+
+                # исключаем зацикливание
+                if not request.url.path.startswith("/profiles/onboarding") \
+                and not request.url.path.startswith("/auth") \
+                and not request.url.path.startswith("/static"):
+
+                    return RedirectResponse(
+                        "/profiles/onboarding",
+                        status_code=303
+                    )
+
+        # -------------------------------------------------
+        # 3. RESPONSE
+        # -------------------------------------------------
         response = await call_next(request)
 
+        # -------------------------------------------------
+        # 4. REFRESH COOKIES IF NEEDED
+        # -------------------------------------------------
         if new_session:
             response.set_cookie(
                 "access_token",

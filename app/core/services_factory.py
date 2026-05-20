@@ -1,4 +1,5 @@
 from app.teams.service import TeamsService
+from app.profiles.service import ProfilesService
 from app.quests.service import QuestsService
 from app.quest_applications.service import QuestApplicationsService
 from app.quest_structure.service import QuestStructureService
@@ -6,6 +7,9 @@ from app.tasks.service import TasksService
 
 def get_teams_service():
     return TeamsService()
+
+def get_profiles_service():
+    return ProfilesService()
 
 def get_quest_applications_service():
     return QuestApplicationsService()

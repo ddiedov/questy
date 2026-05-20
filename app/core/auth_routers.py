@@ -1,11 +1,20 @@
 from fastapi import APIRouter, Request, Form, HTTPException
-from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi.responses import HTMLResponse, RedirectResponse, JSONResponse
 
 from app.core.supabase import supabase
 from app.core.templates import templates
+from pydantic import BaseModel
 
+from app.core.services_factory import get_profiles_service
+
+from config import BASE_URL
 from app.core.helpers import safe_next_url
 
+
+class SessionDTO(BaseModel):
+    access_token: str
+    refresh_token: str
+    next: str = "/"
 
 
 def create_auth_router(prefix: str):
@@ -35,7 +44,7 @@ def create_auth_router(prefix: str):
                 "email": email,
                 "password": password,
                 "options": {
-                    "email_redirect_to": f"auth/callback?next={safe_next_url(next)}"
+                    "email_redirect_to": f"{BASE_URL}/auth/callback?next={safe_next_url(next)}"
                 }
             }
         )
@@ -58,6 +67,34 @@ def create_auth_router(prefix: str):
             context={}
         )
 
+
+    # -------------------------
+    # SESSION
+    # -------------------------
+    @router.post("/session")
+    async def create_session(data: SessionDTO):
+
+        redirect_to = safe_next_url(data.next)
+
+        response = JSONResponse({
+            "redirect_to": redirect_to
+        })
+
+        response.set_cookie(
+            "access_token",
+            data.access_token,
+            httponly=True,
+            samesite="lax"
+        )
+
+        response.set_cookie(
+            "refresh_token",
+            data.refresh_token,
+            httponly=True,
+            samesite="lax"
+        )
+
+        return response
 
     # -------------------------
     # FORGOT PASSWORD
@@ -99,7 +136,7 @@ def create_auth_router(prefix: str):
         refresh_token = session.session.refresh_token
         if not access_token:
             raise HTTPException(401, "Login failed")
-#            return {"error": "Login failed. Possibly email not confirmed."}
+
         response = RedirectResponse(url=safe_next_url(next), status_code=303)
         response.set_cookie(
             key="access_token",

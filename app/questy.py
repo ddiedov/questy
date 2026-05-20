@@ -7,6 +7,7 @@ from fastapi.responses import HTMLResponse
 from app.core.templates import templates
 
 from app.teams.router import router as teams_router
+from app.profiles.router import router as profiles_router
 from app.quests.router import router as quests_router
 from app.quest_applications.router import router as quest_applications_router
 from app.quest_applications.router import quest_applications_router as application_actions_router
@@ -32,7 +33,7 @@ app = FastAPI(title="Questy")
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
 
 from app.core.auth_routers import create_auth_router
-app.include_router(create_auth_router(""))
+app.include_router(create_auth_router("/auth"))
 
 from starlette.middleware.sessions import SessionMiddleware
 app.add_middleware(SessionMiddleware, secret_key=SESSION_SECRET)
@@ -41,6 +42,7 @@ from app.core.auth import AuthMiddleware
 app.add_middleware(AuthMiddleware)
 
 app.include_router(teams_router)
+app.include_router(profiles_router)
 app.include_router(quests_router)
 app.include_router(quest_applications_router)
 app.include_router(application_actions_router)

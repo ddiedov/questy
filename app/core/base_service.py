@@ -2,10 +2,13 @@ from fastapi import HTTPException
 
 class BaseService:
     repository = None
+    
     model = None
     create_model = None
     update_model = None
     patch_model = None
+
+    with_owner = True
 
     def list(self, filters=None, current_user_id=None):
         rows = self.repository.list(filters)
@@ -34,13 +37,12 @@ class BaseService:
         return f"/{entity}/{item.id}/edit"
 
     def create(self, data, user_id):
-        payload = {
-            **data.model_dump(),
-            "created_by": user_id
-        }
+        payload = data.model_dump()
+        if self.with_owner:
+            payload["created_by"] = user_id
         row = self.repository.create(payload)
         if not row:
-            return None
+            raise Exception("Object was not created in Supabase")
         return self.model(**row[0])
 
     def update(self, id: int, data):

@@ -9,7 +9,7 @@
       <span>Questy</span>
     </div>
 
-    <form class="card auth-card" action="/login" method="post">
+    <form class="card auth-card" action="/auth/login" method="post">
       <input type="hidden" name="next" value="{{ request.query_params.get('next', '/') }}">
       <div class="card-body">
         <h1 class="h2 mb-2">Login</h1>
@@ -30,7 +30,7 @@
     </form>
 
     <div class="auth-links text-muted">
-      No account yet? <a href="/signup">Create one</a>
+      No account yet? <a href="/auth/signup">Create one</a>
       <span class="mx-2">.</span>
       <a href="/forgot-password">Forgot password?</a>
     </div>

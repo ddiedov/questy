@@ -41,7 +41,9 @@ class BaseRepository:
     def create(self, data):
         try:
             response = self.table.insert(data).execute()
-            return response.data or []
+            if not response.data:
+                raise Exception(f"Supabase insert failed: {response}")
+            return response.data
         except APIError:
             logger.exception("[Repository:%s] ERROR", self.prefix)
             return []

@@ -3,20 +3,36 @@
 <head><title>Auth Callback</title></head>
 <body>
 <script>
-  const hash = window.location.hash.substring(1);
-  const params = new URLSearchParams(hash);
+    const hash = window.location.hash.substring(1);
+    const hashParams = new URLSearchParams(hash);
 
-  const access_token = params.get("access_token");
+    const access_token = hashParams.get("access_token");
+    const refresh_token = hashParams.get("refresh_token");
 
-  const urlParams = new URLSearchParams(window.location.search);
-  const next = urlParams.get("next") || "/";
+    const queryParams = new URLSearchParams(window.location.search);
+    const next = queryParams.get("next") || "/";
 
-  if (access_token) {
-    document.cookie = "access_token=" + access_token + "; path=/";
-    window.location.href = next;
-  } else {
-    document.body.innerHTML = "Auth failed";
-  }
+    async function completeAuth() {
+
+        const response = await fetch("/auth/session", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                access_token,
+                refresh_token,
+                next
+            })
+        });
+
+        const data = await response.json();
+
+        window.location.href = data.redirect_to;
+    }
+
+    completeAuth();
+
 </script>
 </body>
 </html>
