@@ -1,6 +1,7 @@
 import logging
 
 from fastapi import APIRouter, Request, Form
+from fastapi import UploadFile, File
 from fastapi.responses import RedirectResponse
 
 from app.core.templates import templates
@@ -88,3 +89,23 @@ async def profile_update(
     )
     request.session["flash"] = "Profile updated"
     return RedirectResponse("/profiles/me", status_code=303)
+
+@router.post("/me/avatar")
+async def upload_avatar(
+    request: Request,
+    file: UploadFile = File(...)
+):
+    user = request.state.user
+
+    profiles_service = get_profiles_service()
+
+    contents = await file.read()
+
+    image_url = profiles_service.upload_image(
+        user.id,
+        contents
+    )
+
+    return {
+        "image_url": image_url
+    }

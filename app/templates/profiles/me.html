@@ -1,27 +1,155 @@
 {% extends "core/base.html" %}
+
 {% block content %}
 
-<h2>My Profile</h2>
+<div class="container py-4" style="max-width: 760px;">
 
-<form method="post">
+  <!-- PAGE HEADER -->
+  <div class="mb-4">
 
-  <div>
-    <label>Username</label>
-    <input name="username" value="{{ profile.username or '' }}">
+    <h1 class="h3 mb-1 fw-bold">
+      My Profile
+    </h1>
+
+    <div class="text-muted">
+      Manage your public profile information
+    </div>
+
   </div>
 
-  <div>
-    <label>Display name</label>
-    <input name="display_name" value="{{ profile.display_name or '' }}">
+  <!-- CARD -->
+  <div class="card border-0 shadow-sm">
+
+    <div class="card-body p-4">
+
+      <form
+        method="post"
+        enctype="multipart/form-data"
+        class="d-flex flex-column gap-4"
+      >
+
+        <!-- AVATAR SECTION -->
+        <div>
+
+        <label class="form-label fw-semibold d-block mb-3">
+            Profile Photo
+        </label>
+
+        <div class="d-flex align-items-center gap-4">
+
+            <!-- AVATAR PREVIEW -->
+            <img
+            id="avatar-preview"
+            src="{{ profile.avatar_url or '/static/images/default-avatar.png' }}"
+            class="rounded-circle border shadow-sm"
+            style="
+                width: 96px;
+                height: 96px;
+                object-fit: cover;
+            "
+            >
+
+            <!-- ACTIONS -->
+            <div class="d-flex flex-column gap-2">
+
+            <!-- HIDDEN INPUT -->
+            <input
+                type="hidden"
+                name="avatar_url"
+                id="avatar-url-input"
+                value="{{ profile.avatar_url or '' }}"
+            >
+
+            <!-- FILE INPUT -->
+            <input
+                type="file"
+                id="image-input"
+                accept="image/*"
+                class="d-none"
+
+                data-upload-url="/profiles/me/avatar"
+                data-preview-target="#avatar-preview"
+                data-hidden-input="#avatar-url-input"
+            >
+
+            <!-- BUTTON -->
+            <button
+                type="button"
+                class="btn btn-outline-secondary"
+                onclick="document.getElementById('image-input').click()"
+            >
+                <i class="bi bi-upload"></i>
+                Upload Photo
+            </button>
+
+            <div class="text-muted small">
+                JPG, PNG, WEBP up to 5MB
+            </div>
+
+            </div>
+
+        </div>
+
+        </div>
+
+        <!-- USERNAME -->
+        <div>
+
+          <label class="form-label fw-semibold">
+            Username
+          </label>
+
+          <input
+            type="text"
+            name="username"
+            class="form-control"
+            placeholder="john_doe"
+            value="{{ profile.username or '' }}"
+            required
+          >
+
+          <div class="form-text">
+            Used in your public profile URL
+          </div>
+
+        </div>
+
+        <!-- DISPLAY NAME -->
+        <div>
+
+          <label class="form-label fw-semibold">
+            Display Name
+          </label>
+
+          <input
+            type="text"
+            name="display_name"
+            class="form-control"
+            placeholder="John Doe"
+            value="{{ profile.display_name or '' }}"
+          >
+
+        </div>
+
+        <!-- ACTIONS -->
+        <div class="d-flex justify-content-end pt-2">
+
+          <button
+            type="submit"
+            class="btn btn-primary"
+          >
+            <i class="bi bi-check-lg"></i>
+            Save Changes
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+
   </div>
 
-  <div>
-    <label>Avatar URL</label>
-    <input name="avatar_url" value="{{ profile.avatar_url or '' }}">
-  </div>
-
-  <button type="submit">Save</button>
-
-</form>
+</div>
 
 {% endblock %}
