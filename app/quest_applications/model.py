@@ -7,6 +7,8 @@ class ParticipantType(str, Enum):
 
 class StatusType(str, Enum):
     NEW = "new"
+    APPROVED = "approved"
+    REJECTED = "rejected"
 
 class QuestApplication(BaseModel):
     id: int

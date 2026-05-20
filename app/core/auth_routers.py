@@ -4,13 +4,7 @@ from fastapi.responses import HTMLResponse, RedirectResponse
 from app.core.supabase import supabase
 from app.core.templates import templates
 
-
-def safe_next_url(next_url: str | None) -> str:
-    if not next_url:
-        return "/"
-    if not next_url.startswith("/") or next_url.startswith("//"):
-        return "/"
-    return next_url
+from app.core.helpers import safe_next_url
 
 
 

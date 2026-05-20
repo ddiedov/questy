@@ -46,8 +46,8 @@ async def add_task_page(
 
             "submit_label": "Create Task",
 
-            "back_url": f"/quests/{quest_id}",
-            "cancel_url": f"/quests/{quest_id}",
+            "back_url": f"/quests/{quest_id}/edit",
+            "cancel_url": f"/quests/{quest_id}/edit",
         }
     )
 

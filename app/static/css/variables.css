@@ -18,8 +18,17 @@
   --border: #e5e7eb;
   --border-soft: #f1f3f5;
 
-  --navbar-bg: #f8f4ec;
-  --navbar-border: #e2d8c8;
+  --navbar-bg: linear-gradient(
+      180deg,
+      rgba(40,30,20,.96),
+      rgba(180, 149, 119, 0.96)
+    );
+  --navbar-border: rgba(173,132,74,.35);
+
+  --navbar-shadow:
+    0 10px 30px rgba(0,0,0,.18);
+  --navbar-inset:
+    inset 0 1px 0 rgba(255,255,255,.05);
 
   --card-bg: linear-gradient(
       180deg,

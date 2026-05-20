@@ -9,6 +9,7 @@ from app.core.templates import templates
 from app.teams.router import router as teams_router
 from app.quests.router import router as quests_router
 from app.quest_applications.router import router as quest_applications_router
+from app.quest_applications.router import quest_applications_router as application_actions_router
 from app.tasks.router import router as tasks_router
 
 from app.quest_structure.router import router as quest_structure_router
@@ -42,6 +43,7 @@ app.add_middleware(AuthMiddleware)
 app.include_router(teams_router)
 app.include_router(quests_router)
 app.include_router(quest_applications_router)
+app.include_router(application_actions_router)
 app.include_router(tasks_router)
 
 app.include_router(quest_structure_router)

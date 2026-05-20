@@ -1,15 +1,123 @@
+/* ========================================
+   BUTTONS
+======================================== */
 
 .btn {
-  border-radius: var(--radius-md);
-  padding: 6px 14px;
+
+  border-radius: 12px;
+
+  padding: 8px 16px;
+
+  font-weight: 600;
+
+  transition:
+    transform .12s ease,
+    box-shadow .12s ease,
+    background .12s ease,
+    border-color .12s ease;
+
+  box-shadow:
+    0 2px 6px rgba(0,0,0,.08);
 }
 
-.btn-primary {
-  background-color: var(--primary);
-  border-color: var(--primary);
+
+/* ========================================
+   PRIMARY
+======================================== */
+
+.btn-primary,
+.btn-success {
+
+  background:
+    linear-gradient(
+      180deg,
+      #5f8a71,
+      #3f5f4c
+    );
+
+  border:
+    1px solid rgba(255,255,255,.08);
+
+  color: #fff;
 }
 
-.btn-primary:hover {
-  background-color: var(--primary-hover);
-  border-color: var(--primary-hover);
+.btn-primary:hover,
+.btn-success:hover {
+
+  background:
+    linear-gradient(
+      180deg,
+      #709a81,
+      #486c57
+    );
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 6px 16px rgba(0,0,0,.18);
+}
+
+
+/* ========================================
+   OUTLINE
+======================================== */
+
+.btn-outline-secondary,
+.btn-outline-primary {
+
+  background:
+    rgba(255,255,255,.25);
+
+  border:
+    1px solid rgba(90,70,40,.22);
+
+  color:
+    #4a3828;
+}
+
+.btn-outline-secondary:hover,
+.btn-outline-primary:hover {
+
+  background:
+    rgba(255,255,255,.45);
+
+  border-color:
+    rgba(90,70,40,.4);
+
+  color:
+    #2f2117;
+
+  transform: translateY(-1px);
+}
+
+
+/* ========================================
+   DANGER
+======================================== */
+
+.btn-danger,
+.btn-outline-danger {
+
+  border-radius: 12px;
+}
+
+.btn-outline-danger {
+
+  background:
+    rgba(120,30,30,.04);
+
+  border:
+    1px solid rgba(120,30,30,.18);
+
+  color:
+    #7b2d2d;
+}
+
+.btn-outline-danger:hover {
+
+  background:
+    rgba(120,30,30,.12);
+
+  color:
+    #5f1f1f;
 }

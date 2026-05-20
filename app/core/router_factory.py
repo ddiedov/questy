@@ -105,8 +105,8 @@ def create_crud_router(
 
                 "url": f"/{entity}/{id}",
 
-                "back_url": f"/{entity}",
-                "cancel_url": f"/{entity}",
+                "back_url": f"/{entity}/edit",
+                "cancel_url": f"/{entity}/edit",
             }
         )
 

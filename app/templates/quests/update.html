@@ -197,7 +197,7 @@
 
         <h5 class="mb-0">Applications</h5>
 
-        <span class="badge bg-warning text-dark">
+        <span class="qe-status">
           {{ item.applications | length }}
         </span>
 
@@ -224,8 +224,8 @@
             <div class="qe-app-actions">
 
               <form method="post"
-                    action="/applications/{{ app.id }}/approve">
-
+                    action="/quest-applications/{{ app.id }}/approve">
+                <input type="hidden" name="back" id="back" value="/quests/{{ item.id }}/edit">
                 <button class="btn btn-success btn-sm">
                   Approve
                 </button>
@@ -233,8 +233,8 @@
               </form>
 
               <form method="post"
-                    action="/applications/{{ app.id }}/reject">
-
+                    action="/quest-applications/{{ app.id }}/reject">
+                <input type="hidden" name="back" id="back" value="/quests/{{ item.id }}/edit">
                 <button class="btn btn-outline-danger btn-sm">
                   Reject
                 </button>
