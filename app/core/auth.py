@@ -24,7 +24,7 @@ def build_user_dependency(required: bool) -> Callable:
 
                 raise HTTPException(
                     status_code=303,
-                    headers={"Location": f"/login?next={next_url}"}
+                    headers={"Location": f"/auth/login?next={next_url}"}
                 )
             return None
 

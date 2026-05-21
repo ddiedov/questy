@@ -32,8 +32,20 @@
       <textarea name="description" class="qe-desc">{{ item.description }}</textarea>
 
       <div class="qe-actions">
-        <button type="submit" class="btn btn-success btn-sm">Save</button>
-        <a href="/quests" class="btn btn-outline-secondary btn-sm">Cancel</a>
+        <button type="submit"
+                class="btn btn-success btn-sm">
+          Save
+        </button>
+
+        <a href="/quests/{{ item.id }}/manage"
+          class="btn btn-outline-primary btn-sm">
+          Manage
+        </a>
+
+        <a href="/quests"
+          class="btn btn-outline-secondary btn-sm">
+          Cancel
+        </a>
       </div>
     </div>
 
@@ -198,49 +210,53 @@
         <h5 class="mb-0">Applications</h5>
 
         <span class="qe-status">
-          {{ item.applications | length }}
+          {{ item.new_applications | length }}
         </span>
 
       </div>
 
-      {% if item.applications %}
+      {% if item.new_applications %}
 
         <div class="qe-app-list">
 
-          {% for app in item.applications %}
+          {% for app in item.new_applications %}
 
           <div class="qe-app-item">
 
-            <div>
-              <div class="fw-semibold">
-                Participant #{{ app.participant_id }}
+            <div class="d-flex align-items-center gap-2">
+
+              {% if app.profile and app.profile.avatar_url %}
+                <img src="{{ app.profile.avatar_url }}"
+                    class="rounded-circle"
+                    style="width:32px;height:32px;object-fit:cover;">
+              {% endif %}
+
+              <div>
+                <div class="fw-semibold">
+                  {{ app.profile.display_name or app.profile.username or ("Player #" ~ app.participant_id) }}
+                </div>
+
+                <div class="small text-muted">
+                  Applied recently
+                </div>
               </div>
 
-              <div class="small text-muted">
-                {{ app.status }}
-              </div>
             </div>
 
             <div class="qe-app-actions">
-
-              <form method="post"
-                    action="/quest-applications/{{ app.id }}/approve">
-                <input type="hidden" name="back" id="back" value="/quests/{{ item.id }}/edit">
+              <form method="post" action="/quest-applications/{{ app.id }}/approve">
+                <input type="hidden" name="back" value="/quests/{{ item.id }}/edit">
                 <button class="btn btn-success btn-sm">
                   Approve
                 </button>
-
               </form>
 
-              <form method="post"
-                    action="/quest-applications/{{ app.id }}/reject">
-                <input type="hidden" name="back" id="back" value="/quests/{{ item.id }}/edit">
+              <form method="post" action="/quest-applications/{{ app.id }}/reject">
+                <input type="hidden" name="back" value="/quests/{{ item.id }}/edit">
                 <button class="btn btn-outline-danger btn-sm">
                   Reject
                 </button>
-
               </form>
-
             </div>
 
           </div>
@@ -248,11 +264,17 @@
           {% endfor %}
 
         </div>
+        <div class="mt-3">
+          <a href="/quests/{{ item.id }}/manage#applications"
+            class="small text-decoration-none">
+            View all applications →
+          </a>
+        </div>
 
       {% else %}
 
         <div class="text-muted small">
-          No active applications
+          No new applications
         </div>
 
       {% endif %}

@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from app.quest_applications.model import QuestApplication
+from app.quest_applications.model import QuestApplicationView
 from app.quest_structure.model import QuestStructureItem
 
 
@@ -30,5 +30,6 @@ class QuestPatch(BaseModel):
 #------ Use Case Models (UI usage structures)
 
 class QuestForUpdate(Quest):
-    applications: list[QuestApplication]
+    applications: list[QuestApplicationView]
+    new_applications: list[QuestApplicationView]
     tasks: list[QuestStructureItem]

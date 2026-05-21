@@ -6,6 +6,7 @@ from app.quests.repository import QuestsRepository
 from .model import Quest, QuestCreate, QuestUpdate, QuestPatch
 from .model import QuestForUpdate
 from .filter import QuestsFilter
+from app.quest_applications.model import StatusType, QuestApplicationView
 
 
 logger = logging.getLogger(__name__)
@@ -18,10 +19,11 @@ class QuestsService(BaseService):
     update_model=QuestUpdate
     patch_model=QuestPatch
 
-    def __init__(self, quest_applications_service, quest_structure_service):
+    def __init__(self, quest_applications_service, quest_structure_service, profiles_service):
         super().__init__()
         self.quest_applications_service = quest_applications_service
         self.quest_structure_service = quest_structure_service
+        self.profiles_service = profiles_service
 
 
     def create(self, data: QuestCreate, user_id):
@@ -60,11 +62,27 @@ class QuestsService(BaseService):
         if not quest:
             return None
         applications = self.quest_applications_service.get_list_by_quest(quest_id = id)
+
+        enriched_applications = []
+        for app in applications:
+            profile = self.profiles_service.get(app.participant_id)
+            enriched_applications.append(
+                QuestApplicationView(
+                    **app.model_dump(),
+                    profile=profile
+                )
+            )
+
+        new_applications = [
+            app for app in enriched_applications
+            if app.status == StatusType.NEW
+        ]
         tasks = self.get_tasks(quest_id = id, current_user_id=None)
         logger.debug("Quest %s tasks for update: %s", id, tasks)
         return QuestForUpdate(
             **quest.model_dump(),
-            applications = applications,
+            applications = enriched_applications,
+            new_applications = new_applications,
             tasks = tasks
         )  
 

@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 from enum import Enum
+from app.profiles.model import Profile
 
 class ParticipantType(str, Enum):
     INDIVIDUAL = "individual"
@@ -35,3 +36,15 @@ class QuestApplicationPatch(BaseModel):
     participant_id: str | None = None
     participant_type: ParticipantType | None = None
     status: StatusType | None = None
+
+#------ Use Case Models (UI usage structures)
+
+class QuestApplicationView(BaseModel):
+    id: int
+    quest_id: int
+    participant_id: str
+    participant_type: ParticipantType
+    status: StatusType
+    created_by: str | None = None
+
+    profile: Profile | None = None

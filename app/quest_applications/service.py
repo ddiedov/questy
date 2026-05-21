@@ -10,7 +10,8 @@ class QuestApplicationsService(BaseService):
     create_model=QuestApplicationCreate
     update_model=QuestApplicationUpdate
     patch_model=QuestApplicationPatch
-        
+
+               
         
     def get_redirect_url(self, entity, item):
         return f"/quests/{item.quest_id}"
@@ -22,6 +23,7 @@ class QuestApplicationsService(BaseService):
             filters = QuestApplicationsFilter(quest_id=quest_id),
             current_user_id=None
         )
+    
     
     def get_list_by_applicant(self, participant_id: int):
         return self.list(
@@ -73,4 +75,3 @@ class QuestApplicationsService(BaseService):
         
         return application.quest_id, None
     
-
