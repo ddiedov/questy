@@ -42,13 +42,19 @@ class QuestsService(BaseService):
         for q in quests:
             item = q.model_dump()
 
+            application = None
+            if current_user_id:
+                application = self.quest_applications_service.get_by_quest_and_user(
+                    quest_id=q.id,
+                    participant_id=current_user_id
+                )
+
 #            application = self.get_user_application(q.id, current_user_id)
 #            quest_run = self.get_user_quest_run(q.id, current_user_id)
 
             item.update({
                 "is_author": q.created_by == current_user_id,
-                "application_status": None,
-#               "application_status": application.status if application else None,
+                "application_status": application.status if application else None,
 #               "quest_run_id": quest_run.id if quest_run else None,
             })
 

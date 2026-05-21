@@ -13,14 +13,39 @@
         {% if quest.is_author %}
             <a href="/quests/{{ quest.id }}/edit" class="btn btn-warning">Edit</a>
         {% else %}
+            {% if not request.state.user %}
+                <a href="/auth/login" class="btn btn-outline-primary mb-2">
+                    Login to participate
+                </a>
+            {% endif %}
+
             {% if request.state.user %}
-                {% if quest.application_status == None %}
+
+                {% if quest.application_status == "approved" %}
+
+                    <a href="/game/start?quest_id={{ quest.id }}" class="btn btn-success">
+                        Start Quest
+                    </a>
+
+                {% elif quest.application_status == "new" %}
+
+                    <button class="btn btn-secondary" disabled>
+                        Awaiting approval
+                    </button>
+
+                {% elif quest.application_status == None %}
+
                     <form method="post" action="/quest-applications">
                         {% include "quests/_apply.html" %}
                     </form>
+
                 {% endif %}
+
             {% endif %}
-            <a href="/quests/{{ quest.id }}" class="btn btn-primary">View</a>
+
+            <a href="/quests/{{ quest.id }}" class="btn btn-primary">
+                View
+            </a> 
         {% endif %}
         
         

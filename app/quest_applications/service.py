@@ -31,6 +31,16 @@ class QuestApplicationsService(BaseService):
             current_user_id=None
         )
     
+    def get_by_quest_and_user(self, quest_id: int, participant_id: str):
+        apps = self.list(
+            filters=QuestApplicationsFilter(
+                quest_id=quest_id,
+                participant_id=participant_id
+            ),
+            current_user_id=None
+        )
+        return apps[0] if apps else None
+
 #   ======      actions      ======
     def approve(self, application_id: int) -> tuple[int | None, str | None]:
         raw = self.repository.get(application_id)
