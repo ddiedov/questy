@@ -1,20 +1,29 @@
-def apply_filters(query, filters, filter_map: dict):
+from enum import Enum
 
+def apply_filters(query, filters, filter_map: dict):
     if not filters:
         return query
 
-    for field, value in filters.model_dump(exclude_none=True).items():
+    def normalize(value):
+        if isinstance(value, Enum):
+            return value.value
+        return value
+
+    data = filters.model_dump(exclude_none=True)
+
+    for field, value in data.items():
 
         if field not in filter_map:
             continue
 
+        value = normalize(value)
+
         handler = filter_map[field]
 
-        # handler — функція або конфіг
+        # handler — функция или строка колонки
         if callable(handler):
             query = handler(query, value)
         else:
-            # простий eq
             query = query.eq(handler, value)
 
     return query

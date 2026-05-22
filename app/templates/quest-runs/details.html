@@ -1,0 +1,73 @@
+{% extends "core/base.html" %}
+{% block title %}{{ item.title }}{% endblock %}
+
+
+{% block content %}
+<div class="container-xl mt-4">
+
+    <div class="mb-4">
+        <h1>Quest Runtime</h1>
+
+        <p class="text-muted">
+            Run ID: {{ item.run.id }}
+        </p>
+    </div>
+
+
+    <!-- CURRENT TASK -->
+
+    <div class="card mb-4 border-primary">
+        <div class="card-body">
+
+            <div class="mb-2">
+                <span class="badge bg-primary">
+                    Current Task
+                </span>
+            </div>
+
+            <h2>
+                {{ item.current_task.title }}
+            </h2>
+
+            <p class="text-muted">
+                {{ item.current_task.description }}
+            </p>
+
+        </div>
+    </div>
+
+
+    <!-- PREVIOUS TASKS -->
+
+    {% if item.previous_tasks %}
+    <div class="card">
+        <div class="card-body">
+
+            <h3 class="mb-3">
+                Previous Tasks
+            </h3>
+
+            <div class="list-group">
+
+                {% for task in item.previous_tasks %}
+                <div class="list-group-item">
+
+                    <div class="fw-bold">
+                        {{ task.title }}
+                    </div>
+
+                    <div class="text-muted small">
+                        {{ task.description }}
+                    </div>
+
+                </div>
+                {% endfor %}
+
+            </div>
+
+        </div>
+    </div>
+    {% endif %}
+
+</div>
+{% endblock %}

@@ -21,13 +21,26 @@ from app.quests.api import router as quests_api_router
 from app.quest_applications.api import router as quest_applications_api_router
 from app.tasks.api import router as tasks_api_router
 
+from app.quest_runs.router import router as quest_runs_router
+from app.quest_runs.router import quest_runs_router as quest_runs_router_extensions
+
 from config import SESSION_SECRET
 
 logging.basicConfig(
     level=logging.DEBUG,
     format="%(levelname)s:%(name)s:%(message)s"
 )
+
+# Твои логи
 logger = logging.getLogger(__name__)
+
+# Глушим шумные библиотеки
+logging.getLogger("hpack").setLevel(logging.WARNING)
+logging.getLogger("httpcore").setLevel(logging.WARNING)
+logging.getLogger("httpx").setLevel(logging.WARNING)
+logging.getLogger("urllib3").setLevel(logging.WARNING)
+logging.getLogger("asyncio").setLevel(logging.WARNING)
+logging.getLogger("python_multipart").setLevel(logging.WARNING)
 
 app = FastAPI(title="Questy")
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
@@ -50,6 +63,9 @@ app.include_router(tasks_router)
 
 app.include_router(quest_structure_router)
 app.include_router(quest_tasks_router)
+
+app.include_router(quest_runs_router)
+app.include_router(quest_runs_router_extensions)
 
 app.include_router(teams_api_router)
 app.include_router(quests_api_router)

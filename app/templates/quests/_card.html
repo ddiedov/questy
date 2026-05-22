@@ -14,18 +14,30 @@
             <a href="/quests/{{ quest.id }}/edit" class="btn btn-warning">Edit</a>
         {% else %}
             {% if not request.state.user %}
+
                 <a href="/auth/login" class="btn btn-outline-primary mb-2">
                     Login to participate
                 </a>
-            {% endif %}
 
-            {% if request.state.user %}
+            {% else %}
 
                 {% if quest.application_status == "approved" %}
+                    <p class="text-muted">
+                        {{ quest.state.state }}
+                    </p>
+                    {% if quest.state.state == "resume" %}
 
-                    <a href="/game/start?quest_id={{ quest.id }}" class="btn btn-success">
-                        Start Quest
-                    </a>
+                        <a href="/quest-runs/{{ quest.state.run_id }}" class="btn btn-primary">
+                            Resume Quest
+                        </a>
+
+                    {% else %}
+
+                        <a href="/quests/{{ quest.id }}/start" class="btn btn-success">
+                            Start Quest
+                        </a>
+
+                    {% endif %}
 
                 {% elif quest.application_status == "new" %}
 

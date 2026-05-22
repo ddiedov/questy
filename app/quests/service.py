@@ -19,11 +19,12 @@ class QuestsService(BaseService):
     update_model=QuestUpdate
     patch_model=QuestPatch
 
-    def __init__(self, quest_applications_service, quest_structure_service, profiles_service):
+    def __init__(self, quest_applications_service, quest_structure_service, profiles_service, quest_runs_service):
         super().__init__()
         self.quest_applications_service = quest_applications_service
         self.quest_structure_service = quest_structure_service
         self.profiles_service = profiles_service
+        self.quest_runs_service = quest_runs_service
 
 
     def create(self, data: QuestCreate, user_id):
@@ -49,13 +50,12 @@ class QuestsService(BaseService):
                     participant_id=current_user_id
                 )
 
-#            application = self.get_user_application(q.id, current_user_id)
-#            quest_run = self.get_user_quest_run(q.id, current_user_id)
+            quest_run_state = self.quest_runs_service.get_run_state(q.id, current_user_id)
 
             item.update({
                 "is_author": q.created_by == current_user_id,
                 "application_status": application.status if application else None,
-#               "quest_run_id": quest_run.id if quest_run else None,
+                "state": quest_run_state if quest_run_state else None,
             })
 
             result.append(item)
@@ -63,7 +63,7 @@ class QuestsService(BaseService):
         return result
     
 
-    def get_for_update(self, id: int) -> QuestForUpdate:
+    def get(self, id: int) -> QuestForUpdate:
         quest = super().get(id)
         if not quest:
             return None

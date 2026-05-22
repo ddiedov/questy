@@ -4,6 +4,7 @@ from app.quests.service import QuestsService
 from app.quest_applications.service import QuestApplicationsService
 from app.quest_structure.service import QuestStructureService
 from app.tasks.service import TasksService
+from app.quest_runs.service import QuestRunsService
 
 def get_teams_service():
     return TeamsService()
@@ -22,9 +23,15 @@ def get_quest_structure_service():
         tasks_service = get_tasks_service()
     )
 
+def get_quest_runs_service():
+    return QuestRunsService(
+        quest_structure_service = get_quest_structure_service()
+    )
+
 def get_quests_service():
     return QuestsService(
         quest_applications_service=get_quest_applications_service(),
         quest_structure_service=get_quest_structure_service(),
-        profiles_service=get_profiles_service()
+        profiles_service=get_profiles_service(),
+        quest_runs_service=get_quest_runs_service()
     )
