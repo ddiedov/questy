@@ -26,11 +26,11 @@
             </div>
 
             <h2>
-                {{ item.current_task.title }}
+                {{ item.current_task.task.title }}
             </h2>
 
             <p class="text-muted">
-                {{ item.current_task.description }}
+                {{ item.current_task.task.description }}
             </p>
 
         </div>
@@ -53,11 +53,11 @@
                 <div class="list-group-item">
 
                     <div class="fw-bold">
-                        {{ task.title }}
+                        {{ task.task.title }}
                     </div>
 
                     <div class="text-muted small">
-                        {{ task.description }}
+                        {{ task.task.description }}
                     </div>
 
                 </div>
