@@ -6,5 +6,5 @@ class TasksRepository(BaseRepository):
 
     filter_map = {
         "id": "id",
-        "author_id": "author_id",
+        "created_by": "created_by",
     }

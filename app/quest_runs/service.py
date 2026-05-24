@@ -116,3 +116,67 @@ class QuestRunsService(BaseService):
             "state": "start",
             "run_id": None
         }
+    
+
+
+    # =========================
+    # ANSWER
+    # =========================
+    def submit_answer(
+        self,
+        run_id: int,
+        answer: str,
+        participant_id: str
+    ):
+        run = super().get(run_id)
+
+        if not run:
+            return False, "Run not found"
+        
+        tasks = self.quest_structure_service.get_by_quest(
+            run.quest_id
+        ).tasks
+
+        current_index = next(
+            (
+                i for i, t in enumerate(tasks)
+                if t.id == run.current_task_id
+            ),
+            None
+        )
+
+        if current_index is None:
+            return False, "Current task not found"
+
+        current_item = tasks[current_index]
+        current_task = current_item.task
+
+        expected = (current_task.answer or "").strip().lower()
+        actual = answer.strip().lower()
+
+        if expected != actual:
+            return False, "Wrong answer"
+
+        next_index = current_index + 1
+
+        if next_index >= len(tasks):
+            self.patch(
+                run_id,
+                QuestRunPatch(
+                    current_task_id=None,
+                    status=QuestRunStatusType.COMPLETED
+                )
+            )
+
+            return True, None
+
+        next_task_id = tasks[next_index].id
+
+        self.patch(
+            run_id,
+            QuestRunPatch(
+                current_task_id=next_task_id
+            )
+        )
+
+        return True, None
