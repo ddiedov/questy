@@ -32,3 +32,18 @@ class TasksService(BaseService):
         filters = filters or TasksFilter()
         filters = self.apply_user_scope(filters, current_user_id)
         return super().list(filters)
+
+     # =========================
+    # ANSWER VALIDATION
+    # =========================
+    def validate_answer(self, task: Task, answer: str):
+        if not task.answer:
+            return False, "This task has no answer configured"
+
+        expected = task.answer.strip().lower()
+        actual = answer.strip().lower()
+
+        if expected != actual:
+            return False, "Wrong answer"
+
+        return True, None

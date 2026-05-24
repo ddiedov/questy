@@ -16,9 +16,11 @@ class QuestRunsService(BaseService):
     update_model = QuestRunUpdate
     patch_model = QuestRunPatch
 
-    def __init__(self, quest_structure_service):
+    def __init__(self, quest_structure_service, tasks_service):
         super().__init__()
         self.quest_structure_service = quest_structure_service
+        self.tasks_service = tasks_service 
+
 
     # =========================
     # RUNTIME VIEW
@@ -151,11 +153,13 @@ class QuestRunsService(BaseService):
         current_item = tasks[current_index]
         current_task = current_item.task
 
-        expected = (current_task.answer or "").strip().lower()
-        actual = answer.strip().lower()
+        success, error = self.tasks_service.validate_answer(
+            current_task,
+            answer
+        )
 
-        if expected != actual:
-            return False, "Wrong answer"
+        if not success:
+            return False, error
 
         next_index = current_index + 1
 
@@ -168,7 +172,7 @@ class QuestRunsService(BaseService):
                 )
             )
 
-            return True, None
+            return True, "completed"
 
         next_task_id = tasks[next_index].id
 

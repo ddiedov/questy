@@ -25,7 +25,8 @@ def get_quest_structure_service():
 
 def get_quest_runs_service():
     return QuestRunsService(
-        quest_structure_service = get_quest_structure_service()
+        quest_structure_service = get_quest_structure_service(),
+        tasks_service = get_tasks_service()
     )
 
 def get_quests_service():
