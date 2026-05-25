@@ -162,7 +162,7 @@ class QuestRunsService(BaseService):
             answer
         )
 
-        # ❌ WRONG ANSWER
+        # WRONG ANSWER
         if not success:
             return {
                 "success": False,
@@ -172,7 +172,7 @@ class QuestRunsService(BaseService):
 
         next_index = current_index + 1
 
-        # 🏁 COMPLETED
+        # COMPLETED
         if next_index >= len(tasks):
             self.patch(
                 run_id,
@@ -188,7 +188,7 @@ class QuestRunsService(BaseService):
                 "message": None
             }
 
-        # ➡️ CORRECT (NEXT TASK)
+        # CORRECT (NEXT TASK)
         next_task_id = tasks[next_index].id
 
         self.patch(
