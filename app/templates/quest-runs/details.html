@@ -1,122 +1,168 @@
 {% extends "core/base.html" %}
-{% block title %}{{ item.title }}{% endblock %}
+{% block title %}Quest Run{% endblock %}
 
 {% block content %}
 
-<div class="container py-4">
+<link rel="stylesheet" href="/static/css/quest-runtime.css">
 
-    <h1 class="mb-4">Quest Run</h1>
+<div class="container py-4 qr-page">
 
-    {# =======================
-       COMPLETED STATE
-       ======================= #}
+    <!-- =======================
+         HEADER / PROGRESS PLACEHOLDER
+         ======================= -->
+
+    <div class="qr-header">
+
+        <div>
+            <div class="qr-kicker">
+                Quest Runtime
+            </div>
+
+            <h1 class="qr-title">
+                Quest Run
+            </h1>
+        </div>
+
+        <div class="qr-progress-placeholder">
+            Progress UI placeholder
+        </div>
+
+    </div>
+
+    <!-- =======================
+         COMPLETED
+         ======================= -->
 
     {% if item.run.status == "completed" %}
 
-        <div class="alert alert-success mb-4">
-            🎉 Quest completed!
-        </div>
+        <div class="qr-completed">
 
-        <div class="card">
-            <div class="card-body text-center">
-
-                <h3>Well done!</h3>
-
-                <p class="text-muted">
-                    You have finished this quest.
-                </p>
-
-                <a href="/quests/{{ item.run.quest_id }}"
-                   class="btn btn-primary">
-                    Back to Quest
-                </a>
-
+            <div class="qr-completed-icon">
+                <i class="bi bi-trophy"></i>
             </div>
+
+            <h2 class="qr-completed-title">
+                Quest Completed
+            </h2>
+
+            <p class="qr-completed-text">
+                You finished this quest successfully.
+            </p>
+
+            <a href="/quests/{{ item.run.quest_id }}"
+               class="btn btn-primary">
+                Back to Quest
+            </a>
+
         </div>
 
     {% else %}
 
-        {# =======================
-           ACTIVE RUN STATE
-           ======================= #}
+        <!-- =======================
+             CURRENT TASK
+             ======================= -->
 
         {% if item.current_task %}
 
             {% set task_item = item.current_task %}
             {% set task = task_item.task %}
 
-            <div class="card mb-4">
+            <div class="qr-task-card">
 
                 {% if task.image_url %}
+
                     <img
                         src="{{ task.image_url }}"
-                        class="card-img-top"
+                        class="qr-task-image"
                         alt="{{ task.title }}"
                     >
+
                 {% endif %}
 
-                <div class="card-body">
+                <div class="qr-task-body">
 
-                    <h2 class="card-title">
+                    <div class="qr-task-meta">
+                        Current Task
+                    </div>
+
+                    <h2 class="qr-task-title">
                         {{ task.title }}
                     </h2>
 
                     {% if task.description %}
-                        <p class="card-text">
+
+                        <div class="qr-task-description">
                             {{ task.description }}
-                        </p>
+                        </div>
+
                     {% endif %}
 
                 </div>
+
             </div>
+
+            <!-- =======================
+                 QUESTION
+                 ======================= -->
 
             {% if task.question %}
 
-                <div class="card mb-4">
+                <div class="qr-question-card">
 
                     {% if task.question_image_url %}
+
                         <img
                             src="{{ task.question_image_url }}"
-                            class="card-img-top"
+                            class="qr-question-image"
                             alt="Question"
                         >
+
                     {% endif %}
 
-                    <div class="card-body">
+                    <div class="qr-question-body">
 
-                        <h3 class="mb-3">Question</h3>
+                        <div class="qr-question-label">
+                            Question
+                        </div>
 
-                        <p>
+                        <div class="qr-question-text">
                             {{ task.question }}
-                        </p>
+                        </div>
 
-                        <form method="post"
-                              action="/quest-runs/{{ item.run.id }}/answer">
+                        <form
+                            method="post"
+                            action="/quest-runs/{{ item.run.id }}/answer"
+                            class="qr-answer-form"
+                        >
 
-                            <div class="mb-3">
-                                <input
-                                    type="text"
-                                    name="answer"
-                                    class="form-control"
-                                    placeholder="Your answer"
-                                    required
-                                >
-                            </div>
+                            <input
+                                type="text"
+                                name="answer"
+                                class="form-control qr-answer-input"
+                                placeholder="Enter your answer"
+                                autocomplete="off"
+                                required
+                            >
 
-                            {% if error %}
-                                <div class="alert alert-danger">
-                                    {{ error }}
+                            {% if answer_state %}
+
+                                <div class="qr-answer-state qr-answer-{{ answer_state }}">
+                                    {{ message }}
                                 </div>
+
                             {% endif %}
 
-                            <button type="submit"
-                                    class="btn btn-primary">
+                            <button
+                                type="submit"
+                                class="btn btn-primary"
+                            >
                                 Submit Answer
                             </button>
 
                         </form>
 
                     </div>
+
                 </div>
 
             {% endif %}
@@ -131,41 +177,51 @@
 
     {% endif %}
 
-    {# =======================
-       PREVIOUS TASKS (always visible)
-       ======================= #}
+    <!-- =======================
+         PREVIOUS TASKS
+         ======================= -->
 
     {% if item.previous_tasks %}
 
-        <div class="card mt-5">
+        <div class="qr-history">
 
-            <div class="card-body">
+            <div class="qr-history-head">
 
-                <h3 class="mb-3">
-                    Previous Tasks
+                <h3 class="qr-history-title">
+                    Completed Tasks
                 </h3>
 
-                <ul class="list-group">
+            </div>
 
-                    {% for previous in item.previous_tasks %}
+            <div class="qr-history-list">
 
-                        <li class="list-group-item">
+                {% for previous in item.previous_tasks %}
 
-                            <strong>
+                    <div class="qr-history-item">
+
+                        <div class="qr-history-icon">
+                            <i class="bi bi-check-lg"></i>
+                        </div>
+
+                        <div class="qr-history-content">
+
+                            <div class="qr-history-item-title">
                                 {{ previous.task.title }}
-                            </strong>
+                            </div>
 
                             {% if previous.task.outer_description %}
-                                <div class="mt-2 text-muted">
+
+                                <div class="qr-history-item-description">
                                     {{ previous.task.outer_description }}
                                 </div>
+
                             {% endif %}
 
-                        </li>
+                        </div>
 
-                    {% endfor %}
+                    </div>
 
-                </ul>
+                {% endfor %}
 
             </div>
 

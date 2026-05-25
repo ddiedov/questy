@@ -133,22 +133,26 @@ class QuestRunsService(BaseService):
         run = super().get(run_id)
 
         if not run:
-            return False, "Run not found"
-        
-        tasks = self.quest_structure_service.get_by_quest(
-            run.quest_id
-        ).tasks
+            return {
+                "success": False,
+                "state": "wrong",
+                "message": "Run not found"
+            }
+
+        structure = self.quest_structure_service.get_by_quest(run.quest_id)
+        tasks = structure.tasks if structure else []
 
         current_index = next(
-            (
-                i for i, t in enumerate(tasks)
-                if t.id == run.current_task_id
-            ),
+            (i for i, t in enumerate(tasks) if t.id == run.current_task_id),
             None
         )
 
         if current_index is None:
-            return False, "Current task not found"
+            return {
+                "success": False,
+                "state": "wrong",
+                "message": "Current task not found"
+            }
 
         current_item = tasks[current_index]
         current_task = current_item.task
@@ -158,11 +162,17 @@ class QuestRunsService(BaseService):
             answer
         )
 
+        # ❌ WRONG ANSWER
         if not success:
-            return False, error
+            return {
+                "success": False,
+                "state": "wrong",
+                "message": error
+            }
 
         next_index = current_index + 1
 
+        # 🏁 COMPLETED
         if next_index >= len(tasks):
             self.patch(
                 run_id,
@@ -172,8 +182,13 @@ class QuestRunsService(BaseService):
                 )
             )
 
-            return True, "completed"
+            return {
+                "success": True,
+                "state": "completed",
+                "message": None
+            }
 
+        # ➡️ CORRECT (NEXT TASK)
         next_task_id = tasks[next_index].id
 
         self.patch(
@@ -183,4 +198,8 @@ class QuestRunsService(BaseService):
             )
         )
 
-        return True, None
+        return {
+            "success": True,
+            "state": "correct",
+            "message": None
+        }
