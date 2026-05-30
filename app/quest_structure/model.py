@@ -16,11 +16,11 @@ class CreateQuestStructureItemDTO(BaseModel):
     
 
 #   ======      Service structures      ======
-class QuestStructureItem(BaseModel):
+class QuestStep(BaseModel):
     id: int
     task: Task
     position: int | None = None
 
 class QuestStructure(BaseModel):
     quest_id: int
-    tasks: list[QuestStructureItem]
+    steps: list[QuestStep]

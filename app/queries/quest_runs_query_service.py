@@ -26,37 +26,35 @@ class QuestRunsQueryService(BaseQueryService):
     # =========================
     def get(self, id: int) -> QuestRunRuntimeView | None:
         run = super().get(id)
+
         if not run:
             return None
 
-        structure = self.quest_structure_query_service.get_by_quest(run.quest_id)
-        tasks = structure.tasks if structure else []
-
-        if not tasks:
+        if run.current_step_id is None:
             return QuestRunRuntimeView(
                 run=run,
-                current_task=None,
-                previous_tasks=[]
+                current_step=None,
+                previous_steps=[]
             )
 
-        current_index = None
-
-        if run.current_task_id is not None:
-            current_index = next(
-                (i for i, t in enumerate(tasks) if t.id == run.current_task_id),
-                None
+        current_step = (
+            self.quest_structure_query_service.get_step_by_id(
+                run.quest_id,
+                run.current_step_id
             )
+        )
 
-        if current_index is None:
-            current_index = 0
-
-        current_task = tasks[current_index]
-        previous_tasks = tasks[:current_index]
+        previous_steps = (
+            self.quest_structure_query_service.get_previous_steps(
+                run.quest_id,
+                run.current_step_id
+            )
+        )
 
         return QuestRunRuntimeView(
             run=run,
-            current_task=current_task,
-            previous_tasks=previous_tasks
+            current_step=current_step,
+            previous_steps=previous_steps
         )
 
     # =========================

@@ -2,8 +2,7 @@ import logging
 
 from app.core.base_command_service import BaseCommandService
 from app.quest_runs.repository import QuestRunsRepository
-from .model import QuestRun, QuestRunCreate, QuestRunUpdate, QuestRunPatch, QuestRunRuntimeView, QuestRunStatusType
-from .filter import QuestRunsFilter
+from .model import QuestRun, QuestRunCreate, QuestRunUpdate, QuestRunPatch, QuestRunStatusType
 
 logger = logging.getLogger(__name__)
 
@@ -35,16 +34,23 @@ class QuestRunsService(BaseCommandService):
         if existing:
             return existing
 
-        structure = self.quest_structure_query_service.get_by_quest(quest_id)
-        tasks = structure.tasks if structure else []
+        first_step = (
+            self.quest_structure_query_service.get_first_step(
+                quest_id
+            )
+        )
 
-        first_task_id = tasks[0].id if tasks else None
+        first_step_id = (
+            first_step.id
+            if first_step
+            else None
+        )
 
         return self.create(
             QuestRunCreate(
                 quest_id=quest_id,
                 participant_id=participant_id,
-                current_task_id=first_task_id
+                current_step_id=first_step_id
             ),
             participant_id
         )
@@ -70,22 +76,20 @@ class QuestRunsService(BaseCommandService):
                 "message": "Run not found"
             }
 
-        structure = self.quest_structure_query_service.get_by_quest(run.run.quest_id)
-        tasks = structure.tasks if structure else []
-
-        current_index = next(
-            (i for i, t in enumerate(tasks) if t.id == run.run.current_task_id),
-            None
+        current_item = (
+            self.quest_structure_query_service.get_step_by_id(
+                run.run.quest_id,
+                run.run.current_step_id
+            )
         )
 
-        if current_index is None:
+        if not current_item:
             return {
                 "success": False,
                 "state": "wrong",
                 "message": "Current task not found"
             }
 
-        current_item = tasks[current_index]
         current_task = current_item.task
 
         success, error = self.tasks_service.validate_answer(
@@ -100,15 +104,28 @@ class QuestRunsService(BaseCommandService):
                 "state": "wrong",
                 "message": error
             }
+        
+        current_position = (
+            self.quest_structure_query_service.get_step_position(
+                run.run.quest_id,
+                run.run.current_step_id
+            )
+        )
 
-        next_index = current_index + 1
+        structure = self.quest_structure_query_service.get_by_quest(
+            run.run.quest_id
+        )
+
+        steps = structure.steps if structure else []
+
+        next_index = current_position + 1
 
         # COMPLETED
-        if next_index >= len(tasks):
+        if next_index >= len(steps):
             self.patch(
                 run_id,
                 QuestRunPatch(
-                    current_task_id=None,
+                    current_step_id=None,
                     status=QuestRunStatusType.COMPLETED
                 )
             )
@@ -119,13 +136,13 @@ class QuestRunsService(BaseCommandService):
                 "message": None
             }
 
-        # CORRECT (NEXT TASK)
-        next_task_id = tasks[next_index].id
+        # CORRECT (NEXT STEP)
+        next_step_id = steps[next_index].id
 
         self.patch(
             run_id,
             QuestRunPatch(
-                current_task_id=next_task_id
+                current_step_id=next_step_id
             )
         )
 

@@ -5,7 +5,7 @@ from app.quest_structure.repository import QuestStructureRepository
 
 from app.quest_structure.model import (
     QuestStructure,
-    QuestStructureItem,
+    QuestStep,
     QuestStructureItemDTO
 )
 
@@ -54,7 +54,7 @@ class QuestStructureQueryService(BaseQueryService):
         )
 
         items = [
-            QuestStructureItem(
+            QuestStep(
                 id=link.id,
                 task=task_map[link.task_id],
                 position=link.position
@@ -65,5 +65,73 @@ class QuestStructureQueryService(BaseQueryService):
 
         return QuestStructure(
             quest_id=quest_id,
-            tasks=items
+            steps=items
         )
+    
+    # =========================
+    # QUEST TASKS
+    # =========================
+
+    def get_first_step(self, quest_id: int):
+        structure = self.get_by_quest(quest_id)
+
+        if not structure or not structure.steps:
+            return None
+
+        return structure.steps[0]
+    
+
+    def get_step_position(
+        self,
+        quest_id: int,
+        step_id: int
+    ):
+        structure = self.get_by_quest(quest_id)
+
+        if not structure:
+            return None
+
+        return next(
+            (
+                i
+                for i, step in enumerate(structure.steps)
+                if step.id == step_id
+            ),
+            None
+        )
+    
+
+    def get_step_by_id(
+        self,
+        quest_id: int,
+        step_id: int
+    ):
+        position = self.get_step_position(
+            quest_id,
+            step_id
+        )
+
+        if position is None:
+            return None
+
+        structure = self.get_by_quest(quest_id)
+
+        return structure.steps[position]
+    
+
+    def get_previous_steps(
+        self,
+        quest_id: int,
+        step_id: int
+    ):
+        position = self.get_step_position(
+            quest_id,
+            step_id
+        )
+
+        if position is None:
+            return []
+
+        structure = self.get_by_quest(quest_id)
+
+        return structure.steps[:position]

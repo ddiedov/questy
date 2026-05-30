@@ -63,13 +63,13 @@ class QuestsQueryService(BaseQueryService):
         )
     
 
-#   ======      quest tasks      ======
-    def get_tasks(self, quest_id: int, current_user_id=None):
+#   ======      quest steps      ======
+    def get_steps(self, quest_id: int, current_user_id=None):
         quest_structure = self.quest_structure_query_service.get_by_quest(
             quest_id=quest_id,
             current_user_id=current_user_id
         )
-        return quest_structure.tasks
+        return quest_structure.steps
     
     
     def get(self, id: int) -> QuestForUpdate:
@@ -92,12 +92,12 @@ class QuestsQueryService(BaseQueryService):
             app for app in enriched_applications
             if app.status == StatusType.NEW
         ]
-        tasks = self.get_tasks(quest_id = id, current_user_id=None)
-        logger.debug("Quest %s tasks for update: %s", id, tasks)
+        steps = self.get_steps(quest_id = id, current_user_id=None)
+        logger.debug("Quest %s steps for update: %s", id, steps)
         return QuestForUpdate(
             **quest.model_dump(),
             applications = enriched_applications,
             new_applications = new_applications,
-            tasks = tasks
+            steps = steps
         )  
 

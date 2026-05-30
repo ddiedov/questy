@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from enum import Enum
-from app.quest_structure.model import QuestStructureItem
+from app.quest_structure.model import QuestStep
 from app.quests.model import QuestForRuntimeView
 
 
@@ -12,7 +12,7 @@ class QuestRun(BaseModel):
     id: int
     quest_id: int
     participant_id: str
-    current_task_id: int | None = None
+    current_step_id: int | None = None
     status: QuestRunStatusType
     created_by: str | None = None
 
@@ -20,19 +20,19 @@ class QuestRun(BaseModel):
 class QuestRunCreate(BaseModel):
     quest_id: int
     participant_id: str
-    current_task_id: int | None = None
+    current_step_id: int | None = None
     status: QuestRunStatusType = QuestRunStatusType.ACTIVE
 
 
 class QuestRunUpdate(BaseModel):
     quest_id: int
     participant_id: str
-    current_task_id: int | None
+    current_step_id: int | None
     status: QuestRunStatusType
 
 
 class QuestRunPatch(BaseModel):
-    current_task_id: int | None = None
+    current_step_id: int | None = None
     status: QuestRunStatusType | None = None
 
 
@@ -42,5 +42,5 @@ class QuestRunPatch(BaseModel):
 class QuestRunRuntimeView(BaseModel):
     run: QuestRun
 #    quest: QuestForRuntimeView
-    current_task: QuestStructureItem | None
-    previous_tasks: list[QuestStructureItem]
+    current_step: QuestStep | None
+    previous_steps: list[QuestStep]

@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from app.quest_applications.model import QuestApplicationView
-from app.quest_structure.model import QuestStructureItem
+from app.quest_structure.model import QuestStep
 
 
 #------ DTO Models (Database structures)
@@ -35,7 +35,7 @@ class QuestPatch(BaseModel):
 class QuestForUpdate(Quest):
     applications: list[QuestApplicationView]
     new_applications: list[QuestApplicationView]
-    tasks: list[QuestStructureItem]
+    steps: list[QuestStep]
 
 
 class QuestForRuntimeView(BaseModel):

@@ -112,7 +112,7 @@ async def select_task_page(
 
     excluded_ids = [
         item.task.id
-        for item in quest_structure.tasks
+        for item in quest_structure.steps
     ]
 
     tasks = [
