@@ -87,8 +87,8 @@ def get_quest_runs_query_service():
 def get_quests_query_service():
     return QuestsQueryService(
         #quests_service=get_quests_service(),
-        quest_applications_service=get_quest_applications_service(),
-        quest_runs_service=get_quest_runs_service(),
+        quest_applications_query_service=get_quest_applications_query_service(),
+        quest_runs_query_service=get_quest_runs_query_service(),
         quest_structure_query_service=get_quest_structure_query_service(),
-        profiles_service=get_profiles_service()
+        profiles_query_service=get_profiles_query_service()
     )

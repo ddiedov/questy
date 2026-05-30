@@ -16,16 +16,16 @@ class QuestsQueryService(BaseQueryService):
     def __init__(
         self,
         #quests_service,
-        quest_applications_service,
-        quest_runs_service,
+        quest_applications_query_service,
+        quest_runs_query_service,
         quest_structure_query_service,
-        profiles_service
+        profiles_query_service
     ):
         #self.quests_service = quests_service
-        self.quest_applications_service = quest_applications_service
-        self.quest_runs_service = quest_runs_service
+        self.quest_applications_query_service = quest_applications_query_service
+        self.quest_runs_query_service = quest_runs_query_service
         self.quest_structure_query_service = quest_structure_query_service
-        self.profiles_service = profiles_service
+        self.profiles_query_service = profiles_query_service
 
 
     def list(self, filters=None, current_user_id=None):
@@ -38,12 +38,12 @@ class QuestsQueryService(BaseQueryService):
 
             application = None
             if current_user_id:
-                application = self.quest_applications_service.get_by_quest_and_user(
+                application = self.quest_applications_query_service.get_by_quest_and_user(
                     quest_id=q.id,
                     participant_id=current_user_id
                 )
 
-            quest_run_state = self.quest_runs_service.get_run_state(q.id, current_user_id)
+            quest_run_state = self.quest_runs_query_service.get_run_state(q.id, current_user_id)
 
             item.update({
                 "is_author": q.created_by == current_user_id,
@@ -76,11 +76,11 @@ class QuestsQueryService(BaseQueryService):
         quest = super().get(id)
         if not quest:
             return None
-        applications = self.quest_applications_service.get_list_by_quest(quest_id = id)
+        applications = self.quest_applications_query_service.get_list_by_quest(quest_id = id)
 
         enriched_applications = []
         for app in applications:
-            profile = self.profiles_service.get(app.participant_id)
+            profile = self.profiles_query_service.get(app.participant_id)
             enriched_applications.append(
                 QuestApplicationView(
                     **app.model_dump(),

@@ -1,13 +1,13 @@
 import logging
 
-from app.core.base_service import BaseService
+from app.core.base_command_service import BaseCommandService
 from app.profiles.repository import ProfilesRepository
 from .model import Profile, CreateProfileDTO, UpdateProfileDTO, PatchProfileDTO
 
 
 logger = logging.getLogger(__name__)
 
-class ProfilesService(BaseService):
+class ProfilesService(BaseCommandService):
     repository=ProfilesRepository()
     
     model=Profile
