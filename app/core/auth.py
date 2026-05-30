@@ -6,7 +6,7 @@ from typing import Optional, Callable
 from starlette.middleware.base import BaseHTTPMiddleware
 from supabase_auth.errors import AuthApiError
 
-from app.core.services_factory import get_profiles_service
+from app.core.services_factory import get_profiles_service, get_profiles_query_service
 
 
 # =========================================================
@@ -78,8 +78,9 @@ class AuthMiddleware(BaseHTTPMiddleware):
         if request.state.user:
             try:
                 profiles_service = get_profiles_service()
+                profiles_query_service = get_profiles_query_service()
 
-                profile = profiles_service.get(request.state.user.id)
+                profile = profiles_query_service.get(request.state.user.id)
 
                 # если нет профиля → создаём, но БЕЗ падений
                 if not profile:
