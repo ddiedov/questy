@@ -5,7 +5,12 @@ from fastapi.responses import RedirectResponse
 
 from app.core.templates import templates
 from app.core.router_factory import create_crud_router
-from app.core.services_factory import get_quest_runs_service
+
+from app.core.services_factory import (
+    get_quest_runs_service,
+    get_quest_runs_query_service
+)
+
 from app.core.auth import build_user_dependency
 
 
@@ -13,10 +18,11 @@ logger = logging.getLogger(__name__)
 
 
 router = create_crud_router(
-    get_quest_runs_service(),
-    "/quest-runs",
-    True,
-    False
+    command_service=get_quest_runs_service(),
+    query_service=get_quest_runs_query_service(),
+    prefix="/quest-runs",
+    require_auth_for_write=True,
+    require_auth_for_read=False
 )
 
 get_user_for_write = build_user_dependency(True)
@@ -49,6 +55,7 @@ async def submit_answer(
     user_id=Depends(get_user_for_write)
 ):
     service = get_quest_runs_service()
+    query_service = get_quest_runs_query_service()
 
     result = service.submit_answer(
         run_id=run_id,
@@ -60,7 +67,7 @@ async def submit_answer(
     # WRONG ANSWER
     # -------------------------
     if result["state"] == "wrong":
-        item = service.get(run_id)
+        item = query_service.get(run_id)
 
         return templates.TemplateResponse(
             name="quest-runs/details.html",
@@ -84,7 +91,7 @@ async def submit_answer(
     # -------------------------
     # CORRECT ANSWER (NEXT TASK)
     # -------------------------
-    item = service.get(run_id)
+    item = query_service.get(run_id)
 
     return templates.TemplateResponse(
         name="quest-runs/details.html",

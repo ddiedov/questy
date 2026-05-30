@@ -72,13 +72,13 @@ app.include_router(quests_api_router)
 app.include_router(quest_applications_api_router)
 app.include_router(tasks_api_router)
 
-from app.core.services_factory import get_quests_service
-quests_service = get_quests_service()
+from app.core.services_factory import get_quests_query_service
+quests_query_service = get_quests_query_service()
 
 @app.get("/", response_class=HTMLResponse)
 def index(request: Request):
     user = getattr(request.state, "user", None)
-    featured_quests = quests_service.get_featured(user.id if user else None)
+    featured_quests = quests_query_service.get_featured(user.id if user else None)
 
     logger.debug("Templates type: %s", type(templates))
     logger.debug("Featured quests type: %s", type(featured_quests))

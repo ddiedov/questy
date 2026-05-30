@@ -1,9 +1,9 @@
 from fastapi import HTTPException
-from app.core.base_service import BaseService
+from app.core.base_command_service import BaseCommandService
 from app.teams.repository import TeamsRepository
 from .model import Team, TeamCreate, TeamUpdate, TeamPatch
 
-class TeamsService(BaseService):
+class TeamsService(BaseCommandService):
     repository=TeamsRepository()
     model=Team
     create_model=TeamCreate

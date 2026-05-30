@@ -43,10 +43,10 @@ class BaseRepository:
             response = self.table.insert(data).execute()
             if not response.data:
                 raise Exception(f"Supabase insert failed: {response}")
-            return response.data
+            return response.data[0]
         except APIError:
-            logger.exception("[Repository:%s] ERROR", self.prefix)
-            return []
+            logger.exception("[Repository:%s] CREATE ERROR", self.prefix)
+            raise
     
     def get(self, id):
         try:
@@ -61,10 +61,12 @@ class BaseRepository:
     def update(self, id, data):
         try:
             response = self.table.update(data).eq("id", id).execute()
-            return response.data or []
+            if not response.data:
+                return None
+            return response.data[0]
         except APIError:
-            logger.exception("[Repository:%s] ERROR", self.prefix)
-            return []
+            logger.exception("[Repository:%s] UPDATE ERROR", self.prefix)
+            raise
         
     def upload_image(self, id, filename: str, data: bytes):
         try:
@@ -78,8 +80,8 @@ class BaseRepository:
         
     def delete(self, id):
         try:
-            self.table.delete().eq("id", id).execute()
-            return True
+            response = self.table.delete().eq("id", id).execute()
+            return bool(response.data)
         except APIError:
             logger.exception("[Repository:%s] ERROR", self.prefix)
-            return False
+            raise

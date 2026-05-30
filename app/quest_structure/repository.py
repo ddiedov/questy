@@ -41,9 +41,6 @@ class QuestStructureRepository(BaseRepository):
             return None
 
     def exists(self, quest_id: int, task_id: int):
-        logger.error("EXISTS CALLED")
-        logger.error("TABLE TYPE = %s", type(self.table))
-        logger.error("TABLE REPR = %s", self.table)
         try:
             response = (
                 self.table
@@ -54,8 +51,6 @@ class QuestStructureRepository(BaseRepository):
                 .execute()
             )
 
-            logger.error("EXISTS RESPONSE = %s", response)
-
             if not response:
                 return False
 
@@ -63,24 +58,18 @@ class QuestStructureRepository(BaseRepository):
 
         except APIError:
             logger.exception("[Repository:%s] EXISTS ERROR", self.prefix)
-            return False
+            raise
 
-    def shift_positions_down(self, quest_id: int, from_position: int):
+    def update_position(self, id: int, position: int):
         try:
             response = (
                 self.table
-                .select("id, position")
-                .eq("quest_id", quest_id)
-                .gt("position", from_position)
+                .update({"position": position})
+                .eq("id", id)
                 .execute()
             )
-
-            rows = response.data or []
-
-            for row in rows:
-                self.table.update({
-                    "position": row["position"] - 1
-                }).eq("id", row["id"]).execute()
-
+            return response.data or []
         except APIError:
-            logger.exception("[Repository:%s] SHIFT ERROR", self.prefix)
+            logger.exception("[Repository:%s] UPDATE POSITION ERROR", self.prefix)
+            return []
+    
