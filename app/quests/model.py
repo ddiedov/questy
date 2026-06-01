@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from app.quest_applications.model import QuestApplicationView
 from app.quest_structure.model import QuestStep
 
@@ -14,7 +14,7 @@ class Quest(BaseModel):
     created_by: str | None = None
 
 class QuestCreate(BaseModel):
-    title: str
+    title: str = Field(min_length=5)
 
 class QuestUpdate(BaseModel):
     title: str
