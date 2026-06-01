@@ -11,10 +11,6 @@
 ========================= */
 
 .qr-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
     margin-bottom: 32px;
 }
 
@@ -30,8 +26,6 @@
 }
 
 .qr-title {
-    margin: 0;
-
     font-size: 36px;
     font-weight: 700;
 
@@ -328,4 +322,85 @@
         padding: 22px;
     }
 
+}
+
+/* =====================================
+   TIMELINE
+===================================== */
+
+.qr-timeline-wrapper {
+    margin-bottom: 2rem;
+    padding-bottom: 0.5rem;
+}
+
+.qr-timeline {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.qr-timeline-item {
+    width: 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.qr-timeline-line {
+    height: 2px;
+    background: #d0d7de;
+
+    flex-grow: 1;
+    flex-basis: 30px;
+
+    margin-top: 20px;
+}
+
+.qr-timeline-dot {
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: 600;
+
+    border: 2px solid #d0d7de;
+    background: #fff;
+    color: #6c757d;
+}
+
+.qr-timeline-dot.completed {
+    background: #198754;
+    border-color: #198754;
+    color: #fff;
+}
+
+.qr-timeline-dot.current {
+    background: #0d6efd;
+    border-color: #0d6efd;
+    color: #fff;
+}
+
+.qr-timeline-dot.future {
+    background: #f8f9fa;
+    border-color: #ced4da;
+    color: #6c757d;
+}
+
+.qr-timeline-dot.finish {
+    background: #fff;
+    border-color: #adb5bd;
+    color: #6c757d;
+}
+
+.qr-timeline-label {
+    margin-top: 8px;
+    text-align: center;
+    font-size: 0.8rem;
+    line-height: 1.2;
+    word-break: break-word;
 }

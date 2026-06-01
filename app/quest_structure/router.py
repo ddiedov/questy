@@ -6,6 +6,9 @@ from fastapi.responses import RedirectResponse
 from app.core.templates import templates
 from app.core.router_factory import create_crud_router
 
+from pydantic import ValidationError
+from app.core.errors import validation_errors_to_dict
+
 from app.core.services_factory import (
     get_quest_structure_service,
     get_quest_structure_query_service,
@@ -72,7 +75,18 @@ async def create_task_for_quest(
 
     logger.debug("Create task for quest %s form data: %s", quest_id, data_dict)
 
-    data = TaskCreate(**data_dict)
+    try:
+        data = TaskCreate(**data_dict)
+    except ValidationError as e:
+        return templates.TemplateResponse(
+            name="/tasks/add.html",
+            request=request,
+            context={
+                "errors": validation_errors_to_dict(e),
+                "item": data_dict,
+                "quest_id": quest_id
+            }
+        )
 
     task = get_tasks_service().create(
         data,

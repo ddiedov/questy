@@ -3,8 +3,6 @@
 
 {% block content %}
 
-<link rel="stylesheet" href="/static/css/quest-runtime.css">
-
 <div class="container py-4 qr-page">
 
     <!-- =======================
@@ -22,10 +20,102 @@
                 Quest Run
             </h1>
         </div>
+        
 
-        <div class="qr-progress-placeholder">
-            Progress UI placeholder
+        <div class="qr-timeline-wrapper">
+
+            <div class="qr-timeline">
+
+                <!-- START -->
+
+                <div class="qr-timeline-item">
+
+                    <div class="qr-timeline-dot completed">
+                        <i class="bi bi-play-fill"></i>
+                    </div>
+
+                    <div class="qr-timeline-label">
+                        Start
+                    </div>
+
+                </div>
+
+                <!-- COMPLETED -->
+
+                {% for step in item.previous_steps %}
+
+                    <div class="qr-timeline-line"></div>
+
+                    <div class="qr-timeline-item">
+
+                        <div class="qr-timeline-dot completed">
+                            <i class="bi bi-check-lg"></i>
+                        </div>
+
+                        <div class="qr-timeline-label">
+                            {{ step.task.title }}
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+                <!-- CURRENT -->
+
+                {% if item.current_step %}
+
+                    <div class="qr-timeline-line"></div>
+
+                    <div class="qr-timeline-item">
+
+                        <div class="qr-timeline-dot current">
+                            <i class="bi bi-geo-alt-fill"></i>
+                        </div>
+
+                        <div class="qr-timeline-label">
+                            {{ item.current_step.task.title }}
+                        </div>
+
+                    </div>
+
+                    <!-- HIDDEN FUTURE STEPS -->
+
+                    <div class="qr-timeline-line"></div>
+
+                    <div class="qr-timeline-item">
+
+                        <div class="qr-timeline-dot future">
+                            ...
+                        </div>
+
+                        <div class="qr-timeline-label">
+                            More
+                        </div>
+
+                    </div>
+
+                {% endif %}
+
+                <!-- FINISH -->
+
+                <div class="qr-timeline-line"></div>
+
+                <div class="qr-timeline-item">
+
+                    <div class="qr-timeline-dot finish">
+                        <i class="bi bi-flag"></i>
+                    </div>
+
+                    <div class="qr-timeline-label">
+                        Finish
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
+        
 
     </div>
 
@@ -62,10 +152,10 @@
              CURRENT TASK
              ======================= -->
 
-        {% if item.current_task %}
+        {% if item.current_step %}
 
-            {% set task_item = item.current_task %}
-            {% set task = task_item.task %}
+            {% set step_item = item.current_step %}
+            {% set task = step_item.task %}
 
             <div class="qr-task-card">
 
@@ -177,57 +267,7 @@
 
     {% endif %}
 
-    <!-- =======================
-         PREVIOUS TASKS
-         ======================= -->
-
-    {% if item.previous_tasks %}
-
-        <div class="qr-history">
-
-            <div class="qr-history-head">
-
-                <h3 class="qr-history-title">
-                    Completed Tasks
-                </h3>
-
-            </div>
-
-            <div class="qr-history-list">
-
-                {% for previous in item.previous_tasks %}
-
-                    <div class="qr-history-item">
-
-                        <div class="qr-history-icon">
-                            <i class="bi bi-check-lg"></i>
-                        </div>
-
-                        <div class="qr-history-content">
-
-                            <div class="qr-history-item-title">
-                                {{ previous.task.title }}
-                            </div>
-
-                            {% if previous.task.outer_description %}
-
-                                <div class="qr-history-item-description">
-                                    {{ previous.task.outer_description }}
-                                </div>
-
-                            {% endif %}
-
-                        </div>
-
-                    </div>
-
-                {% endfor %}
-
-            </div>
-
-        </div>
-
-    {% endif %}
+    
 
 </div>
 

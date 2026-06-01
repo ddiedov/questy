@@ -33,6 +33,11 @@
                 class="form-control form-control-lg"
                 value="{{ item.title if item else '' }}"
             >
+            {% if errors and errors.title %}
+                {% for error in errors.title %}
+                    <div class="text-danger">{{ error }}</div>
+                {% endfor %}
+            {% endif %}
 
             <label>Description</label>
             <textarea
@@ -40,6 +45,11 @@
                 rows="6"
                 class="form-control"
             >{{ item.description if item else '' }}</textarea>
+            {% if errors and errors.description %}
+                {% for error in errors.description %}
+                    <div class="text-danger">{{ error }}</div>
+                {% endfor %}
+            {% endif %}
 
             <!-- IMAGE -->
 

@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 class Task(BaseModel):
     id: int
@@ -13,7 +13,7 @@ class Task(BaseModel):
     created_by: str | None = None
 
 class TaskCreate(BaseModel):
-    title: str
+    title: str = Field(min_length=5)
     description: str | None = None
     image_url: str | None = None
     question: str

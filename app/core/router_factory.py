@@ -3,6 +3,8 @@ import logging
 from fastapi import APIRouter, Request, HTTPException, Depends
 from fastapi.responses import RedirectResponse
 from app.core.templates import templates
+from pydantic import ValidationError
+from app.core.errors import validation_errors_to_dict
 from fastapi import UploadFile, File
 from app.core.auth import build_user_dependency
 
@@ -68,7 +70,20 @@ def create_crud_router(
     async def create_item(request: Request, user_id = Depends(get_user_for_write)):
         form = await request.form()
         data_dict = dict(form)
-        data = create_model(**data_dict)
+
+        try:
+            data = create_model(**data_dict)
+        except ValidationError as e:
+            return templates.TemplateResponse(
+                name=f"{entity}/add.html",
+                request=request,
+                context={
+                    "entity": entity,
+                    "url": f"/{entity}",
+                    "item": data_dict,
+                    "errors": validation_errors_to_dict(e)
+                }
+            )
 
         new_item = command_service.create(data, user_id)
 
