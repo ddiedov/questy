@@ -176,7 +176,7 @@
           <div>Start</div>
         </div>
 
-        {% for task in item.tasks %}
+        {% for step in item.steps %}
 
         <div class="qe-flow-item">
           <div class="qe-flow-dot">
@@ -184,7 +184,7 @@
           </div>
 
           <div>
-            {{ task.task.title }}
+            {{ step.task.title }}
           </div>
         </div>
 
