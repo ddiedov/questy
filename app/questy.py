@@ -31,10 +31,10 @@ logging.basicConfig(
     format="%(levelname)s:%(name)s:%(message)s"
 )
 
-# Твои логи
+# App logs
 logger = logging.getLogger(__name__)
 
-# Глушим шумные библиотеки
+# Reduce noisy third-party logs
 logging.getLogger("hpack").setLevel(logging.WARNING)
 logging.getLogger("httpcore").setLevel(logging.WARNING)
 logging.getLogger("httpx").setLevel(logging.WARNING)

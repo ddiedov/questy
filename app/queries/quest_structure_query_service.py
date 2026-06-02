@@ -38,7 +38,7 @@ class QuestStructureQueryService(BaseQueryService):
             for row in rows
         ]
 
-        # сортировка для линейного квеста
+        # Sort steps for a linear quest.
         links = sorted(
             links,
             key=lambda x: x.position or 0

@@ -4,19 +4,19 @@
 
 :root {
   /* Colors */
-  --primary: #4f7cff;
-  --primary-hover: #3b63d6;
+  --primary: #4f7c65;
+  --primary-hover: #345443;
 
-  --background: #eef2f7;
-  --surface: #ffffff;
+  --background: #dfe3e8;
+  --surface: #f3e7cc;
 
-  --text-main: #1f2a37;
+  --text-main: #3d2b1f;
   --text-muted: #5e4b3b;
 
   --paper-text: #3d2b1f;
 
-  --border: #e5e7eb;
-  --border-soft: #f1f3f5;
+  --border: rgba(93, 67, 31, 0.28);
+  --border-soft: rgba(90, 70, 40, 0.14);
 
   --navbar-bg: linear-gradient(
       180deg,
@@ -93,17 +93,17 @@
   --status-radius: 999px;
 
   /* Task */
-  --task-bg: #f4f6fb;
-  --task-card: #ffffff;
-  --task-border: #e6e8ef;
+  --task-bg: transparent;
+  --task-card: var(--card-bg);
+  --task-border: var(--card-border);
 
-  --task-text: #1f2a37;
-  --task-muted: #6b7280;
+  --task-text: var(--text-main);
+  --task-muted: var(--text-muted);
 
-  --task-primary: #4f7cff;
-  --task-primary-hover: #3b63d6;
+  --task-primary: var(--primary);
+  --task-primary-hover: var(--primary-hover);
 
-  --task-radius: 14px;
+  --task-radius: var(--radius-md);
 }
 
 /* =========================

@@ -20,7 +20,7 @@ def apply_filters(query, filters, filter_map: dict):
 
         handler = filter_map[field]
 
-        # handler — функция или строка колонки
+        # handler is a function or a column name.
         if callable(handler):
             query = handler(query, value)
         else:

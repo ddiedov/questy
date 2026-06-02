@@ -82,7 +82,7 @@ class AuthMiddleware(BaseHTTPMiddleware):
 
                 profile = profiles_query_service.get(request.state.user.id)
 
-                # если нет профиля → создаём, но БЕЗ падений
+                # Create a missing profile without breaking the request.
                 if not profile:
                     try:
                         profile = profiles_service.create(
@@ -95,7 +95,7 @@ class AuthMiddleware(BaseHTTPMiddleware):
                             request.state.user.id
                         )
                     except Exception as e:
-                        # НЕ ломаем request
+                        # Do not break the request.
                         profile = None
 
                 request.state.profile = profile
@@ -111,7 +111,7 @@ class AuthMiddleware(BaseHTTPMiddleware):
 
             if not getattr(request.state.profile, "username", None):
 
-                # исключаем зацикливание
+                # Prevent redirect loops.
                 if not request.url.path.startswith("/profiles/onboarding") \
                 and not request.url.path.startswith("/auth") \
                 and not request.url.path.startswith("/static"):

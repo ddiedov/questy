@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const previewSelector = this.dataset.previewTarget;
             const hiddenSelector = this.dataset.hiddenInput;
 
-            // локальный preview если upload невозможен
+            // Local preview if upload is not available.
             if (!uploadUrl) {
 
                 if (previewSelector) {

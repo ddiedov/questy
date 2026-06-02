@@ -133,7 +133,7 @@ class QuestStructureService(BaseCommandService):
 
         items = self.repository.get_by_quest(quest_id)
 
-        # защита: убедимся, что все id принадлежат этому квесту
+        # Guard: all ids must belong to this quest.
         valid_ids = {
             item["id"]
             for item in items
@@ -148,7 +148,7 @@ class QuestStructureService(BaseCommandService):
                 )
                 return
 
-        # обновляем позиции
+        # Update positions.
         for position, quest_task_id in enumerate(ordered_ids):
 
             self.repository.update_position(

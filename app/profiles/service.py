@@ -21,4 +21,4 @@ class ProfilesService(BaseCommandService):
         payload = data.model_dump()
 
         row = self.repository.create(payload)
-        return self.model(**row[0])
+        return self.model(**row)

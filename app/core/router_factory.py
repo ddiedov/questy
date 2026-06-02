@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 
 def create_crud_router(
         command_service,
-        query_service,   # <-- добавили, пока не используем
+        query_service,
         prefix: str,
         require_auth_for_write: bool = True,
         require_auth_for_read: bool = False

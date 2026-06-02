@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<div class="container py-4" style="max-width: 760px;">
+<div class="container py-4 profile-page">
 
   <!-- PAGE HEADER -->
   <div class="mb-4">
@@ -40,13 +40,8 @@
             <!-- AVATAR PREVIEW -->
             <img
             id="avatar-preview"
-            src="{{ profile.avatar_url or '/static/images/default-avatar.png' }}"
-            class="rounded-circle border shadow-sm"
-            style="
-                width: 96px;
-                height: 96px;
-                object-fit: cover;
-            "
+            src="{{ profile.avatar_url or '/static/images/default-avatar.svg' }}"
+            class="profile-avatar rounded-circle border shadow-sm"
             >
 
             <!-- ACTIONS -->

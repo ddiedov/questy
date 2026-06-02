@@ -24,7 +24,7 @@ class BaseCommandService:
 
         row = self.repository.create(payload)
 
-        # защита от сломанного репозитория / Supabase edge cases
+        # Guard against repository or Supabase edge cases.
         if not row:
             raise Exception("Object was not created in repository")
 

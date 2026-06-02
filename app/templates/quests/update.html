@@ -20,7 +20,7 @@
           id="image-input"
           class="d-none"
           accept="image/*"
-          data-upload-url="/quests/{{ item.id }}/image"
+          data-upload-url="/quests/{{ item.id }}/image/main"
           data-preview-target="#preview"
           data-hidden-input="#image-hidden"
         >
@@ -227,8 +227,7 @@
 
               {% if app.profile and app.profile.avatar_url %}
                 <img src="{{ app.profile.avatar_url }}"
-                    class="rounded-circle"
-                    style="width:32px;height:32px;object-fit:cover;">
+                    class="avatar-sm rounded-circle">
               {% endif %}
 
               <div>
@@ -267,7 +266,7 @@
         <div class="mt-3">
           <a href="/quests/{{ item.id }}/manage#applications"
             class="small text-decoration-none">
-            View all applications →
+            View all applications &rarr;
           </a>
         </div>
 
