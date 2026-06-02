@@ -103,6 +103,7 @@ async def upload_avatar(
 
     image_url = profiles_service.upload_image(
         user.id,
+        "main",
         contents
     )
 

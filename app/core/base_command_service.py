@@ -64,10 +64,17 @@ class BaseCommandService:
     # FILES
     # =========================
 
-    def upload_image(self, id: int, data: bytes):
+    def upload_image(
+        self,
+        id: int,
+        image_type: str,
+        data: bytes
+    ):
+        filename = f"{image_type}.png"
+
         url = self.repository.upload_image(
             id,
-            "main.png",
+            filename,
             data
         )
 

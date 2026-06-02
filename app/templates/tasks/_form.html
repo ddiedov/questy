@@ -63,10 +63,9 @@
 
             <input
                 type="file"
-                id="image-input"
                 class="form-control"
                 {% if item %}
-                    data-upload-url="/tasks/{{ item.id }}/image"
+                    data-upload-url="/tasks/{{ item.id }}/image/main"
                 {% endif %}
                 data-preview-target="#preview"
                 data-hidden-input="#image-hidden"
@@ -95,12 +94,28 @@
                 class="form-control"
             >{{ item.question if item else '' }}</textarea>
 
-            <label>Question Image URL</label>
+            <label>Question Image</label>
+
+            <img
+                id="question-preview"
+                src="{{ item.question_image_url if item and item.question_image_url else '/static/images/placeholder.svg' }}"
+                class="img-preview"
+            >
 
             <input
-                type="text"
-                name="question_image_url"
+                type="file"
                 class="form-control"
+                {% if item %}
+                    data-upload-url="/tasks/{{ item.id }}/image/question"
+                {% endif %}
+                data-preview-target="#question-preview"
+                data-hidden-input="#question-image-hidden"
+            >
+
+            <input
+                type="hidden"
+                name="question_image_url"
+                id="question-image-hidden"
                 value="{{ item.question_image_url if item else '' }}"
             >
 
@@ -137,12 +152,28 @@
                 class="form-control"
             >{{ item.outer_description if item else '' }}</textarea>
 
-            <label>Outer Image URL</label>
+            <label>Result Image</label>
+
+            <img
+                id="result-preview"
+                src="{{ item.outer_image_url if item and item.outer_image_url else '/static/images/placeholder.svg' }}"
+                class="img-preview"
+            >
 
             <input
-                type="text"
-                name="outer_image_url"
+                type="file"
                 class="form-control"
+                {% if item %}
+                    data-upload-url="/tasks/{{ item.id }}/image/result"
+                {% endif %}
+                data-preview-target="#result-preview"
+                data-hidden-input="#result-image-hidden"
+            >
+
+            <input
+                type="hidden"
+                name="outer_image_url"
+                id="result-image-hidden"
                 value="{{ item.outer_image_url if item else '' }}"
             >
 

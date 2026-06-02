@@ -160,16 +160,41 @@ def create_crud_router(
     # =========================
     # IMAGE UPLOAD
     # =========================
-    @router.post("/{id}/image")
-    async def upload_image(id: int, file: UploadFile = File(...), user_id = Depends(get_user_for_write)):
+    @router.post("/{id}/image/{image_type}")
+    async def upload_image(id: int, image_type: str, file: UploadFile = File(...), user_id = Depends(get_user_for_write)):
         if user_id:
             command_service.ensure_owner(id, user_id)
 
+        allowed_types = {
+            "main",
+            "question",
+            "result"
+        }
+
+        if image_type not in allowed_types:
+            raise HTTPException(400, "Invalid image type")
+
         contents = await file.read()
 
-        url = command_service.upload_image(id, contents)
+        url = command_service.upload_image(
+            id=id,
+            image_type=image_type,
+            data=contents
+        )
 
-        command_service.patch(id, patch_model(image_url=url))
+        patch_data = {}
+
+        if image_type == "main":
+            patch_data["image_url"] = url
+
+        elif image_type == "question":
+            patch_data["question_image_url"] = url
+
+        elif image_type == "result":
+            patch_data["outer_image_url"] = url
+
+
+        command_service.patch(id, patch_model(**patch_data))
 
         return {"image_url": url}
 
