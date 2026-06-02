@@ -134,8 +134,8 @@ def create_crud_router(
                 "page_title": f"Edit {entity.title()}: {item.title}",
                 "submit_label": "Save",
                 "url": f"/{entity}/{id}",
-                "back_url": f"/{entity}/edit",
-                "cancel_url": f"/{entity}/edit",
+                "back_url": f"/{entity}",
+                "cancel_url": f"/{entity}",
             }
         )
 

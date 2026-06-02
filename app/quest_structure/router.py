@@ -17,7 +17,7 @@ from app.core.services_factory import (
 )
 
 from app.tasks.filter import TasksFilter
-from app.tasks.model import TaskCreate
+from app.tasks.model import TaskCreate, TaskPatch
 from app.core.auth import build_user_dependency
 
 
@@ -79,7 +79,7 @@ async def create_task_for_quest(
         data = TaskCreate(**data_dict)
     except ValidationError as e:
         return templates.TemplateResponse(
-            name="/tasks/add.html",
+            name="tasks/add.html",
             request=request,
             context={
                 "errors": validation_errors_to_dict(e),
@@ -92,6 +92,44 @@ async def create_task_for_quest(
         data,
         user_id=user_id
     )
+
+    patch_data = {}
+
+    main_image = form.get("main_image")
+    if main_image and getattr(main_image, "filename", None):
+        contents = await main_image.read()
+        url = get_tasks_service().upload_image(
+            task.id,
+            "main",
+            contents
+        )
+        patch_data["image_url"] = url
+
+    question_image = form.get("question_image")
+    if question_image and getattr(question_image, "filename", None):
+        contents = await question_image.read()
+        url = get_tasks_service().upload_image(
+            task.id,
+            "question",
+            contents
+        )
+        patch_data["question_image_url"] = url
+
+    result_image = form.get("result_image")
+    if result_image and getattr(result_image, "filename", None):
+        contents = await result_image.read()
+        url = get_tasks_service().upload_image(
+            task.id,
+            "result",
+            contents
+        )
+        patch_data["outer_image_url"] = url
+
+    if patch_data:
+        get_tasks_service().patch(
+            task.id,
+            TaskPatch(**patch_data)
+        )
 
     logger.debug("Link task %s to quest %s", task.id, quest_id)
 

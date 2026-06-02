@@ -14,7 +14,7 @@
         {% endif %}
     </div>
 
-    <form method="post" action="{{ url }}" class="task-form">
+    <form method="post" action="{{ url }}" enctype="multipart/form-data" class="task-form">
 
         {% if quest_id %}
             <input type="hidden" name="quest_id" value="{{ quest_id }}">
@@ -63,6 +63,7 @@
 
             <input
                 type="file"
+                name="main_image"
                 class="form-control"
                 {% if item %}
                     data-upload-url="/tasks/{{ item.id }}/image/main"
@@ -104,6 +105,7 @@
 
             <input
                 type="file"
+                name="question_image"
                 class="form-control"
                 {% if item %}
                     data-upload-url="/tasks/{{ item.id }}/image/question"
@@ -162,6 +164,7 @@
 
             <input
                 type="file"
+                name="result_image"
                 class="form-control"
                 {% if item %}
                     data-upload-url="/tasks/{{ item.id }}/image/result"
