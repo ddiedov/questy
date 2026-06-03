@@ -10,6 +10,7 @@ from app.queries.quests_query_service import QuestsQueryService
 from app.queries.profiles_query_service import ProfilesQueryService
 from app.queries.quest_applications_query_service import QuestApplicationsQueryService
 from app.queries.quest_runs_query_service import QuestRunsQueryService
+from app.queries.quest_runs_ui_query_service import QuestRunsUIQueryService
 from app.queries.quest_structure_query_service import QuestStructureQueryService
 from app.queries.tasks_query_service import TasksQueryService
 from app.queries.teams_query_service import TeamsQueryService
@@ -42,6 +43,7 @@ def get_quest_structure_service():
 def get_quest_runs_service():
     return QuestRunsService(
         quest_runs_query_service = get_quest_runs_query_service(),
+        quest_runs_ui_query_service = get_quest_runs_ui_query_service(),
         quest_structure_query_service=get_quest_structure_query_service(),
         tasks_service=get_tasks_service()
     )
@@ -81,6 +83,14 @@ def get_quest_runs_query_service():
     return QuestRunsQueryService(
         quest_structure_query_service = get_quest_structure_query_service(),
         tasks_service = get_tasks_service()
+#        quests_query_service=get_quests_query_service()
+    )
+
+def get_quest_runs_ui_query_service():
+    return QuestRunsUIQueryService(
+        quest_structure_query_service = get_quest_structure_query_service(),
+        tasks_service = get_tasks_service(),
+        quests_query_service=get_quests_query_service()
     )
 
 

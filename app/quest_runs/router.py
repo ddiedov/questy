@@ -8,7 +8,8 @@ from app.core.router_factory import create_crud_router
 
 from app.core.services_factory import (
     get_quest_runs_service,
-    get_quest_runs_query_service
+    get_quest_runs_query_service,
+    get_quest_runs_ui_query_service
 )
 
 from app.core.auth import build_user_dependency
@@ -19,7 +20,8 @@ logger = logging.getLogger(__name__)
 
 router = create_crud_router(
     command_service=get_quest_runs_service(),
-    query_service=get_quest_runs_query_service(),
+    #query_service=get_quest_runs_query_service(),
+    query_service=get_quest_runs_ui_query_service(),
     prefix="/quest-runs",
     require_auth_for_write=True,
     require_auth_for_read=False
@@ -56,6 +58,7 @@ async def submit_answer(
 ):
     service = get_quest_runs_service()
     query_service = get_quest_runs_query_service()
+    ui_query_service = get_quest_runs_ui_query_service()
 
     result = service.submit_answer(
         run_id=run_id,
@@ -67,7 +70,7 @@ async def submit_answer(
     # WRONG ANSWER
     # -------------------------
     if result["state"] == "wrong":
-        item = query_service.get(run_id)
+        item = ui_query_service.get(run_id)
 
         return templates.TemplateResponse(
             name="quest-runs/details.html",
@@ -91,7 +94,7 @@ async def submit_answer(
     # -------------------------
     # CORRECT ANSWER (NEXT TASK)
     # -------------------------
-    item = query_service.get(run_id)
+    item = ui_query_service.get(run_id)
 
     return templates.TemplateResponse(
         name="quest-runs/details.html",

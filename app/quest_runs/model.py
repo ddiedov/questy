@@ -1,6 +1,5 @@
 from pydantic import BaseModel
 from enum import Enum
-from app.quest_structure.model import QuestStep
 
 
 class QuestRunStatusType(str, Enum):
@@ -40,10 +39,3 @@ class QuestRunPatch(BaseModel):
 class QuestState(BaseModel):
     state: str
     run_id: int | None = None
-
-
-class QuestRunRuntimeView(BaseModel):
-    run: QuestRun
-#    quest: QuestForRuntimeView
-    current_step: QuestStep | None
-    previous_steps: list[QuestStep]

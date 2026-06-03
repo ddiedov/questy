@@ -15,9 +15,10 @@ class QuestRunsService(BaseCommandService):
     update_model = QuestRunUpdate
     patch_model = QuestRunPatch
 
-    def __init__(self, quest_runs_query_service, quest_structure_query_service, tasks_service):
+    def __init__(self, quest_runs_query_service, quest_runs_ui_query_service, quest_structure_query_service, tasks_service):
         super().__init__()
         self.quest_runs_query_service = quest_runs_query_service
+        self.quest_runs_ui_query_service = quest_runs_ui_query_service
         self.quest_structure_query_service = quest_structure_query_service
         self.tasks_service = tasks_service 
 
@@ -67,7 +68,7 @@ class QuestRunsService(BaseCommandService):
         answer: str,
         participant_id: str
     ):
-        run = self.quest_runs_query_service.get(run_id)
+        run = self.quest_runs_ui_query_service.get(run_id)
 
         if not run:
             return {

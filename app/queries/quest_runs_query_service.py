@@ -4,7 +4,6 @@ from app.core.base_query_service import BaseQueryService
 from app.quest_runs.repository import QuestRunsRepository
 from app.quest_runs.model import (
     QuestRun,
-    QuestRunRuntimeView,
     QuestRunStatusType,
     QuestState
 )
@@ -17,46 +16,15 @@ class QuestRunsQueryService(BaseQueryService):
     repository = QuestRunsRepository()
     model = QuestRun
 
-    def __init__(self, quest_structure_query_service, tasks_service):
+    def __init__(self, quest_structure_query_service, tasks_service
+#                 , quests_query_service
+                ):
         super().__init__()
         self.quest_structure_query_service = quest_structure_query_service
         self.tasks_service = tasks_service
+#        self.quests_query_service = quests_query_service
 
-    # =========================
-    # RUNTIME VIEW
-    # =========================
-    def get(self, id: int) -> QuestRunRuntimeView | None:
-        run = super().get(id)
-
-        if not run:
-            return None
-
-        if run.current_step_id is None:
-            return QuestRunRuntimeView(
-                run=run,
-                current_step=None,
-                previous_steps=[]
-            )
-
-        current_step = (
-            self.quest_structure_query_service.get_step_by_id(
-                run.quest_id,
-                run.current_step_id
-            )
-        )
-
-        previous_steps = (
-            self.quest_structure_query_service.get_previous_steps(
-                run.quest_id,
-                run.current_step_id
-            )
-        )
-
-        return QuestRunRuntimeView(
-            run=run,
-            current_step=current_step,
-            previous_steps=previous_steps
-        )
+    
 
     # =========================
     # ACTIVE RUN

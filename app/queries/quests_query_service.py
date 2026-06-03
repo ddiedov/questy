@@ -4,7 +4,7 @@ from app.core.base_query_service import BaseQueryService
 from app.quests.filter import QuestsFilter
 from app.quests.repository import QuestsRepository
 from app.quests.model import Quest
-from app.quests.model import QuestForView, QuestForUpdate
+from app.quests.model import QuestForView, QuestForUpdate, QuestForRuntimeView
 from app.quest_applications.model import StatusType, QuestApplicationView
 
 logger = logging.getLogger(__name__)
@@ -149,3 +149,14 @@ class QuestsQueryService(BaseQueryService):
             steps = steps
         )  
 
+    def get_for_runtime_view(self, id: int, current_user_id: str | None = None) -> QuestForRuntimeView:
+        quest = super().get(id)
+
+        if not quest:
+            return None
+
+        return QuestForRuntimeView(
+            id=quest.id,
+            title=quest.title,
+            description=quest.description
+        )

@@ -12,13 +12,15 @@
     <div class="qr-header">
 
         <div>
-            <div class="qr-kicker">
-                Quest Runtime
-            </div>
-
             <h1 class="qr-title">
-                Quest Run
+                {{ item.quest.title }}
             </h1>
+
+            {% if item.quest.description %}
+            <div class="qr-desc">
+                {{ item.quest.description }}
+            </div>
+            {% endif %}
         </div>
         
 
