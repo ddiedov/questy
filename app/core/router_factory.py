@@ -101,7 +101,7 @@ def create_crud_router(
     # =========================
     @router.get("/{id}")
     async def details_form(request: Request, id: int, user_id = Depends(get_user_for_read)):
-        item = query_service.get(id)
+        item = query_service.get_for_view(id, user_id)
 
         if not item:
             raise HTTPException(status_code=404)

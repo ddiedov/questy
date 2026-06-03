@@ -10,55 +10,11 @@
         </p>
         
         
-        {% if quest.is_author %}
-            <a href="/quests/{{ quest.id }}/edit" class="btn btn-warning">Edit</a>
-        {% else %}
-            {% if not request.state.user %}
+        {% include "quests/_quest_actions.html" %}
 
-                <a href="/auth/login" class="btn btn-outline-primary mb-2">
-                    Login to participate
-                </a>
-
-            {% else %}
-
-                {% if quest.application_status == "approved" %}
-                    <p class="text-muted">
-                        {{ quest.state.state }}
-                    </p>
-                    {% if quest.state.state == "resume" %}
-
-                        <a href="/quest-runs/{{ quest.state.run_id }}" class="btn btn-primary">
-                            Resume Quest
-                        </a>
-
-                    {% else %}
-
-                        <a href="/quests/{{ quest.id }}/start" class="btn btn-success">
-                            Start Quest
-                        </a>
-
-                    {% endif %}
-
-                {% elif quest.application_status == "new" %}
-
-                    <button class="btn btn-secondary" disabled>
-                        Awaiting approval
-                    </button>
-
-                {% elif quest.application_status == None %}
-
-                    <form method="post" action="/quest-applications">
-                        {% include "quests/_apply.html" %}
-                    </form>
-
-                {% endif %}
-
-            {% endif %}
-
-            <a href="/quests/{{ quest.id }}" class="btn btn-primary">
-                View
-            </a> 
-        {% endif %}
+        <a href="/quests/{{ quest.id }}" class="btn btn-primary">
+            View
+        </a>
         
         
     </div>

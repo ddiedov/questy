@@ -33,6 +33,11 @@ class BaseQueryService:
         return self.model(**row)
 
     # =========================
+    # VIEW FORM DATA
+    # =========================
+    def get_for_view(self, id: int, current_user_id=None):
+        return self.get(id)
+    # =========================
     # EDIT FORM DATA
     # =========================
     def get_for_update(self, id: int):

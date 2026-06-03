@@ -1,6 +1,7 @@
 from pydantic import BaseModel, Field
 from app.quest_applications.model import QuestApplicationView
 from app.quest_structure.model import QuestStep
+from app.quest_runs.model import QuestState
 
 
 #------ DTO Models (Database structures)
@@ -28,12 +29,16 @@ class QuestPatch(BaseModel):
 
 
 #------ Use Case Models (UI usage structures)
+class QuestForView(Quest):
+    is_author: bool
+    application_status: str | None = None
+    state: QuestState | None = None
+    steps: list[QuestStep]
 
 class QuestForUpdate(Quest):
     applications: list[QuestApplicationView]
     new_applications: list[QuestApplicationView]
     steps: list[QuestStep]
-
 
 class QuestForRuntimeView(BaseModel):
     id: int

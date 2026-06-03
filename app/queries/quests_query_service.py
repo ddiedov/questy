@@ -4,7 +4,7 @@ from app.core.base_query_service import BaseQueryService
 from app.quests.filter import QuestsFilter
 from app.quests.repository import QuestsRepository
 from app.quests.model import Quest
-from app.quests.model import QuestForUpdate
+from app.quests.model import QuestForView, QuestForUpdate
 from app.quest_applications.model import StatusType, QuestApplicationView
 
 logger = logging.getLogger(__name__)
@@ -71,8 +71,56 @@ class QuestsQueryService(BaseQueryService):
         )
         return quest_structure.steps
     
+
+    def get_for_view(self, id: int, current_user_id: str | None = None) -> QuestForView:
+        quest = super().get(id)
+
+        if not quest:
+            return None
+
+        item = quest.model_dump()
+
+        # -----------------------------
+        # steps (same as list-style enrichment)
+        # -----------------------------
+        steps = self.get_steps(
+            quest_id=id,
+            current_user_id=current_user_id
+        )
+
+        # -----------------------------
+        # default enriched fields
+        # -----------------------------
+        application = None
+
+        if current_user_id:
+            application = (
+                self.quest_applications_query_service
+                .get_by_quest_and_user(
+                    quest_id=id,
+                    participant_id=current_user_id
+                )
+            )
+
+        quest_run_state = self.quest_runs_query_service.get_run_state(id, current_user_id)
+
+        # -----------------------------
+        # extend item (same style as list)
+        # -----------------------------
+        item.update({
+            "is_author": (
+                current_user_id is not None
+                and quest.created_by == current_user_id
+            ),
+            "application_status": application.status if application else None,
+            "state": quest_run_state if quest_run_state else None,
+            "steps": steps,
+        })
+
+        return QuestForView(**item)
+
     
-    def get(self, id: int) -> QuestForUpdate:
+    def get_for_update(self, id: int) -> QuestForUpdate:
         quest = super().get(id)
         if not quest:
             return None
