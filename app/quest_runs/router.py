@@ -57,7 +57,6 @@ async def submit_answer(
     user_id=Depends(get_user_for_write)
 ):
     service = get_quest_runs_service()
-    query_service = get_quest_runs_query_service()
     ui_query_service = get_quest_runs_ui_query_service()
 
     result = service.submit_answer(
@@ -86,13 +85,21 @@ async def submit_answer(
     # COMPLETED
     # -------------------------
     if result["state"] == "completed":
-        return RedirectResponse(
-            url=f"/quest-runs/{run_id}",
-            status_code=303
+        # важно: после PATCH состояние уже обновлено
+        item = ui_query_service.get(run_id)
+
+        return templates.TemplateResponse(
+            name="quest-runs/details.html",
+            request=request,
+            context={
+                "item": item,
+                "answer_state": "completed",
+                "message": None
+            }
         )
 
     # -------------------------
-    # CORRECT ANSWER (NEXT TASK)
+    # CORRECT (NEXT TASK)
     # -------------------------
     item = ui_query_service.get(run_id)
 
@@ -102,6 +109,6 @@ async def submit_answer(
         context={
             "item": item,
             "answer_state": "correct",
-            "message": "Correct answer"
+            "message": None
         }
     )

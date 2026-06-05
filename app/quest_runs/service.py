@@ -68,30 +68,25 @@ class QuestRunsService(BaseCommandService):
         answer: str,
         participant_id: str
     ):
-        run = self.quest_runs_ui_query_service.get(run_id)
+        run_view = self.quest_runs_ui_query_service.get(run_id)
 
-        if not run:
+        if not run_view:
             return {
                 "success": False,
                 "state": "wrong",
                 "message": "Run not found"
             }
 
-        current_item = (
-            self.quest_structure_query_service.get_step_by_id(
-                run.run.quest_id,
-                run.run.current_step_id
-            )
-        )
+        run = run_view.run
 
-        if not current_item:
+        if not run_view.current_step:
             return {
                 "success": False,
                 "state": "wrong",
                 "message": "Current task not found"
             }
 
-        current_task = current_item.task
+        current_task = run_view.current_step.task
 
         success, error = self.tasks_service.validate_answer(
             current_task,
@@ -105,23 +100,23 @@ class QuestRunsService(BaseCommandService):
                 "state": "wrong",
                 "message": error
             }
-        
-        current_position = (
-            self.quest_structure_query_service.get_step_position(
-                run.run.quest_id,
-                run.run.current_step_id
-            )
+
+        # =========================
+        # CURRENT POSITION LOGIC
+        # =========================
+        current_position = self.quest_structure_query_service.get_step_position(
+            run.quest_id,
+            run.current_step_id
         )
 
-        structure = self.quest_structure_query_service.get_by_quest(
-            run.run.quest_id
-        )
-
+        structure = self.quest_structure_query_service.get_by_quest(run.quest_id)
         steps = structure.steps if structure else []
 
         next_index = current_position + 1
 
+        # =========================
         # COMPLETED
+        # =========================
         if next_index >= len(steps):
             self.patch(
                 run_id,
@@ -137,7 +132,9 @@ class QuestRunsService(BaseCommandService):
                 "message": None
             }
 
-        # CORRECT (NEXT STEP)
+        # =========================
+        # NEXT STEP
+        # =========================
         next_step_id = steps[next_index].id
 
         self.patch(

@@ -16,14 +16,10 @@ class QuestRunsQueryService(BaseQueryService):
     repository = QuestRunsRepository()
     model = QuestRun
 
-    def __init__(self, quest_structure_query_service, tasks_service
-#                 , quests_query_service
-                ):
+    def __init__(self, quest_structure_query_service, tasks_service):
         super().__init__()
         self.quest_structure_query_service = quest_structure_query_service
         self.tasks_service = tasks_service
-#        self.quests_query_service = quests_query_service
-
     
 
     # =========================

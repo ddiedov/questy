@@ -193,6 +193,35 @@
 
             </div>
 
+            {% if answer_state %}
+
+                <div class="qr-state-card qr-state-{{ answer_state }}">
+
+                    {% if answer_state == "wrong" %}
+
+                        <div class="qr-state-title">Wrong answer</div>
+                        <div class="qr-state-message">{{ message }}</div>
+
+                    {% elif answer_state == "correct" %}
+
+                        <div class="qr-state-title">Correct!</div>
+                        <div class="qr-state-message">
+                            You can continue to the next step.
+                        </div>
+
+                    {% elif answer_state == "completed" %}
+
+                        <div class="qr-state-title">Quest completed</div>
+                        <div class="qr-state-message">
+                            You finished the quest successfully.
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+            {% endif %}
+
             <!-- =======================
                  QUESTION
                  ======================= -->
