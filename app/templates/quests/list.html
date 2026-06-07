@@ -13,14 +13,13 @@
         <div class="col-12 col-sm-6 col-md-4 mb-4">
             <div class="card">
                 <div class="card-body text-center">
-                    <h3>+</h3>
-                    <p class="text-muted">
-                        Add quest
-                    </p>
-                    <a href="/quests/add" class="btn btn-primary">
-                        Add quest
-                    </a>
-                </div>
+                    <form method="post" action="/quests">
+                        <input type="hidden" name="title" value="draft">
+                        <button type="submit">
+                            Создать квест
+                        </button>
+                    </form>
+                </div>                
             </div>
         </div>
 
