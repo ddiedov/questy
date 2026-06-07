@@ -158,5 +158,6 @@ class QuestsQueryService(BaseQueryService):
         return QuestForRuntimeView(
             id=quest.id,
             title=quest.title,
-            description=quest.description
+            description=quest.description,
+            image_url=quest.image_url
         )

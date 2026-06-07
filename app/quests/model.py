@@ -44,3 +44,4 @@ class QuestForRuntimeView(BaseModel):
     id: int
     title: str
     description: str | None = None
+    image_url: str | None = None

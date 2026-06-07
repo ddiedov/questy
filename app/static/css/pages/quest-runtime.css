@@ -11,24 +11,52 @@
 ========================= */
 
 .qr-header {
-    margin-bottom: 32px;
+    display: flex;
+    gap: 24px;
+    padding: 24px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-md);
+    box-shadow:
+        var(--card-shadow),
+        var(--card-inset);
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+}
+
+.qr-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(255,255,255,.25),
+      transparent 35%
+    );
+  pointer-events: none;
 }
 
 .qr-desc {
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: .08em;
-    
+    border: none;
+    background: transparent;
+    width: 100%;
     color: var(--text-muted);
-
-    margin-bottom: 6px;
+    font-size: 16px;
+    line-height: 1.6;
+    resize: none;
 }
 
 .qr-title {
-    font-size: 36px;
+    font-size: 38px;
     font-weight: 700;
-
+    border: none;
+    background: transparent;
+    width: 100%;
     color: var(--text-main);
+    line-height: 1.1;
+    margin-bottom: 10px;
 }
 
 .qr-progress-placeholder {

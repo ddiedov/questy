@@ -9,22 +9,34 @@
          HEADER / PROGRESS PLACEHOLDER
          ======================= -->
 
+    <!-- HEADER -->
     <div class="qr-header">
-
-        <div>
-            <h1 class="qr-title">
-                {{ item.quest.title }}
-            </h1>
-
-            {% if item.quest.description %}
-            <div class="qr-desc">
-                {{ item.quest.description }}
-            </div>
-            {% endif %}
+        <div class="qe-cover-wrap">
+        <img
+            src="{{ item.quest.image_url or '/static/images/placeholder.svg' }}"
+            class="qe-cover"
+        >
         </div>
-        
 
-        <div class="qr-timeline-wrapper">
+        <div class="qe-meta">
+            <div>
+                <h1 class="qr-title">
+                    {{ item.quest.title }}
+                </h1>
+
+                {% if item.quest.description %}
+                <div class="qr-desc">
+                    {{ item.quest.description }}
+                </div>
+                {% endif %}
+            </div>        
+        </div>
+
+        <div class="qe-status">On-going</div>
+    </div>
+
+
+    <div class="qr-timeline-wrapper">
 
             <div class="qr-timeline">
 
@@ -115,9 +127,6 @@
                 </div>
 
             </div>
-
-        </div>
-        
 
     </div>
 
