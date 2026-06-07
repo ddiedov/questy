@@ -13,12 +13,7 @@
         <div class="col-12 col-sm-6 col-md-4 mb-4">
             <div class="card">
                 <div class="card-body text-center">
-                    <form method="post" action="/quests">
-                        <input type="hidden" name="title" value="draft">
-                        <button type="submit">
-                            Создать квест
-                        </button>
-                    </form>
+                    {% include "quests/_create.html" %}
                 </div>                
             </div>
         </div>
