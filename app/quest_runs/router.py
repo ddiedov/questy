@@ -94,7 +94,8 @@ async def submit_answer(
             context={
                 "item": item,
                 "answer_state": "completed",
-                "message": None
+                "message": None,
+                "expanded_step_id": result["expanded_step_id"]
             }
         )
 
@@ -109,6 +110,7 @@ async def submit_answer(
         context={
             "item": item,
             "answer_state": "correct",
-            "message": None
+            "message": None,
+            "expanded_step_id": result["expanded_step_id"]
         }
     )

@@ -433,3 +433,115 @@
     line-height: 1.2;
     word-break: break-word;
 }
+
+
+/* =========================
+   STEP PREVIEW
+========================= */
+
+.qr-step-details {
+    margin-bottom: 24px;
+}
+
+.qr-step-preview {
+    margin-top: 16px;
+
+    background: var(--card-bg);
+
+    border: 1px solid var(--card-border);
+
+    border-radius: var(--radius-lg);
+
+    overflow: hidden;
+
+    box-shadow: var(--shadow-md);
+}
+
+.qr-step-preview-image {
+    width: 100%;
+    max-height: 320px;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+.qr-step-preview-body {
+    padding: 24px;
+}
+
+.qr-step-preview-title {
+    margin-bottom: 12px;
+
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.qr-step-preview-text {
+    line-height: 1.7;
+}
+
+.qr-timeline-dot {
+    cursor: pointer;
+}
+
+button.qr-timeline-dot {
+    padding: 0;
+}
+
+
+/* =========================
+   ANSWER STATE CARD
+========================= */
+
+.qr-state-card {
+    margin-bottom: 24px;
+    padding: 22px 24px;
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--card-shadow), var(--card-inset);
+    animation: qr-state-fade 0.18s ease-out;
+}
+
+@keyframes qr-state-fade {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.qr-state-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: var(--text-main);
+}
+
+.qr-state-message {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--text-muted);
+}
+
+/* =========================
+   STATE VARIANTS
+========================= */
+
+.qr-state-wrong {
+    border-left: 4px solid #dc3545;
+    background-color: (220, 53, 69, 0.2)
+}
+
+.qr-state-correct {
+    border-left: 4px solid #198754;
+    background: var(--card-bg);
+}
+
+.qr-state-completed {
+    border-left: 4px solid #b78b3d;
+    background: var(--card-bg);
+}

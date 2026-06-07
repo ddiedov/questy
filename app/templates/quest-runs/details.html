@@ -9,7 +9,6 @@
          HEADER / PROGRESS PLACEHOLDER
          ======================= -->
 
-    <!-- HEADER -->
     <div class="qr-header">
         <div class="qe-cover-wrap">
         <img
@@ -62,9 +61,14 @@
 
                     <div class="qr-timeline-item">
 
-                        <div class="qr-timeline-dot completed">
+                        <button
+                            class="qr-timeline-dot completed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#step-details-{{ step.id }}"
+                        >
                             <i class="bi bi-check-lg"></i>
-                        </div>
+                        </button>
 
                         <div class="qr-timeline-label">
                             {{ step.task.title }}
@@ -133,6 +137,52 @@
     <!-- =======================
          COMPLETED
          ======================= -->
+
+    <!-- =======================
+        STEP DETAILS
+        ======================= -->
+
+    <div class="accordion qr-step-details" id="timelineAccordion">
+
+        {% for step in item.previous_steps %}
+
+            <div
+                id="step-details-{{ step.id }}"
+                class="accordion-collapse collapse {% if expanded_step_id == step.id %}show{% endif %}"
+                data-bs-parent="#timelineAccordion"
+            >
+                <div class="qr-step-preview">
+
+                    {% if step.task.outer_image_url %}
+                        <img
+                            src="{{ step.task.outer_image_url }}"
+                            class="qr-step-preview-image"
+                            alt="{{ step.task.title }}"
+                        >
+                    {% endif %}
+
+                    <div class="qr-step-preview-body">
+
+                        <h3 class="qr-step-preview-title">
+                            {{ step.task.title }}
+                        </h3>
+
+                        {% if step.task.outer_description %}
+                            <div class="qr-step-preview-text">
+                                {{ step.task.outer_description }}
+                            </div>
+                        {% endif %}
+
+                    </div>
+
+                </div>
+            </div>
+
+        {% endfor %}        
+
+    </div>
+
+
 
     {% if item.run.status == "completed" %}
 
@@ -211,20 +261,6 @@
                         <div class="qr-state-title">Wrong answer</div>
                         <div class="qr-state-message">{{ message }}</div>
 
-                    {% elif answer_state == "correct" %}
-
-                        <div class="qr-state-title">Correct!</div>
-                        <div class="qr-state-message">
-                            You can continue to the next step.
-                        </div>
-
-                    {% elif answer_state == "completed" %}
-
-                        <div class="qr-state-title">Quest completed</div>
-                        <div class="qr-state-message">
-                            You finished the quest successfully.
-                        </div>
-
                     {% endif %}
 
                 </div>
@@ -273,14 +309,6 @@
                                 autocomplete="off"
                                 required
                             >
-
-                            {% if answer_state %}
-
-                                <div class="qr-answer-state qr-answer-{{ answer_state }}">
-                                    {{ message }}
-                                </div>
-
-                            {% endif %}
 
                             <button
                                 type="submit"
