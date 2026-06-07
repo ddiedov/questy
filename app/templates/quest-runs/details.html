@@ -254,16 +254,14 @@
 
             {% if answer_state %}
 
-                <div class="qr-state-card qr-state-{{ answer_state }}">
-
-                    {% if answer_state == "wrong" %}
+                {% if answer_state == "wrong" %}
+                    <div class="qr-state-card qr-state-{{ answer_state }}">
 
                         <div class="qr-state-title">Wrong answer</div>
                         <div class="qr-state-message">{{ message }}</div>
-
-                    {% endif %}
-
-                </div>
+    
+                    </div>
+                {% endif %}
 
             {% endif %}
 

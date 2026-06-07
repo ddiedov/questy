@@ -533,15 +533,15 @@ button.qr-timeline-dot {
 
 .qr-state-wrong {
     border-left: 4px solid #dc3545;
-    background-color: (220, 53, 69, 0.2)
+    background: rgba(220, 53, 69, 0.20);
 }
 
 .qr-state-correct {
     border-left: 4px solid #198754;
-    background: var(--card-bg);
+    background: rgba(40, 199, 111, 0.20);
 }
 
 .qr-state-completed {
     border-left: 4px solid #b78b3d;
-    background: var(--card-bg);
+    background: rgba(183, 139, 61, 0.20);
 }
