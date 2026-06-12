@@ -60,7 +60,9 @@ class BaseRepository:
     
     def update(self, id, data):
         try:
+            logger.debug("[Repository:%s] DATA", data)
             response = self.table.update(data).eq("id", id).execute()
+            logger.debug("[Repository:%s] RESPONSE", response)
             if not response.data:
                 return None
             return response.data[0]

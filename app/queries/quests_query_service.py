@@ -4,7 +4,7 @@ from app.core.base_query_service import BaseQueryService
 from app.quests.filter import QuestsFilter
 from app.quests.repository import QuestsRepository
 from app.quests.model import Quest
-from app.quests.model import QuestForView, QuestForUpdate, QuestForRuntimeView
+from app.quests.model import QuestState, QuestForView, QuestForUpdate, QuestForRuntimeView
 from app.quest_applications.model import StatusType, QuestApplicationView
 
 logger = logging.getLogger(__name__)
@@ -15,17 +15,104 @@ class QuestsQueryService(BaseQueryService):
 
     def __init__(
         self,
-        #quests_service,
         quest_applications_query_service,
         quest_runs_query_service,
         quest_structure_query_service,
         profiles_query_service
     ):
-        #self.quests_service = quests_service
         self.quest_applications_query_service = quest_applications_query_service
         self.quest_runs_query_service = quest_runs_query_service
         self.quest_structure_query_service = quest_structure_query_service
         self.profiles_query_service = profiles_query_service
+
+    def can_start(self, quest_id: int, user_id: str) -> bool:
+        state = self.get_ui_state(quest_id, user_id)
+        return state.state in ("start", "start_again")
+
+    def get_ui_state(self, quest_id: int, user_id: str) -> QuestState:
+
+        active = self.quest_runs_query_service.get_active_run(
+            quest_id,
+            user_id
+        )
+        logger.debug("ACTIVE = %s", active)
+
+        if active:
+            return QuestState(
+                state="resume",
+                run_id=active.id
+            )
+
+        has_runs = self.quest_runs_query_service.has_runs(
+            quest_id,
+            user_id
+        )
+        logger.debug("HAS RUNS = %s", has_runs)
+
+        
+        #has_application = self.quest_applications_query_service.has_applications(quest_id, user_id)
+        has_approved = self.quest_applications_query_service.has_approved_application(quest_id, user_id)
+        has_pending = self.quest_applications_query_service.has_pending_application(quest_id, user_id)
+        
+
+        quest = super().get(quest_id)
+
+        allow_replays = (
+            quest.allow_replays
+            if quest
+            else False
+        )
+
+
+        # ----------------------------------
+        # User has already completed runs
+        # ----------------------------------
+
+        if has_runs:
+
+            if allow_replays:
+                return QuestState(
+                    state="start_again",
+                    run_id=None
+                )
+
+            if has_approved:
+                return QuestState(
+                    state="start_again",
+                    run_id=None
+                )
+
+            if has_pending:
+                return QuestState(
+                    state="pending_approval",
+                    run_id=None
+                )
+
+            return QuestState(
+                state="apply_again",
+                run_id=None
+            )
+
+        # ----------------------------------
+        # User never had runs
+        # ----------------------------------
+
+        if has_approved:
+            return QuestState(
+                state="start",
+                run_id=None
+            )
+
+        if has_pending:
+            return QuestState(
+                state="pending_approval",
+                run_id=None
+            )
+
+        return QuestState(
+            state="apply",
+            run_id=None
+        )
 
 
     def list(self, filters=None, current_user_id=None):
@@ -43,7 +130,7 @@ class QuestsQueryService(BaseQueryService):
                     participant_id=current_user_id
                 )
 
-            quest_run_state = self.quest_runs_query_service.get_run_state(q.id, current_user_id)
+            quest_run_state = self.get_ui_state(q.id, current_user_id)
 
             item.update({
                 "is_author": q.created_by == current_user_id,
@@ -102,7 +189,7 @@ class QuestsQueryService(BaseQueryService):
                 )
             )
 
-        quest_run_state = self.quest_runs_query_service.get_run_state(id, current_user_id)
+        quest_run_state = self.get_ui_state(id, current_user_id)
 
         # -----------------------------
         # extend item (same style as list)

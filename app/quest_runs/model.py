@@ -36,6 +36,3 @@ class QuestRunPatch(BaseModel):
 
 
 #------ Use Case Models (UI usage structures)
-class QuestState(BaseModel):
-    state: str
-    run_id: int | None = None

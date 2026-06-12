@@ -231,6 +231,24 @@
 
 .qe-desc-sm { font-size: 13px; color: var(--text-muted); }
 
+.qe-option {
+    margin-top: 18px;
+    padding: 14px 16px;
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-md);
+    background: var(--card-bg);
+}
+
+.qe-option-title {
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.qe-option-help {
+    font-size: .85rem;
+    color: var(--text-muted);
+}
+
 .qe-actions {
   display: flex;
   align-items: center;

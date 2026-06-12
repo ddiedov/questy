@@ -8,4 +8,5 @@ class QuestApplicationsRepository(BaseRepository):
         "id": "id",
         "quest_id": "quest_id",
         "participant_id": "participant_id",
+        "status": "status",
     }

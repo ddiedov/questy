@@ -7,6 +7,7 @@ from pydantic import ValidationError
 from app.core.errors import validation_errors_to_dict
 from fastapi import UploadFile, File
 from app.core.auth import build_user_dependency
+from app.core.helpers import normalize_form_booleans
 
 
 logger = logging.getLogger(__name__)
@@ -69,7 +70,10 @@ def create_crud_router(
     @router.post("/")
     async def create_item(request: Request, user_id = Depends(get_user_for_write)):
         form = await request.form()
-        data_dict = dict(form)
+        data_dict = normalize_form_booleans(
+            dict(form),
+            create_model
+        )
 
         try:
             data = create_model(**data_dict)
@@ -145,7 +149,12 @@ def create_crud_router(
     @router.post("/{id}")
     async def save_item(request: Request, id: int, user_id = Depends(get_user_for_write)):
         form = await request.form()
-        data = update_model(**dict(form))
+        data_dict = normalize_form_booleans(
+            dict(form),
+            update_model
+        )
+
+        data = update_model(**data_dict)
 
         if user_id:
             command_service.ensure_owner(id, user_id)

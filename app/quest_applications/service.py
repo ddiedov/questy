@@ -1,8 +1,11 @@
+import logging
+
 from app.core.base_command_service import BaseCommandService
 from app.quest_applications.repository import QuestApplicationsRepository
 from .model import QuestApplication, QuestApplicationCreate, QuestApplicationUpdate, QuestApplicationPatch, StatusType
+from .filter import QuestApplicationsFilter
 
-
+logger = logging.getLogger(__name__)
 
 class QuestApplicationsService(BaseCommandService):
     repository=QuestApplicationsRepository()
@@ -61,4 +64,25 @@ class QuestApplicationsService(BaseCommandService):
             return None, "Failed to update application"
         
         return application.quest_id, None
-    
+
+
+    def mark_used(self, quest_id: int, participant_id: str):
+        apps = self.repository.list(
+            filters=QuestApplicationsFilter(
+                quest_id=quest_id,
+                participant_id=participant_id,
+                status=StatusType.APPROVED
+            )
+        )
+        
+        if not apps:
+            return
+
+        app = apps[0]
+        logger.debug("APP to mark as used: %s", app)
+
+        
+        self.repository.update(
+            app["id"],
+            {"status": StatusType.USED}
+        )

@@ -4,8 +4,7 @@ from app.core.base_query_service import BaseQueryService
 from app.quest_runs.repository import QuestRunsRepository
 from app.quest_runs.model import (
     QuestRun,
-    QuestRunStatusType,
-    QuestState
+    QuestRunStatusType
 )
 from app.quest_runs.filter import QuestRunsFilter
 
@@ -35,7 +34,12 @@ class QuestRunsQueryService(BaseQueryService):
         )
 
         return runs[0] if runs else None
+    
+    def has_runs(self, quest_id: int, participant_id: str):
+        return self.repository.exists(quest_id, participant_id)
+    
 
+"""
     def get_run_state(self, quest_id: int, participant_id: str) -> QuestState:
         active = self.get_active_run(quest_id, participant_id)
 
@@ -49,3 +53,4 @@ class QuestRunsQueryService(BaseQueryService):
             state="start",
             run_id=None
         )
+"""

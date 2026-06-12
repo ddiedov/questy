@@ -10,6 +10,7 @@ class StatusType(str, Enum):
     NEW = "new"
     APPROVED = "approved"
     REJECTED = "rejected"
+    USED = "used"
 
 class QuestApplication(BaseModel):
     id: int
