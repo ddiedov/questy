@@ -35,7 +35,6 @@ class QuestsQueryService(BaseQueryService):
             quest_id,
             user_id
         )
-        logger.debug("ACTIVE = %s", active)
 
         if active:
             return QuestState(
@@ -47,10 +46,7 @@ class QuestsQueryService(BaseQueryService):
             quest_id,
             user_id
         )
-        logger.debug("HAS RUNS = %s", has_runs)
-
         
-        #has_application = self.quest_applications_query_service.has_applications(quest_id, user_id)
         has_approved = self.quest_applications_query_service.has_approved_application(quest_id, user_id)
         has_pending = self.quest_applications_query_service.has_pending_application(quest_id, user_id)
         
@@ -67,7 +63,6 @@ class QuestsQueryService(BaseQueryService):
         # ----------------------------------
         # User has already completed runs
         # ----------------------------------
-
         if has_runs:
 
             if allow_replays:
@@ -168,7 +163,7 @@ class QuestsQueryService(BaseQueryService):
         item = quest.model_dump()
 
         # -----------------------------
-        # steps (same as list-style enrichment)
+        # quest additional attributes - quest steps
         # -----------------------------
         steps = self.get_steps(
             quest_id=id,
@@ -176,10 +171,9 @@ class QuestsQueryService(BaseQueryService):
         )
 
         # -----------------------------
-        # default enriched fields
+        # quest additional attributes - quest applications
         # -----------------------------
         application = None
-
         if current_user_id:
             application = (
                 self.quest_applications_query_service
@@ -189,10 +183,13 @@ class QuestsQueryService(BaseQueryService):
                 )
             )
 
+        # -----------------------------
+        # quest additional attributes - quest run state
+        # -----------------------------
         quest_run_state = self.get_ui_state(id, current_user_id)
 
         # -----------------------------
-        # extend item (same style as list)
+        # extend quest with additional attributes
         # -----------------------------
         item.update({
             "is_author": (
@@ -235,6 +232,7 @@ class QuestsQueryService(BaseQueryService):
             new_applications = new_applications,
             steps = steps
         )  
+
 
     def get_for_runtime_view(self, id: int, current_user_id: str | None = None) -> QuestForRuntimeView:
         quest = super().get(id)

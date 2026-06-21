@@ -85,7 +85,6 @@ async def submit_answer(
     # COMPLETED
     # -------------------------
     if result["state"] == "completed":
-        # важно: после PATCH состояние уже обновлено
         item = ui_query_service.get(run_id)
 
         return templates.TemplateResponse(

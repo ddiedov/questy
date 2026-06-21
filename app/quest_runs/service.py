@@ -3,6 +3,9 @@ import logging
 from app.core.base_command_service import BaseCommandService
 from app.quest_runs.repository import QuestRunsRepository
 from .model import QuestRun, QuestRunCreate, QuestRunUpdate, QuestRunPatch, QuestRunStatusType
+
+from app.queries.quest_runs_ui_query_service import QuestRunsUIQueryService
+
 from fastapi import HTTPException
 
 logger = logging.getLogger(__name__)
@@ -16,9 +19,14 @@ class QuestRunsService(BaseCommandService):
     update_model = QuestRunUpdate
     patch_model = QuestRunPatch
 
-    def __init__(self, quest_runs_query_service, quest_runs_ui_query_service, quest_structure_query_service, tasks_service, quests_query_service, quest_applications_service):
+    def __init__(self, 
+                 quest_runs_ui_query_service: QuestRunsUIQueryService, 
+                 quest_structure_query_service, 
+                 tasks_service, 
+                 quests_query_service, 
+                 quest_applications_service
+                ):
         super().__init__()
-        self.quest_runs_query_service = quest_runs_query_service
         self.quest_runs_ui_query_service = quest_runs_ui_query_service
         self.quest_structure_query_service = quest_structure_query_service
         self.tasks_service = tasks_service 

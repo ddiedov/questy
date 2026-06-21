@@ -38,19 +38,3 @@ class QuestRunsQueryService(BaseQueryService):
     def has_runs(self, quest_id: int, participant_id: str):
         return self.repository.exists(quest_id, participant_id)
     
-
-"""
-    def get_run_state(self, quest_id: int, participant_id: str) -> QuestState:
-        active = self.get_active_run(quest_id, participant_id)
-
-        if active:
-            return QuestState(
-                state="resume",
-                run_id=active.id
-            )
-
-        return QuestState(
-            state="start",
-            run_id=None
-        )
-"""

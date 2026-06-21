@@ -30,11 +30,19 @@ class QuestRunsUIQueryService(BaseQueryService):
         quest = self.quests_query_service.get_for_runtime_view(run.quest_id)
 
         if run.current_step_id is None:
+            structure = self.quest_structure_query_service.get_by_quest(
+                run.quest_id
+            )
+            previous_steps = (
+                structure.steps
+                if structure
+                else []
+            )
             view = QuestRunRuntimeView(
                 run=run,
                 quest=quest,
                 current_step=None,
-                previous_steps=[]
+                previous_steps=previous_steps
             )
             return StepStateBuilder.idle(view)
 

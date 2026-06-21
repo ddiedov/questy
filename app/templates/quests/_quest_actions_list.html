@@ -6,13 +6,6 @@
     </a>
 
 {% else %}
-
-<pre>
-state: {{ quest.state.state if quest.state else None }}
-run_id: {{ quest.state.run_id if quest.state else None }}
-replay: {{ quest.allow_replays }}
-</pre>
-
     {% if not request.state.user %}
 
         <a href="/auth/login"
@@ -29,14 +22,14 @@ replay: {{ quest.allow_replays }}
 
     {% elif quest.state.state == "start" %}
 
-        <a href="/quests/{{ quest.id }}/start"
+        <a href="/quests/{{ quest.id }}"
            class="btn btn-success">
-            Start
+            Open
         </a>
 
     {% elif quest.state.state == "start_again" %}
 
-        <a href="/quests/{{ quest.id }}/start"
+        <a href="/quests/{{ quest.id }}"
            class="btn btn-warning">
             Start Again
         </a>
