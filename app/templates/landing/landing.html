@@ -1,33 +1,140 @@
 {% extends "core/base.html" %}
+
 {% block content %}
-<div class="container-xl mt-5">
-  <div class="row">
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-body text-center">
-          {% include "quests/_create.html" %}
-        </div>
+
+<!-- =========================
+     HERO
+========================= -->
+<div class="hero text-center mt-4 mb-5">
+
+  <h1 class="display-5 fw-bold mb-3">
+    Questy
+  </h1>
+
+  <p class="lead text-muted mb-4">
+    Create and play interactive quests — step-by-step adventures, stories, and games.
+  </p>
+
+  <div class="d-flex justify-content-center gap-3 flex-wrap mb-3">
+    <a href="/quests" class="btn btn-primary btn-lg">
+      🎮 Play quests
+    </a>
+
+    <a href="/quests/create" class="btn btn-outline-secondary btn-lg">
+      ✍️ Create quest
+    </a>
+  </div>
+
+  <div class="text-muted small">
+    No complexity. Just guided interactive stories.
+  </div>
+
+</div>
+
+
+<div class="path-line"></div>
+
+<!-- =========================
+     PLAY / CREATE MODES
+========================= -->
+<div class="row g-4 mb-5">
+
+  <div class="col-md-6">
+    <div class="card h-100 text-center">
+      <div class="card-body p-4">
+
+        <div class="display-6 mb-2">🎮</div>
+        <h3 class="mb-2">Play</h3>
+
+        <p class="text-muted mb-4">
+          Explore quests created by others. Solve tasks, follow stories, and complete adventures step by step.
+        </p>
+
+        <a href="/quests" class="btn btn-primary">
+          Browse quests
+        </a>
+
       </div>
     </div>
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-body text-center">
-          <h2>Play a Quest</h2>
-          <p>
-            Browse quests created by the community
-          </p>
-          <a href="/quests" class="btn btn-primary">
-            Browse quests
-          </a>
+  </div>
+
+
+  <div class="col-md-6">
+    <div class="card h-100 text-center">
+      <div class="card-body p-4">
+
+        <div class="display-6 mb-2">✍️</div>
+        <h3 class="mb-2">Create</h3>
+
+        <p class="text-muted mb-4">
+          Build your own interactive quests — stories, challenges, and experiences for others to play.
+        </p>
+
+        <a href="/quests/create" class="btn btn-outline-secondary">
+          Start creating
+        </a>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="path-line"></div>
+
+<!-- =========================
+     WHAT IS QUESTY
+========================= -->
+<div class="card mb-5">
+  <div class="card-body p-4">
+
+    <h2 class="mb-3">What is Questy?</h2>
+
+    <p class="text-muted mb-3">
+      Questy is a platform where quests are not just text — they are interactive journeys.
+      You move step by step through a story, solve tasks, and reach an ending.
+    </p>
+
+    <div class="row g-3">
+
+      <div class="col-md-4">
+        <div class="p-3 border rounded">
+          <strong>Step-by-step</strong>
+          <div class="text-muted small">Every quest is a guided path</div>
         </div>
       </div>
-    </div>    
+
+      <div class="col-md-4">
+        <div class="p-3 border rounded">
+          <strong>Interactive</strong>
+          <div class="text-muted small">Questions, tasks, decisions</div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="p-3 border rounded">
+          <strong>Stories</strong>
+          <div class="text-muted small">From games to real-world adventures</div>
+        </div>
+      </div>
+
+    </div>
+
   </div>
 </div>
 
-<h2 class="mt-5 mb-3">Featured Quests</h2>
+<div class="path-line"></div>
 
-<div id="carousel-featured" class="carousel slide" data-bs-ride="carousel">
+<!-- =========================
+     FEATURED QUESTS
+========================= -->
+<h2 class="mb-2">Featured adventures</h2>
+<p class="text-muted mb-3">
+  Try quests created by the community
+</p>
+
+<div id="carousel-featured" class="carousel slide mb-5" data-bs-ride="carousel">
+
   <div class="carousel-inner">
 
     {% for quest in featured_quests %}
@@ -45,5 +152,63 @@
   <button class="carousel-control-next" type="button" data-bs-target="#carousel-featured" data-bs-slide="next">
     <span class="carousel-control-next-icon"></span>
   </button>
+
 </div>
+
+<div class="path-line"></div>
+
+<!-- =========================
+     GAME METAPHOR BLOCK
+========================= -->
+<div class="card mb-5">
+  <div class="card-body p-4">
+
+    <h2 class="mb-3">Every quest is a journey</h2>
+
+    <p class="text-muted mb-4">
+      You don’t just read stories — you move through them.
+    </p>
+
+    <div class="d-flex align-items-center justify-content-center gap-3 flex-wrap">
+
+      <div class="qe-dot start">Start</div>
+
+      <div style="width: 60px; height: 2px; background: var(--timeline-line);"></div>
+
+      <div class="qe-dot discover">Step</div>
+
+      <div style="width: 60px; height: 2px; background: var(--timeline-line);"></div>
+
+      <div class="qe-dot finish">End</div>
+
+    </div>
+
+  </div>
+</div>
+
+<div class="path-line"></div>
+
+<!-- =========================
+     FINAL CTA
+========================= -->
+<div class="text-center py-5">
+
+  <h2 class="mb-3">Start your first adventure</h2>
+
+  <p class="text-muted mb-4">
+    Play or create — choose your path in Questy
+  </p>
+
+  <div class="d-flex justify-content-center gap-3 flex-wrap">
+    <a href="/quests" class="btn btn-primary btn-lg">
+      🎮 Play quests
+    </a>
+
+    <a href="/quests/create" class="btn btn-outline-secondary btn-lg">
+      ✍️ Create quest
+    </a>
+  </div>
+
+</div>
+
 {% endblock %}
