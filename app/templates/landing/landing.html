@@ -2,213 +2,403 @@
 
 {% block content %}
 
+<div class="landing-page">
+
+
 <!-- =========================
      HERO
 ========================= -->
-<div class="hero text-center mt-4 mb-5">
 
-  <h1 class="display-5 fw-bold mb-3">
-    Questy
-  </h1>
+<section class="landing-hero">
 
-  <p class="lead text-muted mb-4">
-    Create and play interactive quests — step-by-step adventures, stories, and games.
-  </p>
+  <div class="landing-hero-content">
 
-  <div class="d-flex justify-content-center gap-3 flex-wrap mb-3">
-    <a href="/quests" class="btn btn-primary btn-lg">
-      🎮 Play quests
-    </a>
-
-    <a href="/quests/create" class="btn btn-outline-secondary btn-lg">
-      ✍️ Create quest
-    </a>
-  </div>
-
-  <div class="text-muted small">
-    No complexity. Just guided interactive stories.
-  </div>
-
-</div>
-
-
-<div class="path-line"></div>
-
-<!-- =========================
-     PLAY / CREATE MODES
-========================= -->
-<div class="row g-4 mb-5">
-
-  <div class="col-md-6">
-    <div class="card h-100 text-center">
-      <div class="card-body p-4">
-
-        <div class="display-6 mb-2">🎮</div>
-        <h3 class="mb-2">Play</h3>
-
-        <p class="text-muted mb-4">
-          Explore quests created by others. Solve tasks, follow stories, and complete adventures step by step.
-        </p>
-
-        <a href="/quests" class="btn btn-primary">
-          Browse quests
-        </a>
-
-      </div>
+    <div class="landing-kicker">
+      INTERACTIVE ADVENTURES
     </div>
-  </div>
 
+    <h1 class="landing-title">
+      Questy
+    </h1>
 
-  <div class="col-md-6">
-    <div class="card h-100 text-center">
-      <div class="card-body p-4">
-
-        <div class="display-6 mb-2">✍️</div>
-        <h3 class="mb-2">Create</h3>
-
-        <p class="text-muted mb-4">
-          Build your own interactive quests — stories, challenges, and experiences for others to play.
-        </p>
-
-        <a href="/quests/create" class="btn btn-outline-secondary">
-          Start creating
-        </a>
-
-      </div>
-    </div>
-  </div>
-
-</div>
-
-<div class="path-line"></div>
-
-<!-- =========================
-     WHAT IS QUESTY
-========================= -->
-<div class="card mb-5">
-  <div class="card-body p-4">
-
-    <h2 class="mb-3">What is Questy?</h2>
-
-    <p class="text-muted mb-3">
-      Questy is a platform where quests are not just text — they are interactive journeys.
-      You move step by step through a story, solve tasks, and reach an ending.
+    <p class="landing-subtitle">
+      Create and play interactive quests —
+      stories, challenges and adventures
+      built step by step.
     </p>
 
-    <div class="row g-3">
 
-      <div class="col-md-4">
-        <div class="p-3 border rounded">
-          <strong>Step-by-step</strong>
-          <div class="text-muted small">Every quest is a guided path</div>
-        </div>
-      </div>
+    <div class="landing-actions">
 
-      <div class="col-md-4">
-        <div class="p-3 border rounded">
-          <strong>Interactive</strong>
-          <div class="text-muted small">Questions, tasks, decisions</div>
-        </div>
-      </div>
+      <a href="/quests"
+         class="btn btn-primary btn-lg">
+        🎮 Explore quests
+      </a>
 
-      <div class="col-md-4">
-        <div class="p-3 border rounded">
-          <strong>Stories</strong>
-          <div class="text-muted small">From games to real-world adventures</div>
-        </div>
-      </div>
+
+      <a href="/quests/create"
+         class="btn btn-outline-secondary btn-lg">
+        ✍️ Create adventure
+      </a>
 
     </div>
 
-  </div>
-</div>
 
-<div class="path-line"></div>
+    <div class="landing-note">
+      Every quest is a journey.
+      Every step reveals something new.
+    </div>
+
+
+  </div>
+
+
+  <div class="landing-route">
+
+      <span class="landing-node active">
+        Start
+      </span>
+
+      <span class="landing-route-line"></span>
+
+      <span class="landing-node">
+        Explore
+      </span>
+
+      <span class="landing-route-line"></span>
+
+      <span class="landing-node finish">
+        Finish
+      </span>
+
+  </div>
+
+
+</section>
+
+
+
+<div class="landing-divider"></div>
+
+
 
 <!-- =========================
-     FEATURED QUESTS
+     PLAY / CREATE
 ========================= -->
-<h2 class="mb-2">Featured adventures</h2>
-<p class="text-muted mb-3">
-  Try quests created by the community
+
+<section class="landing-choice">
+
+
+<div class="landing-choice-card">
+
+    <div class="landing-icon">
+      🎮
+    </div>
+
+    <h2>
+      Play
+    </h2>
+
+
+    <p>
+      Discover quests created by others.
+      Solve tasks, follow stories,
+      and complete adventures.
+    </p>
+
+
+    <a href="/quests"
+       class="btn btn-primary">
+       Browse quests
+    </a>
+
+
+</div>
+
+
+
+<div class="landing-choice-card">
+
+    <div class="landing-icon">
+      ✍️
+    </div>
+
+    <h2>
+      Create
+    </h2>
+
+
+    <p>
+      Turn your ideas into interactive
+      stories, games and experiences.
+    </p>
+
+
+    <a href="/quests/create"
+       class="btn btn-outline-secondary">
+       Start creating
+    </a>
+
+
+</div>
+
+
+</section>
+
+
+
+
+<div class="landing-divider"></div>
+
+
+
+
+<!-- =========================
+     ABOUT
+========================= -->
+
+<section class="landing-about">
+
+
+<div class="landing-section-title">
+  What is Questy?
+</div>
+
+
+<p>
+Questy is a platform where quests become
+interactive journeys.
 </p>
 
-<div id="carousel-featured" class="carousel slide mb-5" data-bs-ride="carousel">
 
-  <div class="carousel-inner">
+<div class="landing-feature-grid">
 
-    {% for quest in featured_quests %}
-    <div class="carousel-item {% if loop.first %}active{% endif %}">
-      {% include "quests/_card.html" %}
-    </div>
-    {% endfor %}
 
-  </div>
+<div>
+<strong>
+Path-based
+</strong>
 
-  <button class="carousel-control-prev" type="button" data-bs-target="#carousel-featured" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon"></span>
-  </button>
-
-  <button class="carousel-control-next" type="button" data-bs-target="#carousel-featured" data-bs-slide="next">
-    <span class="carousel-control-next-icon"></span>
-  </button>
+<span>
+Follow a story step by step
+</span>
 
 </div>
 
-<div class="path-line"></div>
+
+
+<div>
+<strong>
+Interactive
+</strong>
+
+<span>
+Tasks, questions and discoveries
+</span>
+
+</div>
+
+
+
+<div>
+<strong>
+Flexible
+</strong>
+
+<span>
+Games, city quests and experiences
+</span>
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+<div class="landing-divider"></div>
+
+
 
 <!-- =========================
-     GAME METAPHOR BLOCK
+     FEATURED
 ========================= -->
-<div class="card mb-5">
-  <div class="card-body p-4">
 
-    <h2 class="mb-3">Every quest is a journey</h2>
 
-    <p class="text-muted mb-4">
-      You don’t just read stories — you move through them.
-    </p>
+<section>
 
-    <div class="d-flex align-items-center justify-content-center gap-3 flex-wrap">
 
-      <div class="qe-dot start">Start</div>
+<h2 class="landing-section-title">
+Featured adventures
+</h2>
 
-      <div style="width: 60px; height: 2px; background: var(--timeline-line);"></div>
 
-      <div class="qe-dot discover">Step</div>
+<p class="text-muted mb-4">
+Try quests created by the community
+</p>
 
-      <div style="width: 60px; height: 2px; background: var(--timeline-line);"></div>
 
-      <div class="qe-dot finish">End</div>
 
-    </div>
+<div id="carousel-featured"
+     class="carousel slide mb-5"
+     data-bs-ride="carousel">
 
-  </div>
+
+<div class="carousel-inner">
+
+
+{% for quest in featured_quests %}
+
+<div class="carousel-item {% if loop.first %}active{% endif %}">
+
+{% include "quests/_card.html" %}
+
 </div>
 
-<div class="path-line"></div>
+
+{% endfor %}
+
+
+</div>
+
+
+<button class="carousel-control-prev"
+        type="button"
+        data-bs-target="#carousel-featured"
+        data-bs-slide="prev">
+
+<span class="carousel-control-prev-icon"></span>
+
+</button>
+
+
+<button class="carousel-control-next"
+        type="button"
+        data-bs-target="#carousel-featured"
+        data-bs-slide="next">
+
+<span class="carousel-control-next-icon"></span>
+
+</button>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+<div class="landing-divider"></div>
+
+
+
 
 <!-- =========================
-     FINAL CTA
+     JOURNEY
 ========================= -->
-<div class="text-center py-5">
 
-  <h2 class="mb-3">Start your first adventure</h2>
 
-  <p class="text-muted mb-4">
-    Play or create — choose your path in Questy
-  </p>
+<section class="landing-journey">
 
-  <div class="d-flex justify-content-center gap-3 flex-wrap">
-    <a href="/quests" class="btn btn-primary btn-lg">
-      🎮 Play quests
-    </a>
 
-    <a href="/quests/create" class="btn btn-outline-secondary btn-lg">
-      ✍️ Create quest
-    </a>
-  </div>
+<h2>
+Every quest is a journey
+</h2>
+
+
+<p>
+You don't just read a story.
+You move through it.
+</p>
+
+
+
+<div class="landing-route big">
+
+
+<span class="landing-node active">
+Start
+</span>
+
+
+<span class="landing-route-line"></span>
+
+
+<span class="landing-node">
+Step
+</span>
+
+
+<span class="landing-route-line"></span>
+
+
+<span class="landing-node finish">
+End
+</span>
+
 
 </div>
+
+
+</section>
+
+
+
+
+
+<div class="landing-divider"></div>
+
+
+
+<!-- =========================
+     CTA
+========================= -->
+
+
+<section class="landing-final">
+
+
+<h2>
+Start your first adventure
+</h2>
+
+
+<p>
+Choose your path in Questy
+</p>
+
+
+<div class="landing-actions">
+
+
+<a href="/quests"
+class="btn btn-primary btn-lg">
+🎮 Play
+</a>
+
+
+<a href="/quests/create"
+class="btn btn-outline-secondary btn-lg">
+✍️ Create
+</a>
+
+
+</div>
+
+
+</section>
+
+
+
+</div>
+
 
 {% endblock %}
