@@ -1,79 +1,100 @@
-/* =================================
-   LANDING PAGE ONLY
-================================= */
-
-
+/* =========================
+   QUESTY LANDING
+========================= */
 .landing-page {
-    padding-top: 20px;
+    position:relative;
+    padding-top:30px;
+    overflow:hidden;
 }
+
 
 
 /* HERO */
-
 .landing-hero {
+    min-height:680px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    position:relative;
+}
 
-    padding: 70px 40px;
-
-    text-align: center;
-
-    border-radius: var(--radius-lg);
-
+.landing-hero-bg {
+    position:absolute;
+    width:700px;
+    height:700px;
+    border-radius:50%;
     background:
         radial-gradient(
-            circle at top,
-            rgba(255,255,255,.45),
-            transparent 45%
+            circle,
+            rgba(183,139,61,.18),
+            transparent 65%
         );
+    top:-200px;
+    z-index:-1;
+}
 
-    border:
-        1px solid var(--card-border);
 
-    box-shadow:
-        var(--card-shadow),
-        var(--card-inset);
+
+.landing-eyebrow {
+
+
+letter-spacing:.2em;
+
+font-size:.75rem;
+
+font-weight:600;
+
+
+color:var(--text-muted);
+
+
+margin-bottom:25px;
+
 
 }
 
 
 
-.landing-kicker {
+.landing-hero h1 {
 
-    font-size: .75rem;
 
-    letter-spacing: .18em;
+font-size:72px;
 
-    color: var(--text-muted);
+line-height:1.05;
 
-    margin-bottom: 14px;
+
+font-weight:700;
+
+
+color:var(--text-main);
+
+
+margin-bottom:30px;
+
 
 }
 
 
 
-.landing-title {
-
-    font-size: 64px;
-
-    font-weight: 700;
-
-    color: var(--text-main);
-
-}
+.landing-hero p {
 
 
+max-width:650px;
 
-.landing-subtitle {
 
-    max-width: 620px;
+font-size:21px;
 
-    margin:
-        0 auto 32px;
 
-    font-size: 20px;
+line-height:1.6;
 
-    line-height: 1.6;
 
-    color: var(--text-muted);
+color:var(--text-muted);
+
+
+margin-bottom:40px;
+
 
 }
 
@@ -81,124 +102,104 @@
 
 .landing-actions {
 
-    display:flex;
 
-    justify-content:center;
+display:flex;
 
-    gap:16px;
+justify-content:center;
 
-    flex-wrap:wrap;
+gap:16px;
 
-}
-
-
-
-.landing-note {
-
-    margin-top:24px;
-
-    color:var(--text-muted);
-
-    font-size:.9rem;
+flex-wrap:wrap;
 
 }
 
 
 
 
-
-/* ROUTE */
-
-
-.landing-route {
-
-    margin-top:40px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    gap:12px;
-
-}
+/* MAP */
 
 
-.landing-route-line {
-
-    width:70px;
-
-    height:2px;
-
-    background:
-        var(--timeline-line);
-
-}
+.landing-map {
 
 
-.landing-node {
+display:flex;
 
-    width:44px;
 
-    height:44px;
+align-items:center;
 
-    border-radius:50%;
 
-    display:flex;
+margin-top:70px;
 
-    align-items:center;
-
-    justify-content:center;
-
-    font-size:.75rem;
-
-    background:var(--editor-card-bg);
-
-    border:1px solid var(--card-border);
 
 }
 
 
 
-.landing-node.active {
+.landing-map-point {
 
-    background:var(--dot-start-bg);
 
-    color:white;
+width:58px;
+
+height:58px;
+
+
+border-radius:50%;
+
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+
+font-size:.8rem;
+
+
+background:var(--editor-card-bg);
+
+
+border:1px solid var(--card-border);
+
 
 }
 
 
 
-.landing-node.finish {
+.landing-map-point.active {
 
-    background:var(--dot-finish-bg);
 
-    color:white;
+background:var(--dot-start-bg);
+
+color:white;
+
 
 }
 
 
 
+.landing-map-point.finish {
 
 
-/* DIVIDER */
+background:var(--dot-finish-bg);
+
+color:white;
 
 
-.landing-divider {
+}
 
-    height:1px;
 
-    margin:45px 0;
 
-    background:
-        linear-gradient(
-        90deg,
-        transparent,
-        var(--border),
-        transparent
-        );
+.landing-map-path {
+
+
+width:110px;
+
+height:2px;
+
+
+background:var(--timeline-line);
+
 
 }
 
@@ -206,51 +207,44 @@
 
 
 
-/* PLAY CREATE */
+/* INTRO */
 
 
-.landing-choice {
+.landing-intro {
 
-    display:grid;
 
-    grid-template-columns:repeat(2,1fr);
+text-align:center;
 
-    gap:24px;
+
+max-width:700px;
+
+
+margin:100px auto;
+
 
 }
 
 
 
-.landing-choice-card {
+.landing-intro h2 {
 
 
-    padding:32px;
+font-size:38px;
 
-    text-align:center;
-
-    background:var(--card-bg);
-
-    border:
-        1px solid var(--card-border);
-
-
-    border-radius:var(--radius-lg);
-
-
-    box-shadow:
-        var(--card-shadow),
-        var(--card-inset);
-
-
-    transition:.2s ease;
 
 }
 
 
 
-.landing-choice-card:hover {
+.landing-intro p {
 
-    transform:translateY(-4px);
+
+font-size:20px;
+
+color:var(--text-muted);
+
+line-height:1.7;
+
 
 }
 
@@ -258,11 +252,112 @@
 
 
 
-.landing-icon {
 
-    font-size:42px;
+/* WORLD */
 
-    margin-bottom:12px;
+
+.landing-world {
+
+
+display:grid;
+
+
+grid-template-columns:repeat(2,1fr);
+
+
+gap:40px;
+
+
+margin-bottom:100px;
+
+
+}
+
+
+
+.landing-world-item {
+
+
+padding:45px;
+
+
+border-radius:20px;
+
+
+background:var(--card-bg);
+
+
+border:1px solid var(--card-border);
+
+
+box-shadow:
+var(--card-shadow),
+var(--card-inset);
+
+
+transition:.25s;
+
+
+}
+
+
+
+.landing-world-item:hover {
+
+
+transform:translateY(-8px);
+
+
+}
+
+
+
+.landing-world-icon {
+
+
+font-size:48px;
+
+
+margin-bottom:20px;
+
+
+}
+
+
+
+.landing-world-item h3 {
+
+
+font-size:28px;
+
+
+}
+
+
+
+.landing-world-item p {
+
+
+color:var(--text-muted);
+
+
+font-size:17px;
+
+
+line-height:1.6;
+
+
+}
+
+
+
+.landing-world-item a {
+
+
+font-weight:600;
+
+text-decoration:none;
+
 
 }
 
@@ -270,92 +365,27 @@
 
 
 
-/* ABOUT */
+/* FEATURED */
 
 
-.landing-about {
+.landing-featured {
 
-    text-align:center;
+
+margin-bottom:100px;
+
 
 }
 
 
 
-.landing-section-title {
+.landing-featured h2 {
 
-    font-size:32px;
 
-    font-weight:700;
+font-size:38px;
 
-    color:var(--text-main);
-
-    margin-bottom:16px;
 
 }
 
-
-
-.landing-feature-grid {
-
-    display:grid;
-
-    grid-template-columns:repeat(3,1fr);
-
-    gap:18px;
-
-    margin-top:30px;
-
-}
-
-
-
-.landing-feature-grid div {
-
-
-    padding:20px;
-
-
-    border:
-        1px solid var(--card-border);
-
-
-    border-radius:var(--radius-md);
-
-    background:var(--editor-card-bg);
-
-}
-
-
-.landing-feature-grid span {
-
-    display:block;
-
-    margin-top:6px;
-
-    color:var(--text-muted);
-
-}
-
-
-
-
-
-/* JOURNEY */
-
-
-.landing-journey {
-
-    text-align:center;
-
-}
-
-
-
-.landing-journey p {
-
-    color:var(--text-muted);
-
-}
 
 
 
@@ -365,48 +395,206 @@
 
 .landing-final {
 
-    text-align:center;
 
-    padding:50px 0;
+text-align:center;
+
+
+padding:80px 0;
+
 
 }
 
 
 
+.landing-final h2 {
 
 
-/* MOBILE */
+font-size:42px;
+
+
+}
+
+
+
+.landing-final p {
+
+
+color:var(--text-muted);
+
+font-size:20px;
+
+
+}
+
+
+
 
 
 @media(max-width:768px){
 
 
-.landing-title {
+.landing-hero h1 {
 
-    font-size:42px;
-
-}
-
-
-.landing-choice {
-
-    grid-template-columns:1fr;
+font-size:42px;
 
 }
 
 
-.landing-feature-grid {
+.landing-world {
 
-    grid-template-columns:1fr;
+grid-template-columns:1fr;
+
+}
+
+
+.landing-map-path {
+
+width:40px;
 
 }
 
 
-.landing-hero {
+}
 
-    padding:40px 20px;
+
+/* =========================
+   QUEST COLLECTION
+========================= */
+.landing-featured {
+    margin-bottom:100px;
+}
+
+.landing-featured-header {
+    display:flex;
+    justify-content:space-between;
+    align-items:end;
+    margin-bottom:35px;
+}
+
+.landing-featured-header h2 {
+    font-size:38px;
+    margin:0;
+}
+
+.landing-featured-header p {
+    color:var(--text-muted);
+    margin:0;
+}
+
+.landing-featured-header a {
+    text-decoration:none;
+    font-weight:600;
+}
+
+.landing-quest-grid {
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:28px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+
+.landing-quest-card {
+    overflow:hidden;
+    border-radius:18px;
+    background:var(--card-bg);
+    border:1px solid var(--card-border);
+    box-shadow:
+    var(--card-shadow),
+    var(--card-inset);
+    transition:.25s;
+}
+
+.landing-quest-card:hover {
+    transform:translateY(-8px);
+}
+
+.landing-quest-image-wrap {
+    height:220px;
+    overflow:hidden;
+}
+
+.landing-quest-image {
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.35s ease;
+}
+
+.landing-quest-card:hover 
+.landing-quest-image {
+    transform:scale(1.05);
+}
+
+.landing-quest-body {
+    padding:25px;
+}
+
+.landing-quest-type {
+    font-size:.7rem;
+    letter-spacing:.18em;
+    font-weight:700;
+    color:var(--text-muted);
+    margin-bottom:10px;
+}
+
+.landing-quest-body h3 {
+    font-size:24px;
+    margin-bottom:12px;
+}
+
+.landing-quest-body p {
+    color:var(--text-muted);
+    line-height:1.6;
+    min-height:50px;
+}
+
+.landing-quest-body a {
+    text-decoration:none;
+    font-weight:600;
+}
+
+
+
+
+
+@media(max-width:900px){
+
+
+.landing-quest-grid {
+
+grid-template-columns:1fr;
 
 }
 
+
+.landing-featured-header {
+
+display:block;
+
+}
+
+
+}
+
+.landing-world-item form {
+    margin:0;
+}
+
+
+.landing-world-link {
+
+    background:none;
+
+    border:none;
+
+    padding:0;
+
+    color:var(--primary);
+
+    font-weight:600;
+
+    cursor:pointer;
 
 }
