@@ -1,23 +1,38 @@
-
 {% extends "core/base.html" %}
+
 {% block content %}
-<h2>Quests</h2>
-<div class="container">
-    <div class="row">
 
-        {% for quest in items %}
-        <div class="col-12 col-sm-6 col-md-4 mb-4">
-            {% include "quests/_card.html" %}
-        </div>
-        {% endfor %}
-        <div class="col-12 col-sm-6 col-md-4 mb-4">
-            <div class="card">
-                <div class="card-body text-center">
-                    {% include "quests/_create.html" %}
-                </div>                
-            </div>
-        </div>
+<div class="quest-select-page">
 
+  <!-- HEADER -->
+  <div class="qs-header text-center mb-5">
+
+    <h1 class="qs-title">
+      Choose your mission
+    </h1>
+
+    <p class="text-muted">
+      Select a quest and continue your journey
+    </p>
+
+  </div>
+
+  <!-- GRID (MISSION BOARD) -->
+  <div class="qs-grid">
+
+    {% for quest in items %}
+      <div class="qs-tile">
+        {% include "quests/_card.html" %}
+      </div>
+    {% endfor %}
+
+    <!-- CREATE SLOT -->
+    <div class="qs-tile qs-create">
+      {% include "quests/_create.html" %}
     </div>
+
+  </div>
+
 </div>
+
 {% endblock %}

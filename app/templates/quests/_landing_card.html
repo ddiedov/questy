@@ -1,27 +1,29 @@
 {% set quest_image = quest.image_url or '/static/images/placeholder.svg' %}
-<div class="landing-quest-card">
-    <div class="landing-quest-image-wrap">
-        <img
-            src="{{ quest_image }}"
-            class="landing-quest-image"
-            alt="{{ quest.title }}"
-        >
-    </div>
-    <div class="landing-quest-body">
-        <div class="landing-quest-type">
-            ADVENTURE
+
+<a href="/quests/{{ quest.id }}" class="landing-tile">
+
+    <div class="landing-tile-image">
+
+        <img src="{{ quest_image }}" alt="{{ quest.title }}">
+
+        <div class="landing-tile-overlay"></div>
+
+        <div class="landing-tile-badge">
+            Adventure
         </div>
-        <h3>
-            {{ quest.title }}
-        </h3>
-        <p>
-            {{ quest.description }}
-        </p>
-        <a href="/quests/{{ quest.id }}"
-           class="landing-quest-link">
 
-            Start journey →
-
-        </a>
     </div>
-</div>
+
+    <div class="landing-tile-body">
+
+        <h3>{{ quest.title }}</h3>
+
+        <p>{{ quest.description }}</p>
+
+        <div class="landing-tile-cta">
+            Begin →
+        </div>
+
+    </div>
+
+</a>

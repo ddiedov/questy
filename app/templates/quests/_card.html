@@ -1,20 +1,28 @@
-<div class="card">
-    {% set quest_image = quest.image_url or '/static/images/placeholder.svg' %}
-    <div class="img-responsive img-responsive-21x9 card-img-top"
-        style="background-image: url('{{ quest_image }}')">
+<div class="qs-card">
+    <div class="qs-image">
+        <img src="{{ quest.image_url or '/static/images/placeholder.svg' }}">
+        <div class="qs-overlay"></div>
     </div>
-    <div class="card-body text-center">
-        <h3>{{ quest.title }}</h3>
-        <p class="text-muted">
+    <div class="qs-body">
+        <div class="qs-meta">
+            QUEST
+        </div>
+
+        <h3 class="qs-title">
+            {{ quest.title }}
+        </h3>
+
+        <p class="qs-desc">
             {{ quest.description }}
         </p>
         
-        
-        {% include "quests/_quest_actions_list.html" %}
+        <div class="qs-cta">
+            {% include "quests/_quest_actions_list.html" %}
 
-        <a href="/quests/{{ quest.id }}" class="btn btn-primary">
-            View
-        </a>
+            <a href="/quests/{{ quest.id }}" class="btn btn-primary">
+                View
+            </a>
+        </div>
         
         
     </div>
