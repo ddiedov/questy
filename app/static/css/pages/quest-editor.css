@@ -3,7 +3,7 @@
   display: flex;
   gap: 24px;
   padding: 24px;
-  background: var(--card-bg);
+  background: var(--gradient-card);
   border: 1px solid var(--card-border);
   border-radius: var(--radius-md);
   box-shadow:
@@ -95,7 +95,7 @@
 
 /* ===== SCENARIO ===== */
 .qe-scenario {
-  background: var(--card-bg);
+  background: var(--gradient-card);
   border: 1px solid var(--card-border);
   border-radius: var(--radius-md);
   padding: 20px;
@@ -175,8 +175,8 @@
 .qe-card {
   display: flex;
   gap: 14px;
-  background: var(--editor-card-bg);
-  border: 1px solid var(--editor-card-border);
+  background: var(--gradient-card);
+  border: 1px solid var(--card-border);
   border-radius: var(--radius-md);
   padding: 14px;
   width: 100%;
@@ -236,7 +236,7 @@
     padding: 14px 16px;
     border: 1px solid var(--card-border);
     border-radius: var(--radius-md);
-    background: var(--card-bg);
+    background: var(--gradient-card);
 }
 
 .qe-option-title {
@@ -296,7 +296,7 @@
 }
 
 .qe-side-card {
-  background: var(--card-bg);
+  background: var(--gradient-card);
   border: 1px solid var(--card-border);
   border-radius: var(--radius-md);
   padding: 18px;

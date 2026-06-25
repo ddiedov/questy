@@ -1,7 +1,7 @@
 {% if quest.is_author %}
 
     <a href="/quests/{{ quest.id }}/edit"
-       class="btn btn-warning">
+       class="btn btn-primary">
         Edit
     </a>
 
@@ -9,7 +9,7 @@
     {% if not request.state.user %}
 
         <a href="/auth/login"
-           class="btn btn-outline-primary">
+           class="btn btn-neutral">
             Login to participate
         </a>
 
@@ -23,14 +23,14 @@
     {% elif quest.state.state == "start" %}
 
         <a href="/quests/{{ quest.id }}"
-           class="btn btn-success">
+           class="btn btn-primary">
             Open
         </a>
 
     {% elif quest.state.state == "start_again" %}
 
         <a href="/quests/{{ quest.id }}"
-           class="btn btn-warning">
+           class="btn btn-top">
             Start Again
         </a>
 
@@ -45,7 +45,7 @@
             <input type="hidden" name="participant_type" value="individual">
             <input type="hidden" name="next" value="/quests/{{ quest.id }}">
 
-            <button type="submit" class="btn btn-success">
+            <button type="submit" class="btn btn-primary">
                 Apply
             </button>
 
@@ -68,7 +68,7 @@
             <input type="hidden" name="participant_type" value="individual">
             <input type="hidden" name="next" value="/quests/{{ quest.id }}">
 
-            <button type="submit" class="btn btn-success">
+            <button type="submit" class="btn btn-top">
                 Apply Again
             </button>
 

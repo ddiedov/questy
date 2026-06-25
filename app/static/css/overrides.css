@@ -3,21 +3,16 @@
 ======================================== */
 
 .btn {
-
-  border-radius: 12px;
-
+  border-radius: var(--radius-sm);
   padding: 8px 16px;
-
   font-weight: 600;
-
   transition:
     transform .12s ease,
     box-shadow .12s ease,
     background .12s ease,
     border-color .12s ease;
 
-  box-shadow:
-    0 2px 6px rgba(0,0,0,.08);
+  box-shadow: var(--shadow-sm);    
 }
 
 
@@ -27,97 +22,68 @@
 
 .btn-primary,
 .btn-success {
-
-  background:
-    linear-gradient(
-      180deg,
-      #5f8a71,
-      #3f5f4c
-    );
-
-  border:
-    1px solid rgba(255,255,255,.08);
-
-  color: #fff;
+  background: var(--primary-bright-gradient);
+  border: 1px solid var(--primary-bright-border);
+  color: var(--primary-bright-text);
 }
 
 .btn-primary:hover,
 .btn-success:hover {
-
-  background:
-    linear-gradient(
-      180deg,
-      #709a81,
-      #486c57
-    );
-
+  background: var(--primary-bright-hover);
   transform: translateY(-1px);
-
-  box-shadow:
-    0 6px 16px rgba(0,0,0,.18);
+  box-shadow: var(--shadow-sm);
 }
 
 
 /* ========================================
-   OUTLINE
+   SECONDARY (NEUTRAL)
 ======================================== */
 
-.btn-outline-secondary,
-.btn-outline-primary {
-
-  background:
-    rgba(255,255,255,.25);
-
-  border:
-    1px solid rgba(90,70,40,.22);
-
-  color:
-    #4a3828;
+.btn-secondary {
+  background: var(--secondary-gold-gradient);
+  border: 1px solid var(--secondary-gold-border);
+  color: var(--secondary-gold-text);
 }
 
-.btn-outline-secondary:hover,
-.btn-outline-primary:hover {
-
-  background:
-    rgba(255,255,255,.45);
-
-  border-color:
-    rgba(90,70,40,.4);
-
-  color:
-    #2f2117;
-
+.btn-secondary:hover {
+  background: var(--secondary-gold-hover);
   transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
 }
 
 
 /* ========================================
-   DANGER
+   NEUTRAL
+======================================== */
+
+.btn-neutral {
+  background: var(--accent-blue-gradient);
+  border: 1px solid var(--accent-blue-border);
+  color: var(--accent-blue-text);
+}
+
+.btn-neutral:hover {
+  background: var(--accent-blue-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+
+/* ========================================
+   TOP
 ======================================== */
 
 .btn-danger,
-.btn-outline-danger {
-
-  border-radius: 12px;
+.btn-top {
+  background: var(--gold-bright-gradient);
+  border: 1px solid var(--gold-bright-border);
+  color: var(--gold-bright-text);
 }
 
-.btn-outline-danger {
-
-  background:
-    rgba(120,30,30,.04);
-
-  border:
-    1px solid rgba(120,30,30,.18);
-
-  color:
-    #7b2d2d;
-}
-
-.btn-outline-danger:hover {
-
-  background:
-    rgba(120,30,30,.12);
-
-  color:
-    #5f1f1f;
+.btn-danger:hover,
+.btn-top:hover {
+  background: var(--gold-bright-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+  color: var(--gold-bright-text);
 }

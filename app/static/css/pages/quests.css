@@ -43,6 +43,6 @@
 .step-card {
   margin-left: 60px;
   border-radius: var(--radius-md);
-  border: 1px solid var(--editor-card-border);
-  background: var(--editor-card-bg);
+  border: 1px solid var(--card-border);
+  background: var(--gradient-card);
 }

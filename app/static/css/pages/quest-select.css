@@ -28,9 +28,9 @@
 .qs-card {
     display: block;
     text-decoration: none;
-    border-radius: 18px;
+    border-radius: var(--radius-lg);
     overflow: hidden;
-    background: var(--card-bg);
+    background: var(--gradient-card);
     border: 1px solid var(--card-border);
     box-shadow: var(--card-shadow);
     transition: .25s ease;

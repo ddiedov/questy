@@ -1,184 +1,242 @@
-/* =========================
-   LIGHT THEME (default)
-========================= */
+/* variables.css */
 
 :root {
-  /* Colors */
-  --primary: #4f7c65;
-  --primary-hover: #345443;
+  /* ==========================================================================
+     1. PRIMITIVE TOKENS (Базова палітра фарб, градієнтів та рамок)
+     ========================================================================= */
+  
+  /* --- Нейтральні паперові тони (Пастельний пергамент) --- */
+  --clr-parchment-light:         #FAF8F2;
+  --clr-parchment-light-txt:     #52473E;
+  --clr-parchment-light-brd:     #D1C4A5;
+  --clr-parchment-light-grad:    linear-gradient(180deg, #FFFFFF 0%, #F2EAD6 100%);
 
-  --background: #dfe3e8;
-  --surface: #f3e7cc;
+  --clr-parchment-mid:           #F5EAD4;
+  --clr-parchment-mid-txt:       #52473E;
+  --clr-parchment-mid-brd:       #785A2840;
+  --clr-parchment-mid-grad:      linear-gradient(180deg, #F3E7CCE0, #EADBBD9E);
 
-  --text-main: #3d2b1f;
-  --text-muted: #5e4b3b;
+  --clr-parchment-dark:          #EADCBF;
+  --clr-parchment-dark-txt:      #52473E;
+  --clr-parchment-dark-brd:      #A8946E;
+  --clr-parchment-dark-grad:      linear-gradient(180deg, #FDF6E2 0%, #EAD2A3 100%);
 
-  --paper-text: #3d2b1f;
+  /* --- Зелені тони (Primary / Головна дія) --- */
+  --clr-sage:                    #728F70;
+  --clr-sage-txt:                #FAF8F2;
+  --clr-sage-brd:                #4B624A;
+  --clr-sage-grad:               linear-gradient(180deg, #93B290 0%, #5F7B5E 100%);
 
-  --border: rgba(93, 67, 31, 0.28);
-  --border-soft: rgba(90, 70, 40, 0.14);
+  --clr-forest:                  #4D8049;
+  --clr-forest-txt:              #FAF8F2;
+  --clr-forest-brd:              #2C4F2A;
+  --clr-forest-grad:             linear-gradient(180deg, #6EAA69 0%, #3D6B3A 100%);
 
-  --navbar-bg: linear-gradient(
-      180deg,
-      rgba(40,30,20,.96),
-      rgba(180, 149, 119, 0.96)
-    );
-  --navbar-border: rgba(173,132,74,.35);
+  /* --- Золоті тони (Gold / Досягнення та нагороди) --- */
+  --clr-amber:                   #D9B382;
+  --clr-amber-txt:               #52473E;
+  --clr-amber-brd:               #A8804D;
+  --clr-amber-grad:              linear-gradient(180deg, #F2DAB7 0%, #C69E69 100%);
 
-  --navbar-shadow:
-    0 10px 30px rgba(0,0,0,.18);
-  --navbar-inset:
-    inset 0 1px 0 rgba(255,255,255,.05);
+  --clr-gold:                    #E59F3C;
+  --clr-gold-txt:                #FFFDF9;
+  --clr-gold-brd:                #A3650B;
+  --clr-gold-grad:               linear-gradient(180deg, #F7C881 0%, #CE851A 100%);
 
-  --card-bg: linear-gradient(
-      180deg,
-      #f3e7cc 0%,
-      #eadbbd 100%
-    );
-  --card-border: rgba(93, 67, 31, 0.35);
+  /* --- Сині тони (Blue Accent / Магія, мана або лор) --- */
+  --clr-slate-blue:              #6E8CA0;
+  --clr-slate-blue-txt:          #FAF8F2;
+  --clr-slate-blue-brd:          #3D5463;
+  --clr-slate-blue-grad:         linear-gradient(180deg, #91AFC4 0%, #557285 100%);
 
-  --card-shadow:
-    0 6px 18px rgba(30, 20, 10, 0.12);
-  --card-inset:
-    inset 0 1px 0 rgba(255,255,255,.35);
+  --clr-ocean:                   #34658A;
+  --clr-ocean-txt:               #FFFDF9;
+  --clr-ocean-brd:               #16364F;
+  --clr-ocean-grad:              linear-gradient(180deg, #4F89B5 0%, #245275 100%);
 
-  --editor-card-bg: linear-gradient(
-      180deg,
-      rgba(255,255,255,.55),
-      rgba(255,255,255,.35)
-    );
-  --editor-card-border: rgba(90,70,40,.18);
+  /* Деревні відтінки */
+  --clr-wood-dark:               #6A5B50;
+  --clr-wood-light:              #998372;
 
-  --status-draft-bg: linear-gradient(
-      180deg,
-      #f3d68b,
-      #d4a94c
-    );
+  /* --- Системні кольори сповіщень (Посилений контраст) --- */
+  --clr-sys-success-bg:          #E1EAE0;
+  --clr-sys-success-txt:         #2D4C2B;
+  --clr-sys-success-brd:         #91B58F;
+  --clr-sys-success-grad:        linear-gradient(180deg, #EFF7EE 0%, #CBDBC9 100%);
 
-  --timeline-line: linear-gradient(
-      180deg,
-      #8b7355,
-      #c9b08a,
-      #8b7355
-    );
-  --timeline-discover-bg: #28c76f;
-  --timeline-finish-bg: #444444;
+  --clr-sys-warning-bg:          #FCEFD9;
+  --clr-sys-warning-txt:         #704B19;
+  --clr-sys-warning-brd:         #E2B273;
+  --clr-sys-warning-grad:        linear-gradient(180deg, #FFF4E0 0%, #F6DCB1 100%);
 
-  --dot-start-bg: linear-gradient(
-      180deg,
-      #4f7c65,
-      #345443
-    );
-  --dot-start-border: #e2d8c8;
+  --clr-sys-error-bg:            #F7E2E0;
+  --clr-sys-error-txt:           #822F25;
+  --clr-sys-error-brd:           #D8958D;
+  --clr-sys-error-grad:          linear-gradient(180deg, #FDF0EE 0%, #E9C4C0 100%);
 
-  --dot-discover-bg: linear-gradient(
-      180deg,
-      #4d6c91,
-      #334a64
-    );
-  --dot-finish-bg: linear-gradient(
-      180deg,
-      #b78b3d,
-      #8c6525
-    );
+  --clr-sys-info-bg:             #E1EAF0;
+  --clr-sys-info-txt:            #324B59;
+  --clr-sys-info-brd:            #9FB6C4;
+  --clr-sys-info-grad:           linear-gradient(180deg, #EFF6FA 0%, #C4D7E3 100%);
 
-  /* Shadows */
-  --shadow-sm: 0 8px 24px rgba(0,0,0,0.06);
-  --shadow-md: 0 8px 24px rgba(0,0,0,0.08);
+  /* Базові ховери для інтерактивності */
+  --clr-sage-hover:              #5D785B;
+  --clr-sage-hover-grad:         linear-gradient(180deg, #789975 0%, #4D634B 100%);
+  --clr-forest-hover:            #3B6338;
+  --clr-forest-hover-grad:       linear-gradient(180deg, #50854C 0%, #2D4C2B 100%);
+  --clr-amber-hover:             #C5A070;
+  --clr-amber-hover-grad:        linear-gradient(180deg, #DEC299 0%, #AB8554 100%);
+  --clr-gold-hover:              #C98628;
+  --clr-gold-hover-grad:         linear-gradient(180deg, #EFA843 0%, #A3691A 100%);
+  --clr-slate-blue-hover:        #567184;
+  --clr-slate-blue-hover-grad:   linear-gradient(180deg, #6F8EAC 0%, #445969 100%);
+  --clr-ocean-hover:             #264D6B;    
+  --clr-ocean-hover-grad:        linear-gradient(180deg, #376C94 0%, #1A374F 100%);
 
-  /* Radius */
+
+  /* Текстові чорнила */
+  --clr-ink-dark:        #52473E;
+  --clr-ink-muted:       #82756A;
+
+
+
+  /* ==========================================================================
+     2. SEMANTIC TOKENS (Зв'язування елементів із розширеною палітрою)
+     ========================================================================= */
+  
+  /* Мапування фонів інтерфейсу */
+  --bg-main:                     var(--clr-parchment-light);
+  --bg-surface:                  var(--clr-parchment-dark);
+    
+  /* Текст за замовчуванням (М'яке чорнило) */
+  --text-main:                   var(--clr-ink-dark);
+  --text-muted:                  var(--clr-ink-muted);
+
+  /* Головний зелений акцент (Primary) */
+  --primary:                     var(--clr-sage);
+  --primary-text:                var(--clr-sage-txt);
+  --primary-border:              var(--clr-sage-brd);
+  --primary-gradient:            var(--clr-sage-grad);
+  --primary-hover:               var(--clr-sage-hover-grad);
+
+  /* Яскравий зелений (Forest / Епічна дія) */
+  --primary-bright:              var(--clr-forest);
+  --primary-bright-text:         var(--clr-forest-txt);
+  --primary-bright-border:       var(--clr-forest-brd);
+  --primary-bright-gradient:     var(--clr-forest-grad);
+  --primary-bright-hover:        var(--clr-forest-hover-grad);
+
+  /* М'яке золото (Amber / Досягнення) */
+  --secondary-gold:              var(--clr-amber);
+  --secondary-gold-text:         var(--clr-amber-txt);
+  --secondary-gold-border:       var(--clr-amber-brd);
+  --secondary-gold-gradient:     var(--clr-amber-grad);
+  --secondary-gold-hover:        var(--clr-amber-hover-grad);
+
+  /* Яскраве золото (Gold / Легендарна нагорода) */
+  --gold-bright:                 var(--clr-gold);
+  --gold-bright-text:            var(--clr-gold-txt);
+  --gold-bright-border:          var(--clr-gold-brd);
+  --gold-bright-gradient:        var(--clr-gold-grad);
+  --gold-bright-hover:           var(--clr-gold-hover-grad);
+
+  /* Спокійний синій (Slate / Магічні елементи) */
+  --accent-blue:                 var(--clr-slate-blue);
+  --accent-blue-text:            var(--clr-slate-blue-txt);
+  --accent-blue-border:          var(--clr-slate-blue-brd);
+  --accent-blue-gradient:        var(--clr-slate-blue-grad);
+  --accent-blue-hover:           var(--clr-slate-blue-hover-grad);
+
+  /* Яскравий синій (Ocean / Кристали, мана) */
+  --accent-blue-bright:          var(--clr-ocean);
+  --accent-blue-bright-text:     var(--clr-ocean-txt);
+  --accent-blue-bright-border:   var(--clr-ocean-brd);
+  --accent-blue-bright-gradient: var(--clr-ocean-grad);
+  --accent-blue-bright-hover:    var(--clr-ocean-hover-grad);
+
+  /* Мапування системних сповіщень */
+  --status-success-bg:           var(--clr-sys-success-bg);
+  --status-success-border:       var(--clr-sys-success-brd);
+  --status-success-text:         var(--clr-sys-success-txt);
+  --status-success-gradient:     var(--clr-sys-success-grad);
+
+  --status-warning-bg:           var(--clr-sys-warning-bg);
+  --status-warning-border:       var(--clr-sys-warning-brd);
+  --status-warning-text:         var(--clr-sys-warning-txt);
+  --status-warning-gradient:     var(--clr-sys-warning-grad);
+
+  --status-error-bg:             var(--clr-sys-error-bg);
+  --status-error-border:         var(--clr-sys-error-brd);
+  --status-error-text:           var(--clr-sys-error-txt);
+  --status-error-gradient:       var(--clr-sys-error-grad);
+
+  --status-info-bg:              var(--clr-sys-info-bg);
+  --status-info-border:          var(--clr-sys-info-brd);
+  --status-info-text:            var(--clr-sys-info-txt);
+  --status-info-gradient:        var(--clr-sys-info-grad);
+
+  /* М'які паперові тіні (Замість грубих чорних) */
+  --shadow-sm:                   0 4px 12px rgba(82, 71, 62, 0.04);
+  --shadow-md:                   0 10px 30px rgba(30, 20, 10, 0.12);
+  --shadow-lg:                   0 18px 40px rgba(0, 0, 0, 0.18);
+
+  --inset-light-sm:      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  --inset-light-md:      inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  --inset-light-lg:      inset 0 1px 0 rgba(255, 255, 255, 0.5);
+
+
+   /* Radius */
   --radius-sm: 6px;
   --radius-md: 8px;
   --radius-lg: 10px;
   --status-radius: 999px;
 
-  /* Task */
-  --task-bg: transparent;
-  --task-card: var(--card-bg);
-  --task-border: var(--card-border);
 
+  /* ==========================================================================
+     3. COMPONENTS
+     ========================================================================= */
+
+  /* Navbar */
+  --gradient-navbar:     var(--clr-amber-grad);
+  --navbar-border:       var(--clr-amber-brd);
+
+  /* Card */
+  --bg-card:             var(--clr-parchment-mid);
+  --gradient-card:       var(--clr-parchment-mid-grad);
+  --card-border:         var(--clr-parchment-mid-brd);
+  --card-shadow:         var(--shadow-md);
+  --card-inset:          var(--inset-light-md);
+
+  /* Timeline */
+  --gradient-timeline:  linear-gradient(180deg, var(--clr-wood-light), var(--clr-amber), var(--clr-wood-light));
+  --timeline-line:      linear-gradient(180deg, var(--clr-wood-light), var(--clr-amber), var(--clr-wood-light));
+  
+  --dot-start-bg:       var(--clr-sage-grad);
+  --dot-start-border:   var(--clr-gold-brd);
+
+  --dot-more-bg:        linear-gradient(180deg, var(--clr-slate-blue), var(--clr-ocean));
+  --dot-more-border:    var(--clr-gold-brd);
+
+  --dot-discover-bg:    var(--clr-slate-blue-grad);
+  --dot-discover-border:var(--clr-gold-brd);
+
+  --dot-finish-bg:      var(--clr-gold-grad);
+  --dot-finish-border:  var(--clr-gold-brd);
+  
+
+  /* Status */
+  --status-published-bg: var(--clr-sage-grad);
+  --status-draft-bg:     var(--clr-amber-grad);
+
+  /* Task */
+  --bg-task: transparent;
+  --task-card: var(--bg-card);
+  --task-border: var(--card-border);
   --task-text: var(--text-main);
   --task-muted: var(--text-muted);
-
   --task-primary: var(--primary);
   --task-primary-hover: var(--primary-hover);
-
   --task-radius: var(--radius-md);
-}
 
-/* =========================
-   DARK THEME
-========================= */
 
-[data-theme="dark"] {
-  /* Colors */
-  --primary: #6ea8fe;
-  --primary-hover: #4f7cff;
-
-  --background: #0f172a;
-  --surface: #111827;
-
-  --text-main: #e5e7eb;
-  --text-muted: #9ca3af;
-
-  --paper-text: #3d2b1f;
-
-  --border: #1f2937;
-  --border-soft: #111827;
-
-  --navbar-bg: #111827;
-  --navbar-border: #1f2937;
-
-  --card-bg: #111827;
-  --card-border: #1f2937;
-
-  --card-shadow:
-    0 6px 18px rgba(30, 20, 10, 0.12);
-  --card-inset:
-    inset 0 1px 0 rgba(255,255,255,.35);
-
-  --editor-card-bg: #111827;
-  --editor-card-border: #1f2937;
-
-  --status-draft-bg: #854d0e;
-
-  --timeline-line: #374151;
-  --timeline-discover-bg: #22c55e;
-  --timeline-finish-bg: #6b7280;
-
-  --dot-start-bg: #111827;
-  --dot-start-border: #1f2937;
-
-  --dot-discover-bg: linear-gradient(
-      180deg,
-      #4d6c91,
-      #334a64
-    );
-  --dot-finish-bg: linear-gradient(
-      180deg,
-      #b78b3d,
-      #8c6525
-    );
-
-  /* Shadows */
-  --shadow-sm: 0 8px 24px rgba(0,0,0,0.4);
-  --shadow-md: 0 8px 24px rgba(0,0,0,0.5);
-
-  /* Radius */
-  --radius-sm: 6px;
-  --radius-md: 8px;
-  --radius-lg: 10px;
-
-  /* Task */
-  --task-bg: #f4f6fb;
-  --task-card: #ffffff;
-  --task-border: #e6e8ef;
-
-  --task-text: #1f2a37;
-  --task-muted: #6b7280;
-
-  --task-primary: #4f7cff;
-  --task-primary-hover: #3b63d6;
-
-  --task-radius: 14px;
 }

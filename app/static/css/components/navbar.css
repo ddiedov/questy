@@ -5,7 +5,7 @@
   z-index: 1000;
   margin-bottom: 20px;
 
-  background: var(--navbar-bg);
+  background: var(--gradient-navbar);
   border: 1px solid var(--navbar-border);
   border-radius: var(--radius-md);
   padding: 12px 18px;

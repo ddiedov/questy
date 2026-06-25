@@ -14,7 +14,7 @@
     display: flex;
     gap: 24px;
     padding: 24px;
-    background: var(--card-bg);
+    background: var(--gradient-card);
     border: 1px solid var(--card-border);
     border-radius: var(--radius-md);
     box-shadow:
@@ -61,8 +61,7 @@
 
 .qr-progress-placeholder {
     padding: 12px 16px;
-
-    background: var(--editor-card-bg);
+    background: var(--gradient-card);
 
     border: 1px dashed var(--card-border);
     border-radius: var(--radius-md);
@@ -79,7 +78,7 @@
 .qr-question-card,
 .qr-history,
 .qr-completed {
-    background: var(--card-bg);
+    background: var(--gradient-card);
 
     border: 1px solid var(--card-border);
 
@@ -109,7 +108,7 @@
 
     object-fit: cover;
 
-    background: var(--editor-card-bg);
+    background: var(--gradient-card);
 }
 
 /* =========================
@@ -169,7 +168,7 @@
 
     border-radius: var(--radius-md);
 
-    background: var(--editor-card-bg);
+    background: var(--gradient-card);
 
     border: 1px solid var(--card-border);
 
@@ -292,24 +291,7 @@
 }
 
 .qr-history-item:hover {
-    background: var(--editor-card-bg);
-}
-
-.qr-history-icon {
-    width: 36px;
-    height: 36px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 50%;
-
-    background: rgba(40,199,111,.15);
-
-    color: var(--timeline-discover-bg);
-
-    flex-shrink: 0;
+    background: var(--gradient-card);
 }
 
 .qr-history-item-title {
@@ -396,15 +378,11 @@
     justify-content: center;
 
     font-weight: 600;
-
-    border: 2px solid var(--card-border);
-    background: var(--editor-card-bg);
-    color: var(--text-muted);
 }
 
 .qr-timeline-dot.completed {
     background: var(--dot-discover-bg);
-    border-color: var(--card-border);
+    border-color: var(--dot-discover-border);
     color: #fff;
 }
 
@@ -414,15 +392,15 @@
     color: #fff;
 }
 
-.qr-timeline-dot.future {
-    background: var(--editor-card-bg);
-    border-color: var(--card-border);
+.qr-timeline-dot.more {
+    background: var(--dot-more-bg);
+    border-color: var(--dot-more-border);
     color: var(--text-muted);
 }
 
 .qr-timeline-dot.finish {
     background: var(--dot-finish-bg);
-    border-color: var(--card-border);
+    border-color: var(--dot-finish-border);
     color: #fff;
 }
 
@@ -446,7 +424,7 @@
 .qr-step-preview {
     margin-top: 16px;
 
-    background: var(--card-bg);
+    background: var(--gradient-card);
 
     border: 1px solid var(--card-border);
 

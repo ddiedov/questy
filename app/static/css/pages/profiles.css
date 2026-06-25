@@ -3,7 +3,7 @@
 }
 
 .profile-page .card {
-  background: var(--card-bg);
+  background: var(--gradient-card);
   border: 1px solid var(--card-border);
   box-shadow:
     var(--card-shadow),

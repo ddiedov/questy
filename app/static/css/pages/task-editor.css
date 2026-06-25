@@ -4,7 +4,7 @@
     max-width: 900px;
     margin: 0 auto;
     padding: 20px;
-    background: var(--task-bg);
+    background: var(--bg-task);
 }
 
 .task-editor__header {
@@ -60,7 +60,7 @@
 }
 
 .task-editor .form-control {
-    background: var(--editor-card-bg);
+    background: var(--gradient-card);
     border-radius: var(--radius-md);
     border: 1px solid var(--task-border);
     color: var(--task-text);
