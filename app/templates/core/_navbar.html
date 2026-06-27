@@ -6,25 +6,16 @@
 
       <!-- BRAND -->
       <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="/">
-        <img src="/static/images/icon3.png" alt="" class="navbar-brand-mark">
-        Questy
+          <img src="/static/images/icon3.png" 
+              alt="Questy" 
+              class="navbar-brand-mark">
+          <span>Questy</span>
       </a>
-
-      <!-- CURRENT SECTION -->
-      <span class="text-muted d-flex align-items-center gap-1">
-        <i class="bi bi-map"></i>
-        <span class="fw-semibold">{% block title %}QUESTS{% endblock %}</span>
-      </span>
 
     </div>
 
     <!-- RIGHT -->
     <div class="d-flex align-items-center gap-3 ms-auto">
-
-      <!-- Optional action -->
-      <a href="#" class="btn btn-outline-secondary btn-sm">
-        <i class="bi bi-eye"></i> Preview
-      </a>
 
       {% set profile = request.state.profile %}
 
@@ -32,31 +23,35 @@
         <!-- USER -->
         <div class="dropdown">
 
-          <a class="d-flex align-items-center text-decoration-none dropdown-toggle"
+          <a class="d-flex align-items-center text-decoration-none custom-user-toggle"
              href="#"
              data-bs-toggle="dropdown">
 
             <img src="{{ profile.avatar_url or '/static/images/default-avatar.svg' }}"
                 class="avatar">
 
-            <span class="ms-2 small">
+            <span class="ms-2 navbar-user-name">
                 {{ profile.display_name or profile.username or 'User' }}
             </span>
+
+            <i class="bi bi-chevron-down user-chevron ms-1"></i>
           </a>
 
           <ul class="dropdown-menu dropdown-menu-end">
 
             <li>
-              <a class="dropdown-item" href="/profiles/me">
-                <i class="bi bi-person"></i> Profile
+              <a class="dropdown-item d-flex align-items-center gap-2" href="/profiles/me">
+                <i class="bi bi-person"></i>
+                <span>Profile</span>
               </a>
             </li>
 
             <li><hr class="dropdown-divider"></li>
 
             <li>
-              <a class="dropdown-item" href="/auth/logout">
-                <i class="bi bi-box-arrow-right"></i> Logout
+              <a class="dropdown-item d-flex align-items-center gap-2" href="/auth/logout">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Logout</span>
               </a>
             </li>
 

@@ -197,8 +197,10 @@
      ========================================================================= */
 
   /* Navbar */
-  --gradient-navbar:     var(--clr-amber-grad);
-  --navbar-border:       var(--clr-amber-brd);
+  --gradient-navbar:     var(--clr-parchment-light-grad);
+  --navbar-bg:           var(--clr-parchment-light);
+  --navbar-border:       var(--clr-parchment-light-brd);
+  --navbar-text:         var(--clr-parchment-light-txt);
 
   /* Card */
   --bg-card:             var(--clr-parchment-mid);
