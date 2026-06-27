@@ -214,7 +214,7 @@
   --dot-start-bg:       var(--clr-sage-grad);
   --dot-start-border:   var(--clr-gold-brd);
 
-  --dot-more-bg:        linear-gradient(180deg, var(--clr-slate-blue), var(--clr-ocean));
+  --dot-more-bg:        var(--clr-parchment-light-grad);
   --dot-more-border:    var(--clr-gold-brd);
 
   --dot-discover-bg:    var(--clr-slate-blue-grad);

@@ -382,25 +382,25 @@
 
 .qr-timeline-dot.completed {
     background: var(--dot-discover-bg);
-    border-color: var(--dot-discover-border);
+    border: 1px solid var(--dot-discover-border);
     color: #fff;
 }
 
 .qr-timeline-dot.current {
     background: var(--dot-start-bg);
-    border-color: var(--dot-start-border);
+    border: 1px solid var(--dot-start-border);
     color: #fff;
 }
 
 .qr-timeline-dot.more {
     background: var(--dot-more-bg);
-    border-color: var(--dot-more-border);
+    border: 1px solid var(--dot-more-border);
     color: var(--text-muted);
 }
 
 .qr-timeline-dot.finish {
     background: var(--dot-finish-bg);
-    border-color: var(--dot-finish-border);
+    border: 1px solid var(--dot-finish-border);
     color: #fff;
 }
 
