@@ -1,17 +1,21 @@
 {% extends "core/base.html" %}
 {% block content %}
 
+<div class="qe-card">
 <form method="post" action="/quests/{{ item.id }}" id="quest-form">
 
   <!-- HEADER -->
-  <div class="qe-header">
-    <div class="qe-cover-wrap">
-      <img
-        src="{{ item.image_url or '/static/images/placeholder.svg' }}"
-        class="qe-cover"
-        id="preview"
-      >
 
+    <div class="qe-cover-wrap">
+      <div class="qe-image">
+        <img
+          src="{{ item.image_url or '/static/images/placeholder.svg' }}"
+          class="qe-cover"
+          id="preview"
+        >
+        <input type="hidden" name="image_url" id="image-hidden" value="{{ item.image_url }}">
+      </div>
+    
       <label class="btn btn-light btn-sm qe-cover-upload">
         <i class="bi bi-image"></i>
         Change
@@ -25,33 +29,15 @@
           data-hidden-input="#image-hidden"
         >
       </label>
+
+      <div class="qe-status">Draft</div>
     </div>
 
-    <div class="qe-meta">
+    <div class="qe-body">
+
+    <div class="qe-main-info">
       <input name="title" class="qe-title" value="{{ item.title }}">
       <textarea name="description" class="qe-desc">{{ item.description }}</textarea>
-
-      <div class="qe-option">
-          <div class="form-check">
-              <input
-                  class="form-check-input"
-                  type="checkbox"
-                  id="allow_replays"
-                  name="allow_replays"
-                  {% if item.allow_replays %}checked{% endif %}
-              >
-
-              <label class="form-check-label qe-option-title"
-                    for="allow_replays">
-                  Allow repeated playthroughs
-              </label>
-          </div>
-
-          <div class="qe-option-help">
-              Approved players can restart the quest after completion without submitting a new application.
-          </div>
-
-      </div>
 
       <div class="qe-actions">
         <button type="submit"
@@ -71,12 +57,31 @@
       </div>
     </div>
 
-    <div class="qe-status">Draft</div>
-  </div>
+    <div class="qe-content">
+      <aside class="qe-sidebar">
+        <div class="qe-side-card">
+          <h5>Attributes</h5>
+                <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="allow_replays"
+                    name="allow_replays"
+                    {% if item.allow_replays %}checked{% endif %}
+                >
 
-  <input type="hidden" name="image_url" id="image-hidden" value="{{ item.image_url }}">
-
+                <label class="form-check-label qe-option-title"
+                      for="allow_replays">
+                    Allow repeated playthroughs
+                </label>
+        </div>
+      </aside>
+    </div>
+    
+    </div>
 </form>
+
+
+
 
 
 <div class="qe-layout">
@@ -231,7 +236,7 @@
 
         <h5 class="mb-0">Applications</h5>
 
-        <span class="qe-status">
+        <span class="qe-app-count">
           {{ item.new_applications | length }}
         </span>
 
@@ -303,6 +308,8 @@
     </div>
 
   </aside>
+
+</div>
 
 </div>
 

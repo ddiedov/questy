@@ -3,197 +3,112 @@
 
 {% block content %}
 
-<div class="qe-header">
-
+<div class="qe-card">
+    <!-- IMAGE -->
     <div class="qe-cover-wrap">
-        <img
-            src="{{ item.image_url or '/static/images/placeholder.svg' }}"
-            class="qe-cover"
-        >
-    </div>
-
-    <div class="qe-meta">
-
-        <h1 class="qe-title">
-            {{ item.title }}
-        </h1>
-
-        {% if item.description %}
-        <div class="qe-desc">
-            {{ item.description }}
-        </div>
-        {% endif %}
-
-        <div class="qe-actions">
-
-            {% set quest = item %}
-            {% include "quests/_quest_actions_details.html" %}
-
-        </div>
-
-    </div>
-
-    <div class="qe-status">
-        {{ item.status or "Draft" }}
-    </div>
-
-</div>
-
-
-<div class="qe-layout">
-
-    <!-- MAIN -->
-
-    <div class="qe-main">
-
-        <div class="qe-scenario">
-
-            <div class="qe-scenario-head">
-                <h5 class="mb-0">
-                    Quest Flow
-                </h5>
+        <div class="qe-image">
+            <img
+                src="{{ item.image_url or '/static/images/placeholder.svg' }}"
+                class="qe-cover"
+            >
+            <div class="qe-status">
+                {{ item.status or "Draft" }}
             </div>
+        </div>
+    </div>
 
-            <div class="qe-timeline">
+    <!-- BODY -->
+    <div class="qe-body">
+        <div class="qe-main-info">
+            <h1>
+                {{ item.title }}
+            </h1>
+            {% if item.description %}
+            <div>
+                {{ item.description }}
+            </div>
+            {% endif %}
+            <div class="qe-actions">
+                {% set quest = item %}
+                {% include "quests/_quest_actions_details.html" %}
+            </div>
+        </div>
 
-                <!-- START -->
 
-                <div class="qe-row">
+        <!-- CONTENT -->
 
-                    <div class="qe-col">
-                        <div class="qe-dot start">
-                            <i class="bi bi-play-fill"></i>
-                        </div>
-                    </div>
+        <div class="qe-content">            
+            <aside class="qe-sidebar">
 
-                    <div class="qe-card">
-                        <strong>Start</strong>
-                    </div>
+                <div class="qe-side-card">
 
-                </div>
+                    <h5>Quest Info</h5>
 
-                <!-- STEPS -->
+                    <div class="qe-flow">
 
-                {% for step in item.steps %}
-
-                <div class="qe-row">
-
-                    <div class="qe-col">
-                        <div class="qe-dot discover">
-                            <i class="bi bi-search"></i>
-                        </div>
-                    </div>
-
-                    <div class="qe-card">
-
-                        <div class="d-flex align-items-center gap-3">
-
-                            <div>
-
-                                <div class="fw-semibold">
-                                    {{ step.task.title }}
-                                </div>
-
+                        <div class="qe-flow-item">
+                            <div class="qe-flow-dot">
+                                {{ item.steps|length }}
                             </div>
 
+                            <div>
+                                Steps
+                            </div>
+                        </div>
+
+                        <div class="qe-flow-item">
+                            <div class="qe-flow-dot">
+                                <i class="bi bi-flag"></i>
+                            </div>
+
+                            <div>
+                                Status:
+                                {{ item.status or "Draft" }}
+                            </div>
                         </div>
 
                     </div>
 
                 </div>
 
-                {% endfor %}
+                {% if item.can_play %}
 
-                <!-- FINISH -->
+                <div class="qe-side-card">
 
-                <div class="qe-row">
+                    <h5>Your Access</h5>
 
-                    <div class="qe-col">
-                        <div class="qe-dot finish">
-                            <i class="bi bi-flag"></i>
-                        </div>
+                    <div class="text-success mb-3">
+                        You have access to this quest.
                     </div>
 
-                    <div class="qe-card">
-                        <strong>Finish</strong>
+                    <a href="/quests/{{ item.id }}/play"
+                    class="btn btn-success w-100">
+                        Start Playing
+                    </a>
+
+                </div>
+
+                {% elif item.application_pending %}
+
+                <div class="qe-side-card">
+
+                    <h5>Your Application</h5>
+
+                    <div class="text-muted">
+                        Your application is waiting for approval.
                     </div>
 
                 </div>
 
-            </div>
+                {% endif %}
 
+            </aside>
         </div>
 
     </div>
 
-    <!-- SIDEBAR -->
 
-    <aside class="qe-sidebar">
-
-        <div class="qe-side-card">
-
-            <h5>Quest Info</h5>
-
-            <div class="qe-flow">
-
-                <div class="qe-flow-item">
-                    <div class="qe-flow-dot">
-                        {{ item.steps|length }}
-                    </div>
-
-                    <div>
-                        Steps
-                    </div>
-                </div>
-
-                <div class="qe-flow-item">
-                    <div class="qe-flow-dot">
-                        <i class="bi bi-flag"></i>
-                    </div>
-
-                    <div>
-                        Status:
-                        {{ item.status or "Draft" }}
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
-        {% if item.can_play %}
-
-        <div class="qe-side-card">
-
-            <h5>Your Access</h5>
-
-            <div class="text-success mb-3">
-                You have access to this quest.
-            </div>
-
-            <a href="/quests/{{ item.id }}/play"
-               class="btn btn-success w-100">
-                Start Playing
-            </a>
-
-        </div>
-
-        {% elif item.application_pending %}
-
-        <div class="qe-side-card">
-
-            <h5>Your Application</h5>
-
-            <div class="text-muted">
-                Your application is waiting for approval.
-            </div>
-
-        </div>
-
-        {% endif %}
-
-    </aside>
-
+    
 </div>
 
 {% endblock %}

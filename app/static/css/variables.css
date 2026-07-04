@@ -227,8 +227,13 @@
   
 
   /* Status */
-  --status-published-bg: var(--clr-sage-grad);
+  --status-published-bg:     var(--clr-sage-grad);
+  --status-published-border: var(--clr-sage-border);
+  --status-published-text:   var(--clr-sage-text);
+
   --status-draft-bg:     var(--clr-amber-grad);
+  --status-draft-border: var(--clr-amber-border);
+  --status-draft-text:   var(--clr-amber-text);
 
   /* Task */
   --bg-task: transparent;
