@@ -1,3 +1,26 @@
+/* ===== CARD ===== */
+.qe-card {
+  gap: 14px;
+  background: var(--gradient-card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  overflow:hidden;
+  width: 100%;
+  transition:
+    transform .15s ease,
+    box-shadow .15s ease,
+    border-color .15s ease;
+  box-shadow: var(--shadow-md);
+}
+
+.qe-card:hover {
+  transform: translateY(-2px);
+  border-color:
+    rgba(120,90,40,.35);
+  box-shadow:
+    0 8px 24px rgba(0,0,0,.12);
+}
+
 /* ===== HEADER ===== */
 .qe-header {
   display: flex;
@@ -27,23 +50,7 @@
   pointer-events: none;
 }
 
-.qe-body {
-    padding:30px;
-    display:grid;
-    grid-template-columns: 1fr 320px;
-    justify-content:space-between;
-    gap:30px;
-}
-
-.qe-main-info {
-    max-width:700px;
-}
-
-.qe-main-info h1 {
-    font-size:42px;
-}
-
-
+/* ===== COVER ===== */
 .qe-cover-wrap {
   position: relative;
   width: 100%;  
@@ -70,7 +77,33 @@
   box-shadow: var(--shadow-sm);
 }
 
-.qe-meta { flex: 1; }
+.qe-status {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  text-align: center;
+  min-width: 140px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  background: var(--status-draft-bg);
+  padding: 8px 14px;
+  color: var(--status-draft-text);
+  border: 1px solid var(--status-draft-border);
+  border-radius: var(--status-radius);
+  box-shadow: var(--inset-light-md);
+  backdrop-filter: blur(6px);    
+}
+
+/* ===== MAIN INFO ===== */
+.qe-main-info {
+    max-width:700px;
+}
+
+.qe-main-info h1 {
+    font-size:42px;
+}
 
 .qe-title {
   font-size: 38px;
@@ -93,25 +126,29 @@
   resize: none;
 }
 
+/* ===== ACTIONS ===== */
 .qe-actions { margin-top: 10px; }
 
-.qe-status {
-  position: absolute;
-  top: 16px;
-  right: 16px;
 
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  background: var(--status-draft-bg);
-  padding: 8px 14px;
-  color: var(--status-draft-text);
-  border: 1px solid var(--status-draft-border);
-  border-radius: var(--status-radius);
-  box-shadow: var(--inset-light-md);
-  backdrop-filter: blur(6px);    
+/* ===== BODY ===== */
+.qe-body {
+    gap: 24px;
+    padding: 24px;
+    display:flex;
+    justify-content:space-between;
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* ===== SCENARIO ===== */
@@ -192,34 +229,18 @@
 .qe-dot.finish { background: var(--dot-finish-bg); }
 
 
-/* ===== CARD ===== */
-.qe-card {
-  gap: 14px;
-  background: var(--gradient-card);
-  border: 1px solid var(--card-border);
-  border-radius: var(--radius-md);
-  overflow:hidden;
-  width: 100%;
-  transition:
-    transform .15s ease,
-    box-shadow .15s ease,
-    border-color .15s ease;
-  box-shadow: var(--shadow-md);
-}
 
-.qe-card:hover {
-  transform: translateY(-2px);
-  border-color:
-    rgba(120,90,40,.35);
-  box-shadow:
-    0 8px 24px rgba(0,0,0,.12);
-}
 
 .qe-drag {
   cursor: grab;
   color: var(--text-muted);
   display: flex;
   align-items: center;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  height: 100%;
+  box-shadow: var(--shadow-sm);
 }
 
 .qe-drag:active {

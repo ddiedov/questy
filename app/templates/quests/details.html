@@ -6,28 +6,30 @@
 <div class="qe-card">
     <!-- IMAGE -->
     <div class="qe-cover-wrap">
-        <div class="qe-image">
-            <img
-                src="{{ item.image_url or '/static/images/placeholder.svg' }}"
-                class="qe-cover"
-            >
-            <div class="qe-status">
-                {{ item.status or "Draft" }}
+            <div class="qe-image">
+                <img
+                    src="{{ item.image_url or '/static/images/placeholder.svg' }}"
+                    class="qe-cover"
+                >
+                <div class="qe-status">
+                    {{ item.status or "Draft" }}
+                </div>
             </div>
-        </div>
     </div>
-
+    
     <!-- BODY -->
     <div class="qe-body">
-        <div class="qe-main-info">
-            <h1>
-                {{ item.title }}
-            </h1>
-            {% if item.description %}
-            <div>
-                {{ item.description }}
+        <div>
+            <div class="qe-main-info">
+                <h1>
+                    {{ item.title }}
+                </h1>
+                {% if item.description %}
+                <div>
+                    {{ item.description }}
+                </div>
+                {% endif %}                
             </div>
-            {% endif %}
             <div class="qe-actions">
                 {% set quest = item %}
                 {% include "quests/_quest_actions_details.html" %}
@@ -36,7 +38,6 @@
 
 
         <!-- CONTENT -->
-
         <div class="qe-content">            
             <aside class="qe-sidebar">
 

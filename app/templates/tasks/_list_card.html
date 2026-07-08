@@ -1,37 +1,34 @@
-  <div class="card mb-3 add-task-card">
-    <div class="card-body d-flex align-items-center">
+<div class="tc-card">
+    <div class="tc-cover-wrap">
+        <!-- IMAGE -->
+        <img 
+          src="{{ task.image_url or '/static/images/placeholder.svg' }}" 
+          class="tc-cover"
+        >
+    </div>
+    <div class="tc-body">
+        <!-- CONTENT -->
+        <div class="tc-main-info">
+            <a href="/tasks/{{ task.id }}/edit" class="tc-title">
+                {{ task.title }}
+            </a>
+            
+            <p class="tc-desc">
+                {{ task.description }}
+            </p>
+        </div>
 
-      <!-- IMAGE -->
-      <img 
-        src="{{ task.image_url or '/static/images/placeholder.svg' }}" 
-        class="thumb-80 rounded me-3"
-      >
-
-      <!-- CONTENT -->
-      <div class="flex-grow-1">
-        <h5 class="mb-1"><a href="/tasks/{{ task.id }}/edit" class="qe-title-sm">
-            {{ task.title }}
-          </a></h5>
-        <p class="text-muted mb-0">
-          {{ task.description }}
-        </p>
-      </div>
-
-      <!-- ACTIONS -->
-      <div class="ms-3 d-flex flex-column align-items-center">
-
-        <!-- Add to quest -->
-        <form method="post" action="/quest-structure/">
-          <input type="hidden" name="quest_id" value="{{ quest_id }}">
-          <input type="hidden" name="task_id" value="{{ task.id }}">
-          <button class="btn btn-sm btn-light mb-1" title="Add to Quest">
-            +
-          </button>
-        </form>
-
-        
-      </div>
-
+        <!-- ACTIONS -->
+        <div class="tc-actions">
+          <!-- Add to quest -->
+          <form method="post" action="/quest-structure/">
+            <input type="hidden" name="quest_id" value="{{ quest_id }}">
+            <input type="hidden" name="task_id" value="{{ task.id }}">
+            <button class="tc-add" title="Add to Quest">
+              +
+            </button>
+          </form>
+        </div>
     </div>
   </div>
   

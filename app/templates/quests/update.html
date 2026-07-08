@@ -84,7 +84,7 @@
 
 
 
-<div class="qe-layout">
+<div class="qe-body">
 
   <!-- LEFT -->
   <div class="qe-main">
@@ -122,31 +122,32 @@
               </div>
             </div>
 
-            <div class="qe-card">
-
-              <div class="qe-drag">
-                <i class="bi bi-grip-vertical"></i>
+            <div class="tc-card">
+              <div class="tc-cover-wrap">
+                <div class="qe-drag">
+                  <i class="bi bi-grip-vertical"></i>
+                </div>
+                <img
+                  src="{{ step.task.image_url or '/static/images/placeholder.svg' }}"
+                  class="tc-cover"
+                >
               </div>
-
-              <img
-                src="{{ step.task.image_url or '/static/images/placeholder.svg' }}"
-                class="qe-img"
-              >
-
-              <div class="qe-content">
+              <div class="tc-body">
+              
+              <div class="tc-main-info">
 
                 <a href="/tasks/{{ step.task.id }}/edit"
-                   class="qe-title-sm">
+                   class="tc-title">
                   {{ step.task.title }}
                 </a>
 
-                <div class="qe-desc-sm">
+                <div class="tc-desc">
                   {{ step.task.description }}
                 </div>
 
               </div>
 
-              <div class="qe-actions">
+              <div class="tc-actions">
 
                 <form method="post"
                       action="/quests/{{item.id}}/tasks/{{ step.task.id }}/remove">
@@ -158,7 +159,7 @@
                 </form>
 
               </div>
-
+            </div>
             </div>
 
           </div>
