@@ -2,321 +2,327 @@
 {% block content %}
 
 <div class="qe-card">
-<form method="post" action="/quests/{{ item.id }}" id="quest-form">
+    <form method="post" action="/quests/{{ item.id }}" id="quest-form">
+        <!-- IMAGE -->
+        <div class="qe-cover-wrap">
+          <div class="qe-image">
+            <img
+              src="{{ item.image_url or '/static/images/placeholder.svg' }}"
+              class="qe-cover"
+              id="preview"
+            >
+            <input type="hidden" name="image_url" id="image-hidden" value="{{ item.image_url }}">
+          </div>
+        
+          <label class="qe-cover-overlay">
+            <div class="qe-cover-overlay-content">
+              <i class="bi bi-camera-fill"></i>
+              <span>Change image</span>
+            </div>
+            <input
+              type="file"
+              id="image-input"
+              class="d-none"
+              accept="image/*"
+              data-upload-url="/quests/{{ item.id }}/image/main"
+              data-preview-target="#preview"
+              data-hidden-input="#image-hidden"
+            >
+          </label>
 
-  <!-- HEADER -->
+          <div class="qe-status qe-status--draft">Draft</div>
+        </div>
+        <!-- HEADER -->
+        <div class="qe-header">
+            <input name="title" class="qe-title" value="{{ item.title }}">
+            <div class="qe-main-info">
+                <textarea name="description" class="qe-description qe-description-edit">{{ item.description }}</textarea>
+                <div class="qe-properties">
+                    <div class="qe-property">
+                        <div class="qe-property-icon">
+                            Allow repeated playthroughs
+                        </div>
 
-    <div class="qe-cover-wrap">
-      <div class="qe-image">
-        <img
-          src="{{ item.image_url or '/static/images/placeholder.svg' }}"
-          class="qe-cover"
-          id="preview"
-        >
-        <input type="hidden" name="image_url" id="image-hidden" value="{{ item.image_url }}">
-      </div>
-    
-      <label class="btn btn-light btn-sm qe-cover-upload">
-        <i class="bi bi-image"></i>
-        Change
-        <input
-          type="file"
-          id="image-input"
-          class="d-none"
-          accept="image/*"
-          data-upload-url="/quests/{{ item.id }}/image/main"
-          data-preview-target="#preview"
-          data-hidden-input="#image-hidden"
-        >
-      </label>
+                        <div class="qe-property-value">
+                            <input type="checkbox"
+                                id="allow_replays"
+                                name="allow_replays"
+                                {% if item.allow_replays %}checked{% endif %}
+                            >
+                        </div>
+                    </div>
+                    <div class="qe-property">
+                        <label class="form-check-label qe-option-title">
+                                Duration
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="qe-actions">
+                <button type="submit"
+                        class="btn btn-success btn-sm">
+                  Save
+                </button>
 
-      <div class="qe-status">Draft</div>
-    </div>
+                <a href="/quests/{{ item.id }}/manage"
+                  class="btn btn-outline-primary btn-sm">
+                  Manage
+                </a>
+
+                <a href="/quests"
+                  class="btn btn-outline-secondary btn-sm">
+                  Cancel
+                </a>
+            </div>      
+        </div>
+    </form>
+
+
+
+
 
     <div class="qe-body">
 
-    <div class="qe-main-info">
-      <input name="title" class="qe-title" value="{{ item.title }}">
-      <textarea name="description" class="qe-desc">{{ item.description }}</textarea>
+      <!-- LEFT -->
+      <div class="qe-main">
 
-      <div class="qe-actions">
-        <button type="submit"
-                class="btn btn-success btn-sm">
-          Save
-        </button>
+        <!-- SCENARIO -->
+        <div class="qe-scenario">
 
-        <a href="/quests/{{ item.id }}/manage"
-          class="btn btn-outline-primary btn-sm">
-          Manage
-        </a>
+          <div class="qe-scenario-head">
+            <h5>Scenario</h5>
 
-        <a href="/quests"
-          class="btn btn-outline-secondary btn-sm">
-          Cancel
-        </a>
-      </div>
-    </div>
-
-    <div class="qe-content">
-      <aside class="qe-sidebar">
-        <div class="qe-side-card">
-          <h5>Attributes</h5>
-                <input
-                    class="form-check-input"
-                    type="checkbox"
-                    id="allow_replays"
-                    name="allow_replays"
-                    {% if item.allow_replays %}checked{% endif %}
-                >
-
-                <label class="form-check-label qe-option-title"
-                      for="allow_replays">
-                    Allow repeated playthroughs
-                </label>
-        </div>
-      </aside>
-    </div>
-    
-    </div>
-</form>
-
-
-
-
-
-<div class="qe-body">
-
-  <!-- LEFT -->
-  <div class="qe-main">
-
-    <!-- SCENARIO -->
-    <div class="qe-scenario">
-
-      <div class="qe-scenario-head">
-        <h5>Scenario</h5>
-
-        {% include "quests/_add_task_actions.html" %}
-      </div>
-
-      <div class="qe-timeline">
-
-        <!-- START -->
-        <div class="qe-row">
-          <div class="qe-col">
-            <div class="qe-dot start">
-              <i class="bi bi-play-fill"></i>
-            </div>
-          </div>
-          <div></div>
-        </div>
-
-        <div id="quest-task-list">
-
-          {% for step in item.steps %}
-
-          <div class="qe-row" data-id="{{ step.id }}">
-
-            <div class="qe-col">
-              <div class="qe-dot discover">
-                <i class="bi bi-search"></i>
-              </div>
-            </div>
-
-            <div class="tc-card">
-              <div class="tc-cover-wrap">
-                <div class="qe-drag">
-                  <i class="bi bi-grip-vertical"></i>
-                </div>
-                <img
-                  src="{{ step.task.image_url or '/static/images/placeholder.svg' }}"
-                  class="tc-cover"
-                >
-              </div>
-              <div class="tc-body">
-              
-              <div class="tc-main-info">
-
-                <a href="/tasks/{{ step.task.id }}/edit"
-                   class="tc-title">
-                  {{ step.task.title }}
-                </a>
-
-                <div class="tc-desc">
-                  {{ step.task.description }}
-                </div>
-
-              </div>
-
-              <div class="tc-actions">
-
-                <form method="post"
-                      action="/quests/{{item.id}}/tasks/{{ step.task.id }}/remove">
-
-                  <button class="qe-delete">
-                    <i class="bi bi-x-lg"></i>
-                  </button>
-
-                </form>
-
-              </div>
-            </div>
-            </div>
-
-          </div>
-
-          {% endfor %}
-
-        </div>
-
-        <!-- FINISH -->
-        <div class="qe-row">
-
-          <div class="qe-col">
-            <div class="qe-dot finish">
-              <i class="bi bi-flag"></i>
-            </div>
-          </div>
-
-          <div class="qe-card">
             {% include "quests/_add_task_actions.html" %}
           </div>
 
-        </div>
+          <div class="qe-timeline">
 
-      </div>
-
-    </div>
-
-  </div>
-
-  <!-- RIGHT SIDEBAR -->
-  <aside class="qe-sidebar">
-
-    <!-- FLOW -->
-    <div class="qe-side-card">
-
-      <h5>Quest Flow</h5>
-
-      <div class="qe-flow">
-
-        <div class="qe-flow-item">
-          <div class="qe-flow-dot active">01</div>
-          <div>Start</div>
-        </div>
-
-        {% for step in item.steps %}
-
-        <div class="qe-flow-item">
-          <div class="qe-flow-dot">
-            {{ loop.index + 1 }}
-          </div>
-
-          <div>
-            {{ step.task.title }}
-          </div>
-        </div>
-
-        {% endfor %}
-
-        <div class="qe-flow-item">
-          <div class="qe-flow-dot finish">
-            <i class="bi bi-flag"></i>
-          </div>
-
-          <div>Finish</div>
-        </div>
-
-      </div>
-
-    </div>
-
-    <!-- APPLICATIONS -->
-    <div class="qe-side-card">
-
-      <div class="d-flex justify-content-between align-items-center mb-3">
-
-        <h5 class="mb-0">Applications</h5>
-
-        <span class="qe-app-count">
-          {{ item.new_applications | length }}
-        </span>
-
-      </div>
-
-      {% if item.new_applications %}
-
-        <div class="qe-app-list">
-
-          {% for app in item.new_applications %}
-
-          <div class="qe-app-item">
-
-            <div class="d-flex align-items-center gap-2">
-
-              {% if app.profile and app.profile.avatar_url %}
-                <img src="{{ app.profile.avatar_url }}"
-                    class="avatar-sm rounded-circle">
-              {% endif %}
-
-              <div>
-                <div class="fw-semibold">
-                  {{ app.profile.display_name or app.profile.username or ("Player #" ~ app.participant_id) }}
-                </div>
-
-                <div class="small text-muted">
-                  Applied recently
+            <!-- START -->
+            <div class="qe-row">
+              <div class="qe-col">
+                <div class="qe-dot start">
+                  <i class="bi bi-play-fill"></i>
                 </div>
               </div>
+              <div></div>
+            </div>
+
+            <div id="quest-task-list">
+
+              {% for step in item.steps %}
+
+              <div class="qe-row" data-id="{{ step.id }}">
+
+                <div class="qe-col">
+                  <div class="qe-dot discover">
+                    <i class="bi bi-search"></i>
+                  </div>
+                </div>
+
+                <div class="tc-card">
+                  <div class="tc-cover-wrap">
+                    <div class="qe-drag">
+                      <i class="bi bi-grip-vertical"></i>
+                    </div>
+                    <img
+                      src="{{ step.task.image_url or '/static/images/placeholder.svg' }}"
+                      class="tc-cover"
+                    >
+                  </div>
+                  <div class="tc-body">
+                  
+                  <div class="tc-main-info">
+
+                    <a href="/tasks/{{ step.task.id }}/edit"
+                      class="tc-title">
+                      {{ step.task.title }}
+                    </a>
+
+                    <div class="tc-desc">
+                      {{ step.task.description }}
+                    </div>
+
+                  </div>
+
+                  <div class="tc-actions">
+
+                    <form method="post"
+                          action="/quests/{{item.id}}/tasks/{{ step.task.id }}/remove">
+
+                      <button class="qe-delete">
+                        <i class="bi bi-x-lg"></i>
+                      </button>
+
+                    </form>
+
+                  </div>
+                </div>
+                </div>
+
+              </div>
+
+              {% endfor %}
 
             </div>
 
-            <div class="qe-app-actions">
-              <form method="post" action="/quest-applications/{{ app.id }}/approve">
-                <input type="hidden" name="back" value="/quests/{{ item.id }}/edit">
-                <button class="btn btn-success btn-sm">
-                  Approve
-                </button>
-              </form>
-
-              <form method="post" action="/quest-applications/{{ app.id }}/reject">
-                <input type="hidden" name="back" value="/quests/{{ item.id }}/edit">
-                <button class="btn btn-outline-danger btn-sm">
-                  Reject
-                </button>
-              </form>
+            <!-- FINISH -->
+            <div class="qe-row">
+              <div class="qe-col">
+                <div class="qe-dot finish">
+                  <i class="bi bi-flag"></i>
+                </div>
+              </div>
+              {% include "quests/_add_task_actions.html" %}
             </div>
 
           </div>
 
-          {% endfor %}
-
-        </div>
-        <div class="mt-3">
-          <a href="/quests/{{ item.id }}/manage#applications"
-            class="small text-decoration-none">
-            View all applications &rarr;
-          </a>
         </div>
 
-      {% else %}
+      </div>
 
-        <div class="text-muted small">
-          No new applications
+      <!-- RIGHT SIDEBAR -->
+      <aside class="qe-sidebar">
+
+        <!-- FLOW -->
+        <div class="qe-side-card">
+
+          <h5>Quest Flow</h5>
+
+          <div class="qe-flow">
+
+            <div class="qe-flow-item">
+              <div class="qe-flow-dot active">01</div>
+              <div>Start</div>
+            </div>
+
+            {% for step in item.steps %}
+
+            <div class="qe-flow-item">
+              <div class="qe-flow-dot">
+                {{ loop.index + 1 }}
+              </div>
+
+              <div>
+                {{ step.task.title }}
+              </div>
+            </div>
+
+            {% endfor %}
+
+            <div class="qe-flow-item">
+              <div class="qe-flow-dot finish">
+                <i class="bi bi-flag"></i>
+              </div>
+
+              <div>Finish</div>
+            </div>
+
+          </div>
+
         </div>
 
-      {% endif %}
+        <!-- APPLICATIONS -->
+        <div class="qe-side-card">
+
+          <div class="d-flex justify-content-between align-items-center mb-3">
+
+            <h5 class="mb-0">Applications</h5>
+
+            <span class="qe-app-count">
+              {{ item.new_applications | length }}
+            </span>
+
+          </div>
+
+          {% if item.new_applications %}
+
+            <div class="qe-app-list">
+
+              {% for app in item.new_applications %}
+
+              <div class="qe-app-item">
+
+                <div class="d-flex align-items-center gap-2">
+
+                  {% if app.profile and app.profile.avatar_url %}
+                    <img src="{{ app.profile.avatar_url }}"
+                        class="avatar-sm rounded-circle">
+                  {% endif %}
+
+                  <div>
+                    <div class="fw-semibold">
+                      {{ app.profile.display_name or app.profile.username or ("Player #" ~ app.participant_id) }}
+                    </div>
+
+                    <div class="small text-muted">
+                      Applied recently
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="qe-app-actions">
+                  <form method="post" action="/quest-applications/{{ app.id }}/approve">
+                    <input type="hidden" name="back" value="/quests/{{ item.id }}/edit">
+                    <button class="btn btn-success btn-sm">
+                      Approve
+                    </button>
+                  </form>
+
+                  <form method="post" action="/quest-applications/{{ app.id }}/reject">
+                    <input type="hidden" name="back" value="/quests/{{ item.id }}/edit">
+                    <button class="btn btn-outline-danger btn-sm">
+                      Reject
+                    </button>
+                  </form>
+                </div>
+
+              </div>
+
+              {% endfor %}
+
+            </div>
+            <div class="mt-3">
+              <a href="/quests/{{ item.id }}/manage#applications"
+                class="small text-decoration-none">
+                View all applications &rarr;
+              </a>
+            </div>
+
+          {% else %}
+
+            <div class="text-muted small">
+              No new applications
+            </div>
+
+          {% endif %}
+
+        </div>
+
+      </aside>
 
     </div>
-
-  </aside>
-
-</div>
 
 </div>
 
 {% endblock %}
 
 {% block scripts %}
+
+<script>
+document.querySelectorAll(".qe-description-edit").forEach(textarea => {
+
+    function resize() {
+        textarea.style.height = "0";
+        textarea.style.height = textarea.scrollHeight + "px";
+    }
+
+    textarea.addEventListener("input", resize);
+    resize();
+
+});
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.6/Sortable.min.js"></script>
 

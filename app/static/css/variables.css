@@ -19,7 +19,7 @@
   --clr-parchment-dark:          #EADCBF;
   --clr-parchment-dark-txt:      #52473E;
   --clr-parchment-dark-brd:      #A8946E;
-  --clr-parchment-dark-grad:      linear-gradient(180deg, #FDF6E2 0%, #EAD2A3 100%);
+  --clr-parchment-dark-grad:     linear-gradient(180deg, #FDF6E2 0%, #EAD2A3 100%);
 
   /* --- Зелені тони (Primary / Головна дія) --- */
   --clr-sage:                    #728F70;
@@ -78,6 +78,35 @@
   --clr-sys-info-txt:            #324B59;
   --clr-sys-info-brd:            #9FB6C4;
   --clr-sys-info-grad:           linear-gradient(180deg, #EFF6FA 0%, #C4D7E3 100%);
+
+  /* ===== Glass gradients ===== */
+  --status-success-glass-gradient:
+    linear-gradient(
+        180deg,
+        #EDF2E6E0 0%,
+        #D9E4CC9E 100%
+    );
+
+  --status-warning-glass-gradient:
+    linear-gradient(
+        180deg,
+        #F3E7CCE0 0%,
+        #EADBBD9E 100%
+    );
+
+  --status-error-glass-gradient:
+    linear-gradient(
+        180deg,
+        #F3E6E4E0 0%,
+        #E8D0CB9E 100%
+    );
+
+  --status-info-glass-gradient:
+    linear-gradient(
+        180deg,
+        #EAF0F3E0 0%,
+        #D5E0E79E 100%
+    );
 
   /* Базові ховери для інтерактивності */
   --clr-sage-hover:              #5D785B;
@@ -189,7 +218,23 @@
   --radius-sm: 6px;
   --radius-md: 8px;
   --radius-lg: 10px;
-  --status-radius: 999px;
+  --radius-pill: 999px;
+
+  /* Spacing */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 12px;
+    --space-lg: 16px;
+    --space-xl: 24px;
+    --space-2xl: 32px;
+    --space-3xl: 48px;
+
+   /* Typography */
+   --font-xs:     12px;
+   --font-sm:     14px;
+   --font-md:     20px;
+   --font-lg:     38px;
+   --font-xl:     42px;
 
 
   /* ==========================================================================

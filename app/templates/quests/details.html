@@ -11,66 +11,54 @@
                     src="{{ item.image_url or '/static/images/placeholder.svg' }}"
                     class="qe-cover"
                 >
-                <div class="qe-status">
-                    {{ item.status or "Draft" }}
-                </div>
+            </div>
+
+            <div class="qe-status qe-status--draft">
+                {{ item.status or "Draft" }}
             </div>
     </div>
     
-    <!-- BODY -->
-    <div class="qe-body">
-        <div>
-            <div class="qe-main-info">
-                <h1>
-                    {{ item.title }}
-                </h1>
-                {% if item.description %}
-                <div>
-                    {{ item.description }}
+    <!-- HEADER -->
+    <div class="qe-header">
+        <h1 class="qe-title">
+            {{ item.title }}
+        </h1>
+        <div class="qe-main-info">
+            {% if item.description %}
+            <div class="qe-description">
+                {{ item.description }}
+            </div>
+            {% endif %}     
+            <div class="qe-properties">
+                <div class="qe-property">
+                    <div class="qe-property-icon">
+                        Steps
+                    </div>
+                    <div class="qe-property-value">
+                        {{ item.steps|length }}
+                    </div>
                 </div>
-                {% endif %}                
-            </div>
-            <div class="qe-actions">
-                {% set quest = item %}
-                {% include "quests/_quest_actions_details.html" %}
-            </div>
+                <div class="qe-property">
+                    <div class="qe-property-icon">
+                        Status
+                    </div>
+                    <div class="qe-property-value">
+                        {{ item.status or "Draft" }}
+                    </div>
+                </div>
+            </div>           
         </div>
+        <div class="qe-actions">
+            {% set quest = item %}
+            {% include "quests/_quest_actions_details.html" %}
+        </div>
+    </div>
 
 
         <!-- CONTENT -->
         <div class="qe-content">            
             <aside class="qe-sidebar">
 
-                <div class="qe-side-card">
-
-                    <h5>Quest Info</h5>
-
-                    <div class="qe-flow">
-
-                        <div class="qe-flow-item">
-                            <div class="qe-flow-dot">
-                                {{ item.steps|length }}
-                            </div>
-
-                            <div>
-                                Steps
-                            </div>
-                        </div>
-
-                        <div class="qe-flow-item">
-                            <div class="qe-flow-dot">
-                                <i class="bi bi-flag"></i>
-                            </div>
-
-                            <div>
-                                Status:
-                                {{ item.status or "Draft" }}
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
 
                 {% if item.can_play %}
 
@@ -106,7 +94,7 @@
             </aside>
         </div>
 
-    </div>
+    
 
 
     
