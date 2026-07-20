@@ -1,0 +1,43 @@
+{% set current = get_choice(choices, value) %}
+
+<div class="qe-property" tabindex="0">
+    <button
+        type="button"
+        class="qe-property-current"
+    >
+        {% if current %}
+            <img
+                class="qe-property-icon"
+                src="/static/images/properties/{{ current.icon }}.png"
+                alt="{{ current.label }}"
+                title="{{ current.label }}"
+            >
+        {% else %}
+            —
+        {% endif %}
+    </button>
+
+    <input
+        type="hidden"
+        name="{{ name }}"
+        value="{{ value or '' }}"
+    >
+
+    <div class="qe-property-popup">
+        {% for option in choices %}
+            <button
+                type="button"
+                class="qe-property-option"
+                data-value="{{ option.id }}"
+                data-label="{{ option.label }}"
+            >
+                <img
+                    class="qe-property-icon"
+                    src="/static/images/properties/{{ option.icon }}.png"
+                    alt="{{ option.label }}"
+                    title="{{ option.label }}"
+                >
+            </button>
+        {% endfor %}
+    </div>
+</div>

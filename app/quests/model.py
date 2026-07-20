@@ -10,9 +10,14 @@ class Quest(BaseModel):
     image_url: str | None = None
 
     allow_replays: bool | None = None
+    difficulty: int | None = None
+    distance: int | None = None
+    language: str | None = None
+    player_mode: int | None = None
+    duration: int | None = None
+    age_group: int | None = None
 
     featured: bool | None = None
-#   complexity: str | None = None
 
     created_by: str | None = None    
 
@@ -21,15 +26,27 @@ class QuestCreate(BaseModel):
 
 class QuestUpdate(BaseModel):
     title: str
-    description: str
-    image_url: str
-    allow_replays: bool
+    description: str | None = None
+    image_url: str | None = None
+    allow_replays: bool | None = None
+    difficulty: int | None = None
+    distance: int | None = None
+    language: str | None = None
+    player_mode: int | None = None
+    duration: int | None = None
+    age_group: int | None = None
 
 class QuestPatch(BaseModel):
     description: str | None = None
     featured: bool  | None = None
     image_url: str | None = None
     allow_replays: bool | None = None
+    difficulty: int | None = None
+    distance: int | None = None
+    language: str | None = None
+    player_mode: int | None = None
+    duration: int | None = None
+    age_group: int | None = None
 
 
 #------ Use Case Models (UI usage structures)

@@ -11,3 +11,11 @@ def normalize_form_booleans(data_dict, model):
             data_dict[field_name] = field_name in data_dict
 
     return data_dict
+
+def normalize_form_empty(data_dict):
+    # Пустые строки -> None
+    for key, value in data_dict.items():
+        if value == "":
+            data_dict[key] = None
+
+    return data_dict

@@ -7,7 +7,7 @@ from pydantic import ValidationError
 from app.core.errors import validation_errors_to_dict
 from fastapi import UploadFile, File
 from app.core.auth import build_user_dependency
-from app.core.helpers import normalize_form_booleans
+from app.core.helpers import normalize_form_booleans, normalize_form_empty
 
 
 logger = logging.getLogger(__name__)
@@ -153,6 +153,8 @@ def create_crud_router(
             dict(form),
             update_model
         )
+
+        data_dict = normalize_form_empty(data_dict)
 
         data = update_model(**data_dict)
 

@@ -38,24 +38,61 @@
             <div class="qe-main-info">
                 <textarea name="description" class="qe-description qe-description-edit">{{ item.description }}</textarea>
                 <div class="qe-properties">
-                    <div class="qe-property">
-                        <div class="qe-property-icon">
-                            Allow repeated playthroughs
-                        </div>
+                    {% with
+                        name="allow_replays",
+                        value=item.allow_replays,
+                        choices=PROPERTY_OPTIONS["allow_replays"]
+                    %}
+                        {% include "quests/_quest_property.html" %}
+                    {% endwith %}
 
-                        <div class="qe-property-value">
-                            <input type="checkbox"
-                                id="allow_replays"
-                                name="allow_replays"
-                                {% if item.allow_replays %}checked{% endif %}
-                            >
-                        </div>
-                    </div>
-                    <div class="qe-property">
-                        <label class="form-check-label qe-option-title">
-                                Duration
-                        </label>
-                    </div>
+                    {% with
+                        name="difficulty",
+                        value=item.difficulty,
+                        choices=PROPERTY_OPTIONS["difficulty"]
+                    %}
+                        {% include "quests/_quest_property.html" %}
+                    {% endwith %}
+
+                    {% with
+                        name="distance",
+                        value=item.distance,
+                        choices=PROPERTY_OPTIONS["distance"]                        
+                    %}
+                        {% include "quests/_quest_property.html" %}
+                    {% endwith %}
+
+                    {% with
+                        name="language",
+                        value=item.language,
+                        choices=PROPERTY_OPTIONS["language"]
+                    %}
+                        {% include "quests/_quest_property.html" %}
+                    {% endwith %}
+
+                    {% with
+                        name="duration",
+                        value=item.duration,
+                        choices=PROPERTY_OPTIONS["duration"]
+                    %}
+                        {% include "quests/_quest_property.html" %}
+                    {% endwith %}
+
+                    {% with
+                        name="players",
+                        value=item.player_mode,
+                        choices=PROPERTY_OPTIONS["player_mode"]
+                    %}
+                        {% include "quests/_quest_property.html" %}
+                    {% endwith %}
+
+                    {% with
+                        name="age_group",
+                        value=item.age_group,
+                        choices=PROPERTY_OPTIONS["age_group"]
+                    %}
+                        {% include "quests/_quest_property.html" %}
+                    {% endwith %}
                 </div>
             </div>
             <div class="qe-actions">
@@ -353,6 +390,76 @@ if (taskList) {
     });
 
 }
+</script>
+
+<script>
+document.querySelectorAll(".qe-property").forEach(property => {
+
+    property.addEventListener("click", e => {
+
+        const option = e.target.closest(".qe-property-option");
+
+        if (option) {
+
+            e.stopPropagation();
+
+            const value = option.dataset.value;
+            const label = option.dataset.label;
+
+            property.querySelector(".qe-property-current").textContent = label;
+
+            const current = property.querySelector(".qe-property-current");
+
+            current.innerHTML = option.innerHTML;
+
+            const input = property.querySelector("input[type=hidden]");
+            if (input) {
+                input.value = value;
+            }
+
+            property.querySelectorAll(".qe-property-option").forEach(item => {
+                item.classList.toggle(
+                    "active",
+                    item.dataset.value === value
+                );
+            });
+
+            property.classList.remove("open");
+            return;
+        }
+
+        e.stopPropagation();
+
+        document.querySelectorAll(".qe-property.open").forEach(item => {
+            if (item !== property) {
+                item.classList.remove("open");
+            }
+        });
+
+        property.classList.toggle("open");
+
+        if (property.classList.contains("open")) {
+
+            const currentValue =
+                property.querySelector("input[type=hidden]")?.value;
+
+            property.querySelectorAll(".qe-property-option").forEach(item => {
+                item.classList.toggle(
+                    "active",
+                    item.dataset.value === currentValue
+                );
+            });
+
+        }
+    });
+
+});
+
+document.addEventListener("click", () => {
+    document.querySelectorAll(".qe-property.open").forEach(item => {
+        item.classList.remove("open");
+    });
+});
 </script>
 
 {% endblock %}
