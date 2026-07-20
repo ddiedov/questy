@@ -26,7 +26,7 @@
         <div class="qe-main-info">
             {% if item.description %}
             <div class="qe-description">
-                {{ item.description }}
+                {{ item.description | safe }}
             </div>
             {% endif %}     
             <div class="qe-properties">

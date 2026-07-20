@@ -10,7 +10,7 @@
         <h1>{{ page_title }}</h1>
 
         {% if page_description %}
-            <p class="muted">{{ page_description }}</p>
+            <p class="muted">{{ page_description | safe }}</p>
         {% endif %}
     </div>
 

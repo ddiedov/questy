@@ -1,0 +1,20 @@
+<div class="mb-3">
+
+    {% if label %}
+    <label class="form-label">
+        {{ label }}
+    </label>
+    {% endif %}
+
+    <input
+        id="{{ name }}_input"
+        type="hidden"
+        name="{{ name }}"
+        value="{{ value or '' }}">
+
+    <trix-editor
+        input="{{ name }}_input"
+        class="rich-text-editor {{ editor_class or '' }}">
+    </trix-editor>
+
+</div>

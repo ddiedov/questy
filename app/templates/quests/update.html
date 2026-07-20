@@ -36,7 +36,14 @@
         <div class="qe-header">
             <input name="title" class="qe-title" value="{{ item.title }}">
             <div class="qe-main-info">
-                <textarea name="description" class="qe-description qe-description-edit">{{ item.description }}</textarea>
+                
+                {% with
+                    name="description",
+                    editor_class="qe-description qe-description-edit",
+                    value=item.description
+                %}
+                    {% include "core/rich_text.html" %}
+                {% endwith %}
                 <div class="qe-properties">
                     {% with
                         name="allow_replays",
@@ -176,7 +183,7 @@
                     </a>
 
                     <div class="tc-desc">
-                      {{ step.task.description }}
+                      {{ step.task.description | safe }}
                     </div>
 
                   </div>

@@ -1,4 +1,5 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
+from app.core.html import sanitize_html
 from app.quest_applications.model import QuestApplicationView
 from app.quest_structure.model import QuestStep
 
@@ -36,6 +37,11 @@ class QuestUpdate(BaseModel):
     duration: int | None = None
     age_group: int | None = None
 
+    @field_validator("description")
+    @classmethod
+    def sanitize_description(cls, value):
+        return sanitize_html(value)
+
 class QuestPatch(BaseModel):
     description: str | None = None
     featured: bool  | None = None
@@ -47,6 +53,11 @@ class QuestPatch(BaseModel):
     player_mode: int | None = None
     duration: int | None = None
     age_group: int | None = None
+
+    @field_validator("description")
+    @classmethod
+    def sanitize_description(cls, value):
+        return sanitize_html(value)
 
 
 #------ Use Case Models (UI usage structures)
