@@ -8,3 +8,34 @@
 .trix-button-group--history-tools {
     display: none !important;
 }
+
+/* ===========================
+   Toolbar visibility
+   =========================== */
+
+.rich-text-container {
+    position: relative;
+}
+
+trix-toolbar {
+    position: absolute;
+
+    top: -48px;
+    left: 0;
+
+    display: block;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+        opacity .15s ease,
+        visibility .15s ease;
+
+    z-index: 100;
+}
+
+trix-toolbar.visible {
+    opacity: 1;
+    visibility: visible;
+}
