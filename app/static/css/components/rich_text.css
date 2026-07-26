@@ -10,32 +10,218 @@
 }
 
 /* ===========================
-   Toolbar visibility
+   Toolbar
    =========================== */
 
 .rich-text-container {
     position: relative;
+    display: block;
+    width: 100%;
+    min-height: 250px;
+    box-sizing: border-box;
 }
 
 trix-toolbar {
     position: absolute;
 
-    top: -48px;
-    left: 0;
+    right: 12px;
+    bottom: 12px;
 
-    display: block;
-
-    opacity: 0;
-    visibility: hidden;
-
-    transition:
-        opacity .15s ease,
-        visibility .15s ease;
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
 
     z-index: 100;
+
+    padding: var(--space-sm);
+
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-md);
+
+    background: var(--gradient-card);
+
+    box-shadow:
+        var(--card-shadow),
+        var(--card-inset);
+
+    backdrop-filter: blur(8px);
+
+    opacity: .22;
+    visibility: visible;
+    pointer-events: none;
+
+    transition:
+        opacity .18s ease,
+        transform .18s ease;
+
+    transform: translateY(4px);
 }
 
 trix-toolbar.visible {
     opacity: 1;
     visibility: visible;
+
+    pointer-events: auto;
+
+    transform: translateY(0);
+}
+
+trix-toolbar .trix-button--icon {
+    width: 34px !important;
+    height: 34px !important;
+    max-width: none !important;
+
+    padding: 0 !important;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: var(--radius-md);
+
+    transition:
+        background .15s ease,
+        box-shadow .15s ease;
+}
+
+trix-toolbar .trix-button--icon:hover {
+    background: rgba(120,90,40,.08) !important;
+
+    box-shadow: var(--inset-light-sm);
+}
+
+trix-toolbar .trix-button--icon.trix-active {
+    background: var(--gradient-card) !important;
+
+    border: 1px solid var(--card-border) !important;
+
+    box-shadow:
+        var(--inset-light-md),
+        var(--shadow-sm);
+}
+
+trix-toolbar .trix-dialog {
+    border: 1px solid var(--card-border);
+
+    border-radius: var(--radius-md);
+
+    background: var(--gradient-card);
+
+    box-shadow:
+        var(--card-shadow),
+        var(--card-inset);
+
+    padding: var(--space-sm);
+
+    bottom: 48px;
+    right: calc(-1 * var(--space-sm));
+
+    top: auto;
+    left: auto;
+
+    width: 340px;
+
+    box-sizing: border-box;
+}
+
+trix-toolbar .trix-input--dialog {
+    background: var(--clr-parchment-light);
+
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-sm);
+
+    color: var(--text-main);
+
+    box-shadow:
+        var(--card-inset);
+
+    padding: var(--space-sm);
+}
+
+trix-toolbar .trix-button--dialog {
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+
+    padding: 6px 10px;
+
+    color: var(--text-main);
+
+    cursor: pointer;
+
+    transition:
+        background .15s ease,
+        box-shadow .15s ease;
+}
+
+trix-toolbar .trix-button--dialog:hover {
+    background: rgba(120,90,40,.08);
+}
+
+trix-editor {
+    padding-bottom: 60px;
+}
+
+.trix-button-group-spacer {
+    display: none;
+}
+
+.trix-button-group {
+    border: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+
+    display: flex;
+    gap: 4px;
+
+    margin-bottom: 0px !important;
+}
+
+.trix-button {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+
+    border-radius: 6px;
+
+    transition: background-color .15s ease;
+
+    width: 34px !important;
+    height: 34px !important;
+
+    border-radius: 8px !important;
+}
+
+trix-toolbar .trix-button--icon::before {
+    content: "";
+    display: block;
+
+    width: 18px;
+    height: 18px;
+
+    margin: auto;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.trix-button--icon-bold::before {
+    background-image: url("/static/images/icons/bold.svg") !important;
+}
+
+.trix-button--icon-italic::before {
+    background-image: url("/static/images/icons/italic.svg") !important;
+}
+
+.trix-button--icon-link::before {
+    background-image: url("/static/images/icons/link.svg") !important;
+}
+
+.trix-button--icon-bullet-list::before {
+    background-image: url("/static/images/icons/bullet-list.svg");
+}
+
+.trix-button--icon-number-list::before {
+    background-image: url("/static/images/icons/number-list.svg");
 }
