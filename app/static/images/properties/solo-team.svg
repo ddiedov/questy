@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="36"
+     height="36"
+     viewBox="0 0 36 36"
+     fill="none"
+     stroke="currentColor"
+     stroke-width="2"
+     stroke-linecap="round"
+     stroke-linejoin="round">
+
+    <!-- solo -->
+    <circle cx="9" cy="12" r="3"/>
+    <path d="M5 26c0-3 2-5 4-5s4 2 4 5"/>
+
+    <!-- divider -->
+    <line x1="18" y1="7" x2="18" y2="29"/>
+
+    <!-- team -->
+    <circle cx="24" cy="11" r="2.5"/>
+    <circle cx="30" cy="11" r="2.5"/>
+
+    <path d="M21 25c0-3 2-5 5-5"/>
+    <path d="M33 25c0-3-2-5-5-5"/>
+
+</svg>

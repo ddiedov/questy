@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="36"
+     height="36"
+     viewBox="0 0 36 36"
+     fill="none"
+     stroke="currentColor"
+     stroke-width="2"
+     stroke-linecap="round"
+     stroke-linejoin="round">
+
+    <!-- map -->
+    <path d="M7 8 L16 6 L21 9 L29 7 V28 L20 30 L15 27 L7 29 Z"/>
+
+    <!-- compass -->
+    <circle cx="18" cy="18" r="4"/>
+    <path d="M18 14 L19.5 18 L18 22 L16.5 18 Z"/>
+
+</svg>

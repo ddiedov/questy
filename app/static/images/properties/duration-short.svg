@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="36"
+     height="36"
+     viewBox="0 0 36 36"
+     fill="none"
+     stroke="currentColor"
+     stroke-width="2"
+     stroke-linecap="round"
+     stroke-linejoin="round">
+
+    <path d="M11 6h14"/>
+    <path d="M11 30h14"/>
+
+    <path d="M12 6c0 5 5 7 6 8s-6 3-6 8"/>
+    <path d="M24 6c0 5-5 7-6 8s6 3 6 8"/>
+
+    <!-- little sand -->
+    <path d="M18 17v1"/>
+    <path d="M16 26h4"/>
+
+</svg>
