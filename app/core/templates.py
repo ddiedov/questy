@@ -2,7 +2,7 @@ from fastapi.templating import Jinja2Templates
 import pathlib
 import hashlib
 
-from app.core.constants import PROPERTY_OPTIONS
+from app.core.constants import PROPERTY_OPTIONS, PROPERTY_DEFAULTS
 
 BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
 
@@ -24,5 +24,6 @@ templates.env.filters["gravatar"] = gravatar_hash
 
 templates.env.globals.update(
     PROPERTY_OPTIONS=PROPERTY_OPTIONS,
+    PROPERTY_DEFAULTS=PROPERTY_DEFAULTS,
     get_choice=get_choice,
 )

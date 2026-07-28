@@ -30,23 +30,62 @@
             </div>
             {% endif %}     
             <div class="qe-properties">
-                <div class="qe-property">
-                    <div class="qe-property-icon">
-                        Steps
-                    </div>
-                    <div class="qe-property-value">
-                        {{ item.steps|length }}
-                    </div>
-                </div>
-                <div class="qe-property">
-                    <div class="qe-property-icon">
-                        Status
-                    </div>
-                    <div class="qe-property-value">
-                        {{ item.status or "Draft" }}
-                    </div>
-                </div>
-            </div>           
+                {% with
+                    value=item.allow_replays,
+                    choices=PROPERTY_OPTIONS["allow_replays"],
+                    default_value=PROPERTY_DEFAULTS["allow_replays"]
+                %}
+                    {% include "quests/_quest_property_view.html" %}
+                {% endwith %}
+
+                {% with
+                    value=item.difficulty,
+                    choices=PROPERTY_OPTIONS["difficulty"],
+                    default_value=PROPERTY_DEFAULTS["difficulty"]
+                %}
+                    {% include "quests/_quest_property_view.html" %}
+                {% endwith %}
+
+                {% with
+                    value=item.distance,
+                    choices=PROPERTY_OPTIONS["distance"], 
+                    default_value=PROPERTY_DEFAULTS["distance"]                       
+                %}
+                    {% include "quests/_quest_property_view.html" %}
+                {% endwith %}
+
+                {% with
+                    value=item.language,
+                    choices=PROPERTY_OPTIONS["language"],
+                    default_value=PROPERTY_DEFAULTS["language"]
+                %}
+                    {% include "quests/_quest_property_view.html" %}
+                {% endwith %}
+
+                {% with
+                    value=item.duration,
+                    choices=PROPERTY_OPTIONS["duration"],
+                    default_value=PROPERTY_DEFAULTS["duration"]
+                %}
+                    {% include "quests/_quest_property_view.html" %}
+                {% endwith %}
+
+                {% with
+                    value=item.player_mode,
+                    choices=PROPERTY_OPTIONS["player_mode"],
+                    default_value=PROPERTY_DEFAULTS["player_mode"]
+                %}
+                    {% include "quests/_quest_property_view.html" %}
+                {% endwith %}
+
+                {% with
+                    value=item.age_group,
+                    choices=PROPERTY_OPTIONS["age_group"],
+                    default_value=PROPERTY_DEFAULTS["age_group"]
+                %}
+                    {% include "quests/_quest_property_view.html" %}
+                {% endwith %}
+            </div>
         </div>
         <div class="qe-actions">
             {% set quest = item %}

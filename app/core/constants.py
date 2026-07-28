@@ -127,3 +127,13 @@ PROPERTY_OPTIONS = {
     "age_group": AGE_GROUP_CHOICES,
     "allow_replays": ALLOW_REPLAYS_CHOICES,
 }
+
+PROPERTY_DEFAULTS = {
+    "difficulty": DIFFICULTY_NORMAL,
+    "distance": DISTANCE_MEDIUM,
+    "language": LANGUAGE_RU,
+    "player_mode": PLAYER_BOTH,
+    "duration": DURATION_MEDIUM,
+    "age_group": AGE_0,
+    "allow_replays": ALLOW_REPLAYS_YES,
+}

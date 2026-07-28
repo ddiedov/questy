@@ -14,7 +14,6 @@
 }
 
 .qe-card:hover {
-  transform: translateY(-2px);
   border-color:
     rgba(120,90,40,.35);
   box-shadow:
@@ -225,11 +224,18 @@
 .qe-property { 
     display: flex;
     align-items: center;
+    justify-content: center;
+
     gap: var(--space-md);
 
-    min-height: 36px;
+    width: 44px;
+    height: 44px;
 
     position: relative;
+
+    border-radius: var(--radius-md);
+    background: var(--bg-secondary);
+    border: 1px solid var(--card-border);
 }
 
 .qe-property-icon { 
@@ -237,32 +243,45 @@
     height: 36px;
 
     display: block;
-    align-items: center;
-    justify-content: center;
 
     flex-shrink: 0;
-}
-
-.qe-property-value { 
-    flex: 1;
-    min-width: 0;
 }
 
 .qe-property-current {
     display: flex;
     align-items: center;
+    justify-content: center;
+
     gap: var(--space-sm);
 
-    width: 100%;
+    width: 44px;
+    height: 44px;
 
-    padding: 0;
-
-    background: none;
-    border: none;
+    border-radius: var(--radius-md);
+    background: var(--bg-secondary);
+    border: 1px solid var(--card-border);
 
     cursor: pointer;
 
     color: inherit;
+}
+
+.qe-property-view {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 44px;
+    height: 44px;
+
+    border-radius: var(--radius-md);
+    background: var(--bg-secondary);
+    border: 1px solid var(--card-border);
+}
+
+.qe-property-value { 
+    flex: 1;
+    min-width: 0;
 }
 
 .qe-property-popup {
@@ -311,7 +330,8 @@
     align-items: center;
     justify-content: center;
 
-    padding: var(--space-sm) var(--space-md);
+    width: 44px;
+    height: 44px;
 
     border: 1px solid transparent;
     border-radius: var(--radius-md);

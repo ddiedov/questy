@@ -48,7 +48,8 @@
                     {% with
                         name="allow_replays",
                         value=item.allow_replays,
-                        choices=PROPERTY_OPTIONS["allow_replays"]
+                        choices=PROPERTY_OPTIONS["allow_replays"],
+                        default_value=PROPERTY_DEFAULTS["allow_replays"]
                     %}
                         {% include "quests/_quest_property.html" %}
                     {% endwith %}
@@ -56,7 +57,8 @@
                     {% with
                         name="difficulty",
                         value=item.difficulty,
-                        choices=PROPERTY_OPTIONS["difficulty"]
+                        choices=PROPERTY_OPTIONS["difficulty"],
+                        default_value=PROPERTY_DEFAULTS["difficulty"]
                     %}
                         {% include "quests/_quest_property.html" %}
                     {% endwith %}
@@ -64,7 +66,8 @@
                     {% with
                         name="distance",
                         value=item.distance,
-                        choices=PROPERTY_OPTIONS["distance"]                        
+                        choices=PROPERTY_OPTIONS["distance"], 
+                        default_value=PROPERTY_DEFAULTS["distance"]                       
                     %}
                         {% include "quests/_quest_property.html" %}
                     {% endwith %}
@@ -72,7 +75,8 @@
                     {% with
                         name="language",
                         value=item.language,
-                        choices=PROPERTY_OPTIONS["language"]
+                        choices=PROPERTY_OPTIONS["language"],
+                        default_value=PROPERTY_DEFAULTS["language"]
                     %}
                         {% include "quests/_quest_property.html" %}
                     {% endwith %}
@@ -80,15 +84,17 @@
                     {% with
                         name="duration",
                         value=item.duration,
-                        choices=PROPERTY_OPTIONS["duration"]
+                        choices=PROPERTY_OPTIONS["duration"],
+                        default_value=PROPERTY_DEFAULTS["duration"]
                     %}
                         {% include "quests/_quest_property.html" %}
                     {% endwith %}
 
                     {% with
-                        name="players",
+                        name="player_mode",
                         value=item.player_mode,
-                        choices=PROPERTY_OPTIONS["player_mode"]
+                        choices=PROPERTY_OPTIONS["player_mode"],
+                        default_value=PROPERTY_DEFAULTS["player_mode"]
                     %}
                         {% include "quests/_quest_property.html" %}
                     {% endwith %}
@@ -96,7 +102,8 @@
                     {% with
                         name="age_group",
                         value=item.age_group,
-                        choices=PROPERTY_OPTIONS["age_group"]
+                        choices=PROPERTY_OPTIONS["age_group"],
+                        default_value=PROPERTY_DEFAULTS["age_group"]
                     %}
                         {% include "quests/_quest_property.html" %}
                     {% endwith %}

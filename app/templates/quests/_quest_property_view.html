@@ -1,0 +1,14 @@
+{% set current = get_choice(choices, value) %}
+
+{% if not current %}
+    {% set current = get_choice(choices, default_value) %}
+{% endif %}
+
+<div class="qe-property-view">
+    <img
+        class="qe-property-icon"
+        src="/static/images/properties/{{ current.icon }}.svg"
+        alt="{{ current.label }}"
+        title="{{ current.label }}"
+    >
+</div>

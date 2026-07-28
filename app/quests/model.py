@@ -3,6 +3,8 @@ from app.core.html import sanitize_html
 from app.quest_applications.model import QuestApplicationView
 from app.quest_structure.model import QuestStep
 
+from app.core.constants import PROPERTY_DEFAULTS
+
 #------ DTO Models (Database structures)
 class Quest(BaseModel):
     id: int
@@ -24,6 +26,14 @@ class Quest(BaseModel):
 
 class QuestCreate(BaseModel):
     title: str = Field(min_length=5)
+
+    allow_replays: bool = PROPERTY_DEFAULTS["allow_replays"]
+    difficulty: int = PROPERTY_DEFAULTS["difficulty"]
+    distance: int = PROPERTY_DEFAULTS["distance"]
+    language: str = PROPERTY_DEFAULTS["language"]
+    player_mode: int = PROPERTY_DEFAULTS["player_mode"]
+    duration: int = PROPERTY_DEFAULTS["duration"]
+    age_group: int = PROPERTY_DEFAULTS["age_group"]
 
 class QuestUpdate(BaseModel):
     title: str

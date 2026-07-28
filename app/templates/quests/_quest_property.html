@@ -1,5 +1,9 @@
 {% set current = get_choice(choices, value) %}
 
+{% if not current %}
+    {% set current = get_choice(choices, default_value) %}
+{% endif %}
+
 <div class="qe-property" tabindex="0">
     <button
         type="button"
@@ -13,7 +17,7 @@
                 title="{{ current.label }}"
             >
         {% else %}
-            —
+            -
         {% endif %}
     </button>
 
