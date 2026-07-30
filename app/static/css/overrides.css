@@ -41,23 +41,32 @@
         box-shadow .12s ease;
 }
 
-.btn:hover {
+.btn:hover,
+.btn.is-hover {
     background: var(--btn-bg-hover);
+    color: var(--btn-text);
     transform: translateY(-1px);
 }
 
-.btn:focus-visible {
+.btn:focus-visible,
+.btn.is-focus {
     outline: none;
     box-shadow:
         var(--shadow-sm),
         0 0 0 3px rgba(0,0,0,.08);
 }
 
-.btn:disabled {
+.btn:disabled,
+.btn.is-disabled {
     opacity: .55;
     cursor: default;
     transform: none;
     box-shadow: none;
+}
+
+.btn:active,
+.btn.is-active {
+    
 }
 
 
@@ -68,6 +77,7 @@
 .btn-forward {
     --btn-bg: var(--btn-forward-bg);
     --btn-bg-soft: var(--btn-forward-bg-soft);
+    --btn-bg-softest: var(--btn-forward-bg-softest);
     --btn-bg-hover: var(--btn-forward-bg-hover);
 
     --btn-border: var(--btn-forward-border);
@@ -87,6 +97,7 @@
 .btn-explore {
     --btn-bg: var(--btn-explore-bg);
     --btn-bg-soft: var(--btn-explore-bg-soft);
+    --btn-bg-softest: var(--btn-explore-bg-softest);
     --btn-bg-hover: var(--btn-explore-bg-hover);
 
     --btn-border: var(--btn-explore-border);
@@ -106,6 +117,7 @@
 .btn-modify {
     --btn-bg: var(--btn-modify-bg);
     --btn-bg-soft: var(--btn-modify-bg-soft);
+    --btn-bg-softest: var(--btn-modify-bg-softest);
     --btn-bg-hover: var(--btn-modify-bg-hover);
 
     --btn-border: var(--btn-modify-border);
@@ -125,6 +137,7 @@
 .btn-danger {
     --btn-bg: var(--btn-danger-bg);
     --btn-bg-soft: var(--btn-danger-bg-soft);
+    --btn-bg-softest: var(--btn-danger-bg-softest);
     --btn-bg-hover: var(--btn-danger-bg-hover);
 
     --btn-border: var(--btn-danger-border);
@@ -144,6 +157,7 @@
 .btn-auth {
     --btn-bg: var(--btn-auth-bg);
     --btn-bg-soft: var(--btn-auth-bg-soft);
+    --btn-bg-softest: var(--btn-auth-bg-softest);
     --btn-bg-hover: var(--btn-auth-bg-hover);
 
     --btn-border: var(--btn-auth-border);
@@ -163,6 +177,7 @@
 .btn-nav {
     --btn-bg: var(--btn-nav-bg);
     --btn-bg-soft: var(--btn-nav-bg-soft);
+    --btn-bg-softest: var(--btn-nav-bg-softest);
     --btn-bg-hover: var(--btn-nav-bg-hover);
 
     --btn-border: var(--btn-nav-border);
@@ -202,9 +217,9 @@
 ======================================== */
 
 .btn-quiet {
-    background: transparent;
+    background: var(--btn-bg-softest);
     border-color: var(--btn-border-light);
-    color: var(--btn-text-soft);
+    color: var(--btn-text-muted);
 }
 
 

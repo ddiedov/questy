@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Questy Button States</title>
+
+<link rel="stylesheet" href="css/variables.css">
+<link rel="stylesheet" href="css/overrides.css">
+
+<style>
+
+body{
+    margin:40px;
+    background:var(--bg-main);
+    color:var(--text-main);
+    font-family:system-ui,sans-serif;
+}
+
+h1{
+    margin-bottom:32px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:var(--bg-card);
+    border:1px solid var(--card-border);
+    border-radius:var(--radius-lg);
+    overflow:hidden;
+    box-shadow:var(--card-shadow);
+}
+
+th{
+    padding:18px;
+    background:var(--gradient-card);
+    border-bottom:1px solid var(--card-border);
+    font-size:22px;
+}
+
+td{
+    padding:10px 18px;
+    border-bottom:1px solid rgba(0,0,0,.05);
+}
+
+.category{
+    font-weight:700;
+    font-size:18px;
+    width:180px;
+}
+
+.state{
+    width:120px;
+    color:var(--text-muted);
+}
+
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Questy Button States</h1>
+
+<table>
+
+<tr>
+<th></th>
+<th></th>
+<th>Primary</th>
+<th>Secondary</th>
+<th>Quiet</th>
+<th>Mute</th>
+</tr>
+
+<!-- ====================================================== -->
+<!-- FORWARD -->
+<!-- ====================================================== -->
+
+<tr class="section">
+<td rowspan="5" class="category">Forward</td>
+<td class="state">Normal</td>
+
+<td class="demo"><button class="btn btn-forward btn-primary">Start</button></td>
+<td class="demo"><button class="btn btn-forward btn-secondary">Start</button></td>
+<td class="demo"><button class="btn btn-forward btn-quiet">Start</button></td>
+<td class="demo"><button class="btn btn-forward btn-mute">Start</button></td>
+</tr>
+
+<tr>
+<td class="state">Hover</td>
+
+<td class="demo hover"><button class="btn btn-forward btn-primary is-hover">Start</button></td>
+<td class="demo hover"><button class="btn btn-forward btn-secondary is-hover">Start</button></td>
+<td class="demo hover"><button class="btn btn-forward btn-quiet is-hover">Start</button></td>
+<td class="demo hover"><button class="btn btn-forward btn-mute is-hover">Start</button></td>
+</tr>
+
+<tr>
+<td class="state">Active</td>
+
+<td class="demo active"><button class="btn btn-forward btn-primary is-active">Start</button></td>
+<td class="demo active"><button class="btn btn-forward btn-secondary is-active">Start</button></td>
+<td class="demo active"><button class="btn btn-forward btn-quiet is-active">Start</button></td>
+<td class="demo active"><button class="btn btn-forward btn-mute is-active">Start</button></td>
+</tr>
+
+<tr>
+<td class="state">Focus</td>
+
+<td class="demo focus"><button class="btn btn-forward btn-primary is-focus">Start</button></td>
+<td class="demo focus"><button class="btn btn-forward btn-secondary is-focus">Start</button></td>
+<td class="demo focus"><button class="btn btn-forward btn-quiet is-focus">Start</button></td>
+<td class="demo focus"><button class="btn btn-forward btn-mute is-focus">Start</button></td>
+</tr>
+
+<tr>
+<td class="state">Disabled</td>
+
+<td class="demo disabled"><button disabled class="btn btn-forward btn-primary is-disabled">Start</button></td>
+<td class="demo disabled"><button disabled class="btn btn-forward btn-secondary is-disabled">Start</button></td>
+<td class="demo disabled"><button disabled class="btn btn-forward btn-quiet is-disabled">Start</button></td>
+<td class="demo disabled"><button disabled class="btn btn-forward btn-mute is-disabled">Start</button></td>
+</tr>
+
+<!-- ====================================================== -->
+<!-- EXPLORE -->
+<!-- ====================================================== -->
+
+<tr class="section">
+<td rowspan="5" class="category">Explore</td>
+<td class="state">Normal</td>
+
+<td class="demo"><button class="btn btn-explore btn-primary">View</button></td>
+<td class="demo"><button class="btn btn-explore btn-secondary">View</button></td>
+<td class="demo"><button class="btn btn-explore btn-quiet">View</button></td>
+<td class="demo"><button class="btn btn-explore btn-mute">View</button></td>
+</tr>
+
+<tr><td class="state">Hover</td>
+<td class="demo hover"><button class="btn btn-explore btn-primary is-hover">View</button></td>
+<td class="demo hover"><button class="btn btn-explore btn-secondary is-hover">View</button></td>
+<td class="demo hover"><button class="btn btn-explore btn-quiet is-hover">View</button></td>
+<td class="demo hover"><button class="btn btn-explore btn-mute is-hover">View</button></td></tr>
+
+<tr><td class="state">Active</td>
+<td class="demo active"><button class="btn btn-explore btn-primary is-active">View</button></td>
+<td class="demo active"><button class="btn btn-explore btn-secondary is-active">View</button></td>
+<td class="demo active"><button class="btn btn-explore btn-quiet is-active">View</button></td>
+<td class="demo active"><button class="btn btn-explore btn-mute is-active">View</button></td></tr>
+
+<tr><td class="state">Focus</td>
+<td class="demo focus"><button class="btn btn-explore btn-primary is-focus">View</button></td>
+<td class="demo focus"><button class="btn btn-explore btn-secondary is-focus">View</button></td>
+<td class="demo focus"><button class="btn btn-explore btn-quiet is-focus">View</button></td>
+<td class="demo focus"><button class="btn btn-explore btn-mute is-focus">View</button></td></tr>
+
+<tr><td class="state">Disabled</td>
+<td class="demo disabled"><button disabled class="btn btn-explore btn-primary is-disabled">View</button></td>
+<td class="demo disabled"><button disabled class="btn btn-explore btn-secondary is-disabled">View</button></td>
+<td class="demo disabled"><button disabled class="btn btn-explore btn-quiet is-disabled">View</button></td>
+<td class="demo disabled"><button disabled class="btn btn-explore btn-mute is-disabled">View</button></td></tr>
+
+
+<!-- ====================================================== -->
+<!-- MODIFY -->
+<!-- ====================================================== -->
+
+<tr class="section">
+<td rowspan="5" class="category">Modify</td>
+<td class="state">Normal</td>
+
+<td class="demo"><button class="btn btn-modify btn-primary">Start</button></td>
+<td class="demo"><button class="btn btn-modify btn-secondary">Start</button></td>
+<td class="demo"><button class="btn btn-modify btn-quiet">Start</button></td>
+<td class="demo"><button class="btn btn-modify btn-mute">Start</button></td>
+</tr>
+
+<tr>
+<td class="state">Hover</td>
+
+<td class="demo hover"><button class="btn btn-modify btn-primary is-hover">Start</button></td>
+<td class="demo hover"><button class="btn btn-modify btn-secondary is-hover">Start</button></td>
+<td class="demo hover"><button class="btn btn-modify btn-quiet is-hover">Start</button></td>
+<td class="demo hover"><button class="btn btn-modify btn-mute is-hover">Start</button></td>
+</tr>
+
+<tr>
+<td class="state">Active</td>
+
+<td class="demo active"><button class="btn btn-modify btn-primary is-active">Start</button></td>
+<td class="demo active"><button class="btn btn-modify btn-secondary is-active">Start</button></td>
+<td class="demo active"><button class="btn btn-modify btn-quiet is-active">Start</button></td>
+<td class="demo active"><button class="btn btn-modify btn-mute is-active">Start</button></td>
+</tr>
+
+<tr>
+<td class="state">Focus</td>
+
+<td class="demo focus"><button class="btn btn-modify btn-primary is-focus">Start</button></td>
+<td class="demo focus"><button class="btn btn-modify btn-secondary is-focus">Start</button></td>
+<td class="demo focus"><button class="btn btn-modify btn-quiet is-focus">Start</button></td>
+<td class="demo focus"><button class="btn btn-modify btn-mute is-focus">Start</button></td>
+</tr>
+
+<tr>
+<td class="state">Disabled</td>
+
+<td class="demo disabled"><button disabled class="btn btn-modify btn-primary is-disabled">Start</button></td>
+<td class="demo disabled"><button disabled class="btn btn-modify btn-secondary is-disabled">Start</button></td>
+<td class="demo disabled"><button disabled class="btn btn-modify btn-quiet is-disabled">Start</button></td>
+<td class="demo disabled"><button disabled class="btn btn-modify btn-mute is-disabled">Start</button></td>
+</tr>
+
+<!-- ====================================================== -->
+<!-- DANGER -->
+<!-- ====================================================== -->
+
+<tr class="section">
+<td rowspan="5" class="category">Danger</td>
+<td class="state">Normal</td>
+
+<td class="demo"><button class="btn btn-danger btn-primary">Start</button></td>
+<td class="demo"><button class="btn btn-danger btn-secondary">Start</button></td>
+<td class="demo"><button class="btn btn-danger btn-quiet">Start</button></td>
+<td class="demo"><button class="btn btn-danger btn-mute">Start</button></td>
+</tr>
+
+<tr>
+<td class="state">Hover</td>
+
+<td class="demo hover"><button class="btn btn-danger btn-primary is-hover">Start</button></td>
+<td class="demo hover"><button class="btn btn-danger btn-secondary is-hover">Start</button></td>
+<td class="demo hover"><button class="btn btn-danger btn-quiet is-hover">Start</button></td>
+<td class="demo hover"><button class="btn btn-danger btn-mute is-hover">Start</button></td>
+</tr>
+
+<tr>
+<td class="state">Active</td>
+
+<td class="demo active"><button class="btn btn-danger btn-primary is-active">Start</button></td>
+<td class="demo active"><button class="btn btn-danger btn-secondary is-active">Start</button></td>
+<td class="demo active"><button class="btn btn-danger btn-quiet is-active">Start</button></td>
+<td class="demo active"><button class="btn btn-danger btn-mute is-active">Start</button></td>
+</tr>
+
+<tr>
+<td class="state">Focus</td>
+
+<td class="demo focus"><button class="btn btn-danger btn-primary is-focus">Start</button></td>
+<td class="demo focus"><button class="btn btn-danger btn-secondary is-focus">Start</button></td>
+<td class="demo focus"><button class="btn btn-danger btn-quiet is-focus">Start</button></td>
+<td class="demo focus"><button class="btn btn-danger btn-mute is-focus">Start</button></td>
+</tr>
+
+<tr>
+<td class="state">Disabled</td>
+
+<td class="demo disabled"><button disabled class="btn btn-danger btn-primary is-disabled">Start</button></td>
+<td class="demo disabled"><button disabled class="btn btn-danger btn-secondary is-disabled">Start</button></td>
+<td class="demo disabled"><button disabled class="btn btn-danger btn-quiet is-disabled">Start</button></td>
+<td class="demo disabled"><button disabled class="btn btn-danger btn-mute is-disabled">Start</button></td>
+</tr>
+
+<!-- ====================================================== -->
+<!-- AUTH -->
+<!-- ====================================================== -->
+
+<tr class="section">
+<td rowspan="5" class="category">Auth</td>
+<td class="state">Normal</td>
+
+<td class="demo"><button class="btn btn-auth btn-primary">Start</button></td>
+<td class="demo"><button class="btn btn-auth btn-secondary">Start</button></td>
+<td class="demo"><button class="btn btn-auth btn-quiet">Start</button></td>
+<td class="demo"><button class="btn btn-auth btn-mute">Start</button></td>
+</tr>
+
+<tr>
+<td class="state">Hover</td>
+
+<td class="demo hover"><button class="btn btn-auth btn-primary is-hover">Start</button></td>
+<td class="demo hover"><button class="btn btn-auth btn-secondary is-hover">Start</button></td>
+<td class="demo hover"><button class="btn btn-auth btn-quiet is-hover">Start</button></td>
+<td class="demo hover"><button class="btn btn-auth btn-mute is-hover">Start</button></td>
+</tr>
+
+<tr>
+<td class="state">Active</td>
+
+<td class="demo active"><button class="btn btn-auth btn-primary is-active">Start</button></td>
+<td class="demo active"><button class="btn btn-auth btn-secondary is-active">Start</button></td>
+<td class="demo active"><button class="btn btn-auth btn-quiet is-active">Start</button></td>
+<td class="demo active"><button class="btn btn-auth btn-mute is-active">Start</button></td>
+</tr>
+
+<tr>
+<td class="state">Focus</td>
+
+<td class="demo focus"><button class="btn btn-auth btn-primary is-focus">Start</button></td>
+<td class="demo focus"><button class="btn btn-auth btn-secondary is-focus">Start</button></td>
+<td class="demo focus"><button class="btn btn-auth btn-quiet is-focus">Start</button></td>
+<td class="demo focus"><button class="btn btn-auth btn-mute is-focus">Start</button></td>
+</tr>
+
+<tr>
+<td class="state">Disabled</td>
+
+<td class="demo disabled"><button disabled class="btn btn-auth btn-primary is-disabled">Start</button></td>
+<td class="demo disabled"><button disabled class="btn btn-auth btn-secondary is-disabled">Start</button></td>
+<td class="demo disabled"><button disabled class="btn btn-auth btn-quiet is-disabled">Start</button></td>
+<td class="demo disabled"><button disabled class="btn btn-auth btn-mute is-disabled">Start</button></td>
+</tr>
+
+<!-- ====================================================== -->
+<!-- NAVIGATION -->
+<!-- ====================================================== -->
+
+<tr class="section">
+<td rowspan="5" class="category">Navigation</td>
+<td class="state">Normal</td>
+
+<td class="demo"><button class="btn btn-nav btn-primary">Start</button></td>
+<td class="demo"><button class="btn btn-nav btn-secondary">Start</button></td>
+<td class="demo"><button class="btn btn-nav btn-quiet">Start</button></td>
+<td class="demo"><button class="btn btn-nav btn-mute">Start</button></td>
+</tr>
+
+<tr>
+<td class="state">Hover</td>
+
+<td class="demo hover"><button class="btn btn-nav btn-primary is-hover">Start</button></td>
+<td class="demo hover"><button class="btn btn-nav btn-secondary is-hover">Start</button></td>
+<td class="demo hover"><button class="btn btn-nav btn-quiet is-hover">Start</button></td>
+<td class="demo hover"><button class="btn btn-nav btn-mute is-hover">Start</button></td>
+</tr>
+
+<tr>
+<td class="state">Active</td>
+
+<td class="demo active"><button class="btn btn-nav btn-primary is-active">Start</button></td>
+<td class="demo active"><button class="btn btn-nav btn-secondary is-active">Start</button></td>
+<td class="demo active"><button class="btn btn-nav btn-quiet is-active">Start</button></td>
+<td class="demo active"><button class="btn btn-nav btn-mute is-active">Start</button></td>
+</tr>
+
+<tr>
+<td class="state">Focus</td>
+
+<td class="demo focus"><button class="btn btn-nav btn-primary is-focus">Start</button></td>
+<td class="demo focus"><button class="btn btn-nav btn-secondary is-focus">Start</button></td>
+<td class="demo focus"><button class="btn btn-nav btn-quiet is-focus">Start</button></td>
+<td class="demo focus"><button class="btn btn-nav btn-mute is-focus">Start</button></td>
+</tr>
+
+<tr>
+<td class="state">Disabled</td>
+
+<td class="demo disabled"><button disabled class="btn btn-nav btn-primary is-disabled">Start</button></td>
+<td class="demo disabled"><button disabled class="btn btn-nav btn-secondary is-disabled">Start</button></td>
+<td class="demo disabled"><button disabled class="btn btn-nav btn-quiet is-disabled">Start</button></td>
+<td class="demo disabled"><button disabled class="btn btn-nav btn-mute is-disabled">Start</button></td>
+</tr>
+
+
+</table>
+
+</body>
+</html>

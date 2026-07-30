@@ -1,7 +1,7 @@
 {% if quest.is_author %}
 
     <a href="/quests/{{ quest.id }}/edit"
-       class="btn btn-primary">
+       class="btn btn-forward btn-primary">
         Edit
     </a>
 
@@ -9,28 +9,28 @@
     {% if not request.state.user %}
 
         <a href="/auth/login"
-           class="btn btn-neutral">
+           class="btn btn-auth btn-quiet">
             Login to participate
         </a>
 
     {% elif quest.state.state == "resume" %}
 
         <a href="/quest-runs/{{ quest.state.run_id }}"
-           class="btn btn-primary">
+           class="btn btn-forward btn-primary">
             Resume
         </a>
 
     {% elif quest.state.state == "start" %}
 
         <a href="/quests/{{ quest.id }}"
-           class="btn btn-primary">
+           class="btn btn-forward btn-primary">
             Open
         </a>
 
     {% elif quest.state.state == "start_again" %}
 
         <a href="/quests/{{ quest.id }}"
-           class="btn btn-top">
+           class="btn btn-forward btn-primary">
             Start Again
         </a>
 
@@ -45,7 +45,7 @@
             <input type="hidden" name="participant_type" value="individual">
             <input type="hidden" name="next" value="/quests/{{ quest.id }}">
 
-            <button type="submit" class="btn btn-primary">
+            <button type="submit" class="btn btn-forward btn-primary">
                 Apply
             </button>
 
@@ -53,7 +53,7 @@
 
     {% elif quest.state.state == "pending_approval" %}
 
-        <button class="btn btn-secondary" disabled>
+        <button class="btn btn-explore btn-secondary" disabled>
             Awaiting approval
         </button>
 
@@ -68,7 +68,7 @@
             <input type="hidden" name="participant_type" value="individual">
             <input type="hidden" name="next" value="/quests/{{ quest.id }}">
 
-            <button type="submit" class="btn btn-top">
+            <button type="submit" class="btn btn-explore btn-primary">
                 Apply Again
             </button>
 

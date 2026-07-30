@@ -27,6 +27,8 @@
   --clr-sage-brd:                #4B624A;
   --clr-sage-grad:               linear-gradient(180deg, #93B290 0%, #5F7B5E 100%);
   /* Базові ховери для інтерактивності */
+  --clr-sage-soft:               rgba(114, 143, 112, .16);
+  --clr-sage-softest:            rgba(114, 143, 112, .08);
   --clr-sage-hover:              #5D785B;
   --clr-sage-hover-grad:         linear-gradient(180deg, #789975 0%, #4D634B 100%);
 
@@ -35,6 +37,8 @@
   --clr-forest-brd:              #2C4F2A;
   --clr-forest-grad:             linear-gradient(180deg, #6EAA69 0%, #3D6B3A 100%);
   /* Базові ховери для інтерактивності */
+  --clr-forest-soft:             rgba(77, 128, 73, .16);
+  --clr-forest-softest:          rgba(77, 128, 73, .08);
   --clr-forest-hover:            #3B6338;
   --clr-forest-hover-grad:       linear-gradient(180deg, #50854C 0%, #2D4C2B 100%);
 
@@ -44,6 +48,8 @@
   --clr-amber-brd:               #A8804D;
   --clr-amber-grad:              linear-gradient(180deg, #F2DAB7 0%, #C69E69 100%);
   /* Базові ховери для інтерактивності */
+  --clr-amber-soft:              rgba(217, 179, 130, .16);
+  --clr-amber-softest:           rgba(217, 179, 130, .08);
   --clr-amber-hover:             #C5A070;
   --clr-amber-hover-grad:        linear-gradient(180deg, #DEC299 0%, #AB8554 100%);
 
@@ -52,6 +58,8 @@
   --clr-gold-brd:                #A3650B;
   --clr-gold-grad:               linear-gradient(180deg, #F7C881 0%, #CE851A 100%);
   /* Базові ховери для інтерактивності */
+  --clr-gold-soft:               rgba(229, 159, 60, .16);
+  --clr-gold-softest:            rgba(229, 159, 60, .08);
   --clr-gold-hover:              #C98628;
   --clr-gold-hover-grad:         linear-gradient(180deg, #EFA843 0%, #A3691A 100%);
 
@@ -61,6 +69,8 @@
   --clr-ink-blue-brd:           #4E6175;
   --clr-ink-blue-grad:          linear-gradient(180deg, #8E9CAD 0%, #627486 100%);
   /* Базові ховери для інтерактивності */
+  --clr-ink-blue-soft:          rgba(113, 128, 145, .16);
+  --clr-ink-blue-softest:       rgba(113, 128, 145, .08);
   --clr-ink-blue-hover:         #627486;
   --clr-ink-blue-hover-grad:    linear-gradient(180deg, #7E8E9F 0%, #556677 100%);
 
@@ -69,6 +79,8 @@
   --clr-deep-ink-brd:           #384A5B;
   --clr-deep-ink-grad:          linear-gradient(180deg, #6F8498 0%, #475C71 100%);
   /* Базові ховери для інтерактивності */
+  --clr-deep-ink-soft:          rgba(86, 107, 128, .16);
+  --clr-deep-ink-softest:       rgba(86, 107, 128, .08);
   --clr-deep-ink-hover:         #475C71;
   --clr-deep-ink-hover-grad:    linear-gradient(180deg, #62798E 0%, #3D5063 100%);
 
@@ -78,6 +90,8 @@
   --clr-walnut-brd:             #746247;
   --clr-walnut-grad:            linear-gradient(180deg, #BCA783 0%, #8A7555 100%);
   /* Базові ховери для інтерактивності */
+  --clr-walnut-soft:            rgba(160, 138, 103, .16);
+  --clr-walnut-softest:         rgba(160, 138, 103, .08);
   --clr-walnut-hover:           #8A7555;
   --clr-walnut-hover-grad:      linear-gradient(180deg, #A99370 0%, #756144 100%);
 
@@ -87,6 +101,8 @@
   --clr-granite-brd:            #7B8085;
   --clr-granite-grad:           linear-gradient(180deg, #C6CACE 0%, #979CA1 100%);
   /* Базові ховери для інтерактивності */
+  --clr-granite-soft:           rgba(169, 173, 177, .16);
+  --clr-granite-softest:        rgba(169, 173, 177, .08);
   --clr-granite-hover:          #979CA1;
   --clr-granite-hover-grad:     linear-gradient(180deg, #B6BABE 0%, #878C91 100%);
 
@@ -96,6 +112,8 @@
   --clr-rosewood-brd:           #8E5149;
   --clr-rosewood-grad:          linear-gradient(180deg, #DEA49D 0%, #B46B61 100%);
   /* Базові ховери для інтерактивності */
+  --clr-rosewood-soft:          rgba(200, 134, 125, .16);
+  --clr-rosewood-softest:       rgba(200, 134, 125, .08);
   --clr-rosewood-hover:         #B46B61;
   --clr-rosewood-hover-grad:    linear-gradient(180deg, #CD8F88 0%, #9F5C53 100%);
   
@@ -151,47 +169,93 @@
   --text-main:                   var(--clr-ink-dark);
   --text-muted:                  var(--clr-ink-muted);
 
-  /* Головний зелений акцент (Primary) */
-  --primary:                     var(--clr-sage);
-  --primary-text:                var(--clr-sage-txt);
-  --primary-border:              var(--clr-sage-brd);
-  --primary-gradient:            var(--clr-sage-grad);
-  --primary-hover:               var(--clr-sage-hover-grad);
+  /* ==========================================================================
+    SEMANTIC COLORS
+    ========================================================================== */
 
-  /* Яскравий зелений (Forest / Епічна дія) */
-  --primary-bright:              var(--clr-forest);
-  --primary-bright-text:         var(--clr-forest-txt);
-  --primary-bright-border:       var(--clr-forest-brd);
-  --primary-bright-gradient:     var(--clr-forest-grad);
-  --primary-bright-hover:        var(--clr-forest-hover-grad);
+  /* PRIMARY (основна позитивна дія) */
+  --primary:                     var(--clr-forest);
+  --primary-text:                var(--clr-forest-txt);
+  --primary-border:              var(--clr-forest-brd);
+  --primary-gradient:            var(--clr-forest-grad);
+  --primary-hover:               var(--clr-forest-hover-grad);
+  --primary-soft:                var(--clr-forest-soft);
+  --primary-softest:             var(--clr-forest-softest);
 
-  /* М'яке золото (Amber / Досягнення) */
-  --secondary-gold:              var(--clr-amber);
-  --secondary-gold-text:         var(--clr-amber-txt);
-  --secondary-gold-border:       var(--clr-amber-brd);
-  --secondary-gold-gradient:     var(--clr-amber-grad);
-  --secondary-gold-hover:        var(--clr-amber-hover-grad);
+  /* SECONDARY (другорядна позитивна дія) */
+  --secondary:                   var(--clr-sage);
+  --secondary-text:              var(--clr-sage-txt);
+  --secondary-border:            var(--clr-sage-brd);
+  --secondary-gradient:          var(--clr-sage-grad);
+  --secondary-hover:             var(--clr-sage-hover-grad);
+  --secondary-soft:              var(--clr-sage-soft);
+  --secondary-softest:           var(--clr-sage-softest);
 
-  /* Яскраве золото (Gold / Легендарна нагорода) */
-  --gold-bright:                 var(--clr-gold);
-  --gold-bright-text:            var(--clr-gold-txt);
-  --gold-bright-border:          var(--clr-gold-brd);
-  --gold-bright-gradient:        var(--clr-gold-grad);
-  --gold-bright-hover:           var(--clr-gold-hover-grad);
+  /* ACCENT (дослідження, інформація, навігація) */
+  --accent:                      var(--clr-ink-blue);
+  --accent-text:                 var(--clr-ink-blue-txt);
+  --accent-border:               var(--clr-ink-blue-brd);
+  --accent-gradient:             var(--clr-ink-blue-grad);
+  --accent-hover:                var(--clr-ink-blue-hover-grad);
+  --accent-soft:                 var(--clr-ink-blue-soft);
+  --accent-softest:              var(--clr-ink-blue-softest);
 
-  /* Спокійний синій (Ink Blue / Магічні елементи) */
-  --accent-blue:                 var(--clr-ink-blue);
-  --accent-blue-text:            var(--clr-ink-blue-txt);
-  --accent-blue-border:          var(--clr-ink-blue-brd);
-  --accent-blue-gradient:        var(--clr-ink-blue-grad);
-  --accent-blue-hover:           var(--clr-ink-blue-hover-grad);
+  /* ACCENT BRIGHT (особливо важливий акцент) */
+  --accent-bright:               var(--clr-deep-ink);
+  --accent-bright-text:          var(--clr-deep-ink-txt);
+  --accent-bright-border:        var(--clr-deep-ink-brd);
+  --accent-bright-gradient:      var(--clr-deep-ink-grad);
+  --accent-bright-hover:         var(--clr-deep-ink-hover-grad);
+  --accent-bright-soft:          var(--clr-deep-ink-soft);
+  --accent-bright-softest:       var(--clr-deep-ink-softest);
 
-  /* Яскравий синій (Deep Ink) */
-  --accent-blue-bright:          var(--clr-deep-ink);
-  --accent-blue-bright-text:     var(--clr-deep-ink-txt);
-  --accent-blue-bright-border:   var(--clr-deep-ink-brd);
-  --accent-blue-bright-gradient: var(--clr-deep-ink-grad);
-  --accent-blue-bright-hover:    var(--clr-deep-ink-hover-grad);
+  /* WARNING (увага, зміна, редагування) */
+  --warning:                     var(--clr-gold);
+  --warning-text:                var(--clr-gold-txt);
+  --warning-border:              var(--clr-gold-brd);
+  --warning-gradient:            var(--clr-gold-grad);
+  --warning-hover:               var(--clr-gold-hover-grad);
+  --warning--soft:               var(--clr-gold-soft);
+  --warning--softest:            var(--clr-gold-softest);
+
+  /* WARNING SOFT (досягнення, другорядне попередження) */
+  --warning-soft:                var(--clr-amber);
+  --warning-soft-text:           var(--clr-amber-txt);
+  --warning-soft-border:         var(--clr-amber-brd);
+  --warning-soft-gradient:       var(--clr-amber-grad);
+  --warning-soft-hover:          var(--clr-amber-hover-grad);
+  --warning-soft-soft:           var(--clr-amber-soft);
+  --warning-soft-softest:        var(--clr-amber-softest);
+
+  /* DANGER */
+  --danger:                      var(--clr-rosewood);
+  --danger-text:                 var(--clr-rosewood-txt);
+  --danger-border:               var(--clr-rosewood-brd);
+  --danger-gradient:             var(--clr-rosewood-grad);
+  --danger-hover:                var(--clr-rosewood-hover-grad);
+  --danger-soft:                 var(--clr-rosewood-soft);
+  --danger-softest:              var(--clr-rosewood-softest);
+
+  /* AUTHENTICATION */
+  --auth:                        var(--clr-walnut);
+  --auth-text:                   var(--clr-walnut-txt);
+  --auth-border:                 var(--clr-walnut-brd);
+  --auth-gradient:               var(--clr-walnut-grad);
+  --auth-hover:                  var(--clr-walnut-hover-grad);
+  --auth-soft:                   var(--clr-walnut-soft);
+  --auth-softest:                var(--clr-walnut-softest);
+
+  /* NEUTRAL */
+  --neutral:                     var(--clr-granite);
+  --neutral-text:                var(--clr-granite-txt);
+  --neutral-border:              var(--clr-granite-brd);
+  --neutral-gradient:            var(--clr-granite-grad);
+  --neutral-hover:               var(--clr-granite-hover-grad);
+  --neutral-soft:                var(--clr-granite-soft);
+  --neutral-softest:             var(--clr-granite-softest);
+
+
+
 
   /* Мапування системних сповіщень */
   --status-success-bg:           var(--clr-sys-success-bg);
@@ -223,28 +287,27 @@
   --inset-light-md:      inset 0 1px 0 rgba(255, 255, 255, 0.35);
   --inset-light-lg:      inset 0 1px 0 rgba(255, 255, 255, 0.5);
 
-
-   /* Radius */
+  /* Radius */
   --radius-sm: 6px;
   --radius-md: 8px;
   --radius-lg: 10px;
   --radius-pill: 999px;
 
   /* Spacing */
-    --space-xs: 4px;
-    --space-sm: 8px;
-    --space-md: 12px;
-    --space-lg: 16px;
-    --space-xl: 24px;
-    --space-2xl: 32px;
-    --space-3xl: 48px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-lg: 16px;
+  --space-xl: 24px;
+  --space-2xl: 32px;
+  --space-3xl: 48px;
 
-   /* Typography */
-   --font-xs:     12px;
-   --font-sm:     14px;
-   --font-md:     20px;
-   --font-lg:     38px;
-   --font-xl:     42px;
+  /* Typography */
+  --font-xs:     12px;
+  --font-sm:     14px;
+  --font-md:     20px;
+  --font-lg:     38px;
+  --font-xl:     42px;
 
 
   /* ==========================================================================
@@ -263,6 +326,81 @@
   --card-border:         var(--clr-parchment-mid-brd);
   --card-shadow:         var(--shadow-md);
   --card-inset:          var(--inset-light-md);
+
+  /* BUTTONS */
+  /* BUTTON - FORWARD */
+  --btn-forward-bg:              var(--primary-gradient);
+  --btn-forward-bg-soft:         var(--primary-soft);
+  --btn-forward-bg-softest:      var(--primary-softest);
+  --btn-forward-bg-hover:        var(--primary-hover);
+
+  --btn-forward-border:          var(--primary-border);
+  --btn-forward-border-light:    color-mix(in srgb, var(--primary-border) 28%, transparent);
+
+  --btn-forward-text:            var(--primary-text);
+  --btn-forward-text-soft:       var(--primary);
+  --btn-forward-text-muted:      color-mix(in srgb, var(--primary) 65%, var(--primary-text));
+  /* BUTTON - EXPLORE */
+  --btn-explore-bg:              var(--accent-gradient);
+  --btn-explore-bg-soft:         var(--accent-soft);
+  --btn-explore-bg-softest:      var(--accent-softest);
+  --btn-explore-bg-hover:        var(--accent-hover);
+
+  --btn-explore-border:          var(--accent-border);
+  --btn-explore-border-light:    color-mix(in srgb, var(--accent-border) 28%, transparent);
+
+  --btn-explore-text:            var(--accent-text);
+  --btn-explore-text-soft:       var(--accent);
+  --btn-explore-text-muted:      color-mix(in srgb, var(--accent) 65%, var(--accent-text));
+  /* BUTTON - MODIFY */
+  --btn-modify-bg:               var(--warning-gradient);
+  --btn-modify-bg-soft:          var(--warning--soft);
+  --btn-modify-bg-softest:       var(--warning--softest);
+  --btn-modify-bg-hover:         var(--warning-hover);
+
+  --btn-modify-border:           var(--warning-border);
+  --btn-modify-border-light:     color-mix(in srgb, var(--warning-border) 28%, transparent);
+
+  --btn-modify-text:             var(--warning-text);
+  --btn-modify-text-soft:        var(--warning);
+  --btn-modify-text-muted:       color-mix(in srgb, var(--warning) 65%, var(--warning-text));
+  /* BUTTON - DANGER */
+  --btn-danger-bg:               var(--danger-gradient);
+  --btn-danger-bg-soft:          var(--danger-soft);
+  --btn-danger-bg-softest:       var(--danger-softest);
+  --btn-danger-bg-hover:         var(--danger-hover);
+
+  --btn-danger-border:           var(--danger-border);
+  --btn-danger-border-light:     color-mix(in srgb, var(--danger-border) 28%, transparent);
+
+  --btn-danger-text:             var(--danger-text);
+  --btn-danger-text-soft:        var(--danger);
+  --btn-danger-text-muted:       color-mix(in srgb, var(--danger) 65%, var(--danger-text));
+  /* BUTTON - AUTHENTICATION */
+  --btn-auth-bg:                 var(--auth-gradient);
+  --btn-auth-bg-soft:            var(--auth-soft);
+  --btn-auth-bg-softest:         var(--auth-softest);
+  --btn-auth-bg-hover:           var(--auth-hover);
+
+  --btn-auth-border:             var(--auth-border);
+  --btn-auth-border-light:       color-mix(in srgb, var(--auth-border) 28%, transparent);
+
+  --btn-auth-text:               var(--auth-text);
+  --btn-auth-text-soft:          var(--auth);
+  --btn-auth-text-muted:         color-mix(in srgb, var(--auth) 65%, var(--auth-text));
+  /* BUTTON - NAVIGATION */
+  --btn-nav-bg:                  var(--neutral-gradient);
+  --btn-nav-bg-soft:             var(--neutral-soft);
+  --btn-nav-bg-softest:          var(--neutral-softest);
+  --btn-nav-bg-hover:            var(--neutral-hover);
+
+  --btn-nav-border:              var(--neutral-border);
+  --btn-nav-border-light:        color-mix(in srgb, var(--neutral-border) 28%, transparent);
+
+  --btn-nav-text:                var(--neutral-text);
+  --btn-nav-text-soft:           var(--neutral);
+  --btn-nav-text-muted:          color-mix(in srgb, var(--neutral) 65%, var(--neutral-text));
+
 
   /* Timeline */
   --gradient-timeline:  linear-gradient(180deg, var(--clr-wood-light), var(--clr-amber), var(--clr-wood-light));
@@ -283,12 +421,12 @@
 
   /* Status */
   --status-published-bg:     var(--clr-sage-grad);
-  --status-published-border: var(--clr-sage-border);
-  --status-published-text:   var(--clr-sage-text);
+  --status-published-border: var(--clr-sage-brd);
+  --status-published-text:   var(--clr-sage-txt);
 
   --status-draft-bg:     var(--clr-amber-grad);
-  --status-draft-border: var(--clr-amber-border);
-  --status-draft-text:   var(--clr-amber-text);
+  --status-draft-border: var(--clr-amber-brd);
+  --status-draft-text:   var(--clr-amber-txt);
 
   /* Task */
   --bg-task: transparent;
