@@ -215,8 +215,8 @@
   --warning-border:              var(--clr-gold-brd);
   --warning-gradient:            var(--clr-gold-grad);
   --warning-hover:               var(--clr-gold-hover-grad);
-  --warning--soft:               var(--clr-gold-soft);
-  --warning--softest:            var(--clr-gold-softest);
+  --warning-bg-soft:             var(--clr-gold-soft);
+  --warning-softest:             var(--clr-gold-softest);
 
   /* WARNING SOFT (досягнення, другорядне попередження) */
   --warning-soft:                var(--clr-amber);
@@ -354,8 +354,8 @@
   --btn-explore-text-muted:      color-mix(in srgb, var(--accent) 65%, var(--accent-text));
   /* BUTTON - MODIFY */
   --btn-modify-bg:               var(--warning-gradient);
-  --btn-modify-bg-soft:          var(--warning--soft);
-  --btn-modify-bg-softest:       var(--warning--softest);
+  --btn-modify-bg-soft:          var(--warning-bg-soft);
+  --btn-modify-bg-softest:       var(--warning-softest);
   --btn-modify-bg-hover:         var(--warning-hover);
 
   --btn-modify-border:           var(--warning-border);
