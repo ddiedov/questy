@@ -21,107 +21,117 @@
   --clr-parchment-dark-brd:      #A8946E;
   --clr-parchment-dark-grad:     linear-gradient(180deg, #FDF6E2 0%, #EAD2A3 100%);
 
-  /* --- Зелені тони (Primary / Головна дія) --- */
+/* --- Зелені тони (Primary / Головна дія) --- */
   --clr-sage:                    #728F70;
   --clr-sage-txt:                #FAF8F2;
   --clr-sage-brd:                #4B624A;
   --clr-sage-grad:               linear-gradient(180deg, #93B290 0%, #5F7B5E 100%);
+  /* Базові ховери для інтерактивності */
+  --clr-sage-hover:              #5D785B;
+  --clr-sage-hover-grad:         linear-gradient(180deg, #789975 0%, #4D634B 100%);
 
   --clr-forest:                  #4D8049;
   --clr-forest-txt:              #FAF8F2;
   --clr-forest-brd:              #2C4F2A;
   --clr-forest-grad:             linear-gradient(180deg, #6EAA69 0%, #3D6B3A 100%);
+  /* Базові ховери для інтерактивності */
+  --clr-forest-hover:            #3B6338;
+  --clr-forest-hover-grad:       linear-gradient(180deg, #50854C 0%, #2D4C2B 100%);
 
-  /* --- Золоті тони (Gold / Досягнення та нагороди) --- */
+/* --- Золоті тони (Gold / Досягнення та нагороди) --- */
   --clr-amber:                   #D9B382;
   --clr-amber-txt:               #52473E;
   --clr-amber-brd:               #A8804D;
   --clr-amber-grad:              linear-gradient(180deg, #F2DAB7 0%, #C69E69 100%);
+  /* Базові ховери для інтерактивності */
+  --clr-amber-hover:             #C5A070;
+  --clr-amber-hover-grad:        linear-gradient(180deg, #DEC299 0%, #AB8554 100%);
 
   --clr-gold:                    #E59F3C;
   --clr-gold-txt:                #FFFDF9;
   --clr-gold-brd:                #A3650B;
   --clr-gold-grad:               linear-gradient(180deg, #F7C881 0%, #CE851A 100%);
+  /* Базові ховери для інтерактивності */
+  --clr-gold-hover:              #C98628;
+  --clr-gold-hover-grad:         linear-gradient(180deg, #EFA843 0%, #A3691A 100%);
 
-  /* --- Сині тони (Blue Accent / Магія, мана або лор) --- */
-  --clr-slate-blue:              #6E8CA0;
-  --clr-slate-blue-txt:          #FAF8F2;
-  --clr-slate-blue-brd:          #3D5463;
-  --clr-slate-blue-grad:         linear-gradient(180deg, #91AFC4 0%, #557285 100%);
+/* --- Чорнильні тони (Ink Blues / Спокійні акцентні кольори) --- */
+  --clr-ink-blue:               #718091;
+  --clr-ink-blue-txt:           #FAF8F2;
+  --clr-ink-blue-brd:           #4E6175;
+  --clr-ink-blue-grad:          linear-gradient(180deg, #8E9CAD 0%, #627486 100%);
+  /* Базові ховери для інтерактивності */
+  --clr-ink-blue-hover:         #627486;
+  --clr-ink-blue-hover-grad:    linear-gradient(180deg, #7E8E9F 0%, #556677 100%);
 
-  --clr-ocean:                   #34658A;
-  --clr-ocean-txt:               #FFFDF9;
-  --clr-ocean-brd:               #16364F;
-  --clr-ocean-grad:              linear-gradient(180deg, #4F89B5 0%, #245275 100%);
+  --clr-deep-ink:               #566B80;
+  --clr-deep-ink-txt:           #FFFDF9;
+  --clr-deep-ink-brd:           #384A5B;
+  --clr-deep-ink-grad:          linear-gradient(180deg, #6F8498 0%, #475C71 100%);
+  /* Базові ховери для інтерактивності */
+  --clr-deep-ink-hover:         #475C71;
+  --clr-deep-ink-hover-grad:    linear-gradient(180deg, #62798E 0%, #3D5063 100%);
+
+/* --- Walnut (Теплі горіхові тони) --- */
+  --clr-walnut:                 #A08A67;
+  --clr-walnut-txt:             #FAF8F2;
+  --clr-walnut-brd:             #746247;
+  --clr-walnut-grad:            linear-gradient(180deg, #BCA783 0%, #8A7555 100%);
+  /* Базові ховери для інтерактивності */
+  --clr-walnut-hover:           #8A7555;
+  --clr-walnut-hover-grad:      linear-gradient(180deg, #A99370 0%, #756144 100%);
+
+/* --- Granite (Нейтральні кам'яні тони) --- */
+  --clr-granite:                #A9ADB1;
+  --clr-granite-txt:            #52473E;
+  --clr-granite-brd:            #7B8085;
+  --clr-granite-grad:           linear-gradient(180deg, #C6CACE 0%, #979CA1 100%);
+  /* Базові ховери для інтерактивності */
+  --clr-granite-hover:          #979CA1;
+  --clr-granite-hover-grad:     linear-gradient(180deg, #B6BABE 0%, #878C91 100%);
+
+/* --- Rosewood (Приглушені червоно-деревні тони) --- */
+  --clr-rosewood:               #C8867D;
+  --clr-rosewood-txt:           #FFFDF9;
+  --clr-rosewood-brd:           #8E5149;
+  --clr-rosewood-grad:          linear-gradient(180deg, #DEA49D 0%, #B46B61 100%);
+  /* Базові ховери для інтерактивності */
+  --clr-rosewood-hover:         #B46B61;
+  --clr-rosewood-hover-grad:    linear-gradient(180deg, #CD8F88 0%, #9F5C53 100%);
+  
+
+
+
+  /* --- Системні кольори сповіщень (Посилений контраст) --- */
+  --clr-sys-success-bg:             #E1EAE0;
+  --clr-sys-success-txt:            #2D4C2B;
+  --clr-sys-success-brd:            #91B58F;
+  --clr-sys-success-grad:           linear-gradient(180deg, #EFF7EE 0%, #CBDBC9 100%);
+  --clr-sys-success-glass-gradient: linear-gradient(180deg, #EDF2E6E0 0%, #D9E4CC9E 100%);
+
+  --clr-sys-warning-bg:             #FCEFD9;
+  --clr-sys-warning-txt:            #704B19;
+  --clr-sys-warning-brd:            #E2B273;
+  --clr-sys-warning-grad:           linear-gradient(180deg, #FFF4E0 0%, #F6DCB1 100%);
+  --clr-sys-warning-glass-gradient: linear-gradient(180deg, #F3E7CCE0 0%, #EADBBD9E 100%);
+
+  --clr-sys-error-bg:             #F7E2E0;
+  --clr-sys-error-txt:            #822F25;
+  --clr-sys-error-brd:            #D8958D;
+  --clr-sys-error-grad:           linear-gradient(180deg, #FDF0EE 0%, #E9C4C0 100%);
+  --clr-sys-error-glass-gradient: linear-gradient(180deg, #F3E6E4E0 0%, #E8D0CB9E 100%);
+
+  --clr-sys-info-bg:              #E1EAF0;
+  --clr-sys-info-txt:             #324B59;
+  --clr-sys-info-brd:             #9FB6C4;
+  --clr-sys-info-grad:            linear-gradient(180deg, #EFF6FA 0%, #C4D7E3 100%);
+  --clr-sys-info-glass-gradient:  linear-gradient(180deg, #EAF0F3E0 0%, #D5E0E79E 100%);
+
+    
 
   /* Деревні відтінки */
   --clr-wood-dark:               #6A5B50;
   --clr-wood-light:              #998372;
-
-  /* --- Системні кольори сповіщень (Посилений контраст) --- */
-  --clr-sys-success-bg:          #E1EAE0;
-  --clr-sys-success-txt:         #2D4C2B;
-  --clr-sys-success-brd:         #91B58F;
-  --clr-sys-success-grad:        linear-gradient(180deg, #EFF7EE 0%, #CBDBC9 100%);
-
-  --clr-sys-warning-bg:          #FCEFD9;
-  --clr-sys-warning-txt:         #704B19;
-  --clr-sys-warning-brd:         #E2B273;
-  --clr-sys-warning-grad:        linear-gradient(180deg, #FFF4E0 0%, #F6DCB1 100%);
-
-  --clr-sys-error-bg:            #F7E2E0;
-  --clr-sys-error-txt:           #822F25;
-  --clr-sys-error-brd:           #D8958D;
-  --clr-sys-error-grad:          linear-gradient(180deg, #FDF0EE 0%, #E9C4C0 100%);
-
-  --clr-sys-info-bg:             #E1EAF0;
-  --clr-sys-info-txt:            #324B59;
-  --clr-sys-info-brd:            #9FB6C4;
-  --clr-sys-info-grad:           linear-gradient(180deg, #EFF6FA 0%, #C4D7E3 100%);
-
-  /* ===== Glass gradients ===== */
-  --status-success-glass-gradient:
-    linear-gradient(
-        180deg,
-        #EDF2E6E0 0%,
-        #D9E4CC9E 100%
-    );
-
-  --status-warning-glass-gradient:
-    linear-gradient(
-        180deg,
-        #F3E7CCE0 0%,
-        #EADBBD9E 100%
-    );
-
-  --status-error-glass-gradient:
-    linear-gradient(
-        180deg,
-        #F3E6E4E0 0%,
-        #E8D0CB9E 100%
-    );
-
-  --status-info-glass-gradient:
-    linear-gradient(
-        180deg,
-        #EAF0F3E0 0%,
-        #D5E0E79E 100%
-    );
-
-  /* Базові ховери для інтерактивності */
-  --clr-sage-hover:              #5D785B;
-  --clr-sage-hover-grad:         linear-gradient(180deg, #789975 0%, #4D634B 100%);
-  --clr-forest-hover:            #3B6338;
-  --clr-forest-hover-grad:       linear-gradient(180deg, #50854C 0%, #2D4C2B 100%);
-  --clr-amber-hover:             #C5A070;
-  --clr-amber-hover-grad:        linear-gradient(180deg, #DEC299 0%, #AB8554 100%);
-  --clr-gold-hover:              #C98628;
-  --clr-gold-hover-grad:         linear-gradient(180deg, #EFA843 0%, #A3691A 100%);
-  --clr-slate-blue-hover:        #567184;
-  --clr-slate-blue-hover-grad:   linear-gradient(180deg, #6F8EAC 0%, #445969 100%);
-  --clr-ocean-hover:             #264D6B;    
-  --clr-ocean-hover-grad:        linear-gradient(180deg, #376C94 0%, #1A374F 100%);
-
 
   /* Текстові чорнила */
   --clr-ink-dark:        #52473E;
@@ -169,19 +179,19 @@
   --gold-bright-gradient:        var(--clr-gold-grad);
   --gold-bright-hover:           var(--clr-gold-hover-grad);
 
-  /* Спокійний синій (Slate / Магічні елементи) */
-  --accent-blue:                 var(--clr-slate-blue);
-  --accent-blue-text:            var(--clr-slate-blue-txt);
-  --accent-blue-border:          var(--clr-slate-blue-brd);
-  --accent-blue-gradient:        var(--clr-slate-blue-grad);
-  --accent-blue-hover:           var(--clr-slate-blue-hover-grad);
+  /* Спокійний синій (Ink Blue / Магічні елементи) */
+  --accent-blue:                 var(--clr-ink-blue);
+  --accent-blue-text:            var(--clr-ink-blue-txt);
+  --accent-blue-border:          var(--clr-ink-blue-brd);
+  --accent-blue-gradient:        var(--clr-ink-blue-grad);
+  --accent-blue-hover:           var(--clr-ink-blue-hover-grad);
 
-  /* Яскравий синій (Ocean / Кристали, мана) */
-  --accent-blue-bright:          var(--clr-ocean);
-  --accent-blue-bright-text:     var(--clr-ocean-txt);
-  --accent-blue-bright-border:   var(--clr-ocean-brd);
-  --accent-blue-bright-gradient: var(--clr-ocean-grad);
-  --accent-blue-bright-hover:    var(--clr-ocean-hover-grad);
+  /* Яскравий синій (Deep Ink) */
+  --accent-blue-bright:          var(--clr-deep-ink);
+  --accent-blue-bright-text:     var(--clr-deep-ink-txt);
+  --accent-blue-bright-border:   var(--clr-deep-ink-brd);
+  --accent-blue-bright-gradient: var(--clr-deep-ink-grad);
+  --accent-blue-bright-hover:    var(--clr-deep-ink-hover-grad);
 
   /* Мапування системних сповіщень */
   --status-success-bg:           var(--clr-sys-success-bg);
@@ -264,7 +274,7 @@
   --dot-more-bg:        var(--clr-parchment-light-grad);
   --dot-more-border:    var(--clr-gold-brd);
 
-  --dot-discover-bg:    var(--clr-slate-blue-grad);
+  --dot-discover-bg:    var(--clr-ink-blue-grad);
   --dot-discover-border:var(--clr-gold-brd);
 
   --dot-finish-bg:      var(--clr-gold-grad);

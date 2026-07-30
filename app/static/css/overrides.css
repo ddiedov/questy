@@ -1,89 +1,219 @@
 /* ========================================
-   BUTTONS
+   BUTTON BASE
 ======================================== */
 
 .btn {
-  border-radius: var(--radius-sm);
-  padding: 8px 16px;
-  font-weight: 600;
-  transition:
-    transform .12s ease,
-    box-shadow .12s ease,
-    background .12s ease,
-    border-color .12s ease;
+    --btn-bg: transparent;
+    --btn-bg-soft: transparent;
+    --btn-bg-hover: transparent;
 
-  box-shadow: var(--shadow-sm);    
+    --btn-border: transparent;
+    --btn-border-light: transparent;
+    --btn-border-muted: transparent;
+
+    --btn-text: var(--text-main);
+    --btn-text-soft: var(--text-main);
+    --btn-text-muted: var(--text-muted);
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+
+    padding: var(--space-sm) var(--space-lg);
+
+    border: 1px solid var(--btn-border);
+    border-radius: var(--radius-sm);
+
+    background: var(--btn-bg);
+    color: var(--btn-text);
+
+    font-weight: 600;
+    text-decoration: none;
+
+    box-shadow: var(--shadow-sm);
+
+    transition:
+        background .12s ease,
+        border-color .12s ease,
+        color .12s ease,
+        transform .12s ease,
+        box-shadow .12s ease;
+}
+
+.btn:hover {
+    background: var(--btn-bg-hover);
+    transform: translateY(-1px);
+}
+
+.btn:focus-visible {
+    outline: none;
+    box-shadow:
+        var(--shadow-sm),
+        0 0 0 3px rgba(0,0,0,.08);
+}
+
+.btn:disabled {
+    opacity: .55;
+    cursor: default;
+    transform: none;
+    box-shadow: none;
 }
 
 
 /* ========================================
-   PRIMARY
+   CATEGORY: FORWARD
 ======================================== */
 
-.btn-primary,
-.btn-success {
-  background: var(--primary-bright-gradient);
-  border: 1px solid var(--primary-bright-border);
-  color: var(--primary-bright-text);
-}
+.btn-forward {
+    --btn-bg: var(--btn-forward-bg);
+    --btn-bg-soft: var(--btn-forward-bg-soft);
+    --btn-bg-hover: var(--btn-forward-bg-hover);
 
-.btn-primary:hover,
-.btn-success:hover {
-  background: var(--primary-bright-hover);
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-sm);
+    --btn-border: var(--btn-forward-border);
+    --btn-border-light: var(--btn-forward-border-light);
+    --btn-border-muted: var(--btn-forward-border-muted);
+
+    --btn-text: var(--btn-forward-text);
+    --btn-text-soft: var(--btn-forward-text-soft);
+    --btn-text-muted: var(--btn-forward-text-muted);
 }
 
 
 /* ========================================
-   SECONDARY (NEUTRAL)
+   CATEGORY: EXPLORE
+======================================== */
+
+.btn-explore {
+    --btn-bg: var(--btn-explore-bg);
+    --btn-bg-soft: var(--btn-explore-bg-soft);
+    --btn-bg-hover: var(--btn-explore-bg-hover);
+
+    --btn-border: var(--btn-explore-border);
+    --btn-border-light: var(--btn-explore-border-light);
+    --btn-border-muted: var(--btn-explore-border-muted);
+
+    --btn-text: var(--btn-explore-text);
+    --btn-text-soft: var(--btn-explore-text-soft);
+    --btn-text-muted: var(--btn-explore-text-muted);
+}
+
+
+/* ========================================
+   CATEGORY: MODIFY
+======================================== */
+
+.btn-modify {
+    --btn-bg: var(--btn-modify-bg);
+    --btn-bg-soft: var(--btn-modify-bg-soft);
+    --btn-bg-hover: var(--btn-modify-bg-hover);
+
+    --btn-border: var(--btn-modify-border);
+    --btn-border-light: var(--btn-modify-border-light);
+    --btn-border-muted: var(--btn-modify-border-muted);
+
+    --btn-text: var(--btn-modify-text);
+    --btn-text-soft: var(--btn-modify-text-soft);
+    --btn-text-muted: var(--btn-modify-text-muted);
+}
+
+
+/* ========================================
+   CATEGORY: DANGER
+======================================== */
+
+.btn-danger {
+    --btn-bg: var(--btn-danger-bg);
+    --btn-bg-soft: var(--btn-danger-bg-soft);
+    --btn-bg-hover: var(--btn-danger-bg-hover);
+
+    --btn-border: var(--btn-danger-border);
+    --btn-border-light: var(--btn-danger-border-light);
+    --btn-border-muted: var(--btn-danger-border-muted);
+
+    --btn-text: var(--btn-danger-text);
+    --btn-text-soft: var(--btn-danger-text-soft);
+    --btn-text-muted: var(--btn-danger-text-muted);
+}
+
+
+/* ========================================
+   CATEGORY: AUTHENTICATION
+======================================== */
+
+.btn-auth {
+    --btn-bg: var(--btn-auth-bg);
+    --btn-bg-soft: var(--btn-auth-bg-soft);
+    --btn-bg-hover: var(--btn-auth-bg-hover);
+
+    --btn-border: var(--btn-auth-border);
+    --btn-border-light: var(--btn-auth-border-light);
+    --btn-border-muted: var(--btn-auth-border-muted);
+
+    --btn-text: var(--btn-auth-text);
+    --btn-text-soft: var(--btn-auth-text-soft);
+    --btn-text-muted: var(--btn-auth-text-muted);
+}
+
+
+/* ========================================
+   CATEGORY: NAVIGATION
+======================================== */
+
+.btn-nav {
+    --btn-bg: var(--btn-nav-bg);
+    --btn-bg-soft: var(--btn-nav-bg-soft);
+    --btn-bg-hover: var(--btn-nav-bg-hover);
+
+    --btn-border: var(--btn-nav-border);
+    --btn-border-light: var(--btn-nav-border-light);
+    --btn-border-muted: var(--btn-nav-border-muted);
+
+    --btn-text: var(--btn-nav-text);
+    --btn-text-soft: var(--btn-nav-text-soft);
+    --btn-text-muted: var(--btn-nav-text-muted);
+}
+
+
+/* ========================================
+   WEIGHT: PRIMARY
+======================================== */
+
+.btn-primary {
+    background: var(--btn-bg);
+    border-color: var(--btn-border);
+    color: var(--btn-text);
+}
+
+
+/* ========================================
+   WEIGHT: SECONDARY
 ======================================== */
 
 .btn-secondary {
-  background: var(--secondary-gold-gradient);
-  border: 1px solid var(--secondary-gold-border);
-  color: var(--secondary-gold-text);
-}
-
-.btn-secondary:hover {
-  background: var(--secondary-gold-hover);
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-sm);
+    background: var(--btn-bg-soft);
+    border-color: var(--btn-border);
+    color: var(--btn-text-soft);
 }
 
 
 /* ========================================
-   NEUTRAL
+   WEIGHT: QUIET
 ======================================== */
 
-.btn-neutral {
-  background: var(--accent-blue-gradient);
-  border: 1px solid var(--accent-blue-border);
-  color: var(--accent-blue-text);
-}
-
-.btn-neutral:hover {
-  background: var(--accent-blue-hover);
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-sm);
+.btn-quiet {
+    background: transparent;
+    border-color: var(--btn-border-light);
+    color: var(--btn-text-soft);
 }
 
 
 /* ========================================
-   TOP
+   WEIGHT: MUTE
 ======================================== */
 
-.btn-danger,
-.btn-top {
-  background: var(--gold-bright-gradient);
-  border: 1px solid var(--gold-bright-border);
-  color: var(--gold-bright-text);
-}
-
-.btn-danger:hover,
-.btn-top:hover {
-  background: var(--gold-bright-hover);
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-sm);
-  color: var(--gold-bright-text);
+.btn-mute {
+    background: transparent;
+    border-color: var(--btn-border-light);
+    color: var(--btn-text-muted);
 }

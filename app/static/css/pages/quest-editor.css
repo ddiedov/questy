@@ -121,25 +121,25 @@
 
 .qe-status--draft {
     color: var(--status-warning-text);
-    background: var(--status-warning-glass-gradient);
+    background: var(--clr-sys-warning-glass-gradient);
     border-color: var(--status-warning-border);
 }
 
 .qe-status--published {
     color: var(--status-success-text);
-    background: var(--status-success-glass-gradient);
+    background: var(--clr-sys-success-glass-gradient);
     border-color: var(--status-success-border);
 }
 
 .qe-status--archived {
     color: var(--status-error-text);
-    background: var(--status-error-glass-gradient);
+    background: var(--clr-sys-error-glass-gradient);
     border-color:var(--status-error-border);
 }
 
 .qe-status--info {
     color: var(--status-info-text);
-    background: var(--status-info-glass-gradient);
+    background: var(--clr-sys-info-glass-gradient);
     border-color:var(--status-info-border);
 }
 
