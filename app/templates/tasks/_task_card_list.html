@@ -1,0 +1,31 @@
+<div class="tc-card">
+    <div class="tc-cover-wrap">
+        <!-- IMAGE -->
+        <img 
+          src="{{ task.image_url or '/static/images/placeholder.svg' }}" 
+          class="tc-cover"
+        >
+    </div>
+    <div class="tc-content">
+        <!-- CONTENT -->
+            <a href="/tasks/{{ task.id }}/edit" class="tc-title">
+                {{ task.title }}
+            </a>
+            
+            <div class="tc-desc">
+                {{ task.description | safe }}
+            </div>
+    </div>
+    <!-- ACTIONS -->
+    <div class="tc-actions">
+          <!-- Add to quest -->
+          <form method="post" action="/quest-structure/">
+            <input type="hidden" name="quest_id" value="{{ quest_id }}">
+            <input type="hidden" name="task_id" value="{{ task.id }}">
+            <button class="tc-add" title="Add to Quest">
+              +
+            </button>
+          </form>
+    </div>
+  </div>
+  

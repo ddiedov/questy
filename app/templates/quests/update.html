@@ -111,17 +111,17 @@
             </div>
             <div class="qe-actions">
                 <button type="submit"
-                        class="btn btn-success btn-sm">
+                        class="btn btn-forward btn-primary">
                   Save
                 </button>
 
                 <a href="/quests/{{ item.id }}/manage"
-                  class="btn btn-outline-primary btn-sm">
+                  class="btn btn-modify btn-secondary">
                   Manage
                 </a>
 
                 <a href="/quests"
-                  class="btn btn-outline-secondary btn-sm">
+                  class="btn btn-nav btn-secondary">
                   Cancel
                 </a>
             </div>      
@@ -142,8 +142,9 @@
 
           <div class="qe-scenario-head">
             <h5>Scenario</h5>
-
-            {% include "quests/_add_task_actions.html" %}
+            {% if item.steps %}
+              {% include "quests/_add_task_actions.html" %}
+            {% endif %}
           </div>
 
           <div class="qe-timeline">
@@ -159,61 +160,13 @@
             </div>
 
             <div id="quest-task-list">
-
-              {% for step in item.steps %}
-
-              <div class="qe-row" data-id="{{ step.id }}">
-
-                <div class="qe-col">
-                  <div class="qe-dot discover">
-                    <i class="bi bi-search"></i>
-                  </div>
-                </div>
-
-                <div class="tc-card">
-                  <div class="tc-cover-wrap">
-                    <div class="qe-drag">
-                      <i class="bi bi-grip-vertical"></i>
-                    </div>
-                    <img
-                      src="{{ step.task.image_url or '/static/images/placeholder.svg' }}"
-                      class="tc-cover"
-                    >
-                  </div>
-                  <div class="tc-body">
-                  
-                  <div class="tc-main-info">
-
-                    <a href="/tasks/{{ step.task.id }}/edit"
-                      class="tc-title">
-                      {{ step.task.title }}
-                    </a>
-
-                    <div class="tc-desc">
-                      {{ step.task.description | safe }}
-                    </div>
-
-                  </div>
-
-                  <div class="tc-actions">
-
-                    <form method="post"
-                          action="/quests/{{item.id}}/tasks/{{ step.task.id }}/remove">
-
-                      <button class="qe-delete">
-                        <i class="bi bi-x-lg"></i>
-                      </button>
-
-                    </form>
-
-                  </div>
-                </div>
-                </div>
-
-              </div>
-
-              {% endfor %}
-
+              {% if item.steps %}
+                {% for step in item.steps %}
+                  {% include "tasks/_task_card.html" %}  
+                {% endfor %}
+              {% else %}
+                {% include "tasks/_task_card_empty.html" %}  
+              {% endif %}
             </div>
 
             <!-- FINISH -->
@@ -223,7 +176,9 @@
                   <i class="bi bi-flag"></i>
                 </div>
               </div>
-              {% include "quests/_add_task_actions.html" %}
+              {% if item.steps %}
+                {% include "quests/_add_task_actions.html" %}
+              {% endif %}
             </div>
 
           </div>
@@ -234,44 +189,6 @@
 
       <!-- RIGHT SIDEBAR -->
       <aside class="qe-sidebar">
-
-        <!-- FLOW -->
-        <div class="qe-side-card">
-
-          <h5>Quest Flow</h5>
-
-          <div class="qe-flow">
-
-            <div class="qe-flow-item">
-              <div class="qe-flow-dot active">01</div>
-              <div>Start</div>
-            </div>
-
-            {% for step in item.steps %}
-
-            <div class="qe-flow-item">
-              <div class="qe-flow-dot">
-                {{ loop.index + 1 }}
-              </div>
-
-              <div>
-                {{ step.task.title }}
-              </div>
-            </div>
-
-            {% endfor %}
-
-            <div class="qe-flow-item">
-              <div class="qe-flow-dot finish">
-                <i class="bi bi-flag"></i>
-              </div>
-
-              <div>Finish</div>
-            </div>
-
-          </div>
-
-        </div>
 
         <!-- APPLICATIONS -->
         <div class="qe-side-card">

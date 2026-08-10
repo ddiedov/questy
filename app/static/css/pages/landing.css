@@ -61,10 +61,17 @@
 }
 
 .landing-actions {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     justify-content: center;
     gap: 16px;
     flex-wrap: wrap;
+}
+
+
+
+.landing-actions .btn {
+    width: 100%;
 }
 
 /* =========================

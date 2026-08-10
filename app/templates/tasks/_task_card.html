@@ -1,0 +1,37 @@
+<div class="qe-row" data-id="{{ step.id }}">
+
+    <div class="qe-col">
+        <div class="qe-dot discover">
+            <i class="bi bi-search"></i>
+        </div>
+    </div>
+
+    <div class="tc-card">
+        <div class="tc-cover-wrap">
+            <div class="qe-drag">
+                <i class="bi bi-grip-vertical"></i>
+            </div>
+            <img
+                src="{{ step.task.image_url or '/static/images/placeholder.svg' }}"
+                class="tc-cover"
+            >
+        </div>
+        <div class="tc-content">
+                <a href="/tasks/{{ step.task.id }}/edit"
+                    class="tc-title">
+                    {{ step.task.title }}
+                </a>
+                <div class="tc-desc">
+                    {{ step.task.description | safe }}
+                </div>
+        </div>
+        <div class="tc-actions">
+                <form method="post"
+                    action="/quests/{{item.id}}/tasks/{{ step.task.id }}/remove">
+                    <button class="qe-delete">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
+                </form>
+        </div>        
+    </div>
+</div>

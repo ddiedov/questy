@@ -30,13 +30,13 @@
       </p>
 
       <div class="landing-actions">
-        <a href="/quests" class="btn btn-primary btn-lg">
+        <a href="/quests" class="btn btn-forward btn-primary btn-lg">
           Explore quests
         </a>
         <form method="post" action="/quests">
             <input type="hidden" name="title" value="draft">
             <button type="submit"
-                    class="btn btn-outline-secondary btn-lg">
+                    class="btn btn-modify btn-primary btn-lg">
               Create quest
             </button>
         </form>
@@ -160,14 +160,14 @@
       Choose your path.
     </p>
     <div class="landing-actions">
-      <a href="/quests" class="btn btn-forward btn-primary">
+      <a href="/quests" class="btn btn-forward btn-primary btn-lg">
         Play
       </a>
 
       <form method="post" action="/quests">
           <input type="hidden" name="title" value="draft">
           <button type="submit"
-                  class="btn btn-explore btn-secondary">
+                  class="btn btn-explore btn-secondary btn-lg">
               Create
           </button>
       </form>
