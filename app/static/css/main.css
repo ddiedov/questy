@@ -149,3 +149,12 @@ textarea.form-control {
   height: 32px;
   object-fit: cover;
 }
+
+@media (max-width: 768px) {
+    .app-container {
+        width: 100%;
+        max-width: none;
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
