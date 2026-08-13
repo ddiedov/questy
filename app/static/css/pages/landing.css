@@ -375,6 +375,11 @@
 ========================= */
 
 @media(max-width:768px){
+    .landing-page {
+        padding-left: var(--space-lg);
+        padding-right: var(--space-lg);
+    }
+    
     .landing-hero h1 {
         font-size: var(--font-xl);
     }
