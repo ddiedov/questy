@@ -301,6 +301,9 @@
   --space-xl: 24px;
   --space-2xl: 32px;
   --space-3xl: 48px;
+  --space-4xl: 64px;
+  --space-5xl: 80px;
+  --space-6xl: 96px;
 
   /* Typography */
   --font-xs:     12px;
@@ -308,6 +311,7 @@
   --font-md:     20px;
   --font-lg:     38px;
   --font-xl:     42px;
+  --font-2xl:    72px;
 
 
   /* ==========================================================================
