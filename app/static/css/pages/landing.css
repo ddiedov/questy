@@ -71,6 +71,7 @@
     align-items: center;
     justify-content: center;
     gap: var(--space-lg);
+    width: 100%;
 }
 
 .landing-actions form {
@@ -375,8 +376,18 @@
 ========================= */
 
 @media(max-width:768px){
+    .landing-hero {
+        width: 100%;
+        padding-left: var(--space-xs);
+        padding-right: var(--space-xs);
+    }
+
+    .landing-hero-content {
+        width: 100%;
+    }
+
     .landing-hero h1 {
-        font-size: var(--font-xl);
+        font-size: var(--font-lg);
     }
 
     .landing-world {
