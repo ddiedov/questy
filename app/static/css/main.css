@@ -56,16 +56,16 @@ h2 {
 .form-control {
   padding: 10px 12px;
   border-radius: var(--radius-md);
-  background: var(--gradient-card);
-  border: 1px solid var(--border-main);
+  background: var(--bg-main);
   color: var(--text-main);
+  border: 1px solid var(--card-border);
 }
 
 .form-control:focus {
-  background: var(--gradient-card);
-  border-color: var(--card-border);
+  background: var(--bg-main);
   color: var(--text-main);
-  box-shadow: 0 0 0 3px rgba(93, 67, 31, 0.14);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--card-shadow);
 }
 
 textarea.form-control {
