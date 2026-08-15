@@ -136,6 +136,7 @@
 
 .landing-intro h2 {
     font-size: var(--font-lg);
+    line-height: 1.05;
 }
 
 .landing-intro p {
@@ -182,6 +183,7 @@
 
 .landing-world-item h3 {
     font-size: var(--font-lg);
+    line-height: 1.05;
 }
 
 .landing-world-item p {
@@ -229,6 +231,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin-bottom: var(--space-md);
 }
 
 .landing-featured-heading h2 {
@@ -364,6 +367,7 @@
 
 .landing-final h2 {
     font-size: var(--font-xl);
+    line-height: 1.05;
 }
 
 .landing-final p {
@@ -401,7 +405,22 @@
 
 @media(max-width:900px){
     .landing-quest-grid {
-        grid-template-columns: 1fr;
+        display: flex;
+        gap: var(--space-lg);
+        overflow-x: auto;
+        padding-bottom: var(--space-2xl);
+        margin-bottom: calc(-1 * var(--space-2xl));
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
+    }
+
+    .landing-quest-grid::-webkit-scrollbar {
+        display: none;
+    }
+
+    .landing-tile {
+        flex: 0 0 calc(100% - var(--space-3xl));
+        scroll-snap-align: start;
     }
 
     .landing-featured-header {
