@@ -11,27 +11,27 @@
 
     <div class="qr-header">
         <div class="qr-cover-wrap">
-        <img
-            src="{{ item.quest.image_url or '/static/images/placeholder.svg' }}"
-            class="qr-cover"
-        >
+            <img
+                src="{{ item.quest.image_url or '/static/images/placeholder.svg' }}"
+                class="qr-cover"
+            >
         </div>
-
         <div class="qr-main-info">
-            <div>
+            <div class="qr-main-info-header">
                 <h1 class="qr-title">
                     {{ item.quest.title }}
                 </h1>
 
-                {% if item.quest.description %}
+                <div class="qr-status">
+                    {{ item.ui_state.value }} - {{ item.run.status.value }}
+                </div>
+            </div>
+            {% if item.quest.description %}
                 <div class="qr-desc">
                     {{ item.quest.description | safe }}
                 </div>
-                {% endif %}
-            </div>        
+            {% endif %}
         </div>
-
-        <div class="qr-status">{{item.ui_state.value}} - {{ item.run.status.value}}</div>
     </div>
 
 
@@ -252,19 +252,6 @@
 
             </div>
 
-            {% if answer_state %}
-
-                {% if answer_state == "wrong" %}
-                    <div class="qr-state-card qr-state-{{ answer_state }}">
-
-                        <div class="qr-state-title">Wrong answer</div>
-                        <div class="qr-state-message">{{ message }}</div>
-    
-                    </div>
-                {% endif %}
-
-            {% endif %}
-
             <!-- =======================
                  QUESTION
                  ======================= -->
@@ -307,6 +294,19 @@
                                 autocomplete="off"
                                 required
                             >
+
+                            {% if answer_state %}
+
+                                {% if answer_state == "wrong" %}
+                                    <div class="qr-state-card qr-state-{{ answer_state }}">
+
+                                        <div class="qr-state-title">Wrong answer</div>
+                                        <div class="qr-state-message">{{ message }}</div>
+                    
+                                    </div>
+                                {% endif %}
+
+                            {% endif %}
 
                             <button
                                 type="submit"

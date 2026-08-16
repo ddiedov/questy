@@ -306,6 +306,7 @@
   --space-6xl: 96px;
 
   /* Typography */
+  --font-xxs:    8px;
   --font-xs:     12px;
   --font-sm:     14px;
   --font-md:     20px;
