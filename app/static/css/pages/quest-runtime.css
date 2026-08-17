@@ -217,12 +217,16 @@
 .qr-timeline-wrapper {
     margin-bottom: var(--space-2xl);
     padding-bottom: var(--space-sm);
+
+    overflow-x: auto;
+    overflow-y: hidden;
 }
 
 .qr-timeline {
     display: flex;
     align-items: flex-start;
-    width: 100%;
+    width: max-content;
+    min-width: 100%;
 }
 
 .qr-timeline-item {
@@ -426,10 +430,8 @@ button.qr-timeline-dot {
     }
 
     .qr-timeline-wrapper {
-        overflow-x: auto;
-        overflow-y: hidden;
-        padding-bottom: var(--space-2xl);
-        margin-bottom: calc(-1 * var(--space-2xl));
+        margin-bottom: calc(-1 * var(--space-2xl));   
+        
         scrollbar-width: none;
         -webkit-overflow-scrolling: touch;
         scroll-snap-type: x mandatory;
@@ -437,11 +439,6 @@ button.qr-timeline-dot {
 
     .qr-timeline-wrapper::-webkit-scrollbar {
         display: none;
-    }
-
-    .qr-timeline {
-        width: max-content;
-        min-width: 100%;
     }
 
     .qr-timeline-item {
