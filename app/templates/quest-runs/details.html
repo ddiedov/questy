@@ -8,7 +8,6 @@
     <!-- =======================
          HEADER / PROGRESS PLACEHOLDER
          ======================= -->
-
     <div class="qr-header">
         <div class="qr-cover-wrap">
             <img
@@ -34,33 +33,22 @@
         </div>
     </div>
 
-
     <div class="qr-timeline-wrapper">
-
             <div class="qr-timeline">
-
                 <!-- START -->
-
                 <div class="qr-timeline-item">
-
                     <div class="qr-timeline-dot completed">
                         <i class="bi bi-play-fill"></i>
                     </div>
-
                     <div class="qr-timeline-label">
                         Start
                     </div>
-
                 </div>
 
                 <!-- COMPLETED -->
-
                 {% for step in item.previous_steps %}
-
                     <div class="qr-timeline-line"></div>
-
                     <div class="qr-timeline-item">
-
                         <button
                             class="qr-timeline-dot completed"
                             type="button"
@@ -69,90 +57,60 @@
                         >
                             <i class="bi bi-check-lg"></i>
                         </button>
-
                         <div class="qr-timeline-label">
                             {{ step.task.title }}
                         </div>
-
                     </div>
-
                 {% endfor %}
 
                 <!-- CURRENT -->
-
                 {% if item.current_step %}
-
                     <div class="qr-timeline-line"></div>
-
                     <div class="qr-timeline-item">
-
                         <div class="qr-timeline-dot current">
                             <i class="bi bi-geo-alt-fill"></i>
                         </div>
-
                         <div class="qr-timeline-label">
                             {{ item.current_step.task.title }}
                         </div>
-
                     </div>
 
                     <!-- HIDDEN FUTURE STEPS -->
-
                     <div class="qr-timeline-line"></div>
-
                     <div class="qr-timeline-item">
-
                         <div class="qr-timeline-dot more">
                             ...
                         </div>
-
                         <div class="qr-timeline-label">
                             More
                         </div>
-
                     </div>
-
                 {% endif %}
 
                 <!-- FINISH -->
-
                 <div class="qr-timeline-line"></div>
-
                 <div class="qr-timeline-item">
-
                     <div class="qr-timeline-dot finish">
                         <i class="bi bi-flag"></i>
                     </div>
-
                     <div class="qr-timeline-label">
                         Finish
                     </div>
-
                 </div>
-
             </div>
-
     </div>
 
     <!-- =======================
-         COMPLETED
-         ======================= -->
-
-    <!-- =======================
-        STEP DETAILS
+        COMPLETED STEPS DETAILS
         ======================= -->
-
     <div class="accordion qr-step-details" id="timelineAccordion">
-
         {% for step in item.previous_steps %}
-
             <div
                 id="step-details-{{ step.id }}"
                 class="accordion-collapse collapse {% if expanded_step_id == step.id %}show{% endif %}"
                 data-bs-parent="#timelineAccordion"
             >
                 <div class="qr-step-preview">
-
                     {% if step.task.outer_image_url %}
                         <img
                             src="{{ step.task.outer_image_url }}"
@@ -162,130 +120,94 @@
                     {% endif %}
 
                     <div class="qr-step-preview-body">
-
                         <h3 class="qr-step-preview-title">
                             {{ step.task.title }}
                         </h3>
-
                         {% if step.task.outer_description %}
                             <div class="qr-step-preview-text">
                                 {{ step.task.outer_description | safe }}
                             </div>
                         {% endif %}
-
                     </div>
-
                 </div>
             </div>
-
         {% endfor %}        
-
     </div>
 
-
-
+    <!-- =======================
+         COMPLETED QUEST
+         ======================= -->
     {% if item.run.status == "completed" %}
-
         <div class="qr-completed">
-
             <div class="qr-completed-icon">
                 <i class="bi bi-trophy"></i>
             </div>
-
             <h2 class="qr-completed-title">
                 Quest Completed
             </h2>
-
             <p class="qr-completed-text">
                 You finished this quest successfully.
             </p>
-
             <a href="/quests/{{ item.run.quest_id }}"
                class="btn btn-primary btn-forward">
                 Back to Quest
             </a>
-
         </div>
-
     {% else %}
 
         <!-- =======================
              CURRENT TASK
              ======================= -->
-
         {% if item.current_step %}
-
             {% set step_item = item.current_step %}
             {% set task = step_item.task %}
-
             <div class="qr-task-card">
-
                 {% if task.image_url %}
-
                     <img
                         src="{{ task.image_url }}"
                         class="qr-task-image"
                         alt="{{ task.title }}"
                     >
-
                 {% endif %}
-
                 <div class="qr-task-body">
-
                     <div class="qr-task-meta">
                         Current Task
                     </div>
-
                     <h2 class="qr-task-title">
                         {{ task.title }}
                     </h2>
-
                     {% if task.description %}
-
                         <div class="qr-task-description">
                             {{ task.description | safe }}
                         </div>
-
                     {% endif %}
-
                 </div>
-
             </div>
 
             <!-- =======================
                  QUESTION
                  ======================= -->
-
             {% if task.question %}
-
                 <div class="qr-question-card">
-
                     {% if task.question_image_url %}
-
                         <img
                             src="{{ task.question_image_url }}"
                             class="qr-question-image"
                             alt="Question"
                         >
-
                     {% endif %}
-
                     <div class="qr-question-body">
-
                         <div class="qr-question-label">
                             Question
                         </div>
-
                         <div class="qr-question-text">
                             {{ task.question }}
                         </div>
-
                         <form
                             method="post"
                             action="/quest-runs/{{ item.run.id }}/answer"
                             class="qr-answer-form"
                         >
-
                             <input
                                 type="text"
                                 name="answer"
@@ -294,50 +216,33 @@
                                 autocomplete="off"
                                 required
                             >
-
                             {% if answer_state %}
-
                                 {% if answer_state == "wrong" %}
                                     <div class="qr-state-card qr-state-{{ answer_state }}">
-
                                         <div class="qr-state-title">Wrong answer</div>
                                         <div class="qr-state-message">{{ message }}</div>
-                    
                                     </div>
                                 {% endif %}
-
                             {% endif %}
-
                             <button
                                 type="submit"
                                 class="btn btn-forward btn-primary"
                             >
                                 Submit Answer
                             </button>
-
                         </form>
-
                     </div>
-
                 </div>
-
             {% endif %}
 
         {% else %}
-
             <div class="qr-state-card qr-state-wrong">
-
                 <div class="qr-state-title">Error</div>
                 <div class="qr-state-message">No current task.</div>
-                    
             </div>
-
         {% endif %}
 
     {% endif %}
-
-    
-
 </div>
 
 {% endblock %}
