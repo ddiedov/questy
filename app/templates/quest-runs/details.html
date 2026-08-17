@@ -201,7 +201,7 @@
             </p>
 
             <a href="/quests/{{ item.run.quest_id }}"
-               class="btn btn-primary">
+               class="btn btn-primary btn-forward">
                 Back to Quest
             </a>
 
@@ -325,8 +325,11 @@
 
         {% else %}
 
-            <div class="alert alert-warning">
-                No current task.
+            <div class="qr-state-card qr-state-wrong">
+
+                <div class="qr-state-title">Error</div>
+                <div class="qr-state-message">No current task.</div>
+                    
             </div>
 
         {% endif %}
