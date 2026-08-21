@@ -1,10 +1,8 @@
 {% if quest.is_author %}
-
     <a href="/quests/{{ quest.id }}/edit"
        class="btn btn-modify btn-primary">
         Edit
     </a>
-
 {% else %}
     {% if not request.state.user %}
 

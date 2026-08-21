@@ -26,10 +26,8 @@ class BaseQueryService:
     # =========================
     def get(self, id: int):
         row = self.repository.get(id)
-
         if not row:
             return None
-
         return self.model(**row)
 
     # =========================
@@ -37,6 +35,7 @@ class BaseQueryService:
     # =========================
     def get_for_view(self, id: int, current_user_id=None):
         return self.get(id)
+    
     # =========================
     # EDIT FORM DATA
     # =========================

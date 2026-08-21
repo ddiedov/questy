@@ -26,13 +26,14 @@ class QuestsQueryService(BaseQueryService):
         self.profiles_query_service = profiles_query_service
 
     def can_start(self, quest_id: int, user_id: str) -> bool:
-        state = self.get_ui_state(quest_id, user_id)
+        quest = super().get(quest_id)
+        state = self.get_ui_state(quest, user_id)
         return state.state in ("start", "start_again")
 
-    def get_ui_state(self, quest_id: int, user_id: str) -> QuestState:
+    def get_ui_state(self, quest: Quest, user_id: str) -> QuestState:
 
         active = self.quest_runs_query_service.get_active_run(
-            quest_id,
+            quest.id,
             user_id
         )
 
@@ -42,23 +43,10 @@ class QuestsQueryService(BaseQueryService):
                 run_id=active.id
             )
 
-        has_runs = self.quest_runs_query_service.has_runs(
-            quest_id,
-            user_id
-        )
-        
-        has_approved = self.quest_applications_query_service.has_approved_application(quest_id, user_id)
-        has_pending = self.quest_applications_query_service.has_pending_application(quest_id, user_id)
-        
-
-        quest = super().get(quest_id)
-
-        allow_replays = (
-            quest.allow_replays
-            if quest
-            else False
-        )
-
+        has_runs = self.quest_runs_query_service.has_runs(quest.id, user_id)
+        has_approved = self.quest_applications_query_service.has_approved_application(quest.id, user_id)
+        has_pending = self.quest_applications_query_service.has_pending_application(quest.id, user_id)
+        allow_replays = (quest.allow_replays if quest else False)
 
         # ----------------------------------
         # User has already completed runs
@@ -118,18 +106,10 @@ class QuestsQueryService(BaseQueryService):
         for q in quests:
             item = q.model_dump()
 
-            application = None
-            if current_user_id:
-                application = self.quest_applications_query_service.get_by_quest_and_user(
-                    quest_id=q.id,
-                    participant_id=current_user_id
-                )
-
-            quest_run_state = self.get_ui_state(q.id, current_user_id)
+            quest_run_state = self.get_ui_state(q, current_user_id)
 
             item.update({
                 "is_author": q.created_by == current_user_id,
-                "application_status": application.status if application else None,
                 "state": quest_run_state if quest_run_state else None,
             })
 
@@ -154,54 +134,31 @@ class QuestsQueryService(BaseQueryService):
         return quest_structure.steps
     
 
-    def get_for_view(self, id: int, current_user_id: str | None = None) -> QuestForView:
+    def get_for_view(self, id: int, current_user_id: str | None = None) -> QuestForView | None:
         quest = super().get(id)
 
         if not quest:
             return None
 
-        item = quest.model_dump()
-
-        # -----------------------------
-        # quest additional attributes - quest steps
-        # -----------------------------
-        steps = self.get_steps(
-            quest_id=id,
-            current_user_id=current_user_id
-        )
-
-        # -----------------------------
-        # quest additional attributes - quest applications
-        # -----------------------------
-        application = None
-        if current_user_id:
-            application = (
-                self.quest_applications_query_service
-                .get_by_quest_and_user(
-                    quest_id=id,
-                    participant_id=current_user_id
-                )
-            )
-
         # -----------------------------
         # quest additional attributes - quest run state
         # -----------------------------
-        quest_run_state = self.get_ui_state(id, current_user_id)
+        quest_run_state = self.get_ui_state(
+            quest,
+            current_user_id
+        )
 
         # -----------------------------
         # extend quest with additional attributes
         # -----------------------------
-        item.update({
-            "is_author": (
+        return QuestForView(
+            **quest.model_dump(),
+            is_author=(
                 current_user_id is not None
                 and quest.created_by == current_user_id
             ),
-            "application_status": application.status if application else None,
-            "state": quest_run_state if quest_run_state else None,
-            "steps": steps,
-        })
-
-        return QuestForView(**item)
+            state=quest_run_state,
+        )
 
     
     def get_for_update(self, id: int) -> QuestForUpdate:

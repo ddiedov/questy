@@ -77,9 +77,7 @@ class QuestState(BaseModel):
 
 class QuestForView(Quest):
     is_author: bool
-    application_status: str | None = None
     state: QuestState | None = None
-    steps: list[QuestStep]
 
 class QuestForUpdate(Quest):
     applications: list[QuestApplicationView]
