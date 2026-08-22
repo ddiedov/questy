@@ -15,16 +15,14 @@ class BaseCommandService:
     # =========================
     # CREATE
     # =========================
-
     def create(self, data, user_id):
-        payload = data.model_dump()
+        payload = data.model_dump(mode="json")
 
         if self.with_owner:
             payload["created_by"] = user_id
 
         row = self.repository.create(payload)
 
-        # Guard against repository or Supabase edge cases.
         if not row:
             raise Exception("Object was not created in repository")
 
@@ -35,7 +33,7 @@ class BaseCommandService:
     # =========================
 
     def update(self, id: int, data):
-        row = self.repository.update(id, data.model_dump())
+        row = self.repository.update(id, data.model_dump(mode="json"))
 
         if not row:
             return None
@@ -45,7 +43,7 @@ class BaseCommandService:
     def patch(self, id, data):
         row = self.repository.update(
             id,
-            data.model_dump(exclude_unset=True)
+            data.model_dump(mode="json", exclude_unset=True)
         )
 
         if not row:

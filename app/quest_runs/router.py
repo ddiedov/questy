@@ -20,7 +20,6 @@ logger = logging.getLogger(__name__)
 
 router = create_crud_router(
     command_service=get_quest_runs_service(),
-    #query_service=get_quest_runs_query_service(),
     query_service=get_quest_runs_ui_query_service(),
     prefix="/quest-runs",
     require_auth_for_write=True,

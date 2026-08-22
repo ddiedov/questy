@@ -210,6 +210,17 @@
     font-size: var(--font-md);
 }
 
+.qr-completed-time {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-xl);
+    margin-top: var(--space-md);
+    font-size: var(--font-md);
+    font-weight: 600;
+}
+
 /* =====================================
    TIMELINE
 ===================================== */

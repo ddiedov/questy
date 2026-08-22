@@ -5,8 +5,10 @@ from app.quest_runs.repository import QuestRunsRepository
 from .model import QuestRun, QuestRunCreate, QuestRunUpdate, QuestRunPatch, QuestRunStatusType
 
 from app.queries.quest_runs_ui_query_service import QuestRunsUIQueryService
+from app.queries.quest_structure_query_service import QuestStructureQueryService
 
 from fastapi import HTTPException
+from datetime import datetime
 
 logger = logging.getLogger(__name__)
 
@@ -21,7 +23,7 @@ class QuestRunsService(BaseCommandService):
 
     def __init__(self, 
                  quest_runs_ui_query_service: QuestRunsUIQueryService, 
-                 quest_structure_query_service, 
+                 quest_structure_query_service: QuestStructureQueryService, 
                  tasks_service, 
                  quests_query_service, 
                  quest_applications_service
@@ -41,23 +43,15 @@ class QuestRunsService(BaseCommandService):
         if not self.quests_query_service.can_start(quest_id, participant_id):
             raise HTTPException(403)
 
-        first_step = (
-            self.quest_structure_query_service.get_first_step(
-                quest_id
-            )
-        )
-        
-        first_step_id = (
-            first_step.id
-            if first_step
-            else None
-        )
+        first_step = self.quest_structure_query_service.get_first_step(quest_id)
+        first_step_id = (first_step.id if first_step else None)
 
         run = self.create(
             QuestRunCreate(
                 quest_id=quest_id,
                 participant_id=participant_id,
-                current_step_id=first_step_id
+                current_step_id=first_step_id,
+                started_at=datetime.now()
             ),
             participant_id
         )
@@ -68,8 +62,7 @@ class QuestRunsService(BaseCommandService):
         )
 
         return run
-
-  
+ 
 
 
     # =========================
@@ -91,6 +84,20 @@ class QuestRunsService(BaseCommandService):
             }
 
         run = run_view.run
+
+        if run.participant_id != participant_id:
+            return {
+                "success": False,
+                "state": "wrong",
+                "message": "Run does not belong to participant"
+            }
+
+        if run.status != QuestRunStatusType.ACTIVE:
+            return {
+                "success": False,
+                "state": "wrong",
+                "message": "Quest run is not active"
+            }
 
         if not run_view.current_step:
             return {
@@ -132,11 +139,21 @@ class QuestRunsService(BaseCommandService):
         # COMPLETED
         # =========================
         if next_index >= len(steps):
+            if run.started_at is None:
+                return {
+                    "success": False,
+                    "state": "wrong",
+                    "message": "Run has no start time"
+                }
+            completed_at = datetime.now()
+            duration = int((completed_at - run.started_at).total_seconds())
             self.patch(
                 run_id,
                 QuestRunPatch(
                     current_step_id=None,
-                    status=QuestRunStatusType.COMPLETED
+                    status=QuestRunStatusType.COMPLETED,
+                    completed_at=completed_at,
+                    duration=duration
                 )
             )
 

@@ -24,6 +24,16 @@
                 <div class="qr-status">
                     {{ item.ui_state.value }} - {{ item.run.status.value }}
                 </div>
+
+                <div
+                    class="qr-timer"
+                    id="quest-timer"
+                    data-started-at="{{ item.run.started_at.isoformat() if item.run.started_at else '' }}"
+                    data-duration="{{ item.run.duration if item.run.duration is not none else '' }}"
+                >
+                    <i class="bi bi-stopwatch"></i>
+                    <span>00:00:00</span>
+                </div>
             </div>
             {% if item.quest.description %}
                 <div class="qr-desc">
@@ -148,6 +158,10 @@
             <p class="qr-completed-text">
                 You finished this quest successfully.
             </p>
+            <div class="qr-completed-time">
+                <i class="bi bi-stopwatch"></i>
+                <span id="quest-final-time"></span>
+            </div>
             <a href="/quests/{{ item.run.quest_id }}"
                class="btn btn-primary btn-forward">
                 Back to Quest
@@ -245,4 +259,52 @@
     {% endif %}
 </div>
 
+{% endblock %}
+
+{% block scripts %}
+<script>
+    function formatDuration(totalSeconds) {
+        const hours = Math.floor(totalSeconds / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
+
+        return (
+            `${String(hours).padStart(2, "0")}:` +
+            `${String(minutes).padStart(2, "0")}:` +
+            `${String(seconds).padStart(2, "0")}`
+        );
+    }
+
+    const timer = document.getElementById("quest-timer");
+
+    if (timer) {
+        const duration = timer.dataset.duration;
+
+        if (duration !== "") {
+            timer.querySelector("span").textContent =
+                formatDuration(Number(duration));
+        } else {
+            const startedAt = new Date(timer.dataset.startedAt);
+
+            function updateTimer() {
+                const elapsedSeconds = Math.floor(
+                    (new Date() - startedAt) / 1000
+                );
+
+                timer.querySelector("span").textContent =
+                    formatDuration(elapsedSeconds);
+            }
+
+            updateTimer();
+            setInterval(updateTimer, 1000);
+        }
+    }
+
+    const finalTime = document.getElementById("quest-final-time");
+
+    if (finalTime) {
+        const duration = Number("{{ item.run.duration }}");
+        finalTime.textContent = formatDuration(duration);
+    }
+</script>
 {% endblock %}
