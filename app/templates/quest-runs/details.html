@@ -4,52 +4,28 @@
 {% block content %}
 
 <div class="container py-4 qr-page">
-
-    <!-- =======================
-         HEADER / PROGRESS PLACEHOLDER
-         ======================= -->
-    <div class="qr-header">
-        <div class="qr-cover-wrap">
-            <img
-                src="{{ item.quest.image_url or '/static/images/placeholder.svg' }}"
-                class="qr-cover"
-            >
-        </div>
-        <div class="qr-main-info">
-            <div class="qr-main-info-header">
-                <h1 class="qr-title">
-                    {{ item.quest.title }}
-                </h1>
-
-                <div class="qr-status">
-                    {{ item.ui_state.value }} - {{ item.run.status.value }}
-                </div>
-
-                <div
-                    class="qr-timer"
-                    id="quest-timer"
-                    data-started-at="{{ item.run.started_at.isoformat() if item.run.started_at else '' }}"
-                    data-duration="{{ item.run.duration if item.run.duration is not none else '' }}"
-                >
-                    <i class="bi bi-stopwatch"></i>
-                    <span>00:00:00</span>
-                </div>
-            </div>
-            {% if item.quest.description %}
-                <div class="qr-desc">
-                    {{ item.quest.description | safe }}
-                </div>
-            {% endif %}
-        </div>
+    <div
+        class="qr-timer"
+        id="quest-timer"
+        data-started-at="{{ item.run.started_at.isoformat() if item.run.started_at else '' }}"
+        data-duration="{{ item.run.duration if item.run.duration is not none else '' }}"
+    >
+        <i class="bi bi-stopwatch"></i>
+        <span>00:00:00</span>
     </div>
 
     <div class="qr-timeline-wrapper">
             <div class="qr-timeline">
                 <!-- START -->
                 <div class="qr-timeline-item">
-                    <div class="qr-timeline-dot completed">
+                    <button
+                        class="qr-timeline-dot completed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#step-details-start"
+                    >
                         <i class="bi bi-play-fill"></i>
-                    </div>
+                    </button>
                     <div class="qr-timeline-label">
                         Start
                     </div>
@@ -114,6 +90,38 @@
         COMPLETED STEPS DETAILS
         ======================= -->
     <div class="accordion qr-step-details" id="timelineAccordion">
+        <div
+            id="step-details-start"
+            class="accordion-collapse collapse {% if not expanded_step_id %}show{% endif %}"
+            data-bs-parent="#timelineAccordion"
+        >
+            <!-- =======================
+                HEADER / PROGRESS PLACEHOLDER
+                ======================= -->
+            <div class="qr-header">
+                <div class="qr-cover-wrap">
+                    <img
+                        src="{{ item.quest.image_url or '/static/images/placeholder.svg' }}"
+                        class="qr-cover"
+                    >
+                </div>
+                <div class="qr-main-info">
+                    <div class="qr-main-info-header">
+                        <h1 class="qr-title">
+                            {{ item.quest.title }}
+                        </h1>
+                    </div>
+                    {% if item.quest.description %}
+                        <div class="qr-desc">
+                            {{ item.quest.description | safe }}
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="qr-status">
+                    {{ item.ui_state.value }} - {{ item.run.status.value }}
+                </div>
+            </div>
+        </div>
         {% for step in item.previous_steps %}
             <div
                 id="step-details-{{ step.id }}"

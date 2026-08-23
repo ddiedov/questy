@@ -11,6 +11,7 @@
 ========================= */
 
 .qr-header {
+    position: relative;
     display: grid;
     grid-template-columns: 220px 1fr;
     gap: 0;
@@ -52,6 +53,7 @@
     align-items: flex-start;
     justify-content: space-between;
     gap: var(--space-lg);
+    padding-right: calc(2 * var(--space-5xl));
 }
 
 .qr-title {
@@ -87,12 +89,17 @@
 
     align-self: start;
     flex-shrink: 0;
+
+    position: absolute;
+    top: var(--space-md);
+    right: var(--space-md);
 }
 
 /* =========================
    CARDS
 ========================= */
 
+.qr-timer,
 .qr-task-card,
 .qr-question-card,
 .qr-completed,
@@ -104,6 +111,24 @@
         var(--card-shadow),
         var(--card-inset);
     overflow: hidden;
+}
+
+.qr-timer {
+    margin-bottom: var(--space-xl);
+    padding: var(--space-sm) var(--space-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+
+    font-size: var(--font-xs);
+    font-variant-numeric: tabular-nums;
+}
+
+.qr-timer span {
+    font-size: var(--font-xs);
+    font-weight: 700;
+    letter-spacing: 0.1em;
 }
 
 .qr-task-card {
@@ -416,8 +441,8 @@ button.qr-timeline-dot {
 
     .qr-status {
         position: absolute;
-        top: var(--space-2xl);
-        right: var(--space-xl);
+        top: var(--space-md);
+        right: var(--space-md);
 
         display: inline-flex;
         align-items: center;
@@ -436,13 +461,15 @@ button.qr-timeline-dot {
         padding: var(--space-xl);
     }
 
+    .qr-main-info-header {
+        padding-right: 0;
+    }
+
     .qr-title {
         font-size: var(--font-md);
     }
 
     .qr-timeline-wrapper {
-        margin-bottom: calc(-1 * var(--space-2xl));   
-        
         scrollbar-width: none;
         -webkit-overflow-scrolling: touch;
         scroll-snap-type: x mandatory;
