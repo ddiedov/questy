@@ -401,6 +401,27 @@
     .landing-map-path {
         width: 40px;
     }
+
+    .landing-actions {
+        width: 100%;
+        gap: var(--space-sm);
+    }
+
+    .landing-actions > a,
+    .landing-actions > form {
+        width: calc((100% - var(--space-sm)) / 2);
+        min-width: 0;
+        flex: 0 0 calc((100% - var(--space-sm)) / 2);
+    }
+
+    .landing-actions form {
+        margin: 0;
+    }
+
+    .landing-actions .btn {
+        width: 100%;
+        min-width: 0;
+    }
 }
 
 @media(max-width:900px){
