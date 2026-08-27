@@ -13,6 +13,7 @@ from app.core.services_factory import (
 )
 
 from app.core.auth import build_user_dependency
+from app.quest_runs.ui_model import StepStateBuilder
 
 
 logger = logging.getLogger(__name__)
@@ -64,51 +65,16 @@ async def submit_answer(
         participant_id=user_id
     )
 
-    # -------------------------
-    # WRONG ANSWER
-    # -------------------------
-    if result["state"] == "wrong":
-        item = ui_query_service.get(run_id)
-
-        return templates.TemplateResponse(
-            name="quest-runs/details.html",
-            request=request,
-            context={
-                "item": item,
-                "answer_state": "wrong",
-                "message": result["message"]
-            }
-        )
-
-    # -------------------------
-    # COMPLETED
-    # -------------------------
-    if result["state"] == "completed":
-        item = ui_query_service.get(run_id)
-
-        return templates.TemplateResponse(
-            name="quest-runs/details.html",
-            request=request,
-            context={
-                "item": item,
-                "answer_state": "completed",
-                "message": None,
-                "expanded_step_id": result["expanded_step_id"]
-            }
-        )
-
-    # -------------------------
-    # CORRECT (NEXT TASK)
-    # -------------------------
-    item = ui_query_service.get(run_id)
+    item = ui_query_service.get_with_state(
+        run_id=run_id,
+        state=result["state"],
+        message=result["message"]
+    )
 
     return templates.TemplateResponse(
         name="quest-runs/details.html",
         request=request,
         context={
-            "item": item,
-            "answer_state": "correct",
-            "message": None,
-            "expanded_step_id": result["expanded_step_id"]
+            "item": item
         }
     )

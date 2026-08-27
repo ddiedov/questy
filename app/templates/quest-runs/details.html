@@ -32,7 +32,7 @@
                 </div>
 
                 <!-- COMPLETED -->
-                {% for step in item.previous_steps %}
+                {% for step in item.completed_steps %}
                     <div class="qr-timeline-line"></div>
                     <div class="qr-timeline-item">
                         <button
@@ -92,7 +92,7 @@
     <div class="accordion qr-step-details" id="timelineAccordion">
         <div
             id="step-details-start"
-            class="accordion-collapse collapse {% if not expanded_step_id %}show{% endif %}"
+            class="accordion-collapse collapse {% if not item.expanded_step_id %}show{% endif %}"
             data-bs-parent="#timelineAccordion"
         >
             <!-- =======================
@@ -122,10 +122,10 @@
                 </div>
             </div>
         </div>
-        {% for step in item.previous_steps %}
+        {% for step in item.completed_steps %}
             <div
                 id="step-details-{{ step.id }}"
-                class="accordion-collapse collapse {% if expanded_step_id == step.id %}show{% endif %}"
+                class="accordion-collapse collapse {% if item.expanded_step_id == step.id %}show{% endif %}"
                 data-bs-parent="#timelineAccordion"
             >
                 <div class="qr-step-preview">
@@ -238,11 +238,11 @@
                                 autocomplete="off"
                                 required
                             >
-                            {% if answer_state %}
-                                {% if answer_state == "wrong" %}
-                                    <div class="qr-state-card qr-state-{{ answer_state }}">
+                            {% if item.ui_state.value %}
+                                {% if item.ui_state.value == "wrong" %}
+                                    <div class="qr-state-card qr-state-{{ item.ui_state.value }}">
                                         <div class="qr-state-title">Wrong answer</div>
-                                        <div class="qr-state-message">{{ message }}</div>
+                                        <div class="qr-state-message">{{ item.message }}</div>
                                     </div>
                                 {% endif %}
                             {% endif %}

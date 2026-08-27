@@ -128,7 +128,6 @@ class QuestRunsService(BaseCommandService):
             run.quest_id,
             run.current_step_id
         )
-        completed_step_id = run.current_step_id
 
         structure = self.quest_structure_query_service.get_by_quest(run.quest_id)
         steps = structure.steps if structure else []
@@ -160,8 +159,7 @@ class QuestRunsService(BaseCommandService):
             return {
                 "success": True,
                 "state": "completed",
-                "message": None,
-                "expanded_step_id": completed_step_id
+                "message": None
             }
 
         # =========================
@@ -179,6 +177,5 @@ class QuestRunsService(BaseCommandService):
         return {
             "success": True,
             "state": "correct",
-            "message": None,
-            "expanded_step_id": completed_step_id
+            "message": None
         }

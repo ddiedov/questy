@@ -16,9 +16,15 @@ class QuestRunRuntimeView(BaseModel):
     run: QuestRun
     quest: QuestForRuntimeView | None = None
     current_step: QuestStep | None
-    previous_steps: list[QuestStep]
+    completed_steps: list[QuestStep]
     ui_state: QuestRunUIState = QuestRunUIState.IDLE
     message: str | None = None
+
+    @property
+    def expanded_step_id(self) -> int | None:
+        if not self.completed_steps:
+            return None
+        return self.completed_steps[-1].id
 
 
 class StepStateBuilder:

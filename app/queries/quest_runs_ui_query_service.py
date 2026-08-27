@@ -1,8 +1,11 @@
 import logging
 
 from app.core.base_query_service import BaseQueryService
+from app.queries.quest_structure_query_service import QuestStructureQueryService
+from app.queries.quests_query_service import QuestsQueryService
 from app.quest_runs.repository import QuestRunsRepository
 from app.quest_runs.ui_model import QuestRun, QuestRunRuntimeView, StepStateBuilder
+from app.tasks.service import TasksService
     
 
 logger = logging.getLogger(__name__)
@@ -12,7 +15,10 @@ class QuestRunsUIQueryService(BaseQueryService):
     repository = QuestRunsRepository()
     model = QuestRun
 
-    def __init__(self, quest_structure_query_service, tasks_service, quests_query_service):
+    def __init__(self, 
+                 quest_structure_query_service: QuestStructureQueryService, 
+                 tasks_service: TasksService,
+                 quests_query_service: QuestsQueryService):
         super().__init__()
         self.quest_structure_query_service = quest_structure_query_service
         self.tasks_service = tasks_service
@@ -21,7 +27,7 @@ class QuestRunsUIQueryService(BaseQueryService):
     # =========================
     # RUNTIME VIEW
     # =========================
-    def get(self, id: int) -> StepStateBuilder | None:
+    def get(self, id: int) -> QuestRunRuntimeView | None:
         run = super().get(id)
 
         if not run:
@@ -33,7 +39,7 @@ class QuestRunsUIQueryService(BaseQueryService):
             structure = self.quest_structure_query_service.get_by_quest(
                 run.quest_id
             )
-            previous_steps = (
+            completed_steps = (
                 structure.steps
                 if structure
                 else []
@@ -42,7 +48,7 @@ class QuestRunsUIQueryService(BaseQueryService):
                 run=run,
                 quest=quest,
                 current_step=None,
-                previous_steps=previous_steps
+                completed_steps=completed_steps
             )
             return StepStateBuilder.idle(view)
 
@@ -51,7 +57,7 @@ class QuestRunsUIQueryService(BaseQueryService):
             run.current_step_id
         )
 
-        previous_steps = self.quest_structure_query_service.get_previous_steps(
+        completed_steps = self.quest_structure_query_service.get_previous_steps(
             run.quest_id,
             run.current_step_id
         )
@@ -60,7 +66,26 @@ class QuestRunsUIQueryService(BaseQueryService):
             run=run,
             quest=quest,
             current_step=current_step,
-            previous_steps=previous_steps
+            completed_steps=completed_steps
         )
 
         return StepStateBuilder.idle(view)
+
+    def get_with_state(
+        self,
+        run_id: int,
+        state: str,
+        message: str | None = None
+    ) -> QuestRunRuntimeView | None:
+        view = self.get(run_id)
+
+        if not view:
+            return None
+
+        if state == "wrong":
+            return StepStateBuilder.wrong(view, message)
+
+        if state == "completed":
+            return StepStateBuilder.completed(view)
+
+        return StepStateBuilder.correct_reveal(view)
