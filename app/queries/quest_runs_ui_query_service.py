@@ -5,7 +5,6 @@ from app.queries.quest_structure_query_service import QuestStructureQueryService
 from app.queries.quests_query_service import QuestsQueryService
 from app.quest_runs.repository import QuestRunsRepository
 from app.quest_runs.ui_model import QuestRun, QuestRunRuntimeView, StepStateBuilder
-from app.tasks.service import TasksService
     
 
 logger = logging.getLogger(__name__)
@@ -17,11 +16,9 @@ class QuestRunsUIQueryService(BaseQueryService):
 
     def __init__(self, 
                  quest_structure_query_service: QuestStructureQueryService, 
-                 tasks_service: TasksService,
                  quests_query_service: QuestsQueryService):
         super().__init__()
         self.quest_structure_query_service = quest_structure_query_service
-        self.tasks_service = tasks_service
         self.quests_query_service = quests_query_service
 
     # =========================

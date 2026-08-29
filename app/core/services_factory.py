@@ -89,7 +89,6 @@ def get_quest_runs_query_service():
 def get_quest_runs_ui_query_service():
     return QuestRunsUIQueryService(
         quest_structure_query_service = get_quest_structure_query_service(),
-        tasks_service = get_tasks_service(),
         quests_query_service=get_quests_query_service()
     )
 
