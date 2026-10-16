@@ -6,5 +6,5 @@ from .filter import TasksFilter
 router = create_api_router(
     service=get_tasks_service(),
     prefix="/api/tasks",
-    filter_model=TasksFilter
+    filter_model=TasksFilter1
 )
